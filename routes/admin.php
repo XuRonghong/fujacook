@@ -2,44 +2,57 @@
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes
+| Admin Routes
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
+| contains the "admin" middleware group. Now create something great!
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+//Route::get('/', 'HomeController@index')->middleware('auth:admin')->name('admin.home');
+
+//Auth::routes();
+
+// Authentication Routes...
+Route::get('login', 'Auth\LoginController@showLoginForm');
+Route::post('login', 'Auth\LoginController@login')->name('login');
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+Route::group([
+        'middleware' => 'assign.guard:admin,admin/login'
+    ],function(){
+
+    Route::get('/', 'HomeController@index')->name('admin');
+
+
+    /******* 最新消息 ********/
+    Route::get('news/list', 'NewsController@list')->name('news.list');
+    Route::resource('news', 'NewsController');
+    Route::post('news/update/{id}', 'NewsController@update')->name('news.update');
+    Route::post('news/destroy/{id}', 'NewsController@destroy');
+
+
+    /******* 商店店家 ********/
+    Route::get('store/list', 'StoreController@list')->name('store.list');
+    Route::resource('store', 'StoreController');
+    Route::post('store/update', 'StoreController@update')->name('store.update');
+    Route::post('store/destroy/{id}', 'StoreController@destroy');
+
 });
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-
-
-//Route::get('login', 'LoginController@index')->name('login.index');
-//Route::post('login/checklogin', 'LoginController@checklogin')->name('login.check');
-//Route::get('login/successlogin', 'LoginController@successlogin')->name('login.success');
-//Route::get('login/logout', 'LoginController@logout')->name('logout');
-
-//Route::get('/register', 'LoginController@registerView');
-Route::post('register/check', 'LoginController@registerCheck')->name('register.check');
+// Registration Routes...
+//Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+//Route::post('register', 'Auth\RegisterController@register');
+//
+// Password Reset Routes...
+Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
 
 
-Route::get('/live_search', 'AjaxController@live_search');
-Route::get('/live_search/action', 'AjaxController@search')->name('live_search.search');
-
-
-
-
-
-Route::get('news/list', 'NewsController@list')->name('news.list');
-Route::resource('news', 'NewsController');
 
 
 Route::resource('product', 'ProductController');
@@ -92,11 +105,10 @@ Route::post('/loadmore/load_data', 'ArticleController@load_data')->name('loadmor
 
 
 
-Route::resource('store', 'StoreController');
-Route::post('store/update', 'StoreController@update')->name('store.update');
-Route::get('store/destroy/{id}', 'StoreController@destroy');
 
 
 
 Route::get('message', 'MessageController@index')->name('message.index');
 Route::post('message/insert', 'MessageController@insert')->name('message.insert');
+
+

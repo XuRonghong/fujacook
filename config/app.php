@@ -14,6 +14,8 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
+    'copyright' => env('APP_COPYRIGHT', 'Laravel'),
+    'app_title' => env('APP_TITLE', 'Industrious by TEMPLATED'),
 
     /*
     |--------------------------------------------------------------------------
@@ -53,6 +55,7 @@ return [
     */
 
     'url' => env('APP_URL', 'http://localhost'),
+    'frontend_url' => env('FRONTEND_URL', 'http://localhost'),
 
     'asset_url' => env('ASSET_URL', null),
 
@@ -67,7 +70,8 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+//    'timezone' => 'UTC',
+    'timezone' => 'Asia/Taipei',
 
     /*
     |--------------------------------------------------------------------------
@@ -80,7 +84,8 @@ return [
     |
     */
 
-    'locale' => 'en',
+//    'locale' => 'en',
+    'locale' => 'zh-TW',
 
     /*
     |--------------------------------------------------------------------------
@@ -93,7 +98,8 @@ return [
     |
     */
 
-    'fallback_locale' => 'en',
+//    'fallback_locale' => 'en',
+    'fallback_locale' => 'zh-tw',
 
     /*
     |--------------------------------------------------------------------------
@@ -122,6 +128,24 @@ return [
     'key' => env('APP_KEY'),
 
     'cipher' => 'AES-256-CBC',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Logging Configuration
+    |--------------------------------------------------------------------------
+    |
+    | Here you may configure the log settings for your application. Out of
+    | the box, Laravel uses the Monolog PHP logging library. This gives
+    | you a variety of powerful log handlers / formatters to utilize.
+    |
+    | Available Settings: "single", "daily", "syslog", "errorlog"
+    |
+    */
+
+    'log' => env('APP_LOG', 'daily'), //single
+    'log_max_files' => 7,
+
+    'log_level' => env('APP_LOG_LEVEL', 'debug'),
 
     /*
     |--------------------------------------------------------------------------
@@ -165,6 +189,11 @@ return [
         /*
          * Package Service Providers...
          */
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+        Jenssegers\Agent\AgentServiceProvider::class,
+        Recca0120\LaravelTracy\LaravelTracyServiceProvider::class,
+        Yajra\Datatables\DatatablesServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -225,6 +254,14 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
+        /*
+         * Package Aliases...
+         */
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Agent' => Jenssegers\Agent\Facades\Agent::class,
+        'DataTables' => Yajra\DataTables\Facades\DataTables::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
 
     ],
 
