@@ -51,10 +51,10 @@ class CreateMembersTable extends Migration
             $table->string('address')->nullable()->comment('地址');
             $table->timestamps();
 
-            $table->foreign('member_id')
-                ->references('id')
-                ->on('members')
-                ->onDelete('cascade');
+//            $table->foreign('member_id')
+//                ->references('id')
+//                ->on('members')
+//                ->onDelete('cascade');
         });
     }
 

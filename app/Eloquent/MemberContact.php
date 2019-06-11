@@ -3,13 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
-class Member extends Authenticatable
+class MemberContact extends Model
 {
-    use Notifiable;
-
     //
     protected $fillable = [
         'no',
@@ -28,8 +24,8 @@ class Member extends Authenticatable
     ];
 
 
-    public function memberContacts()
+    public function member()
     {
-        return $this->hasMany('App\Eloquent\MemberContact');
+        return $this->belongsTo('App\Eloquent\Member');
     }
 }

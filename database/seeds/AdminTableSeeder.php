@@ -14,6 +14,7 @@ class AdminTableSeeder extends Seeder
      */
     public function run()
     {
+        Admin::truncate();
         //
         Admin::create([
             'no'    => 'a100000000001',

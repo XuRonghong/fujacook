@@ -14,6 +14,9 @@ class MemberTableSeeder extends Seeder
      */
     public function run()
     {
+//        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        Member::truncate();
+//        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
         //
         Member::create([
             'no'    => 'm'.time().rand('00','99'), //以時間當亂數種子
