@@ -21,10 +21,11 @@ Route::get('login', 'Auth\LoginController@showLoginForm');
 Route::post('login', 'Auth\LoginController@login')->name('login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 Route::group([
-        'middleware' => 'assign.guard:admin,admin/login'
+        'middleware' => ['assign.guard:admin,admin/login'/*,'LoginThrottle:5,10'*/]
     ],function(){
 
-    Route::get('/', 'HomeController@index')->name('admin');
+    Route::get('/', 'IndexController@index');
+    Route::get('/home', 'HomeController@index')->name('home');
 
 
     /******* 最新消息 ********/

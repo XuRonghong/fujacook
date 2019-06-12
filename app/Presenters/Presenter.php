@@ -3,6 +3,8 @@
 namespace App\Presenters\Admin;
 
 
+use App\Permission;
+
 abstract class Presenter
 {
     public function getRouteResource($route_name = '')
@@ -34,7 +36,8 @@ abstract class Presenter
             'nav' => [
                 'news' => route('admin.news.index'),
                 'store' => route('admin.store.index'),
-            ]
+            ],
+            'menu' => []
         ];
         switch ($index){
             case 'index':
@@ -69,6 +72,22 @@ abstract class Presenter
                 ]);
         }
         return $data;
+    }
+
+    public function getMenu()
+    {
+        $index = '';
+        $permissions = new Permission();
+        foreach ($permissions as $permission){
+            $arr = explode('.', $permission['name']);
+            if ($arr[0] != $index) {
+
+            } else {
+
+            }
+        }
+
+
     }
 
     public function responseJson($errors=0, $method=0, $status=200)

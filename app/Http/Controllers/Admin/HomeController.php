@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Admin;
+use App\News;
 use App\Presenters\Admin\HomePresenter;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -29,7 +30,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-
         $data = $this->presenter->getParameters('index');
 
         return view('admin.home', compact('data'));

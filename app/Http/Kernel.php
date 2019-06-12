@@ -63,6 +63,17 @@ class Kernel extends HttpKernel
 
         /* multiple user login */
         'assign.guard' => \App\Http\Middleware\AssignGuard::class,
+
+        // from reservoir
+        'CheckLang' => \App\Http\Middleware\CheckLang::class,
+        'CheckLogin' => \App\Http\Middleware\CheckLogin::class,
+        'CheckSuperLogin' => \App\Http\Middleware\CheckSuperLogin::class,
+        'CheckAuthLogin' => \App\Http\Middleware\CheckAuthLogin::class,
+        'CheckAdmin' => \App\Http\Middleware\CheckAdmin::class,
+        'CheckManager' => \App\Http\Middleware\CheckManager::class,
+        'CheckMallLogin' => \App\Http\Middleware\CheckMallLogin::class,
+        'CheckMallLogout' => \App\Http\Middleware\CheckMallLogout::class,
+        'LoginThrottle' => \App\Http\Middleware\LoginThrottle::class,
     ];
 
     /**

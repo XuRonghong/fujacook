@@ -100,3 +100,7 @@ Route::get('store/destroy/{id}', 'StoreController@destroy');
 
 Route::get('message', 'MessageController@index')->name('message.index');
 Route::post('message/insert', 'MessageController@insert')->name('message.insert');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

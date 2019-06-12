@@ -52,8 +52,8 @@ class PermissionTableSeeder extends Seeder
         $permissions[] = Permission::create(['name' => 'admin.hashtags.destroy', 'description' => '全站標籤管理 刪除']);
 
         //訂單管理
-        $permissions[] = Permission::create(['name' => 'admin.orders.index', 'description' => '全站標籤管理 總覽']);
-        $permissions[] = Permission::create(['name' => 'admin.order.show', 'description' => '全站通知管理 檢視']);
+        $permissions[] = Permission::create(['name' => 'admin.orders.index', 'description' => '訂單管理 總覽']);
+        $permissions[] = Permission::create(['name' => 'admin.order.show', 'description' => '訂單管理 檢視']);
 
         //評價管理
         $permissions[] = Permission::create(['name' => 'admin.product_combination_reviews.index', 'description' => '評價管理 總覽']);
