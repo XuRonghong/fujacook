@@ -45,6 +45,22 @@ class PermissionTableSeeder extends Seeder
         $permissions[] = Permission::create(['name' => 'admin.notifications.update', 'description' => '全站通知管理 更新']);
         $permissions[] = Permission::create(['name' => 'admin.notifications.destroy', 'description' => '全站通知管理 刪除']);
 
+        //最新消息
+        $index = ['news', '最新消息'];
+        $permissions[] = Permission::create(['name' => 'admin.'.$index[0].'.index', 'description' => $index[1].' 總覽']);
+        $permissions[] = Permission::create(['name' => 'admin.'.$index[0].'.show', 'description' => $index[1].' 檢視']);
+        $permissions[] = Permission::create(['name' => 'admin.'.$index[0].'.store', 'description' => $index[1].' 新增']);
+        $permissions[] = Permission::create(['name' => 'admin.'.$index[0].'.update', 'description' => $index[1].' 更新']);
+        $permissions[] = Permission::create(['name' => 'admin.'.$index[0].'.destroy', 'description' => $index[1].' 刪除']);
+
+        //供應商
+        $index = ['store', '供應商'];
+        $permissions[] = Permission::create(['name' => 'admin.'.$index[0].'.index', 'description' => $index[1].' 總覽']);
+        $permissions[] = Permission::create(['name' => 'admin.'.$index[0].'.show', 'description' => $index[1].' 檢視']);
+        $permissions[] = Permission::create(['name' => 'admin.'.$index[0].'.store', 'description' => $index[1].' 新增']);
+        $permissions[] = Permission::create(['name' => 'admin.'.$index[0].'.update', 'description' => $index[1].' 更新']);
+        $permissions[] = Permission::create(['name' => 'admin.'.$index[0].'.destroy', 'description' => $index[1].' 刪除']);
+
         //全站標籤管理
         $permissions[] = Permission::create(['name' => 'admin.hashtags.index', 'description' => '全站標籤管理 總覽']);
         $permissions[] = Permission::create(['name' => 'admin.hashtags.store', 'description' => '全站標籤管理 新增']);
@@ -142,6 +158,7 @@ class PermissionTableSeeder extends Seeder
 //        Role::create(['name' => 'role.4', 'description' => '供應商']);
 //        Role::create(['name' => 'role.5', 'description' => '操作員']);
 
+        AdminPermission::truncate();
         foreach ($permissions as $permission){
             AdminPermission::query()->create([
                 'permission_id' => $permission['id'],

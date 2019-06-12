@@ -8,13 +8,17 @@
                 <div class="card-header">Dashboard</div>
 
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
 
-                    You are logged in!
+                    @foreach ($errors->all() as $error)
+
+                        <div class="alert alert-danger" role="alert">
+                            <strong>{{ $error }}</strong>
+                        </div>
+
+                    @endforeach
+
+
+                    You are logged in! <a href="#" onclick="history.back()">Back</a>
                 </div>
             </div>
         </div>

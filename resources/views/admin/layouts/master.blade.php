@@ -102,6 +102,11 @@
     <script src="{{asset('xtreme-admin/assets/extra-libs/DataTables/datatables.min.js')}}"></script>
     <script src="{{asset('xtreme-admin/dist/js/pages/datatable/datatable-basic.init.js')}}"></script>
 
+    <!-- lightbox -->
+    <link  href="{{asset('vendor/lightbox2/dist/css/lightbox.css')}}" rel="stylesheet">
+    <script src="{{asset('vendor/lightbox2/dist/js/lightbox.js')}}"></script>
+
+
     <script src="{{asset('js/toastr.min.js')}}"></script>
     <script src="{{asset('js/sweetalert.min.js')}}"></script>
     <script src="{{asset('js/waitMe.js')}}"></script>

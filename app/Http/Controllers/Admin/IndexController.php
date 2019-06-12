@@ -32,6 +32,8 @@ class IndexController extends Controller
     {
         $data = $this->presenter->getParameters('index');
 
+//        dd($data['menu']);
+
         return view('admin.index', compact('data'));
     }
 }

@@ -27,19 +27,23 @@ Route::group([
     Route::get('/', 'IndexController@index');
     Route::get('/home', 'HomeController@index')->name('home');
 
+    Route::group([
+        'middleware' => ['admin.checkPermission']
+    ],function(){
 
-    /******* 最新消息 ********/
-    Route::get('news/list', 'NewsController@list')->name('news.list');
-    Route::resource('news', 'NewsController');
-    Route::post('news/update/{id}', 'NewsController@update')->name('news.update');
-    Route::post('news/destroy/{id}', 'NewsController@destroy');
+        /******* 最新消息 ********/
+        Route::get('news/list', 'NewsController@list')->name('news.list');
+        Route::resource('news', 'NewsController');
+        Route::post('news/update/{id}', 'NewsController@update')->name('news.update');
+        Route::post('news/destroy/{id}', 'NewsController@destroy');
 
 
-    /******* 商店店家 ********/
-    Route::get('store/list', 'StoreController@list')->name('store.list');
-    Route::resource('store', 'StoreController');
-    Route::post('store/update', 'StoreController@update')->name('store.update');
-    Route::post('store/destroy/{id}', 'StoreController@destroy');
+        /******* 商店店家 ********/
+        Route::get('store/list', 'StoreController@list')->name('store.list');
+        Route::resource('store', 'StoreController');
+        Route::post('store/update', 'StoreController@update')->name('store.update');
+        Route::post('store/destroy/{id}', 'StoreController@destroy');
+    });
 
 });
 // Registration Routes...

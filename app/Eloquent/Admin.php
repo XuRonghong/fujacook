@@ -25,7 +25,7 @@ class Admin extends Authenticatable
         return $this->belongsToMany(
             'App\Permission',
             'admin_has_permissions',
-            'permission_id',
+            'admin_id',
             'id'
         );
     }

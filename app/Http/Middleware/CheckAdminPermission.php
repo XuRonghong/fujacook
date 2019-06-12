@@ -2,10 +2,12 @@
 
 namespace App\Http\Middleware;
 
+use App\Admin;
 use Closure;
-use App\Repositories\PermissionRepository;
+use Auth;
+use App\Repositories\Admin\PermissionRepository;
 
-class CheckPermission
+class CheckAdminPermission
 {
     public function __construct(PermissionRepository $permissionRepository) 
     {
@@ -21,12 +23,26 @@ class CheckPermission
      */
     public function handle($request, Closure $next, $name = null)
     {
-
-        $user = auth()->user();
+        $user = auth()->guard('admin')->user();
         if ($name) {
             $can = $user->can($name);
         } else {
-            $can = $user->can($request->route()->getName());
+            $map['id'] = $user->id;
+            $admin = Admin::query()->where($map)
+                ->whereHas('permission', function ($query) use ($request) {
+                    $query->where('name', $request->route()->getName());
+                });
+//                ->with('permission');
+
+
+            dd($admin->toSql());
+dd($admin->count());
+//            $can = $user->can($request->route()->getName());
+            if ($admin->permission()){
+                $can = ($admin->permission()->where('name', $request->route()->getName())->count())? true: false;
+            } else {
+                $can = false;
+            }
 
             $route_name = $request->route()->getName();
 
@@ -40,7 +56,7 @@ class CheckPermission
         if ($can === true) {
             return $next($request);
         } else {
-            return redirect('/admin')->withErrors(['permission' => '權限不足']);
+            return redirect('/admin/home')->withErrors(['permission' => '權限不足']);
         }
 
     }

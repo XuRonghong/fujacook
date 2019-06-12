@@ -16,12 +16,12 @@ class Permission extends Model
         'guard_name'
     ];
 
-    public function Admin()
+    public function admin()
     {
         return $this->belongsToMany(
-            'App\Eloquent\Admin',
+            'App\Admin',
             'admin_has_permissions',
-            'admin_id',
+            'permission_id',
             'id'
         );
     }

@@ -63,6 +63,9 @@ class Kernel extends HttpKernel
 
         /* multiple user login */
         'assign.guard' => \App\Http\Middleware\AssignGuard::class,
+        'auth.api' => \App\Http\Middleware\AuthenticateApi::class,
+        'admin.checkRole' => \App\Http\Middleware\CheckRole::class,
+        'admin.checkPermission' => \App\Http\Middleware\CheckAdminPermission::class,
 
         // from reservoir
         'CheckLang' => \App\Http\Middleware\CheckLang::class,
