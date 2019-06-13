@@ -5,12 +5,12 @@ namespace App\Presenters\Admin;
 
 class NewsPresenter extends Presenter
 {
-    protected $indexUrl;
+    protected $gotoUrl;
     protected $title;
 
     public function __construct()
     {
-        $this->indexUrl = route('admin.news.index');
+        $this->gotoUrl = url()->current();
         $this->title = 'News';
     }
 }

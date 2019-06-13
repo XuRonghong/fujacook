@@ -38,6 +38,12 @@
             /*clear: both;*/
             margin-top: -25px;
         }
+        #main-wrapper[data-layout=vertical] .topbar .navbar-collapse[data-navbarbg=skin1], #main-wrapper[data-layout=vertical] .topbar[data-navbarbg=skin1], #main-wrapper[data-layout=horizontal] .topbar .navbar-collapse[data-navbarbg=skin1], #main-wrapper[data-layout=horizontal] .topbar[data-navbarbg=skin1] {
+            background-color: black;
+        }
+        .btn {
+            margin-left: 5px;
+        }
     </style>
 
     @yield('style')
@@ -109,6 +115,7 @@
 
     <script src="{{asset('js/toastr.min.js')}}"></script>
     <script src="{{asset('js/sweetalert.min.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
     <script src="{{asset('js/waitMe.js')}}"></script>
     <script>
         // none, bounce, rotateplane, stretch, orbit,
@@ -138,6 +145,86 @@
                 // callback
                 onClose: function() {}
             });
+        }
+
+
+        function doDelete(url, data, table) {
+            Swal.fire({
+                title: "{{trans('_web_alert.del.title')}}",
+                text: "{{trans('_web_alert.del.note')}}",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: "{{trans('_web_alert.ok')}}",
+                cancelButtonText: "{{trans('_web_alert.cancel')}}",
+            }).then((result) => {
+                if (result.value) {
+                    $.ajax({
+                        url: url,
+                        data: data,
+                        type: "POST",
+                        //async: false,
+                        success: function (rtndata) {
+                            if (rtndata.status) {
+                                Swal.fire(
+                                    "{{trans('_web_alert.notice')}}",
+                                    rtndata.message,
+                                    'success'
+                                )
+                                setTimeout(function () {
+                                    table.api().ajax.reload(null, false);
+                                }, 100);
+                            } else {
+                                Swal.fire(
+                                    "{{trans('_web_alert.notice')}}",
+                                    rtndata.message,
+                                    'error'
+                                )
+                            }
+                        },
+                        error: function (err) {
+                            console.log(err.responseJSON);
+                            toastr.error(JSON.stringify(err.responseJSON), "{{trans('_web_alert.notice')}}");
+                        }
+                    });
+                }
+            })
+        }
+
+        function doDelete_2016(id, data)
+        {
+            {{--swal({--}}
+            {{--    title: "{{trans('_web_alert.del.title')}}",--}}
+            {{--    text: "{{trans('_web_alert.del.note')}}",--}}
+            {{--    type: "warning",--}}
+            {{--    showCancelButton: true,--}}
+            {{--    confirmButtonText: "{{trans('_web_alert.ok')}}",--}}
+            {{--    confirmButtonColor: "#DD6B55",--}}
+            {{--    cancelButtonText: "{{trans('_web_alert.cancel')}}",--}}
+            {{--    closeOnConfirm: true,--}}
+            {{--}, function () {--}}
+            {{--    $.ajax({--}}
+            {{--        url: '{{$data['route_url']['destroy']}}'+'/'+id,--}}
+            {{--        data: data,--}}
+            {{--        type: "POST",--}}
+            {{--        //async: false,--}}
+            {{--        success: function (rtndata) {--}}
+            {{--            if (rtndata.status) {--}}
+            {{--                toastr.success(rtndata.message, "{{trans('_web_alert.notice')}}")--}}
+            {{--                setTimeout(function () {--}}
+            {{--                    table.api().ajax.reload(null, false);--}}
+            {{--                }, 100);--}}
+            {{--            } else {--}}
+            {{--                swal("{{trans('_web_alert.notice')}}", rtndata.message, "error");--}}
+            {{--            }--}}
+            {{--        },--}}
+            {{--        error: function (err) {--}}
+            {{--            console.log(err.responseJSON);--}}
+            {{--            toastr.error(JSON.stringify(err.responseJSON), "{{trans('_web_alert.notice')}}");--}}
+            {{--        }--}}
+            {{--    });--}}
+            {{--});--}}
         }
     </script>
 

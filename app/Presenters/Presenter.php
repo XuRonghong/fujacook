@@ -2,7 +2,6 @@
 
 namespace App\Presenters\Admin;
 
-
 use App\Permission;
 
 abstract class Presenter
@@ -13,11 +12,11 @@ abstract class Presenter
             'index' => route($route_name.'.index'),
             'list' => route($route_name.'.list'),
             'create' => route($route_name.'.create'),
-            'store' => route($route_name.'.index'),
-            'edit'  => route($route_name.'.index').'/',
-            'update' => url(str_replace('.','/',$route_name)).'/',
-            'destroy' => url(str_replace('.','/',$route_name).'/destroy').'/',
-            'show' => route($route_name.'.index').'/',
+            'store' => route($route_name.'.store'),
+            'edit'  => route($route_name.'.index'),
+            'update' => url(str_replace('.','/',$route_name)).'/update',
+            'destroy' => url(str_replace('.','/',$route_name).'/destroy'),
+            'show' => route($route_name.'.index'),
         ];
     }
 
@@ -33,11 +32,6 @@ abstract class Presenter
             'admin_logo' => asset('xtreme-admin/assets/images/users/1.jpg'),
             'admin_name' => 'Steave Jobs',
             'admin_email' => 'varun@gmail.com',
-            'nav' => [
-                'news' => route('admin.news.index'),
-                'store' => route('admin.store.index'),
-            ],
-            'menu' => []
         ];
         switch ($index){
             case 'index':
@@ -71,6 +65,16 @@ abstract class Presenter
                     'Summary' => '',
                 ]);
         }
+
+        $nav = [
+            'news' => route('admin.news.index'),
+            'store' => route('admin.store.index'),
+            'permissions' => route('admin.permissions.index'),
+        ];
+        $data['nav'] = $nav;
+        $menu = [];
+        $data['menu'] = $menu;
+
         return $data;
     }
 
@@ -90,9 +94,9 @@ abstract class Presenter
 
     }
 
-    public function responseJson($errors=0, $method=0, $status=200)
+    public function responseJson($errors=null, $method=0, $status=200)
     {
-        if ($errors==0) {
+        if ( !$errors) {
             switch ($method) {
                 case 'store':
                     return response()->json([
@@ -119,10 +123,10 @@ abstract class Presenter
             }
         } else {
             return response()->json([
-                'status' => $method,
+                'status' => 0,
                 'message' => $errors,
-                'redirectUrl' => $this->gotoUrl
-            ], 422);
+//                'redirectUrl' => $this->gotoUrl
+            ], 200);
         }
     }
 

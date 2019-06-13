@@ -28,7 +28,7 @@ Route::group([
     Route::get('/home', 'HomeController@index')->name('home');
 
     Route::group([
-        'middleware' => ['admin.checkPermission']
+        'middleware' => ['admin.checkPermission']       //權限通過
     ],function(){
 
         /******* 最新消息 ********/
@@ -43,6 +43,13 @@ Route::group([
         Route::resource('store', 'StoreController');
         Route::post('store/update', 'StoreController@update')->name('store.update');
         Route::post('store/destroy/{id}', 'StoreController@destroy');
+
+
+        /******* 系統參數設定-權限設定 ********/
+        Route::get('permissions/list', 'PermissionController@list')->name('permissions.list');
+        Route::resource('permissions', 'PermissionController');
+        Route::post('permissions/update/{id}', 'PermissionController@update')->name('permissions.update');
+        Route::post('permissions/destroy/{id}', 'PermissionController@destroy');
     });
 
 });

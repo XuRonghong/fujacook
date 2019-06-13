@@ -51,7 +51,7 @@
                     </ul>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{data_get($data, 'nav.news')}}" aria-expanded="false">
+                    <a href="{{data_get($data['nav'], 'news')}}" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false">
                         <i class="mdi mdi-content-paste"></i><span class="hide-menu">最新消息</span>
                     </a>
                 </li>
@@ -61,7 +61,7 @@
                     </a>
                     <ul aria-expanded="false" class="collapse  first-level">
                         <li class="sidebar-item">
-                            <a href="{{data_get($data, 'nav.store')}}" class="sidebar-link">
+                            <a href="{{data_get($data['nav'], 'store')}}" class="sidebar-link">
                                 <i class="mdi mdi-adjust"></i><span class="hide-menu"> 供應商 </span>
                             </a>
                         </li>
@@ -114,12 +114,12 @@
                     </a>
                     <ul aria-expanded="false" class="collapse  first-level">
                         <li class="sidebar-item">
-                            <a href="{{data_get($data, 'nav.news')}}" class="sidebar-link">
+                            <a href="{{data_get($data['nav'], 'news')}}" class="sidebar-link">
                                 <i class="mdi mdi-adjust"></i><span class="hide-menu"> 品項管理 </span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="{{data_get($data, 'nav.store')}}" class="sidebar-link">
+                            <a href="{{data_get($data['nav'], 'store')}}" class="sidebar-link">
                                 <i class="mdi mdi-adjust"></i><span class="hide-menu"> 商品分類 </span>
                             </a>
                         </li>
@@ -182,7 +182,7 @@
                     </a>
                     <ul aria-expanded="false" class="collapse  first-level">
                         <li class="sidebar-item">
-                            <a href="{{data_get($data, 'nav.news')}}" class="sidebar-link">
+                            <a href="{{data_get($data['nav'], 'permissions')}}" class="sidebar-link">
                                 <i class="mdi mdi-adjust"></i><span class="hide-menu"> 權限設定 </span>
                             </a>
                         </li>

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories\Admin;
+namespace App\Repositories;
 
 //use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Builder;
@@ -209,6 +209,12 @@ abstract class Repository
     /*
      *
      */
+
+    public function validate($request)
+    {
+        return $this->model->validate($request);
+    }
+
     public function searchQuery($search_arr=[], $search_word='' )
     {
         return $this->model->where(function( $query ) use ( $search_arr, $search_word ) {
@@ -266,20 +272,24 @@ abstract class Repository
             ->orderBy( $sort_name, $sort_dir )
             ->offset($iDisplayStart)->limit($iDisplayLength)
             ->get();
-        if ( !$data_arr)
-        {
+        if ( !$data_arr) {
             return response()->json([
                 'status'=> 0,
                 'message'=> ['Oops! 沒有資料!']
             ],204);
+        } else {
+            foreach ($data_arr as $key => $var) {
+                $var->DT_RowId = $var->id;
+            }
         }
+
         return response()->json([
             'status'=> 1,
             'message'=> sprintf("已得到 %s", $total_count."筆資料"),
-            'sEcho'=>$sEcho,
+            'sEcho'=> $sEcho,
             'iTotalDisplayRecords'=>$total_count,
             'iTotalRecords'=>$total_count,
-            'aaData'=> $data_arr
+            'aaData'=> $total_count ? $data_arr : []
         ],200);
     }
 }

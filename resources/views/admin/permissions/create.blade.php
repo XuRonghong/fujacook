@@ -59,15 +59,15 @@
                                     {{--</div>--}}
                                 {{--</div>--}}
                                 <div class="form-group row">
-                                    <label for="com3" class="col-sm-3 text-right control-label col-form-label">標頭</label>
+                                    <label for="com3" class="col-sm-3 text-right control-label col-form-label">name</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="title" value="{{data_get($data['arr'], 'title')}}" class="form-control title" id="com3" placeholder="">
+                                        <input type="text" name="title" value="{{data_get($data['arr'], 'name')}}" class="form-control title" id="com3" placeholder="">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="com4" class="col-sm-3 text-right control-label col-form-label">概要</label>
+                                    <label for="com4" class="col-sm-3 text-right control-label col-form-label">description</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="summary" value="{{data_get($data['arr'], 'summary')}}" class="form-control summary" id="com4" placeholder="">
+                                        <input type="text" name="summary" value="{{data_get($data['arr'], 'description')}}" class="form-control summary" id="com4" placeholder="">
                                     </div>
                                 </div>
                                 {{--<div class="form-group row">--}}

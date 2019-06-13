@@ -2,24 +2,21 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Presenters\Admin\NewsPresenter;
-use App\Repositories\Admin\NewsRepository;
+use App\Presenters\Admin\PermissionPresenter;
+use App\Repositories\Admin\PermissionRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class NewsController extends Controller
+class PermissionController extends Controller
 {
     protected $repository;
     protected $presenter;
-    protected $view_group_name = 'news';
-    protected $route_url;
+    protected $view_group_name = 'permissions';
 
-    public function __construct(NewsRepository $repository, NewsPresenter $presenter)
+    public function __construct(PermissionRepository $repository, PermissionPresenter $presenter)
     {
         $this->repository = $repository;
         $this->presenter = $presenter;
-
-        $this->route_url = $this->presenter->getRouteResource('admin.news');    //所有關於route::resource的位置
     }
 
     /**
@@ -32,7 +29,7 @@ class NewsController extends Controller
         //meta data
         $data = $this->presenter->getParameters('index');
         //to ajax url
-        $data['route_url'] = $this->route_url;
+        $data['route_url'] = $this->presenter->getRouteResource('admin.permissions');
 
         return view('admin.'.$this->view_group_name.'.index', compact('data'));
     }
@@ -60,7 +57,7 @@ class NewsController extends Controller
         //
         $data['arr'] = [];
         //to ajax url
-        $data['route_url'] = $this->route_url;
+        $data['route_url'] = $this->presenter->getRouteResource('admin.permissions');
 
         return view('admin.'.$this->view_group_name.'.create', compact('data'));
     }
@@ -94,7 +91,7 @@ class NewsController extends Controller
         //
         $data['arr'] = $this->repository->findOrFail($id);
         //to ajax url
-        $data['route_url'] = $this->route_url;
+        $data['route_url'] = $this->presenter->getRouteResource('admin.permissions');
 
         return view('admin.'.$this->view_group_name.'.create', compact('data'));
     }
@@ -112,7 +109,7 @@ class NewsController extends Controller
         //
         $data['arr'] = $this->repository->findOrFail($id);
         //to ajax url
-        $data['route_url'] = $this->route_url;
+        $data['route_url'] = $this->presenter->getRouteResource('admin.permissions');
 
         return view('admin.'.$this->view_group_name.'.create', compact('data'));
     }
@@ -131,7 +128,7 @@ class NewsController extends Controller
 
         $permissions = $this->repository->update($request->all(), $id);
 
-        return $this->presenter->responseJson($permissions['errors'], 'update');
+        return $this->presenter->responseJson($permissions['errors'], 'permissions');
     }
 
     /**

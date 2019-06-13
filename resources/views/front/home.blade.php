@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('front.layouts.master')
 
 @section('title')
     <title>{{ data_get($data, 'title', config('app_title')) }}</title>
