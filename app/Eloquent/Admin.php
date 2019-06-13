@@ -23,10 +23,10 @@ class Admin extends Authenticatable
     public function permission()
     {
         return $this->belongsToMany(
-            'App\Permission',
-            'admin_has_permissions',
-            'admin_id',
-            'id'
+            'App\Permission'
+//            'admin_has_permissions',
+//            'admin_id',
+//            'id'
         );
     }
 }

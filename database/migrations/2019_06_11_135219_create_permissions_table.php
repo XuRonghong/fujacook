@@ -26,7 +26,7 @@ class CreatePermissionsTable extends Migration
                  * table should be used to retrieve your models permissions. We have chosen a
                  * basic default value but you may easily change it to any table you like.
                  */
-                'model_has_permissions' => 'admin_has_permissions',
+                'admin_permission' => 'admin_permission',
 
                 /*
                  * When using the "HasRoles" trait from this package, we need to know which
@@ -60,10 +60,10 @@ class CreatePermissionsTable extends Migration
             $table->timestamps();
         });
 
-        Schema::create($table_names['model_has_permissions'], function (Blueprint $table) use ($table_names) {
+        Schema::create($table_names['admin_permission'], function (Blueprint $table) use ($table_names) {
             $table->increments('id')->comment('流水編號');
-            $table->unsignedInteger('permission_id')->comment('對應permissions.id');
             $table->unsignedInteger('admin_id')->comment('對應admin.id');
+            $table->unsignedInteger('permission_id')->comment('對應permissions.id');
             $table->timestamps();
 
 //            $table->morphs('model');
@@ -132,10 +132,10 @@ class CreatePermissionsTable extends Migration
     public function down()
     {
         $tableNames = $this->table_names;
-        Schema::dropIfExists($tableNames['role_has_permissions']);
+//        Schema::dropIfExists($tableNames['role_has_permissions']);
 //        Schema::dropIfExists($tableNames['model_has_roles']);
-        Schema::dropIfExists($tableNames['model_has_permissions']);
+        Schema::dropIfExists($tableNames['admin_permission']);
 //        Schema::dropIfExists($tableNames['roles']);
-//        Schema::dropIfExists($tableNames['permissions']);
+        Schema::dropIfExists($tableNames['permissions']);
     }
 }

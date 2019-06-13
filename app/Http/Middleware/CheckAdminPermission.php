@@ -32,17 +32,8 @@ class CheckAdminPermission
                 ->whereHas('permission', function ($query) use ($request) {
                     $query->where('name', $request->route()->getName());
                 });
-//                ->with('permission');
 
-
-            dd($admin->toSql());
-dd($admin->count());
-//            $can = $user->can($request->route()->getName());
-            if ($admin->permission()){
-                $can = ($admin->permission()->where('name', $request->route()->getName())->count())? true: false;
-            } else {
-                $can = false;
-            }
+            $can = $admin->count() ? true : false;
 
             $route_name = $request->route()->getName();
 

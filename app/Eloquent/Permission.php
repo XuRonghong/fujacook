@@ -19,10 +19,10 @@ class Permission extends Model
     public function admin()
     {
         return $this->belongsToMany(
-            'App\Admin',
-            'admin_has_permissions',
-            'permission_id',
-            'id'
+            'App\Admin'
+//            'admin_has_permissions',
+//            'permission_id',
+//            'id'
         );
     }
 }

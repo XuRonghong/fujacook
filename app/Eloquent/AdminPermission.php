@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class AdminPermission extends Model
 {
     //
-    protected $table = 'admin_has_permissions';
+    protected $table = 'admin_permission';
 
     protected $fillable = [
-        'permission_id',
         'admin_id',
+        'permission_id',
     ];
 }
