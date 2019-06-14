@@ -125,7 +125,6 @@
                 location.href = '{{$data['route_url']['create']}}'
             })
 
-
             //
             data_table.on('click', '.btn-show', function () {
                 var id = $(this).closest('tr').attr('id');

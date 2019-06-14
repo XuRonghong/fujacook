@@ -127,36 +127,34 @@
     <script type="text/javascript">
         $(document).ready(function () {
             //
-            let self = document.querySelector('#sample_form')
-            let data = new FormData(self)
+            let disable = '{{data_get($data, 'Disable')}}'
+            if (disable) $('input[type=text]').attr('disabled','disabled')
 
             //
-            document.querySelector('.btn-cancel').addEventListener('click', function (e) {
-                e.preventDefault();
-                history.back();
-            });
-
+            $(".btn-cancel").click(function (e) {
+                e.preventDefault()
+                history.back()
+            })
             //
-            document.querySelector('.btn-doadd').addEventListener('click', function (e) {
+            $(".btn-doadd").click(function (e) {
                 e.preventDefault();
+                let self = document.querySelector('#sample_form')
                 let url = '{{data_get($data['route_url'], "store")}}'
+                let data = new FormData(self)
                 //
                 ajax(url, data, 'POST')
-            });
-
+            })
             //
-            document.querySelector('.btn-dosave').addEventListener('click', function (e) {
-                e.preventDefault();
-                let id = $(this).data('id');
-                let url = '{{data_get($data['route_url'], "update")}}'.replace('-10', id);  //-10代替字元為id
+            $(".btn-dosave").click(function (e) {
+                e.preventDefault()
+                let self = document.querySelector('#sample_form')
+                let id = $(this).data('id')
+                let url = '{{data_get($data['route_url'], "update")}}'.replace('-10', id)  //-10代替字元為id
+                let data = new FormData(self)
                 // data._method = 'PUT'
                 ajax(url, data, 'POST')
-            });
-
-            // If from route show to set input disable
-            let disable = '{{data_get($data, 'Disable')}}'
-            if (disable) $('input[type=text]').attr('disabled','disabled');
-        });
+            })
+        })
     </script>
 @endsection
 <!-- ================== /inline-js ================== -->

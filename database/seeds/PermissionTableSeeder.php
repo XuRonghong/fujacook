@@ -49,16 +49,16 @@ class PermissionTableSeeder extends Seeder
         $index = ['news', '最新消息'];
         $permissions[] = Permission::create(['name' => 'admin.'.$index[0].'.index', 'description' => $index[1].' 總覽']);
         $permissions[] = Permission::create(['name' => 'admin.'.$index[0].'.show', 'description' => $index[1].' 檢視']);
-        $permissions[] = Permission::create(['name' => 'admin.'.$index[0].'.store', 'description' => $index[1].' 新增']);
-        $permissions[] = Permission::create(['name' => 'admin.'.$index[0].'.update', 'description' => $index[1].' 更新']);
+        $permissions[] = Permission::create(['name' => 'admin.'.$index[0].'.create', 'description' => $index[1].' 新增']);
+        $permissions[] = Permission::create(['name' => 'admin.'.$index[0].'.edit', 'description' => $index[1].' 更新']);
         $permissions[] = Permission::create(['name' => 'admin.'.$index[0].'.destroy', 'description' => $index[1].' 刪除']);
 
         //供應商
         $index = ['store', '供應商'];
         $permissions[] = Permission::create(['name' => 'admin.'.$index[0].'.index', 'description' => $index[1].' 總覽']);
         $permissions[] = Permission::create(['name' => 'admin.'.$index[0].'.show', 'description' => $index[1].' 檢視']);
-        $permissions[] = Permission::create(['name' => 'admin.'.$index[0].'.store', 'description' => $index[1].' 新增']);
-        $permissions[] = Permission::create(['name' => 'admin.'.$index[0].'.update', 'description' => $index[1].' 更新']);
+        $permissions[] = Permission::create(['name' => 'admin.'.$index[0].'.create', 'description' => $index[1].' 新增']);
+        $permissions[] = Permission::create(['name' => 'admin.'.$index[0].'.edit', 'description' => $index[1].' 更新']);
         $permissions[] = Permission::create(['name' => 'admin.'.$index[0].'.destroy', 'description' => $index[1].' 刪除']);
 
         //全站標籤管理
