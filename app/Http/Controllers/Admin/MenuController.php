@@ -2,24 +2,26 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Presenters\Admin\MenuPresenter;
 use App\Presenters\Admin\NewsPresenter;
+use App\Repositories\Admin\MenuRepository;
 use App\Repositories\Admin\NewsRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class NewsController extends Controller
+class MenuController extends Controller
 {
     protected $repository;
     protected $presenter;
-    protected $view_group_name = 'news';
+    protected $view_group_name = 'menus';
     protected $route_url;
 
-    public function __construct(NewsRepository $repository, NewsPresenter $presenter)
+    public function __construct(MenuRepository $repository, MenuPresenter $presenter)
     {
         $this->repository = $repository;
         $this->presenter = $presenter;
 
-        $this->route_url = $this->presenter->getRouteResource('admin.news');    //所有關於route::resource的位置
+        $this->route_url = $this->presenter->getRouteResource('admin.menu');    //所有關於route::resource的位置
     }
 
     /**
@@ -44,6 +46,12 @@ class NewsController extends Controller
         if(request()->ajax())
         {
             $data = $this->repository->getDataTable($request);
+
+            if ( $data['aaData']) {
+                foreach ($data['aaData'] as $key => $var) {
+                    $var->Title = trans('menu.'. $var->name. '.title');
+                }
+            }
 
             return response()->json($data,200);
         }
@@ -129,7 +137,7 @@ class NewsController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $this->repository->validate($request);
+//        $this->repository->validate($request);
 
         $permissions = $this->repository->update($request->all(), $id);
 

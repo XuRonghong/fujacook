@@ -55,6 +55,16 @@ return [
                 ]
             ],
             [
+                //選單管理
+                "id" => 19,
+                "parent_id" => 1,
+                "name" => "admin.menu",
+                "link" => "admin/menu",
+                "sub_menu" => 0,
+                "access" => "1,2",
+                "open" => 1,
+            ],
+            [
                 //群組管理
                 "id" => 12,
                 "parent_id" => 1,

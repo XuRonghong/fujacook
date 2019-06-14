@@ -31,6 +31,12 @@ Route::group([
         'middleware' => ['admin.checkPermission']       //權限通過
     ],function(){
 
+
+        Route::get('menu/list', 'MenuController@list')->name('menu.list');
+        Route::resource('menu', 'MenuController');
+        Route::post('menu/update/{id}', 'MenuController@update')->name('menu.update');
+        Route::post('menu/destroy/{id}', 'MenuController@destroy');
+
         /******* 帳號管理 ********/
         Route::get('admins/list', 'NewsController@list')->name('admins.list');
         Route::resource('admins', 'NewsController');

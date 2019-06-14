@@ -83,7 +83,7 @@ abstract class Presenter
 
 
     /*
-     * 目前無入用
+     *
      */
     public function getMenu2()
     {

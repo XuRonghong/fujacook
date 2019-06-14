@@ -40,7 +40,9 @@ class PermissionController extends Controller
         //
         if(request()->ajax())
         {
-            return $this->repository->getDataTable($request);
+            $data = $this->repository->getDataTable($request);
+
+            return response()->json($data,200);
         }
         return response()->json('no ajax data', 204);
     }

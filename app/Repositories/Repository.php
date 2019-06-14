@@ -278,18 +278,18 @@ abstract class Repository
                 'message'=> ['Oops! 沒有資料!']
             ],204);
         } else {
-            foreach ($data_arr as $key => $var) {
-                $var->DT_RowId = $var->id;
+            foreach ($data_arr as $key => $data) {
+                $data->DT_RowId = $data->id;
             }
-        }
+        };
 
-        return response()->json([
+        return [
             'status'=> 1,
             'message'=> sprintf("已得到 %s", $total_count."筆資料"),
             'sEcho'=> $sEcho,
             'iTotalDisplayRecords'=>$total_count,
             'iTotalRecords'=>$total_count,
             'aaData'=> $total_count ? $data_arr : []
-        ],200);
+        ];
     }
 }
