@@ -12,9 +12,22 @@
 
     <!-- Favicon icon -->
     <link href="{{asset('xtreme-admin/assets/images/favicon.png')}}" rel="icon" type="image/png" sizes="16x16">
+
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    {{--    <script src="{{asset('xtreme-admin/assets/libs/jquery/dist/jquery.min.js')}}"></script>--}}
+    <script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+
     <!-- Custom CSS -->
     <link href="{{asset('xtreme-admin/assets/libs/chartist/dist/chartist.min.css')}}" rel="stylesheet">
     <link href="{{asset('xtreme-admin/assets/extra-libs/c3/c3.min.css')}}" rel="stylesheet">
+{{--    <link href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css" rel="stylesheet" type="text/css" />--}}
+{{--    <link href='//fonts.googleapis.com/css?family=Oxygen:300' rel='stylesheet' type='text/css'>--}}
+
     <!-- Custom CSS -->
     <link href="{{asset('xtreme-admin/dist/css/style.min.css')}}" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -72,10 +85,6 @@
     <!-- ============================================================== -->
 
 {{--    @include('admin.layouts.footer')--}}
-    <!-- ============================================================== -->
-    <!-- All Jquery -->
-    <!-- ============================================================== -->
-    <script src="{{asset('xtreme-admin/assets/libs/jquery/dist/jquery.min.js')}}"></script>
     <!-- Bootstrap tether Core JavaScript -->
     <script src="{{asset('xtreme-admin/assets/libs/popper.js/dist/umd/popper.min.js')}}"></script>
     <script src="{{asset('xtreme-admin/assets/libs/bootstrap/dist/js/bootstrap.min.js')}}"></script>
@@ -96,6 +105,22 @@
     <!--chartis chart-->
     <script src="{{asset('xtreme-admin/assets/libs/chartist/dist/chartist.min.js')}}"></script>
     <script src="{{asset('xtreme-admin/assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js')}}"></script>
+{{--    <script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>--}}
+{{--    <script>--}}
+{{--        // THIS IS WHERE THE ERROR OCCURS--}}
+{{--        new Chartist.Line('.ct-chart', {--}}
+{{--            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],--}}
+{{--            series: [--}}
+{{--                [2, 3, 2, 4, 5],--}}
+{{--                [0, 2.5, 3, 2, 3],--}}
+{{--                [1, 2, 2.5, 3.5, 4]--}}
+{{--            ]--}}
+{{--        }, {--}}
+{{--            width: 500,--}}
+{{--            height: 300--}}
+{{--        });--}}
+
+{{--    </script>--}}
     <!--c3 charts -->
     <script src="{{asset('xtreme-admin/assets/extra-libs/c3/d3.min.js')}}"></script>
     <script src="{{asset('xtreme-admin/assets/extra-libs/c3/c3.min.js')}}"></script>
@@ -114,7 +139,7 @@
 
 
     <script src="{{asset('js/toastr.min.js')}}"></script>
-    <script src="{{asset('js/sweetalert.min.js')}}"></script>
+{{--    <script src="{{asset('js/sweetalert.min.js')}}"></script>--}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
     <script src="{{asset('js/waitMe.js')}}"></script>
     <script>
@@ -144,6 +169,35 @@
                 fontSize: '',
                 // callback
                 onClose: function() {}
+            });
+        }
+
+
+        function ajax(url='', data={}, method='POST')
+        {
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': '{{csrf_token()}}'
+                },
+                url: url,
+                method: method,
+                // type: "POST",
+                dataType:"json",
+                contentType: false,
+                processData: false,
+                cache: false,
+                data: data,
+                resetForm: true,
+                success: function (data) {
+                    if (data.status) {
+                        toastr.success(data.message, "{{trans('_web_alert.notice')}}");
+                        setTimeout(function () {
+                            location.href = data.redirectUrl;
+                        }, 500)
+                    } else {
+                        toastr.error(data.message, "{{trans('_web_alert.notice')}}");
+                    }
+                }
             });
         }
 

@@ -14,7 +14,8 @@ abstract class Presenter
             'create' => route($route_name.'.create'),
             'store' => route($route_name.'.store'),
             'edit'  => route($route_name.'.index'),
-            'update' => url(str_replace('.','/',$route_name)).'/update',
+//            'update' => url(str_replace('.','/',$route_name), [1]),
+            'update' => route($route_name.'.update', [-10]),    //-10暫定代替字元
             'destroy' => url(str_replace('.','/',$route_name).'/destroy'),
             'show' => route($route_name.'.index'),
         ];
@@ -76,6 +77,22 @@ abstract class Presenter
         $data['menu'] = $menu;
 
         return $data;
+    }
+
+    public function view_create_from_button()
+    {
+        return '<div class="card-body">
+                    <div class="form-group m-b-0 text-right">
+                    @if( !data_get($data, \'Disable\'))
+                        @if($data[\'arr\'])
+                            <button type="button" class="btn btn-success waves-effect waves-light btn-dosave" data-id="{{data_get($data[\'arr\'], \'id\')}}">Save</button>
+                        @else
+                            <button type="button" class="btn btn-info waves-effect waves-light btn-doadd">Add</button>
+                        @endif
+                    @endif
+                        <button type="button" class="btn waves-effect waves-light btn-cancel">Cancel</button>
+                    </div>
+                </div>';
     }
 
     public function getMenu()

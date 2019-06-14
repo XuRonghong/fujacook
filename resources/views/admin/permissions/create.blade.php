@@ -94,12 +94,14 @@
                             <hr>
                             <div class="card-body">
                                 <div class="form-group m-b-0 text-right">
-                                    @if($data['arr'])
-                                        <button type="button" class="btn btn-info waves-effect waves-light btn-dosave" data-id="{{data_get($data['arr'], 'id')}}">Save</button>
-                                    @else
-                                        <button type="button" class="btn btn-info waves-effect waves-light btn-doadd">Add</button>
+                                    @if( !data_get($data, 'Disable'))
+                                        @if($data['arr'])
+                                            <button type="button" class="btn btn-success waves-effect waves-light btn-dosave" data-id="{{data_get($data['arr'], 'id')}}">Save</button>
+                                        @else
+                                            <button type="button" class="btn btn-info waves-effect waves-light btn-doadd">Add</button>
+                                        @endif
                                     @endif
-                                    <button type="button" class="btn btn-dark waves-effect waves-light btn-cancel">Cancel</button>
+                                    <button type="button" class="btn waves-effect waves-light btn-cancel">Cancel</button>
                                 </div>
                             </div>
                             {{csrf_field()}}
@@ -122,82 +124,36 @@
 
 <!-- ================== inline-js ================== -->
 @section('inline-js')
-    <!--  -->
-    <!-- Public Crop_Image -->
-    {{--@include('_web._js.crop_image')--}}
-    <!-- end -->
-    <!-- Public SummerNote -->
-    {{--@include('_web._js.summernote')--}}
-    <!-- end -->
     <script type="text/javascript">
         $(document).ready(function () {
             //
-            let modal = $("#manage-modal");
-            let current_modal = modal.find('.messageInfo-modal');
+            let self = document.querySelector('#sample_form')
+            let data = new FormData(self)
+
             //
-            $(".btn-cancel").click(function () {
+            document.querySelector('.btn-cancel').addEventListener('click', function (e) {
+                e.preventDefault();
                 history.back();
             });
+
             //
-            $(".btn-doadd").click(function () {
-                let self = document.querySelector('#sample_form');
+            document.querySelector('.btn-doadd').addEventListener('click', function (e) {
+                e.preventDefault();
+                let url = '{{data_get($data['route_url'], "store")}}'
                 //
-                $.ajax({
-                    url: '{{data_get($data['route_url'], "store")}}',
-                    type: "POST",
-                    dataType:"json",
-                    contentType: false,
-                    processData: false,
-                    cache: false,
-                    data: new FormData(self),
-                    resetForm: true,
-                    success: function (data) {
-                        if (data.status) {
-                            //
-                            //sendNotifyMessage(rtndata.newid , rtndata.heads_token , current_modal.find(".vTitle").val() , current_modal.find(".vSummary").val());
-                            //
-                            toastr.success(data.message, "{{trans('_web_alert.notice')}}");
-                            setTimeout(function () {
-                                location.href = data.redirectUrl;
-                            }, 1000)
-                        } else {
-                            toastr.error(data.message, "{{trans('_web_alert.notice')}}");
-                        }
-                    },
-                    error: function (err) {
-                        console.log(err.responseJSON);
-                        toastr.error(JSON.stringify(err.responseJSON), "{{trans('_web_alert.notice')}}");
-                    }
-                });
+                ajax(url, data, 'POST')
             });
 
             //
-            $(".btn-dosave").click(function () {
-                let self = document.querySelector('#sample_form');
+            document.querySelector('.btn-dosave').addEventListener('click', function (e) {
+                e.preventDefault();
                 let id = $(this).data('id');
-                //
-                $.ajax({
-                    url: '{{data_get($data['route_url'], "update")}}'+ '/'+ id,
-                    type: "POST",
-                    dataType:"json",
-                    contentType: false,
-                    processData: false,
-                    cache: false,
-                    data: new FormData(self),
-                    resetForm: true,
-                    success: function (data) {
-                        if (data.status) {
-                            toastr.success(data.message, "{{trans('_web_alert.notice')}}");
-                            setTimeout(function () {
-                                location.href = data.redirectUrl;
-                            }, 1000)
-                        } else {
-                            toastr.error(data.message, "{{trans('_web_alert.notice')}}");
-                        }
-                    }
-                });
+                let url = '{{data_get($data['route_url'], "update")}}'.replace('-10', id);  //-10代替字元為id
+                // data._method = 'PUT'
+                ajax(url, data, 'POST')
             });
 
+            // If from route show to set input disable
             let disable = '{{data_get($data, 'Disable')}}'
             if (disable) $('input[type=text]').attr('disabled','disabled');
         });

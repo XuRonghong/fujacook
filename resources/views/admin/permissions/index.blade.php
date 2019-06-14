@@ -46,15 +46,7 @@
     </div>
 @endsection
 
-
 @section('inline-js')
-    <!--  -->
-    <!-- Public Crop_Image -->
-    {{--@include('_web._js.crop_image')--}}
-    <!-- end -->
-    <!-- Public SummerNote -->
-    {{--@include('_web._js.summernote')--}}
-    <!-- end -->
     <script>
         $(document).ready(function () {
 
@@ -98,9 +90,9 @@
                         // "width": '100px',
                         "mRender": function (data, type, row) {
                             // current_data[row.id] = row;
-                            let btn = '<button class="btn btn-xs btn-default btn-show" title="全部資訊"><i class="fa fa-book" aria-hidden="true"></i></button>';
-                                btn += '<button class="btn btn-xs btn-default btn-edit" title="修改"><i class="fa fa-pencil" aria-hidden="true">修改</i></button>';
-                                btn += '<button class="btn btn-xs btn-danger btn-del pull-right " title="刪除"><i class="fa fa-trash" aria-hidden="true"></i></button>';
+                            let btn = '<button class="btn btn-xs btn-show" title="詳情"><i class="fa fa-book" aria-hidden="true"></i></button>';
+                                btn += '<button class="btn btn-xs btn-edit" title="修改"><i class="fa fa-pencil-alt" aria-hidden="true"></i></button>';
+                                btn += '<button class="btn btn-xs btn-del pull-right" title="刪除"><i class="fa fa-trash" aria-hidden="true"></i></button>';
                             $('.waitme').waitMe('hide');
                             return btn;
                         }
@@ -134,40 +126,26 @@
             })
 
             //
+            data_table.on('click', '.btn-show', function () {
+                //let id = $(this).closest('tr').attr('id');
+                let id = $(this).closest('tr').find('td').first().text()
+                location.href = '{{$data['route_url']['show']}}'+'/'+id
+            })
+            //
             data_table.on('click', '.btn-edit', function () {
-                //var id = $(this).closest('tr').attr('id');
-                let id = $(this).closest('tr').find('td').first().text();
-                location.href = '{{$data['route_url']['edit']}}'+id+'/edit';
-            });
-
+                //let id = $(this).closest('tr').attr('id');
+                let id = $(this).closest('tr').find('td').first().text()
+                location.href = '{{$data['route_url']['edit']}}'+'/'+id+'/edit'
+            })
             //
             data_table.on('click', '.btn-del', function () {
-                //var id = $(this).closest('tr').attr('id');
-                let id = $(this).closest('tr').find('td').first().text();
-                let url = '{{$data['route_url']['destroy']}}' + '/' + id
+                let id = $(this).closest('tr').attr('id')
+                let url = '{{$data['route_url']['destroy']}}'+'/'+id
                 let data = {
                     "_token": "{{ csrf_token() }}"
-                };
-                doDelete(url, data, table)      // from layout.master
-            });
-
-            //
-            data_table.on('click', '.btn-show', function () {
-                //var id = $(this).closest('tr').attr('id');
-                var id = $(this).closest('tr').find('td').first().text();
-                location.href = '{{$data['route_url']['show']}}'+'/'+id;
-            });
-
-            //
-            // var ii = 1;
-            // $('thead>tr>th').each(function () {
-            //     if (ii==4){
-            //         $(this).click();
-            //         $(this).click();
-            //     }
-            //     ii++;
-            // });
-        });
+                }
+                doDelete(url, data, table)          // from layout.master
+            })
+        })
     </script>
 @endsection
-<!-- ================== /inline-js ================== -->

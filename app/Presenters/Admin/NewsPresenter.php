@@ -10,7 +10,7 @@ class NewsPresenter extends Presenter
 
     public function __construct()
     {
-        $this->gotoUrl = url()->current();
+        $this->gotoUrl = route('admin.news.index');
         $this->title = 'News';
     }
 }
