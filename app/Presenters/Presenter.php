@@ -2,6 +2,7 @@
 
 namespace App\Presenters\Admin;
 
+use App\Menu;
 use App\Permission;
 
 abstract class Presenter
@@ -68,32 +69,43 @@ abstract class Presenter
         }
 
         $nav = [
+            'admins' => route('admin.admins.index'),
             'news' => route('admin.news.index'),
             'store' => route('admin.store.index'),
             'permissions' => route('admin.permissions.index'),
         ];
         $data['nav'] = $nav;
-        $menu = [];
+        $menu = $this->getMenu2();
         $data['menu'] = $menu;
 
         return $data;
     }
 
-    public function view_create_from_button()
+
+    /*
+     * 目前無入用
+     */
+    public function getMenu2()
     {
-        return '<div class="card-body">
-                    <div class="form-group m-b-0 text-right">
-                    @if( !data_get($data, \'Disable\'))
-                        @if($data[\'arr\'])
-                            <button type="button" class="btn btn-success waves-effect waves-light btn-dosave" data-id="{{data_get($data[\'arr\'], \'id\')}}">Save</button>
-                        @else
-                            <button type="button" class="btn btn-info waves-effect waves-light btn-doadd">Add</button>
-                        @endif
-                    @endif
-                        <button type="button" class="btn waves-effect waves-light btn-cancel">Cancel</button>
-                    </div>
-                </div>';
+//        $this->view = View()->make( config( '_menu.' . $this->func . '.view' ) );
+//        session()->put( 'menu_parent', config( '_menu.' . $this->func . '.menu_parent' ) );
+//        session()->put( 'menu_access', config( '_menu.' . $this->func . '.menu_access' ) );
+        $mapSysMenu ['open'] = 1;
+        $DaoSysMenu = Menu::query()->where( $mapSysMenu )->orderBy( 'rank', 'ASC' )->get();
+        $sys_menu = $DaoSysMenu->where('parent_id', '=', 0);
+        foreach ($sys_menu as $key => $var) {
+            if ($var->sub_menu) {
+                $var->second = $DaoSysMenu->where('parent_id', '=', $var->id);
+                foreach ($var->second as $key2 => $var2) {
+                    if ($var2->sub_menu) {
+                        $var2->third = $DaoSysMenu->where('parent_id', '=', $var2->id);
+                    }
+                }
+            }
+        }
+        return $sys_menu;
     }
+
 
     public function getMenu()
     {

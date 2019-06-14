@@ -59,7 +59,7 @@
     <!-- ============================================================== -->
     <div id="main-wrapper">
         @include('admin.layouts.header')
-        @include('admin.layouts.nav')
+        @include('admin.layouts.nav2')
         @yield('content')
     </div>
 

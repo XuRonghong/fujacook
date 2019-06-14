@@ -116,7 +116,7 @@
             closeOnConfirm: true,
         }, function () {
             $.ajax({
-                url: '{{$data['route_url']['destroy']}}'+'/'+id,
+                url: '{{data_get($data,'route_url.destroy')}}'+'/'+id,
                 data: data,
                 type: "POST",
                 //async: false,
