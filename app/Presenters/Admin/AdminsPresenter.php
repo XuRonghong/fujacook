@@ -4,12 +4,12 @@ namespace App\Presenters\Admin;
 
 
 
-class MenuPresenter extends Presenter
+class AdminsPresenter extends Presenter
 {
     protected $gotoUrl;         //ajax finish to url
-    protected $title = 'Menu';          //output for view
-    protected $view_group_name = 'menus';       //document of view group
-    protected $route_name = 'admin.menus';      //Route->name()
+    protected $title = 'Admins';          //output for view
+    protected $view_group_name = 'admins';       //document of view group
+    protected $route_name = 'admin.admins';      //Route->name()
 
     public function __construct()
     {

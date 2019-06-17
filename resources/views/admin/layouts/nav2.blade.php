@@ -5,6 +5,7 @@
         <!-- Sidebar navigation-->
         <nav class="sidebar-nav">
             <ul id="sidebarnav">
+                <br>
             @foreach ($data['menu'] as $key => $var)
                 <li class="sidebar-item">
                     <a href="@if($var->link!='') {{ url($var->link) }} @else javascript:void(0) @endif"
@@ -18,7 +19,7 @@
                             @foreach ($var->second as $key2 => $var2)
                                 <li class="sidebar-item">
                                     <a href="@if($var2->link!='') {{ url($var2->link, '') }} @else javascript:void(0) @endif"
-                                       class="sidebar-link has-arrow waves-effect waves-dark"
+                                       class="@if($var2->link!='') sidebar-link @else sidebar-link has-arrow waves-effect waves-dark @endif"
                                        aria-expanded="false">
                                         <i class="mdi"></i>
                                         <span class="hide-menu">{{ trans('menu.'. $var2->name. '.title' )}}</span>
@@ -47,7 +48,7 @@
             <!-- footer -->
             <!-- ============================================================== -->
             <footer class="footer text-center">
-                All Rights Reserved by Xtreme admin. Designed and Developed by <a href="https://wrappixel.com">WrapPixel</a>.
+{{--                All Rights Reserved by Xtreme admin. Designed and Developed by <a href="https://wrappixel.com">WrapPixel</a>.--}}
             </footer>
             <!-- ============================================================== -->
             <!-- End footer -->

@@ -1,68 +1,87 @@
 <?php
 return [
-    // admin
+    // admin Backend Menu
     [
         //管理員功能
         "id" => 1,
-        "parent_id" => 0,
+        "parent_id" => 0,   //父類別
         "name" => "admin",
         "link" => "",
-        "sub_menu" => 1,
-        "access" => "1,2",
+        "access" => "1,2",   //暫時無功能
         "open" => 1,
+        "sub_menu" => 1,    //有子分類
         "child" => [
             [
                 //帳號管理
                 "id" => 11,
                 "parent_id" => 1,
-                "name" => "admin.admins",
+                "name" => "admin.user",
                 "link" => "",
-                "sub_menu" => 1,
                 "access" => "1,2",
                 "open" => 1,
+                "sub_menu" => 1,
                 "child" => [
-                        [
-                            //一般會員管理
-                            "id" => 111,
-                            "parent_id" => 11,
-                            "name" => "admin.admins.member",
-                            "link" => 'admin.admins.member',
-                            "sub_menu" => 0,
-                            "access" => "1,2",
-                            "open" => 1,
-                        ],
-                        [
-                            //店家會員管理
-                            "id" => 113,
-                            "parent_id" => 11,
-                            "name" => "admin.admins.store",
-                            "link" => 'admin.admins.store',
-                            "sub_menu" => 0,
-                            "parent_id" => 11,
-                            "access" => "1,2",
-                            "open" => 1,
-                        ],
-                        [
-                            //供應商會員管理
-                            "id" => 115,
-                            "parent_id" => 11,
-                            "name" => "admin.admins.supplier",
-                            "link" => 'admin.admins.supplier',
-                            "sub_menu" => 0,
-                            "access" => "1,2",
-                            "open" => 1,
-                        ],
+                    [
+                        //管理員帳號
+                        "id" => 119,
+                        "parent_id" => 11,
+                        "name" => "admin.user.admins",
+                        "link" => 'admin/admins',
+                        "access" => "1,2",
+                        "open" => 1,
+                        "sub_menu" => 0,    //無子類別
+                    ],
+                    [
+                        //一般會員管理
+                        "id" => 111,
+                        "parent_id" => 11,
+                        "name" => "admin.user.members",
+                        "link" => 'admin/members',
+                        "access" => "1,2",
+                        "open" => 0,
+                        "sub_menu" => 0,
+                    ],
+                    [
+                        //店家會員管理
+                        "id" => 113,
+                        "parent_id" => 11,
+                        "name" => "admin.user.store",
+                        "link" => 'admin/store',
+                        "access" => "1,2",
+                        "open" => 0,
+                        "sub_menu" => 0,
+                    ],
+                    [
+                        //供應商會員管理
+                        "id" => 115,
+                        "parent_id" => 11,
+                        "name" => "admin.user.supplier",
+                        "link" => 'admin/supplier',
+                        "access" => "1,2",
+                        "open" => 0,
+                        "sub_menu" => 0,
+                    ],
                 ]
+            ],
+            [
+                //Permission管理
+                "id" => 18,
+                "parent_id" => 1,
+                "name" => "admin.permissions",
+                "link" => "admin/permissions",
+                "access" => "1,2",
+                "open" => 1,
+                "sub_menu" => 0,
             ],
             [
                 //選單管理
                 "id" => 19,
                 "parent_id" => 1,
                 "name" => "admin.menu",
-                "link" => "admin/menu",
-                "sub_menu" => 0,
+                "link" => "admin/menus",
                 "access" => "1,2",
                 "open" => 1,
+                "sub_menu" => 0,
             ],
             [
                 //群組管理
@@ -70,9 +89,9 @@ return [
                 "parent_id" => 1,
                 "name" => "admin.group",
                 "link" => "",
-                "sub_menu" => 1,
                 "access" => "1,2",
-                "open" => 1,
+                "open" => 0,
+                "sub_menu" => 1,
                 "child" => [
                     [
                         //一般會員管理
@@ -80,9 +99,9 @@ return [
                         "parent_id" => 12,
                         "name" => "admin.group.member",
                         "link" => 'admin.group.member',
-                        "sub_menu" => 0,
                         "access" => "1,2",
                         "open" => 1,
+                        "sub_menu" => 0,
                     ],
                 ]
             ],
@@ -92,9 +111,9 @@ return [
                 "parent_id" => 1,
                 "name" => "admin.exchange_rate",
                 "link" => "",
-                "sub_menu" => 1,
                 "access" => "1,2",
                 "open" => 0,
+                "sub_menu" => 1,
                 "child" => [
                     [
                         //匯率設定
@@ -102,9 +121,9 @@ return [
                         "parent_id" => 13,
                         "name" => "admin.exchange_rate.index",
                         "link" => "admin.exchange_rate.index",
-                        "sub_menu" => 0,
                         "access" => "1,2",
                         "open" => 1,
+                        "sub_menu" => 0,
                     ],
                     [
                         //歷史匯率
@@ -112,9 +131,9 @@ return [
                         "parent_id" => 13,
                         "name" => "admin.exchange_rate.log",
                         "link" => "admin.exchange_rate.log",
-                        "sub_menu" => 0,
                         "access" => "1,2",
                         "open" => 1,
+                        "sub_menu" => 0,
                     ],
                 ]
             ],
@@ -125,9 +144,9 @@ return [
                 "name" => "admin.category",
                 "link" => "admin.category",
                 "vCss" => "",
-                "sub_menu" => 0,
                 "access" => "1,2",
-                "open" => 1,
+                "open" => 0,
+                "sub_menu" => 0,
             ],
             [
                 //系統參數設置
@@ -135,9 +154,9 @@ return [
                 "parent_id" => 1,
                 "name" => "admin.config",
                 "link" => "web.admin.config",
-                "sub_menu" => 0,
                 "access" => "1,2",
-                "open" => 1,
+                "open" => 0,
+                "sub_menu" => 0,
             ],
         ],
     ],
@@ -171,9 +190,9 @@ return [
         "parent_id" => 0,
         "name" => "scenes",
         "link" => "",
-        "sub_menu" => 1,
         "access" => "1,2",
         "open" => 1,
+        "sub_menu" => 1,
         "child" => [
             [
                 //登入畫面
@@ -181,9 +200,9 @@ return [
                 "parent_id" => 6,
                 "name" => "scenes.login",
                 "link" => "",
-                "sub_menu" => 1,
                 "access" => "1,2",
-                "open" => 1,
+                "open" => 0,
+                "sub_menu" => 1,
                 "child" => [
                     [
                         //背景圖
@@ -191,9 +210,9 @@ return [
                         "parent_id" => 601,
                         "name" => "scenes.login.background",
                         "link" => "admin/scenes/login/background",
-                        "sub_menu" => 0,
                         "access" => "1,2",
                         "open" => 1,
+                        "sub_menu" => 0,
                     ],
                 ]
             ],
@@ -203,9 +222,9 @@ return [
                 "parent_id" => 6,
                 "name" => "scenes.home",
                 "link" => "",
-                "sub_menu" => 1,
                 "access" => "1,2",
                 "open" => 1,
+                "sub_menu" => 1,
                 "child" => [
                     [
                         //滑動圖
@@ -213,9 +232,9 @@ return [
                         "parent_id" => 602,
                         "name" => "scenes.home.slider",
                         "link" => "admin.scenes.home.slider",
-                        "sub_menu" => 0,
                         "access" => "1,2",
                         "open" => 1,
+                        "sub_menu" => 0,
                     ],
                 ]
             ],
@@ -225,9 +244,9 @@ return [
                 "parent_id" => 6,
                 "name" => "scenes.header",
                 "link" => "",
-                "sub_menu" => 1,
                 "access" => "1,2",
-                "open" => 1,
+                "open" => 0,
+                "sub_menu" => 1,
                 "child" => [
                     [
                         //連結編輯
@@ -235,12 +254,54 @@ return [
                         "name" => "scenes.header.url",
                         "link" => "web/scenes/header/url",
                         "vCss" => "",
-                        "sub_menu" => 0,
                         "parent_id" => 603,
                         "access" => "1,2",
+                        "sub_menu" => 0,
                         "open" => 1,
                     ],
                 ]
+            ],
+        ]
+    ],
+    [
+        //信息管理
+        "id" => 4001,
+        "parent_id" => 0,
+        "name" => "information",
+        "link" => "",
+        "access" => "1,2,11,12",
+        "open" => 1,
+        "sub_menu" => 1,
+        "child" => [
+            [
+                //公告
+                "id" => 40011,
+                "parent_id" => 4001,
+                "name" => "information.announceme",
+                "link" => "admin/announceme",
+                "access" => "1,2,11,12",
+                "open" => 0,
+                "sub_menu" => 0,
+            ],
+            [
+                //最新消息
+                "id" => 40012,
+                "parent_id" => 4001,
+                "name" => "information.news",
+                "link" => "admin/news",
+                "access" => "1,2,11,12",
+                "open" => 1,
+                "sub_menu" => 0,
+            ],
+            [
+                //訊息
+                "id" => 40013,
+                "parent_id" => 4001,
+                "name" => "information.messages",
+                "link" => "admin/messages",
+                "access" => "1,2,11,12",
+                "open" => 1,
+                "sub_menu" => 0,
             ],
         ]
     ],
@@ -253,7 +314,7 @@ return [
         "link" => "",
         "sub_menu" => 1,
         "access" => "1,2,11,12",
-        "open" => 1,
+        "open" => 0,
         "child" => [
             [
                 //商品類別設置
@@ -513,31 +574,6 @@ $storage = [
 //                                ]
                 ],
             ],
-    ],
-    [
-        //訊息公告
-        "id" => 4001,
-        "name" => "reservoir",
-        "link" => "",
-        "vCss" => "fa-list",
-        "sub_menu" => 1,
-        "parent_id" => 0,
-        "access" => "1,2,11,12",
-        "open" => 1,
-        "child" =>
-            [
-                [
-                    //公告訊息
-                    "id" => 40011,
-                    "name" => "reservoir.index",
-                    "link" => "web/reservoir/index",
-                    "vCss" => "",
-                    "sub_menu" => 0,
-                    "parent_id" => 4001,
-                    "access" => "1,2,11,12",
-                    "open" => 1,
-                ],
-            ]
     ],
     [
         //客服專區

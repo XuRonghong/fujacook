@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Presenters\Admin\AdminsPresenter;
 use App\Presenters\Admin\MenuPresenter;
+use App\Repositories\Admin\AdminsRepository;
 use App\Repositories\Admin\MenuRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class MenuController extends Controller
+class AdminsController extends Controller
 {
     protected $repository;
     protected $presenter;
     protected $route_url;
 
-    public function __construct(MenuRepository $repository, MenuPresenter $presenter)
+    public function __construct(AdminsRepository $repository, AdminsPresenter $presenter)
     {
         $this->repository = $repository;
         $this->presenter = $presenter;

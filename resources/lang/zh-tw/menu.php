@@ -11,10 +11,25 @@ return [
     'admin' =>
         [
             'title' => '管理員功能',
-            'admins' =>
+            'user' =>
                 [
                     'title' => '帳號管理',
-                    'member' => [
+                    'admins' => [
+                        'title' => '管理員帳號管理',
+                        'add' =>
+                            [
+                                'title' => '新增管理員'
+                            ],
+                        'edit' =>
+                            [
+                                'title' => '編輯'
+                            ],
+                        'access' =>
+                            [
+                                'title' => '權限設置',
+                            ],
+                    ],
+                    'members' => [
                         'title' => '一般會員帳號',
                         'add' =>
                             [
@@ -59,6 +74,10 @@ return [
                                 'title' => '權限設置',
                             ],
                     ],
+                ],
+            'permissions' =>
+                [
+                    'title' => '權限管理',
                 ],
             'menu' =>
                 [
@@ -785,12 +804,32 @@ return [
                         ]
                 ]
         ],
-    'news' =>
+    'information' =>
         [
-            'title' => '訊息公告',
-            'index' =>
+            'title' => '信息管理',
+            'announceme' =>
                 [
-                    'title' => '資訊專區',
+                    'title' => '公告',
+                    'index' =>
+                        [
+                            'title' => '資訊專區',
+                        ],
+                ],
+            'news' =>
+            [
+                'title' => '最新消息',
+                'index' =>
+                    [
+                        'title' => '資訊專區',
+                    ],
+            ],
+            'messages' =>
+                [
+                    'title' => '訊息',
+                    'index' =>
+                        [
+                            'title' => '資訊專區',
+                        ],
                 ],
         ],
     'service' =>

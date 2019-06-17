@@ -17,7 +17,9 @@ class AdminTableSeeder extends Seeder
         Admin::truncate();
         //
         Admin::create([
-            'no'    => 'a100000000001',
+            'no'    => 'a1000000000001',
+            'rank'  => 1,
+            'type'  => 1,
             'name'    => 'Superdo',
             'email'    => 'hello080810@gmail.com',
             'account'   => 'superdo',
@@ -28,7 +30,9 @@ class AdminTableSeeder extends Seeder
         ]);
         //
         Admin::create([
-            'no'    => 'a100000000002',
+            'no'    => 'a1000000000002',
+            'rank'  => 2,
+            'type'  => 2,
             'name'    => 'fujacook',
             'email'    => 'fujacook@fujacook.com',
             'account'   => 'fujacook',
@@ -39,7 +43,9 @@ class AdminTableSeeder extends Seeder
         ]);
         //
         Admin::create([
-            'no'    => 'a'.time().rand('00','99'), //以時間當亂數種子
+            'no'    => 'a1'.time().rand('00','99'), //以時間當亂數種子
+            'rank'  => 3,
+            'type'  => 3,
             'name'    => 'Ronghong',
             'email'    => 'hello080810@gmail.com',
             'account'   => 'ronghong',
