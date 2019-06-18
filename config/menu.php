@@ -231,7 +231,7 @@ return [
                         "id" => 60201,
                         "parent_id" => 602,
                         "name" => "scenes.home.slider",
-                        "link" => "admin.scenes.home.slider",
+                        "link" => "admin/scenes/home",
                         "access" => "1,2",
                         "open" => 1,
                         "sub_menu" => 0,

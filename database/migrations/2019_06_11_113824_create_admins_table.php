@@ -28,6 +28,23 @@ class CreateAdminsTable extends Migration
             $table->dateTime('login_time')->comment('最後登入時間')->nullable();
             $table->timestamps();
         });
+
+        Schema::create('admins_info', function (Blueprint $table) {
+            $table->integer( 'admin_id' )->unique();
+            $table->string( 'user_file')->nullable();
+            $table->string( 'user_image')->nullable();
+            $table->string( 'user_name')->nullable();
+            $table->string( 'user_name_en')->nullable();
+            $table->string( 'user_title')->nullable();
+            $table->string( 'userID')->nullable();
+            $table->dateTime( 'user_birthday' )->nullable();
+            $table->string( 'user_email')->nullable();
+            $table->string( 'user_contact')->nullable();
+            $table->string( 'user_zip_code')->nullable();
+            $table->string( 'user_city')->nullable();
+            $table->string( 'user_area')->nullable();
+            $table->string( 'user_address')->nullable();
+        });
     }
 
     /**
@@ -37,6 +54,7 @@ class CreateAdminsTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('admins_info');
         Schema::dropIfExists('admins');
     }
 }

@@ -54,8 +54,39 @@
                 } else {
                     toastr.error(data.message, "{{trans('_web_alert.notice')}}")
                 }
+            },
+            error: function (err) {
+                console.log(err.responseJSON)
+                toastr.error(JSON.stringify(err.responseJSON), "{{trans('_web_alert.notice')}}")
             }
         })
+    }
+
+
+    function ajaxUploadFile(url='', data={}, method='POST')
+    {
+        let file_id
+        $.ajax({
+            data: data,
+            type: method,
+            url: url,
+            cache: false,
+            contentType: false,
+            processData: false,
+            async: false,
+            success: function (data) {
+                if (data.status) {
+                    file_id = data.fileid;
+                } else {
+                    toastr.error(data.message, "{{trans('_web_alert.notice')}}")
+                }
+            },
+            error: function (err) {
+                console.log(err.responseJSON)
+                toastr.error(JSON.stringify(err.responseJSON), "{{trans('_web_alert.notice')}}")
+            }
+        })
+        return file_id
     }
 
 

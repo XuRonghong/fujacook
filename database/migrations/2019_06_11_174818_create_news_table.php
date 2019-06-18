@@ -21,6 +21,7 @@ class CreateNewsTable extends Migration
             $table->string( 'title', 127 )->nullable();
             $table->string( 'summary', 255 )->nullable();
             $table->string( 'image', 255 )->nullable();
+            $table->string( 'file_id')->nullable()->comment('檔案');
             $table->string( 'url', 255 )->comment('相關連結')->nullable();
             $table->longText( 'detail' )->nullable();
             $table->dateTime( 'startTime' )->nullable();

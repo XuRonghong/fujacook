@@ -1,0 +1,40 @@
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateFilesTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('files', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer( 'rank');
+            $table->integer( 'author_id');
+            $table->smallInteger( 'type')->default(0)->common('1.S3原檔 2.local原檔 3.S3裁切 4.local裁切');
+            $table->string( 'file_type')->common('附檔名');
+            $table->string( 'file_server')->common('APP_URL');
+            $table->string( 'file_path')->common('');
+            $table->string( 'file_name')->common('');
+            $table->integer( 'file_size')->common('');
+            $table->tinyInteger( 'open' )->default(1);
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('files');
+    }
+}

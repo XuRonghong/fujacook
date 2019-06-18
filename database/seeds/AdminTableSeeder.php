@@ -1,9 +1,11 @@
 <?php
 
+use App\SysMemberInfo;
 use Illuminate\Http\Request;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 use App\Admin;
+use App\AdminInfo;
 
 class AdminTableSeeder extends Seeder
 {
@@ -54,6 +56,38 @@ class AdminTableSeeder extends Seeder
             'remember_token' =>  str_random(10),
             'active'    =>  1
         ]);
+
+
+        $data_arr = [
+            [
+                "user_image" => env('APP_URL') . "/images/admin.jpg",
+                "user_name" => "Superdo",
+                "user_email" => "superdo@fujacook.com",
+                "user_contact" => ""
+            ],
+            [
+                "user_image" => env('APP_URL') . "/images/manager.jpg",
+                "user_name" => "Manager",
+                "user_email" => "fujacook@fujacook.com",
+                "user_contact" => ""
+            ],
+            [
+                "user_image" => env('APP_URL') . "/images/manager.jpg",
+                "user_name" => "Ronghong",
+                "user_email" => "ronghong@fujacook.com",
+                "user_contact" => ""
+            ],
+        ];
+        $admin_id = 1;
+        foreach ($data_arr as $key => $var) {
+            $Dao = new AdminInfo();
+            $Dao->admin_id = $admin_id++;
+            $Dao->user_image = $var['user_image'];
+            $Dao->user_name = $var['user_name'];
+            $Dao->user_email = $var['user_email'];
+            $Dao->user_contact = $var['user_contact'];
+            $Dao->save();
+        }
     }
 }
 

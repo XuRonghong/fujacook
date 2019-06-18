@@ -2046,7 +2046,7 @@
                     c.update()
                 }
             }, this.initialize = function() {
-                this.$handle = a(['<div class="note-handle">', '<div class="note-control-selection">', '<div class="note-control-selection-bg"></div>', '<div class="note-control-holder note-control-nw"></div>', '<div class="note-control-holder note-control-ne"></div>', '<div class="note-control-holder note-control-sw"></div>', '<div class="', f.disableResizeImage ? "note-control-holder" : "note-control-sizing", ' note-control-se"></div>', f.disableResizeImage ? "" : '<div class="note-control-selection-meta"></div>', "</div>", "</div>"].join("")).prependTo(e), this.$handle.on("mousedown", function(a) {
+                this.$handle = a(['<div class="note-handle">', '<div class="note-control-selection">', '<div class="note-control-selection-bg"></div>', '<div class="note-control-holder note-control-nw"></div>', '<div class="note-control-holder note-control-ne"></div>', '<div class="note-control-holder note-control-sw"></div>', '<div class="', f.disableResizeImage ? "note-control-holder" : "note-control-sizing", ' note-control-se"></div>', f.disableResizeImage ? "" : '<div class="note-control-selection-info"></div>', "</div>", "</div>"].join("")).prependTo(e), this.$handle.on("mousedown", function(a) {
                     if (p.isControlSizing(a.target)) {
                         a.preventDefault(), a.stopPropagation();
                         var e = c.$handle.find(".note-control-selection").data("target"),
@@ -2082,7 +2082,7 @@
                         "height": h.h
                     }).data("target", f);
                     var i = h.w + "x" + h.h;
-                    e.find(".note-control-selection-meta").text(i), b.invoke("editor.saveTarget", c)
+                    e.find(".note-control-selection-info").text(i), b.invoke("editor.saveTarget", c)
                 } else this.hide();
                 return d
             }, this.hide = function() {

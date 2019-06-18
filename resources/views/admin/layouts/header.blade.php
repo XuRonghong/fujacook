@@ -18,20 +18,20 @@
                     <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                     <!-- Dark Logo icon -->
 {{--                    <img src="{{asset('xtreme-admin/assets/images/logo-icon.png')}}" alt="homepage" class="dark-logo" />--}}
-                    <img src="{{asset('img/logo_icon.png')}}" alt="homepage" class="dark-logo" />
+                    <img src="{{asset('images/logo_icon.png')}}" alt="homepage" class="dark-logo" />
                     <!-- Light Logo icon -->
 {{--                    <img src="{{asset('xtreme-admin/assets/images/logo-light-icon.png')}}" alt="homepage" class="light-logo" />--}}
-                    <img src="{{asset('img/logo_icon.png')}}" alt="homepage" class="light-logo" />
+                    <img src="{{asset('images/logo_icon.png')}}" alt="homepage" class="light-logo" />
                 </b>
                 <!--End Logo icon -->
                 <!-- Logo text -->
                 <span class="logo-text">
                     <!-- dark Logo text -->
-                    <img src="{{asset('img/logo_icon2.png')}}" alt="homepage" class="dark-logo" style="margin-left: -5px" />
+                    <img src="{{asset('images/logo_icon2.png')}}" alt="homepage" class="dark-logo" style="margin-left: -5px" />
 {{--                    <img src="{{asset('xtreme-admin/assets/images/logo-text.png')}}" alt="homepage" class="dark-logo" />--}}
 {{--                    <div class="dark-logo" style="color: black; font-family: '微軟正黑體'; font-size: 18px;">Fujacook</div>--}}
                     <!-- Light Logo text -->
-                    <img src="{{asset('img/logo_icon2.png')}}" alt="homepage" class="light-logo" style="margin-left: -5px" />
+                    <img src="{{asset('images/logo_icon2.png')}}" alt="homepage" class="light-logo" style="margin-left: -5px" />
 {{--                    <img src="{{asset('xtreme-admin/assets/images/logo-light-text.png')}}" class="light-logo" alt="homepage" />--}}
 {{--                    <div class="light-logo" style="color: white; font-family: '微軟正黑體'; font-size: 18px;">Fujacook</div>--}}
                 </span>

@@ -34,6 +34,9 @@ abstract class Presenter
             'admin_logo' => asset('xtreme-admin/assets/images/users/1.jpg'),
             'admin_name' => 'Steave Jobs',
             'admin_email' => 'varun@gmail.com',
+            'upload_image' => url('admin/upload_image'),
+            'upload_image_base64_url' => url('admin/upload_image_base64'),
+            'upload_file_url' => url('admin/upload_file'),
         ];
         switch ($index){
             case 'index':

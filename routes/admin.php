@@ -27,6 +27,20 @@ Route::group([
     Route::get('/', 'IndexController@index');
     Route::get('/home', 'HomeController@index')->name('home');
 
+    /**********************************************************
+     * Upload Images
+     *********************************************************/
+    Route::post( 'upload_image', 'UploadController@doUploadImage' );
+    Route::post( 'upload_image_base64', 'UploadController@doUploadImageBase64' );
+    Route::post( 'upload_file', 'UploadController@doUploadFile' );
+
+    /**********************************************************
+     * Import Excel
+     *********************************************************/
+    Route::get( 'import_excel', 'ExcelController@index')->name('excel_index');
+    Route::post('import_excel', 'ExcelController@import')->name('import');
+
+
     Route::group([
         'middleware' => ['admin.checkPermission']       //權限通過
     ],function(){
@@ -64,8 +78,8 @@ Route::group([
                 Route::any( 'getlist', 'InfoController@getList' );
                 Route::get( 'edit/{id}', 'InfoController@edit' );
                 Route::post( 'dosave', 'InfoController@doSave' );
-            } );
-        } );
+            });
+        });
 
         /******* 商店店家 ********/
         $index = array('url'=>'store', 'C'=>'StoreController', 'name'=>'store');
@@ -99,11 +113,35 @@ Route::group([
 
 
 
+        /**********************************************************
+         * 場面介面管理
+         *********************************************************/
+        Route::group([
+            'name' => 'scenes.',
+            'prefix' => 'scenes',
+            'namespace' => 'Scenes',
+//            'middleware' => 'CheckAuthLogin'
+        ], function() {
+            //
+            $index = array('url'=>'home', 'C'=>'HomeController', 'name'=>'scenes.home');
+            Route::get($index['url'].'/list', $index['C'].'@list')->name($index['name'].'.list');
+            Route::resource($index['url'], $index['C'], ['as'=> 'scenes', 'name'=> $index['name'] ]);
+            Route::post($index['url'].'/update/{id}', $index['C'].'@update')->name($index['name'].'.update');
+            Route::post($index['url'].'/destroy/{id}', $index['C'].'@destroy')->name($index['name'].'.destroy');
+        });
+
+
+
+
+        /**********************************************************
+         * 信息管理
+         *********************************************************/
         /******* 最新消息 ********/
-        Route::get('news/list', 'NewsController@list')->name('news.list');
-        Route::resource('news', 'NewsController');
-        Route::post('news/update/{id}', 'NewsController@update')->name('news.update');
-        Route::post('news/destroy/{id}', 'NewsController@destroy');
+        $index = array('url'=>'news', 'C'=>'NewsController', 'name'=>'news');
+        Route::get($index['url'].'/list', $index['C'].'@list')->name($index['name'].'.list');
+        Route::resource($index['url'], $index['C']);
+        Route::post($index['url'].'/update/{id}', $index['C'].'@update')->name($index['name'].'.update');
+        Route::post($index['url'].'/destroy/{id}', $index['C'].'@destroy')->name($index['name'].'.destroy');
 
     });
 

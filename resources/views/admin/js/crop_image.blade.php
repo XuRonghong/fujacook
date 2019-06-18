@@ -51,11 +51,14 @@
 </div>
 <script src="{{url('js/cropper.min.js')}} "></script>
 <script>
-var imagedata = {};
 $(document).ready(function() {
+
+    var imagedata = {};
+
     $(".btn-image-modal").click(function() {
         $('#image-form').modal();
     });
+
     var $image = $(".image-crop > img");
     $($image).cropper({
         aspectRatio: 1,
@@ -118,7 +121,7 @@ $(document).ready(function() {
     $("#setDrag").click(function() {
         $('#image-form').modal('hide');
         $image.cropper("setDragMode", "crop");
-        swal("{{trans('_web_alert.notice')}}", "{{trans('_web_alert.cropper_success')}}", "success");
+        Swal.fire("{{trans('_web_alert.notice')}}", "{{trans('_web_alert.cropper_success')}}", "success");
         var image = $image.cropper("getDataURL", "image/jpeg");
         sendImage(image);
         $('.cropper_image').find('.btn-image-modal').before("<div id=\"div_"+imagedata.fileid+"\" class=\"image-box\"></div>");
@@ -133,8 +136,10 @@ $(document).ready(function() {
     		$('.cropper_image').find('#Image').remove();
     	}
     	//
-        current_modal.find('img').attr('src', imagedata.path);
-        current_modal.find('img').attr('id', imagedata.fileid);
+        $('#div_'+imagedata.fileid).attr('src', imagedata.path);
+        $('#div_'+imagedata.fileid).attr('id', imagedata.fileid);
+        // current_modal.find('img').attr('src', imagedata.path);
+        // current_modal.find('img').attr('id', imagedata.fileid);
         //
     });
 
@@ -147,23 +152,27 @@ $(document).ready(function() {
     		$('.cropper_image .btn-image-modal').append(cropImage);
     	}
     });
-});
 
-function sendImage(image){
-	var data = new FormData();
-	data.append("_token", "{{ csrf_token() }}");
-	data.append("image", image);
-	$.ajax({
-	    data: data,
-	    type: "POST",
-	    url: "{{url('web/upload_image_base64')}}",
-	    cache: false,
-	    contentType: false,
-	    processData: false,
-	   	async:false,
-	    success: function(rtndata) {
-	    	imagedata = rtndata.info;
-	    }
-	});
-}
+    function sendImage(image){
+        var data = new FormData();
+        data.append("_token", "{{ csrf_token() }}");
+        data.append("image", image);
+        $.ajax({
+            data: data,
+            type: "POST",
+            url: '{{data_get($data, "upload_image_base64_url")}}',
+            cache: false,
+            contentType: false,
+            processData: false,
+            async:false,
+            success: function(rtndata) {
+                imagedata = rtndata.info;
+            },
+            error: function (err) {
+                console.log(err.responseJSON)
+                toastr.error(JSON.stringify(err.responseJSON), "{{trans('_web_alert.notice')}}")
+            }
+        });
+    }
+});
 </script>
