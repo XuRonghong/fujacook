@@ -1,8 +1,8 @@
-
 <script>
     // none, bounce, rotateplane, stretch, orbit,
     // roundBounce, win8, win8_linear or ios
-    function run_waitMe(selector='body', effect='roundBounce'){
+    function run_waitMe(selector='body', effect='roundBounce')
+    {
         $(selector).waitMe({
             //none, rotateplane, stretch, orbit, roundBounce, win8,
             //win8_linear, ios, facebook, rotation, timer, pulse,
@@ -28,7 +28,6 @@
             onClose: function() {}
         })
     }
-
 
     function ajax(url='', data={}, method='POST')
     {
@@ -62,6 +61,33 @@
         })
     }
 
+    function ajaxOpen(url='', data={}, method='POST', DOM=null)
+    {
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': '{{csrf_token()}}'
+            },
+            url: url,
+            method: method,
+            data: data,
+            // type: "POST",
+            //async: false,
+            success: function (data) {
+                if (data.status) {
+{{--                    Swal.fire("{{trans('_web_alert.notice')}}", data.message, "success");--}}
+//                     setTimeout(function () {
+                        DOM.api().ajax.reload(null, false);
+                    // }, 100);
+                } else {
+                    Swal.fire("{{trans('_web_alert.notice')}}", rtndata.message, "error");
+                }
+            },
+            error: function (err) {
+                console.log(err.responseJSON)
+                Swal.fire("{{trans('_web_alert.notice')}}", JSON.stringify(err.responseJSON), "error");
+            }
+        })
+    }
 
     function ajaxUploadFile(url='', data={}, method='POST')
     {
@@ -89,8 +115,8 @@
         return file_id
     }
 
-
-    function doDelete(url, data, table) {
+    function doDelete(url, data, table)
+    {
         Swal.fire({
             title: "{{trans('_web_alert.del.title')}}",
             text: "{{trans('_web_alert.del.note')}}",
@@ -167,5 +193,46 @@
                 }
             })
         })
+    }
+
+    function do_upload_file_fun()
+    {
+        //上傳檔案資料庫，回傳file id
+        let url = '{{data_get($data, "upload_file_url")}}'
+        let file_data = $('.uploadfile').prop('files')[0]
+        let data = new FormData()
+        data.append("_token", "{{ csrf_token() }}")
+        data.append('file', file_data)
+        return ajaxUploadFile(url, data, 'POST')
+    }
+
+    function prop_fromData_fun(formHTML, datas=[])
+    {
+        let form_data = new FormData(formHTML)
+
+        /*** 上傳檔案資料庫，需要再呼叫，回傳file id ***/
+        // let file_id = do_upload_file_fun();
+
+        /*** 多圖片串連 ***/
+        let images = ""
+        $(".cropper_image").find('img').each(function () {
+            if ($(this).attr('id') != "Image") {
+                images = images + $(this).attr('id') + ";"
+            }
+        });
+        // data.append('file_id', file_id)
+        // data.append('file_id', current_modal.find("img").attr('id'))
+        // data.append('image', current_modal.find("img").attr('src'))
+        form_data.append('file_id', images)
+
+        //撈取html content
+        // let detail = $('#detail').summernote('code')
+
+        //假如還有資料就填充上去
+        for (let key in datas) {
+            form_data.append(key, datas[key])
+        }
+
+        return form_data
     }
 </script>

@@ -29,7 +29,7 @@ class CreateScenesTable extends Migration
             $table->string( 'url' )->nullable()->comment('連結');
             $table->dateTime( 'start_time' )->comment('開始時間');
             $table->dateTime( 'end_time' )->comment('結束時間');
-            $table->tinyInteger('open');
+            $table->tinyInteger('open')->default( 0 );
             $table->timestamps();
         });
     }

@@ -7,7 +7,7 @@
 
     -->
 </style>
-{{--<script src="{{url('js/summernote.js')}}"></script>--}}
+<script src="{{url('js/summernote/summernote.js')}}"></script>
 <!-- include summernote css/js -->
 <script>
     $(document).ready(function () {

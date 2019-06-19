@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin\Scenes;
 use App\Http\Controllers\FuncController;
 use App\Presenters\Admin\ScenesPresenter;
 use App\Repositories\Admin\ScenesRepository;
-use App\SysFiles;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -50,24 +49,7 @@ class HomeController extends Controller
         {
             $data = $this->repository->getDataTable($request);
 
-            if ( $data['aaData']) {
-                foreach ($data['aaData'] as $key => $var) {
-                    $var->Title = trans('menu.'. $var->name. '.title');
-
-                    //圖片
-                    $image_arr = [];
-                    $tmp_arr = explode( ';', $var->image );
-                    $tmp_arr = array_filter( $tmp_arr );
-                    foreach ($tmp_arr as $item) {
-                        $image_arr[$item] = FuncController::_getFilePathById( $item );
-                    }
-                    if ($tmp_arr){
-                        $var->image = $image_arr;
-                    } else {
-                        $var->image = [];
-                    }
-                }
-            }
+            $data = $this->repository->eachOne_aaData($data);     //每一項目要做甚麼事,有需要在使用
 
             return response()->json($data,200);
         }
@@ -119,6 +101,8 @@ class HomeController extends Controller
         $data = $this->presenter->getParameters('show');
         //
         $data['arr'] = $this->repository->findOrFail($id);
+        //從資料串裡依據file_id找到image
+        $data['arr'] = $this->repository->transFileIdtoImage($data['arr']);
         //to ajax url
         $data['route_url'] = $this->route_url;
 
@@ -137,20 +121,8 @@ class HomeController extends Controller
         $data = $this->presenter->getParameters('edit');
         //
         $data['arr'] = $this->repository->findOrFail($id);
-        //圖片
-        $image_arr = [];
-        $tmp_arr = explode( ';', $data['arr']->image );
-        $tmp_arr = array_filter( $tmp_arr );
-        foreach ($tmp_arr as $item) {
-            $image_arr[$item] = FuncController::_getFilePathById( $item );
-        }
-        if ($tmp_arr){
-            $data['arr']->image = $image_arr;
-        } else {
-            $data['arr']->image = [];
-        }
-
-
+        //從資料串裡依據file_id找到image
+        $data['arr'] = $this->repository->transFileIdtoImage($data['arr']);
         //to ajax url
         $data['route_url'] = $this->route_url;
 

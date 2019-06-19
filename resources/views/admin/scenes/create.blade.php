@@ -2,25 +2,9 @@
 @extends('admin.layouts.master')
 
 @section('style')
-    <link href="{{url('xtreme-admin/assets/libs/jsgrid/dist/jsgrid-theme.min.css')}}" rel="stylesheet">
-    <link href="{{url('xtreme-admin/assets/libs/jsgrid/dist/jsgrid.min.css')}}" rel="stylesheet">
     <style>
         .btn {
             margin-left: 10px;
-        }
-        .image-box {
-            float: left;
-        }
-        .image-box img {
-            height: 140px;
-        }
-        .image-del {
-            vertical-align: top;
-            margin-right: 15px;
-        }
-        .note-editable {
-            /*background-color: #fff !important;*/
-            color: #3e5569 !important;
         }
     </style>
 @endsection
@@ -80,12 +64,6 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="detail" class="col-sm-3 text-right control-label col-form-label">內容</label>
-                                    <div class="col-sm-9">
-                                        <textarea id="detail" name="editordata">{!! data_get($data['arr'], 'detail') !!}</textarea>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
                                     <label for="com5" class="col-sm-3 text-right control-label col-form-label">url</label>
                                     <div class="col-sm-9">
                                         <input type="text" name="url" value="{{data_get($data['arr'], 'url')}}" class="form-control url" id="com5" placeholder="">
@@ -111,23 +89,32 @@
                                 <div class="form-group row">
                                     <label for="img2" class="col-sm-3 text-right control-label col-form-label">圖片s</label>
                                     <div class="col-sm-9 cropper_image">
-                                        @if(isset($data['arr']['image']))
-                                            @foreach(data_get( $data['arr'], 'image', []) as $key => $var)
-                                                <div class="image-box">
-                                                    <img id="{{$key}}" src="{{$var or ''}}">
-                                                    <a class="image-del">X</a>
-                                                </div>
-                                            @endforeach
-                                            <a class="btn-image-modal" data-modal="image-form" data-id="">
-                                                @if(count(data_get( $data['arr'], 'image', [])) < 5)
-                                                    <img id="Image" data-data="" src="{{array_get( $data['arr'], 'image.0', url('images/empty.jpg'))}}" style="height:140px">
-                                                @endif
-                                            </a>
-                                        @else
-                                            <a class="btn-image-modal" data-modal="image-form" data-id="">
-                                                <img id="Image" data-data="" src="{{url('images/empty.jpg')}}" style="height:140px">
-                                            </a>
-                                        @endif
+                                    @if(isset($data['arr']['image']))
+                                        @foreach(data_get( $data['arr'], 'image', []) as $key => $var)
+                                            <div class="image-box">
+                                                <img id="{{$key}}" src="{{$var or ''}}">
+                                                <a class="image-del">X</a>
+                                            </div>
+                                        @endforeach
+                                        <a class="btn-image-modal" data-modal="image-form" data-id="">
+                                            @if(count(data_get( $data['arr'], 'image', [])) < 5)
+                                                <img id="Image" data-data="" src="{{array_get( $data['arr'], 'image.0', url('images/empty.jpg'))}}" style="height:140px">
+                                            @endif
+                                        </a>
+                                    @else
+                                        <a class="btn-image-modal" data-modal="image-form" data-id="">
+                                            <img id="Image" data-data="" src="{{url('images/empty.jpg')}}" style="height:140px">
+                                        </a>
+                                    @endif
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="detail" class="col-sm-3 text-right control-label col-form-label">內容</label>
+                                    <div class="col-sm-9 note-editable">
+                                        <textarea id="detail" name="detail">
+                                            {!! data_get($data['arr'], 'detail') !!}
+                                        </textarea>
                                     </div>
                                 </div>
                             </div>
@@ -144,8 +131,6 @@
                                     <button type="button" class="btn waves-effect waves-light btn-cancel">Cancel</button>
                                 </div>
                             </div>
-{{--                            <input name="_method" type="hidden" value="PUT">--}}
-{{--                            {{csrf_field()}}--}}
                         </form>
                     </div>
                 </div>
@@ -162,126 +147,63 @@
 @endsection
 
 
-
-<!-- ================== inline-js ================== -->
 @section('inline-js')
     <!-- Public Crop_Image -->
     @include('admin.js.crop_image')
     <!-- Public SummerNote -->
-{{--    @include('admin.js.summernote')--}}
+    @include('admin.js.summernote2019')
     <!-- end -->
-    <link href="{{url('_assets/summernote-0.8.9-dist/dist/summernote.css')}}" rel="stylesheet">
-    <script src="{{url('_assets/summernote-0.8.9-dist/dist/summernote.js')}}"></script>
     <script type="text/javascript">
-        $(document).ready(function () {
-            //
-            let disable = '{{data_get($data, 'Disable')}}'
-            if (disable){
-                $('input[type=text]').attr('disabled','disabled')
-                $('select').attr('disabled','disabled')
-            }
-            //
-            var modal = $('#manage-modal')
-            current_modal = modal.find('.messageInfo-modal');
+    $(document).ready(function () {
 
+        // 只顯示詳情不開啟編輯功能
+        let disable = '{{data_get($data, 'Disable')}}'
+        if (disable){
+            $('input[type=text]').attr('disabled','disabled')
+            $('form select').attr('disabled','disabled')
+            $('form #detail').summernote('disable');        //編輯器關閉
+            $('form .image-del').css("visibility","hidden");    //刪除區塊隱藏
+            $('form #Image').css("display","none");     //加載圖片關閉
+        }
 
-            $('#detail').summernote({
-                // codemirror: { // codemirror options
-                //     theme: 'default',
-                // },
-                placeholder: 'Hello stand alone ui',
-                tabsize: 5,
-                height: 300,                 // set editor height
-                minHeight: null,             // set minimum height of editor
-                maxHeight: null,             // set maximum height of editor
-                focus: true,                  // set focus to editable area after initializing summernote
-                lang: 'zh-TW',          // default: 'en-US'
-                fontSizes: ['8', '9', '10', '11', '12', '14', '18', '24', '36', '48' , '64', '82', '150'],
-                toolbar: [
-                    // [groupName, [list of button]]
-                    ['style', ['bold', 'italic', 'underline', 'clear']],
-                    ['font', ['strikethrough', 'superscript', 'subscript']],
-                    ['fontsize', ['fontsize']],
-                    ['color', ['color']],
-                    ['para', ['ul', 'ol', 'paragraph']],
-                    ['height', ['height']],
-                    ['view', ['fullscreen', 'codeview']],
-                ]
-            });
+        // 為了做圖片編輯
+        var modal = $('#manage-modal')
+        current_modal = modal.find('.messageInfo-modal')
 
-            //
-            $(".btn-cancel").click(function (e) {
-                e.preventDefault()
-                history.back()
-            })
-            //
-            $(".btn-doadd").click(function (e) {
-                e.preventDefault();
+        //文字編輯器
+        do_textarea_summernote_fun( $('#detail'))
+        // do_textarea_summernote_fun( $('#detail'))
 
-                //上傳檔案資料庫，回傳file id
-                {{--let url = '{{data_get($data, "upload_file_url")}}'--}}
-                {{--let file_data = $('.uploadfile').prop('files')[0]--}}
-                {{--let data = new FormData();--}}
-                {{--data.append("_token", "{{ csrf_token() }}")--}}
-                {{--data.append('file', file_data)--}}
-                {{--let file_id = ajaxUploadFile(url, data, 'POST')--}}
-
-
-                //寫入資料庫
-                let self = document.querySelector('#sample_form')
-                url = '{{data_get($data['route_url'], "store")}}'
-                data = new FormData(self)
-                // data.append('file_id', file_id)
-                data.append('file_id', current_modal.find("img").attr('id'))
-                // data.append('image', current_modal.find("img").attr('src'))
-
-                /***  ***/
-                let images = "";
-                $(".cropper_image").find('img').each(function () {
-                    if ($(this).attr('id') != "Image") {
-                        //data.vImages = data.vImages + $(this).attr('src') + ";";
-                        images = images + $(this).attr('id') + ";";
-                    }
-                });
-                data.append('image', images)
-
-                ajax(url, data, 'POST')
-            })
-            //
-            $(".btn-dosave").click(function (e) {
-                e.preventDefault()
-
-                //上傳檔案資料庫，回傳file id
-                {{--let url = '{{data_get($data, "upload_file_url")}}'--}}
-                {{--let file_data = $('.uploadfile').prop('files')[0]--}}
-                {{--let data = new FormData();--}}
-                {{--data.append("_token", "{{ csrf_token() }}")--}}
-                {{--data.append('file', file_data)--}}
-                {{--let file_id = ajaxUploadFile(url, data, 'POST')--}}
-
-                //寫入資料庫
-                let self = document.querySelector('#sample_form')
-                let id = $(this).data('id')
-                url = '{{data_get($data['route_url'], "update")}}'.replace('-10', id)  //-10代替字元為id
-                data = new FormData(self)
-                // data.append('file_id', file_id)
-                data.append('file_id', current_modal.find("img").attr('id'))
-                data.append('image', current_modal.find("img").attr('src'))
-                // data.append('_method','PUT')
-
-                /***  ***/
-                let images = "";
-                $(".cropper_image").find('img').each(function () {
-                    if ($(this).attr('id') != "Image") {
-                        //data.vImages = data.vImages + $(this).attr('src') + ";";
-                        images = images + $(this).attr('id') + ";";
-                    }
-                });
-                data.append('image', images)
-
-                ajax(url, data, 'POST')
-            })
+        //返回上一頁
+        $(".btn-cancel").click(function (e) {
+            e.preventDefault()
+            history.back()
         })
+
+        //新增模式
+        $(".btn-doadd").click(function (e) {
+            e.preventDefault();
+
+            //寫入資料庫
+            let url = '{{data_get($data['route_url'], "store")}}'
+            let self = document.querySelector('#sample_form')
+            let data = prop_fromData_fun(self)
+
+            ajax(url, data, 'POST')
+        })
+
+        //編輯模式
+        $(".btn-dosave").click(function (e) {
+            e.preventDefault()
+
+            //寫入資料庫
+            let id = $(this).data('id')
+            let url = '{{data_get($data['route_url'], "update")}}'.replace('-10', id)  //-10代替字元為id
+            let self = document.querySelector('#sample_form')
+            let data = put_fromData_fun(self)
+
+            ajax(url, data, 'POST')
+        })
+    })
     </script>
 @endsection
-<!-- ================== /inline-js ================== -->

@@ -4,10 +4,6 @@ namespace App\Http\Controllers;
 
 use App\File;
 use App\LogLogin;
-use App\ModOrder;
-use App\ModProductCategory;
-use App\SysCategory;
-use App\SysFiles;
 use Illuminate\Support\Facades\Request;
 
 class FuncController
@@ -241,5 +237,22 @@ class FuncController
         curl_close( $ch );
 
         return $response;
+    }
+
+
+
+    /*
+     *  判斷裝置手機版或電腦版
+     */
+    public function JudgeWebOrMobile()
+    {
+        $this->agent = new Agent();
+        if ( $this->agent->isMobile() && !$this->agent->isTablet()) {
+            return 'mobile';
+        } elseif ( !$this->agent->isMobile() && $this->agent->isTablet()) {
+            return 'tablet';
+        } else {
+            return 'computer';
+        }
     }
 }

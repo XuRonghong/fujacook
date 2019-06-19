@@ -1,24 +1,45 @@
 <style>
-/* Image cropper style */
-.img-container, .img-preview {
-	overflow: hidden;
-	text-align: center;
-	width: 100%;
-}
+    /* Image cropper style */
+    .img-container, .img-preview {
+        overflow: hidden;
+        text-align: center;
+        width: 100%;
+    }
 
-.img-preview-sm {
-	width: 100px;
-	height: 100px;
-}
+    .img-preview-sm {
+        width: 150px;
+        height: 150px;
+    }
+
+
+    /*多圖片*/
+    .image-box {
+        float: left;
+    }
+    .image-box img {
+        height: 140px;
+    }
+    .image-del {
+        vertical-align: top;
+        margin-right: 15px;
+    }
+    /*客製化*/
+    .col-mystyle {
+        padding-left: 30px;
+    }
+    .btn-group-mystyle {
+        margin-left: 100px;
+        margin-top: 50px;
+    }
 </style>
 <!-- Image cropper -->
 <link href="{{url('css/cropper.min.css')}}" rel="stylesheet">
 <div id="image-form" class="modal fade" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content" style="width: 680px;">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
 			<div class="modal-header">
+                <h4 class="modal-title">{{trans('_web_alert.cropper_image')}}</h4>
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				{{--<h4 class="modal-title">{{trans('_web_alert.cropper_image')}}</h4>--}}
 			</div>
 			<div class="modal-body">
 				<div class="row">
@@ -27,11 +48,10 @@
 							<img style="width: 100%; height: auto" src="{{url('images/empty.jpg')}}">
 						</div>
 					</div>
-					<div class="col-sm-6">
-						<h4>{{trans('_web_alert.upload.image_preview')}}</h4>
+					<div class="col-sm-6 col-mystyle">
+						<h5>{{trans('_web_alert.upload.image_preview')}}</h5>
 						<div class="img-preview img-preview-sm"></div>
-						<br>
-						<div class="btn-group">
+						<div class="btn-group btn-group-mystyle">
 							<label title="Upload image file" for="inputImage" class="btn btn-primary">
 								<input type="file" accept="image/*" name="file" id="inputImage" class="hide">
 								{{trans('_web_alert.upload.image_new')}}
@@ -53,30 +73,30 @@
 <script>
 $(document).ready(function() {
 
-    var imagedata = {};
+    let imagedata = {};
 
     $(".btn-image-modal").click(function() {
         $('#image-form').modal();
     });
 
-    var $image = $(".image-crop > img");
+    let $image = $(".image-crop > img");
     $($image).cropper({
         aspectRatio: 1,
         //aspectRatio: 3.097,
         preview: ".img-preview",
         data: {
-            width: 500,
-            height: 500
+            width: 800,
+            height: 800
         },
         done: function(data) {
             // Output the result data for cropping image.
         }
     });
 
-    var $inputImage = $("#inputImage");
+    let $inputImage = $("#inputImage");
     if (window.FileReader) {
         $inputImage.change(function() {
-            var fileReader = new FileReader(),
+            let fileReader = new FileReader(),
                 files = this.files,
                 file;
             if (!files.length) {
@@ -122,10 +142,10 @@ $(document).ready(function() {
         $('#image-form').modal('hide');
         $image.cropper("setDragMode", "crop");
         Swal.fire("{{trans('_web_alert.notice')}}", "{{trans('_web_alert.cropper_success')}}", "success");
-        var image = $image.cropper("getDataURL", "image/jpeg");
+        let image = $image.cropper("getDataURL", "image/jpeg");
         sendImage(image);
         $('.cropper_image').find('.btn-image-modal').before("<div id=\"div_"+imagedata.fileid+"\" class=\"image-box\"></div>");
-        var cropImage = new Image();
+        let cropImage = new Image();
         cropImage.src = imagedata.path;
         cropImage.id = imagedata.fileid;
         cropImage.addClass = "del-image";
@@ -135,9 +155,10 @@ $(document).ready(function() {
     	if($('.cropper_image').find('img').length > 5){
     		$('.cropper_image').find('#Image').remove();
     	}
-    	//
+    	//** 多圖片 **/
         $('#div_'+imagedata.fileid).attr('src', imagedata.path);
         $('#div_'+imagedata.fileid).attr('id', imagedata.fileid);
+        //** 單圖片 **/
         // current_modal.find('img').attr('src', imagedata.path);
         // current_modal.find('img').attr('id', imagedata.fileid);
         //
@@ -146,7 +167,7 @@ $(document).ready(function() {
     $('.cropper_image').on('click', '.image-del', function () {
     	$(this).closest('.image-box').remove();
     	if($('.cropper_image').find('img').length < 5 && $('.cropper_image').find('#Image').length == 0 ){
-    		 var cropImage = new Image();
+    		 let cropImage = new Image();
     	        cropImage.src = "{{asset('/images/empty.jpg')}}";
     	        cropImage.id = "Image";
     		$('.cropper_image .btn-image-modal').append(cropImage);
@@ -154,7 +175,7 @@ $(document).ready(function() {
     });
 
     function sendImage(image){
-        var data = new FormData();
+        let data = new FormData();
         data.append("_token", "{{ csrf_token() }}");
         data.append("image", image);
         $.ajax({

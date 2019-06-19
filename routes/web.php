@@ -11,6 +11,13 @@
 |
 */
 
+
+//Games
+Route::get( 'playgame1', 'IndexController@playGame1');
+Route::post('playgame1', 'IndexController@init');
+
+
+
 Route::get('/', function () {
     return view('welcome');
 });

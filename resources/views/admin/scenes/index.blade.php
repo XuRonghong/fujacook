@@ -98,7 +98,7 @@
                     {
                         "sTitle": "image",
                         "mData": "image",
-                        // "width": "100px",
+                        "width": "180px",
                         "sName": "image",
                         "bSortable": false,
                         "bSearchable": false,
@@ -122,11 +122,24 @@
                         "bSortable": false,
                         "bSearchable": false,
                         // "width": '100px',
+                        "sName": "operate",
                         "mRender": function (data, type, row) {
                             // current_data[row.id] = row;
-                            let btn = '<button class="btn btn-xs btn-show" title="詳情"><i class="fa fa-book" aria-hidden="true"></i></button>';
-                                btn += '<button class="btn btn-xs btn-edit" title="修改"><i class="fa fa-pencil-alt" aria-hidden="true"></i></button>';
-                                btn += '<button class="btn btn-xs btn-del pull-right" title="刪除"><i class="fa fa-trash" aria-hidden="true"></i></button>';
+                            let btn = "無功能";
+                            switch (row.open) {
+                                case 1:
+                                    btn = '<button class="btn btn-xs btn-success btn-open">已上架</button>';
+                                    break;
+                                case 0:
+                                    btn = '<button class="btn btn-xs btn-primary btn-open">未上架</button>';
+                                    break;
+                                // default:
+                                //     btn = '<button class="btn btn-xs btn-primary btn-status">未上架</button>';
+                                //     break;
+                            }
+                            btn += '<button class="btn btn-xs btn-show" title="詳情"><i class="fa fa-book" aria-hidden="true"></i></button>';
+                            btn += '<button class="btn btn-xs btn-edit" title="修改"><i class="fa fa-pencil-alt" aria-hidden="true"></i></button>';
+                            btn += '<button class="btn btn-xs btn-del pull-right" title="刪除"><i class="fa fa-trash" aria-hidden="true"></i></button>';
                             $('.waitme').waitMe('hide');
                             return btn;
                         }
@@ -160,26 +173,32 @@
             })
 
             //
+            data_table.on('click', '.btn-open', function () {
+                let id = $(this).closest('tr').attr('id')
+                url = '{{data_get($data['route_url'], "update")}}'.replace('-10', id)
+                ajaxOpen(url, {open: 'change'}, 'POST', table)
+            })
+            //
             data_table.on('click', '.btn-show', function () {
-                var id = $(this).closest('tr').attr('id');
-                // var id = $(this).closest('tr').find('td').first().text();
-                location.href = '{{$data['route_url']['show']}}'+'/'+id;
-            });
+                let id = $(this).closest('tr').attr('id')
+                // var id = $(this).closest('tr').find('td').first().text()
+                location.href = '{{$data['route_url']['show']}}'+'/'+id
+            })
             //
             data_table.on('click', '.btn-edit', function () {
-                var id = $(this).closest('tr').attr('id');
-                location.href = '{{$data['route_url']['edit']}}'+'/'+id+'/edit';
+                let id = $(this).closest('tr').attr('id')
+                location.href = '{{$data['route_url']['edit']}}'+'/'+id+'/edit'
             })
             //
             data_table.on('click', '.btn-del', function () {
-                var id = $(this).closest('tr').attr('id');
+                let id = $(this).closest('tr').attr('id')
                 let url = '{{$data['route_url']['destroy']}}'+'/'+id
                 let data = {
                     "_token": "{{ csrf_token() }}"
-                };
+                }
                 doDelete(url, data, table)          // from layout.master
-            });
-        });
+            })
+        })
     </script>
 @endsection
 <!-- ================== /inline-js ================== -->
