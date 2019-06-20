@@ -33,6 +33,10 @@ class LoginController extends Controller
      */
     protected $redirectTo = 'admin';
 
+
+    protected $maxAttempts = 5; // Default is 5
+    protected $decayMinutes = 1; // Default is 1
+
     /**
      * Create a new controller instance.
      *
@@ -74,22 +78,10 @@ class LoginController extends Controller
     /** 登入驗證 複寫 **/
     protected function validateLogin(Request $request)
     {
-        // set the remember me cookie if the user check the box
-        $remember = ($request->filled('remember')) ? true : false;
-
         $this->validate($request, [
             $this->username() => 'required|string',
             'password' => 'required|string',
         ]);
-
-        //記得我
-        if ($remember) {
-            setcookie('admin_us', $request->input('account'), time()+60*60);
-            setcookie('admin_pw', $request->input('password'), time()+60*60);
-        } else {
-            setcookie('admin_us', $request->input('account'), time()+1);
-            setcookie('admin_pw', $request->input('password'), time()+1);
-        }
     }
 
     protected function credentials(Request $request)
@@ -135,6 +127,17 @@ class LoginController extends Controller
             $log_login->action = 'admin login';
             $log_login->ip = $request->ip();
             $log_login->save();
+
+            // set the remember me cookie if the user check the box
+            $remember = ($request->filled('remember')) ? true : false;
+            //記得我
+            if ($remember) {
+                setcookie('admin_us', $request->input('account'), time()+60*60);
+                setcookie('admin_pw', $request->input('password'), time()+60*60);
+            } else {
+                setcookie('admin_us', $request->input('account'), time()+1);
+                setcookie('admin_pw', $request->input('password'), time()+1);
+            }
 
             return redirect()->intended($this->redirectPath());
         }

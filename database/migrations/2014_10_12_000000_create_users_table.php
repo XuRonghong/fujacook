@@ -22,6 +22,16 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
+
+        //忘記密碼寄驗證信
+        Schema::create('user_verification', function (Blueprint $table) {
+            $table->increments( 'id' );
+            $table->integer( 'user_id' );
+            $table->string( 'verification', 50);
+            $table->dateTime( 'start_time' );
+            $table->dateTime( 'end_time' );
+            $table->tinyInteger( 'status' )->default(0);
+        });
     }
 
     /**

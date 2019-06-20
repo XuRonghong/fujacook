@@ -36,7 +36,7 @@
             </div>
         </div>
     </div>
-    <div style="padding: 25px;text-align: center;background-color: #789162;color: #fff;letter-spacing: 1px;font-size: 16px;">{{config('_website.web_title')}}</div>
+    <div style="padding: 25px;text-align: center;background-color: #789162;color: #fff;letter-spacing: 1px;font-size: 16px;">{{config('app.name')}}</div>
     <div style="height: 20px;font-size: 12px;letter-spacing: 1px;background-color: #000000;color: #ffffff;padding: 11px;text-align: center;">※此信件為系統發出信件，請勿直接回覆。</div>
 </div>
 </body>

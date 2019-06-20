@@ -14,12 +14,33 @@
 
 //Route::get('/', 'HomeController@index')->middleware('auth:admin')->name('admin.home');
 
-//Auth::routes();
+Auth::routes();
+
 
 // Authentication Routes...
 Route::get('login', 'Auth\LoginController@showLoginForm');
 Route::post('login', 'Auth\LoginController@login')->name('login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+
+// 密碼重置連結的路由...
+//Route::get('password/email', 'Auth\ForgotPasswordController@getEmail')->name('password.forgot');
+//Route::post('password/email', 'Auth\ForgotPasswordController@postEmail')->name('password.email');
+
+// 密碼重置的路由...
+//Route::get('password/reset/{token}', 'Auth\ResetPasswordController@getReset');
+//Route::post('password/reset', 'Auth\ResetPasswordController@postReset')->name('password.reset');
+//
+$controller = 'LoginController';
+//Route::get( 'forgotpassword' , $controller . '@forgotPasswordView' )->name('password.forgot');
+Route::post( 'doSendVerification' , $controller . '@doSendVerification' )->name('password.email');
+Route::get( 'resetpassword' , $controller . '@resetPasswordView' )->name('password.reset');
+Route::post( 'doResetPassword' , $controller . '@doResetPassword' );
+
+//
+//Route::post('doRegister'        , 'RegisterController@doRegister' );//
+//Route::get( 'doActive/{usercode}', 'RegisterController@doActive' );//
+
+//
 Route::group([
         'middleware' => ['assign.guard:admin,admin/login'/*,'LoginThrottle:5,10'*/]
     ],function(){
