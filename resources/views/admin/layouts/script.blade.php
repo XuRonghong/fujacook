@@ -1,4 +1,9 @@
 <script>
+    //// windows load ready ////
+    (function () {
+        toastr_options()
+    })()
+
     // none, bounce, rotateplane, stretch, orbit,
     // roundBounce, win8, win8_linear or ios
     function run_waitMe(selector='body', effect='roundBounce')
@@ -29,6 +34,27 @@
         })
     }
 
+    function toastr_options()
+    {
+        toastr.options = {
+            "closeButton": false,
+            "debug": true,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-top-center",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+    }
+
     function ajax(url='', data={}, method='POST')
     {
         $.ajax({
@@ -46,17 +72,17 @@
             resetForm: true,
             success: function (data) {
                 if (data.status) {
-                    toastr.success(data.message, "{{trans('_web_alert.notice')}}")
+                    toastr.success(data.message, "{{trans('_web_alert.notice')}}").css("width","360px")
                     setTimeout(function () {
                         location.href = data.redirectUrl
                     }, 500)
                 } else {
-                    toastr.error(data.message, "{{trans('_web_alert.notice')}}")
+                    toastr.error(data.message, "{{trans('_web_alert.notice')}}").css("width","360px")
                 }
             },
             error: function (err) {
                 console.log(err.responseJSON)
-                toastr.error(JSON.stringify(err.responseJSON), "{{trans('_web_alert.notice')}}")
+                Swal.fire("{{trans('_web_alert.notice')}}", JSON.stringify(err.responseJSON), "error");
             }
         })
     }
@@ -79,7 +105,7 @@
                         DOM.api().ajax.reload(null, false);
                     // }, 100);
                 } else {
-                    Swal.fire("{{trans('_web_alert.notice')}}", rtndata.message, "error");
+                    toastr.error(data.message, "{{trans('_web_alert.notice')}}").css("width","360px")
                 }
             },
             error: function (err) {
@@ -104,12 +130,12 @@
                 if (data.status) {
                     file_id = data.fileid;
                 } else {
-                    toastr.error(data.message, "{{trans('_web_alert.notice')}}")
+                    toastr.error(data.message, "{{trans('_web_alert.notice')}}").css("width","360px")
                 }
             },
             error: function (err) {
                 console.log(err.responseJSON)
-                toastr.error(JSON.stringify(err.responseJSON), "{{trans('_web_alert.notice')}}")
+                Swal.fire("{{trans('_web_alert.notice')}}", JSON.stringify(err.responseJSON), "error");
             }
         })
         return file_id
@@ -153,7 +179,7 @@
                     },
                     error: function (err) {
                         console.log(err.responseJSON)
-                        toastr.error(JSON.stringify(err.responseJSON), "{{trans('_web_alert.notice')}}")
+                        Swal.fire("{{trans('_web_alert.notice')}}", JSON.stringify(err.responseJSON), "error");
                     }
                 })
             }
