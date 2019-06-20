@@ -13,7 +13,7 @@
     <!-- This page plugin CSS -->
     <link href="{{asset('xtreme-admin/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css')}}" rel="stylesheet">
     <!-- Favicon icon -->
-    <link href="{{asset('xtreme-admin/assets/images/favicon.png')}}" rel="icon" type="image/png" sizes="16x16">
+    <link href="{{asset('/images/favicon-2.png')}}" rel="icon" type="image/png" sizes="16x16">
     <!-- Custom CSS -->
     <link href="{{asset('xtreme-admin/dist/css/style.min.css')}}" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
