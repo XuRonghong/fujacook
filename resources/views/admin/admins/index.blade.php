@@ -61,16 +61,16 @@
                 // 'bProcessing': true,
                 // 'sServerMethod': 'GET',
                 "aoColumns": [
-                    {
-                        "sTitle": "ID",
-                        "mData": "id",
-                        "sName": "id",
-                        // "width": "40px",
-                        "bSearchable": false,
-                        "mRender": function (data, type, row) {
-                            return data;
-                        }
-                    },
+                    // {
+                    //     "sTitle": "ID",
+                    //     "mData": "id",
+                    //     "sName": "id",
+                    //     // "width": "40px",
+                    //     "bSearchable": false,
+                    //     "mRender": function (data, type, row) {
+                    //         return data;
+                    //     }
+                    // },
                     {
                         "sTitle": "no",
                         "mData": "no",
@@ -152,13 +152,14 @@
 
             //
             data_table.on('click', '.btn-show', function () {
-                var id = $(this).closest('tr').attr('id');
-                // var id = $(this).closest('tr').find('td').first().text();
+                // var id = $(this).closest('tr').attr('id');
+                var id = $(this).closest('tr').find('td').first().text();
                 location.href = '{{$data['route_url']['show']}}'+'/'+id;
             });
             //
             data_table.on('click', '.btn-edit', function () {
-                var id = $(this).closest('tr').attr('id');
+                // var id = $(this).closest('tr').attr('id');
+                var id = $(this).closest('tr').find('td').first().text();
                 location.href = '{{$data['route_url']['edit']}}'+'/'+id+'/edit';
             })
             //

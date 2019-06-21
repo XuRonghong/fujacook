@@ -46,11 +46,20 @@ class Admin extends Authenticatable
 //        return $request->validate($rules, $messages);
 //    }
 
+    public function info()
+    {
+        return $this->hasMany(
+            'App\AdminInfo',
+            'admin_id',
+            'id'
+        );
+    }
+
     public function permission()
     {
         return $this->belongsToMany(
             'App\Permission'
-//            'admin_has_permissions',
+//            'admin_permissions',
 //            'admin_id',
 //            'id'
         );

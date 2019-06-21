@@ -77,13 +77,14 @@
                 <!-- ============================================================== -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="flag-icon flag-icon-us"></i>
+                        <i class="flag-icon flag-icon-tw"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right  animated bounceInDown" aria-labelledby="navbarDropdown2">
-                        <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-us"></i> English</a>
-                        {{--                                <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-fr"></i> French</a>--}}
-                        {{--                                <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-es"></i> Spanish</a>--}}
-                        {{--                                <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-de"></i> German</a>--}}
+{{--                        <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-us"></i> English</a>--}}
+{{--                        <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-fr"></i> French</a>--}}
+{{--                        <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-es"></i> Spanish</a>--}}
+{{--                        <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-de"></i> German</a>--}}
+                        <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-tw"></i> Taiwan</a>
                     </div>
                 </li>
                 <!-- ============================================================== -->
@@ -91,7 +92,7 @@
                 <!-- ============================================================== -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img src="{{asset('xtreme-admin/assets/images/users/1.jpg')}}" alt="user" class="rounded-circle" width="31">
+                        <img src="{{data_get($data, 'admin_logo')}}" alt="user" class="rounded-circle" width="31">
                     </a>
                     <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
 
@@ -100,18 +101,19 @@
                             <span class="with-arrow"><span class="bg-primary"></span></span>
                             <div class="d-flex no-block align-items-center p-15 bg-primary text-white m-b-10">
                                 <div class="">
-                                    <img src="{{asset('xtreme-admin/assets/images/users/1.jpg')}}" alt="user" class="img-circle" width="60">
+                                    <img src="{{data_get($data, 'admin_logo')}}" alt="user" class="img-circle" width="60">
                                 </div>
                                 <div class="m-l-10">
-                                    <h4 class="m-b-0">Steave Jobs</h4>
-                                    <p class=" m-b-0">varun@gmail.com</p>
+                                    <h4 class="m-b-0">{{data_get($data, 'admin_name')}}</h4>
+                                    <p class=" m-b-0">{{data_get($data, 'admin_email')}}</p>
                                 </div>
                             </div>
-                            <a class="dropdown-item" href="javascript:void(0)"><i class="ti-user m-r-5 m-l-5"></i> My Profile</a>
-                            {{--                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-wallet m-r-5 m-l-5"></i> My Balance</a>--}}
-                            {{--                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-email m-r-5 m-l-5"></i> Inbox</a>--}}
+                            <a class="dropdown-item" href="{{data_get($data, 'admin_profile')}}"><i class="ti-user m-r-5 m-l-5"></i> My Profile</a>
+                            @if(data_get($data, 'my_balance_url'))
+                                <a class="dropdown-item" href="{{data_get($data, 'my_balance_url')}}"><i class="ti-wallet m-r-5 m-l-5"></i> My Balance</a>
+                            @endif
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="javascript:void(0)"><i class="ti-settings m-r-5 m-l-5"></i> Account Setting</a>
+                            <a class="dropdown-item" href="{{data_get($data, 'account_setting_url')}}"><i class="ti-settings m-r-5 m-l-5"></i> Account Setting</a>
                             <div class="dropdown-divider"></div>
                             {{ csrf_field() }}
                             @if (Route::has('login'))
@@ -122,8 +124,6 @@
                                 @endif
                             @endif
                             <div class="dropdown-divider"></div>
-                            {{--                                <div class="p-l-30 p-10"><a href="javascript:void(0)" class="btn btn-sm btn-success btn-rounded">View Profile</a></div>--}}
-
                         </form>
                     </div>
                 </li>

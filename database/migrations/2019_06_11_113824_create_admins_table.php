@@ -30,7 +30,8 @@ class CreateAdminsTable extends Migration
         });
 
         Schema::create('admins_info', function (Blueprint $table) {
-            $table->integer( 'admin_id' )->unique();
+            $table->increments('id');
+            $table->integer( 'admin_id' )->comment('id from admins');
             $table->string( 'user_file')->nullable();
             $table->string( 'user_image')->nullable();
             $table->string( 'user_name')->nullable();

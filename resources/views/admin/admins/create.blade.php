@@ -118,9 +118,15 @@
     <!-- end -->
     <script type="text/javascript">
         $(document).ready(function () {
-            //
+            // 只顯示詳情不開啟編輯功能
             let disable = '{{data_get($data, 'Disable')}}'
-            if (disable) $('input[type=text]').attr('disabled','disabled')
+            if (disable){
+                $('input[type=text],input[type=password]').attr('disabled','disabled')
+                $('form select').attr('disabled','disabled')
+                $('form #detail').summernote('disable');        //編輯器關閉
+                $('form .image-del').css("visibility","hidden");    //刪除區塊隱藏
+                $('form #Image').css("display","none");     //加載圖片關閉
+            }
 
             //
             $(".btn-cancel").click(function (e) {

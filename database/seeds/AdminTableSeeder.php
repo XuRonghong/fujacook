@@ -58,6 +58,7 @@ class AdminTableSeeder extends Seeder
         ]);
 
 
+        AdminInfo::truncate();
         $data_arr = [
             [
                 "user_image" => env('APP_URL') . "/images/admin.jpg",
@@ -72,7 +73,7 @@ class AdminTableSeeder extends Seeder
                 "user_contact" => ""
             ],
             [
-                "user_image" => env('APP_URL') . "/images/manager.jpg",
+                "user_image" => env('APP_URL') . "/xtreme-admin/assets/images/users/3.jpg",
                 "user_name" => "Ronghong",
                 "user_email" => "ronghong@fujacook.com",
                 "user_contact" => ""

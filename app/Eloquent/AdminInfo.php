@@ -49,8 +49,8 @@ class AdminInfo extends Model
     {
         return $this->belongsTo(
             'App\Admin',
-            'admin_id',
-            'id'
+            'id',
+            'admin_id'
         );
     }
 }

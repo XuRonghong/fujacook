@@ -21,6 +21,13 @@ class AdminsRepository extends Repository
         return $this->model::all();
     }
 
+    //
+    public function findOrFail($id)
+    {
+//        return $this->model->findOrFail($id);
+        return $this->model->where('no', $id)->first();
+    }
+
     public function create($attributes)
     {
         try{

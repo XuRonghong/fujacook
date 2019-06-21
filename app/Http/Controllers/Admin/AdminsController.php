@@ -101,7 +101,7 @@ class AdminsController extends Controller
         //
         $data = $this->presenter->getParameters('show');
         //
-        $data['arr'] = $this->repository->findOrFail($id);
+        $data['arr'] = $this->repository->findOrFail($id) or abort(404);
         //to ajax url
         $data['route_url'] = $this->route_url;
 
@@ -119,7 +119,7 @@ class AdminsController extends Controller
         //
         $data = $this->presenter->getParameters('edit');
         //
-        $data['arr'] = $this->repository->findOrFail($id);
+        $data['arr'] = $this->repository->findOrFail($id) or abort(404);
         //to ajax url
         $data['route_url'] = $this->route_url;
 
