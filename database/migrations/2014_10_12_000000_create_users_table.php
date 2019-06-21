@@ -26,7 +26,8 @@ class CreateUsersTable extends Migration
         //忘記密碼寄驗證信
         Schema::create('user_verification', function (Blueprint $table) {
             $table->increments( 'id' );
-            $table->integer( 'user_id' );
+            $table->integer( 'user_id' )->common('admin_id,member_id','user_id');
+            $table->string( 'user_table' )->common('admins,members','users');
             $table->string( 'verification', 50);
             $table->dateTime( 'start_time' );
             $table->dateTime( 'end_time' );
@@ -41,6 +42,7 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('user_verification');
         Schema::dropIfExists('users');
     }
 }

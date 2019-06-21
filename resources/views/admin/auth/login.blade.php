@@ -2,12 +2,6 @@
 
 @section('style')
     <style>
-        .container {
-            margin-top: 100px;
-        }
-        .card-header {
-            text-align: center;
-        }
     </style>
 @endsection
 

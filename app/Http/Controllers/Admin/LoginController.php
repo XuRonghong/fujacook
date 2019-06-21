@@ -6,6 +6,7 @@ use App\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\FuncController;
 use App\UserVerification;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Mail;
 
@@ -29,15 +30,6 @@ class LoginController extends Controller
 
         return view('admin.login', compact('DaoBanner'));
     }
-
-    public function forgotPasswordView()
-    {
-        return view()->make('admin.forgotpassword');
-    }
-
-    /*
-     *
-     */
     public function doLogin ()
     {
         $vAccount = ( Input::has( 'vAccount' ) ) ? Input::get( 'vAccount' ) : "";
@@ -157,9 +149,15 @@ class LoginController extends Controller
         return response()->json( $this->rtndata );
     }
 
+
     /*
-	 *
-	 */
+     * 忘記密碼
+     */
+    public function forgotPasswordView()
+    {
+        return view()->make('admin.forgotpassword');
+    }
+
     public function doSendVerification ()
     {
         $email = Input::get('email', '');
@@ -181,14 +179,17 @@ class LoginController extends Controller
 
         //寫入資料表
         $user_id = $Dao->id;
+        $start_time = time();
+        $end_time = $start_time + config('parameter.verification.time');
         $DaoVerification = UserVerification::query()->where('user_id', $user_id)->first();
         if ( !$DaoVerification) {
             $DaoVerification = new UserVerification();
             $DaoVerification->user_id = $user_id;
+            $DaoVerification->user_table = 'admins';
         }
         $DaoVerification->verification = $verification;
-        $DaoVerification->start_time = time();
-        $DaoVerification->end_time = $DaoVerification->start_time + config('parameter.verification.time');
+        $DaoVerification->start_time = date('Y-m-d H:i:s', $start_time);
+        $DaoVerification->end_time = date('Y-m-d H:i:s', $end_time);
         $DaoVerification->status = 0;
 
         try{
@@ -198,73 +199,80 @@ class LoginController extends Controller
             //信件內容
             $mail_arr = [
                 "verification" => $verification,
+                'url' => route('admin.password.verification'),
+                'app_name' => config('app.name'),
             ];
-            //sending..
-            Mail::send( $mail_tmp, $mail_arr, function( $message ) use ( $verification, $email ) {
-                $message->from( config( 'mail.from.address' ), config( 'mail.from.name' ) );
-                $message->subject( trans( '_web_message.verification.forgot_password' ) );
-                $message->to( $email );
-            } );
+            //Laravel sending..
+//            Mail::send( $mail_tmp, $mail_arr, function( $message ) use ( $verification, $email ) {
+//                $message->from( config( 'mail.from.address' ), config( 'mail.from.name' ) );
+//                $message->subject( trans( '_web_message.verification.forgot_password' ) );
+//                $message->to( $email );
+//            } );
+            //Fujacook sending..
+            $finish = PHPsendMail_fuja(
+                $email,
+                trans( '_web_message.verification.forgot_password' ),
+                $mail_arr,
+                config( 'mail.from.address' )
+            );
 
             session()->put('verification.userid', $user_id);
         } catch (\Exception $e) {
             return redirect()->back()->withErrors([
-                'email'=> '發生不知名錯誤: '. $e->getMessage()
+                'email'=> htmlspecialchars_decode('發生不知名錯誤: '. $e->getMessage())
             ])->withInput();
         }
-//        if () {
-//            $this->rtndata ['status'] = 1;
-//            $this->rtndata ['message'] = trans( '_web_message.verification.success' );
-//        } else {
-//            $this->rtndata ['status'] = 0;
-//            $this->rtndata ['message'] = trans( '_web_message.verification.dail' );
-//        }
-//        dd(123);
-        return response()->json( $this->rtndata );
+        return redirect( route('admin.password.verification'))->with('verification.email', $email);
     }
 
+
+    /*
+     * 重設密碼
+     */
     public function resetPasswordView()
     {
         return view()->make('admin.auth.passwords.reset');
     }
 
-
     public function doResetPassword ()
     {
-        $vVerification = ( Input::has( 'vVerification' ) ) ? Input::get( 'vVerification' ) : "";
-        $vPassword = ( Input::has( 'vPassword' ) ) ? Input::get( 'vPassword' ) : "";
-
-        $mapMemberVerification['vVerification'] = $vVerification;
-        $mapMemberVerification['iStatus'] = 0;
-        $DaoMemberVerification = SysMemberVerification::where( $mapMemberVerification )->find( session( 'verification.memberid' ) );
-        if ( !$DaoMemberVerification) {
-            $this->rtndata ['status'] = 0;
-            $this->rtndata ['message'] = trans( '_web_message.verification.error' );
-
-            return response()->json( $this->rtndata );
+        //資料庫有沒有使用者資訊
+        $User = Admin::query()->where('active', 1)
+            ->where('email', Input::get('email',''))
+            ->orWhere('id', session('verification.memberid'))
+            ->first();
+        if ( !$User) {
+            return redirect()->back()->withErrors(['email'=>trans( '_web_message.verification.no_user' )])->withInput();
         }
 
-        $DaoMember = SysMember::find( $DaoMemberVerification->iMemberId );
-        if ( !$DaoMember) {
-            $this->rtndata ['status'] = 0;
-            $this->rtndata ['message'] = trans( '_web_message.verification.error' );
-
-            return response()->json( $this->rtndata );
+        //比對有沒有此驗證資訊
+        $map = [
+            'user_id' => $User->id,
+            'verification' => Input::get('verification', 0),
+            'status' => 0,
+        ];
+        $Verification = UserVerification::query()->where($map)->first();
+        if ( !$Verification) {
+            return redirect()->back()->withErrors(['verification'=>trans( '_web_message.verification.error' )])->withInput();
         }
-        $DaoMember->iUpdateTime = time();
-        $DaoMember->vPassword = hash( 'sha256', $DaoMember->vAgentCode . $vPassword . $DaoMember->vUserCode );
-        if ($DaoMember->save()) {
-            $DaoMemberVerification->iStatus = 1;
-            $DaoMemberVerification->save();
+
+//        $User->password = hash( 'sha256', $User->vAgentCode . $vPassword . $User->vUserCode );
+        $User->password = Hash::make(Input::get('password',''));
+
+        try{
+            //儲存更改資料
+            $User->save();
+            //驗證碼成功
+            $Verification->status = 1;
+            $Verification->save();
+            //清理session
             session()->flush();
-            $this->rtndata ['status'] = 1;
-            $this->rtndata ['rtnurl'] = url( 'web/login' );
-            $this->rtndata ['message'] = trans( '_web_message.verification.success' );
-        } else {
-            $this->rtndata ['status'] = 0;
-            $this->rtndata ['message'] = trans( '_web_message.verification.fail' );
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors([
+                'verification'=> htmlspecialchars_decode(trans( '_web_message.verification.fail' ).': '. $e->getMessage())
+            ])->withInput();
         }
 
-        return response()->json( $this->rtndata );
+        return redirect( route('admin.login.index'));
     }
 }

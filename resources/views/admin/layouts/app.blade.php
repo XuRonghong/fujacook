@@ -25,6 +25,16 @@
         .navbar {
             display: none;
         }
+        .container {
+            margin-top: 100px;
+        }
+        .card-header {
+            text-align: center;
+            background-color: rgba(0,0,0,.08);
+        }
+        .btn {
+            margin-right: 15px;
+        }
     </style>
 
     @yield('style')
@@ -84,6 +94,8 @@
         <main class="py-4">
             @yield('content')
         </main>
+
+        @yield('inline-js')
     </div>
 </body>
 </html>

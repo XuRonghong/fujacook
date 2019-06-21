@@ -57,6 +57,8 @@ return [
             "forgot_password" => "忘記密碼",
             "success" => "已送出驗證碼",
             "fail" => "系統錯誤",
+            'error' => '驗證碼錯誤',
+            'no_user' => '找不到使用者',
         ],
     "logistics" =>
         [

@@ -73,7 +73,7 @@ return [
             'verification' => '請至信箱收取驗證碼',
             'new_password' => '設置新密碼',
             'confirm_password' => '確認新密碼',
-            'reset_password' => '確定重設密碼',
+            'confirm_reset_password' => '確定重設密碼',
             'register' => '需要一組帳號?',
             'create_account' => '建立帳號',
             'reset_password' => '重設密碼',
