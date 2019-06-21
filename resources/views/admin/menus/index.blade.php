@@ -258,12 +258,12 @@
                     success: function (rtndata) {
                         // $('.waitme').waitMe('hide');
                         if (rtndata.status) {
-                            toastr.success(rtndata.message, "{{trans('_web_alert.notice')}}");
+                            toastr.success(rtndata.message, "{{trans('web_alert.notice')}}");
                             setTimeout(function () {
                                 table.api().ajax.reload(null, false);
                             }, 100);
                         } else {
-                            swal("{{trans('_web_alert.notice')}}", rtndata.message, "error");
+                            swal("{{trans('web_alert.notice')}}", rtndata.message, "error");
                         }
                     }
                 });

@@ -1,6 +1,6 @@
 <script>
     @if(Session::has('check_empty.message'))
-        swal("{{trans('_web_alert.notice')}}", "{{Session::pull('check_empty.message')}}", "error");
+        swal("{{trans('web_alert.notice')}}", "{{Session::pull('check_empty.message')}}", "error");
     @if(Session::has('check_empty.url'))
         setTimeout(function () {
         location.href = "{{Session::pull('check_empty.url')}}";
@@ -19,7 +19,7 @@
                 if (rtndata.status) {
                     location.reload();
                 } else {
-                    swal("{{trans('_web_alert.logout.success')}}", rtndata.message, "error");
+                    swal("{{trans('web_alert.logout.success')}}", rtndata.message, "error");
                 }
             }
         });
@@ -28,13 +28,13 @@
     //
     $(".logout").click(function () {
         swal({
-            title: "{{trans('_web_alert.logout.title')}}",
-            text: "{{trans('_web_alert.logout.note')}}",
+            title: "{{trans('web_alert.logout.title')}}",
+            text: "{{trans('web_alert.logout.note')}}",
             type: "warning",
             showCancelButton: true,
-            cancelButtonText: "{{trans('_web_alert.logout.cancel')}}",
+            cancelButtonText: "{{trans('web_alert.logout.cancel')}}",
             confirmButtonColor: "#DD6B55",
-            confirmButtonText: "{{trans('_web_alert.logout.ok')}}",
+            confirmButtonText: "{{trans('web_alert.logout.ok')}}",
             closeOnConfirm: false
         }, function () {
             $.ajax({
@@ -44,12 +44,12 @@
                 async: false,
                 success: function (rtndata) {
                     if (rtndata.status) {
-                        swal("{{trans('_web_alert.logout.success')}}", rtndata.message, "success");
+                        swal("{{trans('web_alert.logout.success')}}", rtndata.message, "success");
                         setTimeout(function () {
                             location.href = "{{ url('web/login')}}";
                         }, 1000);
                     } else {
-                        swal("{{trans('_web_alert.logout.success')}}", rtndata.message, "error");
+                        swal("{{trans('web_alert.logout.success')}}", rtndata.message, "error");
                     }
                 }
             });

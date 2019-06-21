@@ -221,7 +221,7 @@ class _WebController extends Controller
         FuncController::_addLog( 'Sudo login' );
 
         $this->rtndata ['status'] = 1;
-        $this->rtndata ['message'] = trans( '_web_message.login.success' ) ;
+        $this->rtndata ['message'] = trans( 'web_message.login.success' ) ;
         $this->rtndata ['rtnurl'] =  url('web/member');
 
         return response()->json( $this->rtndata );

@@ -7,13 +7,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Validator;
 
 
 class UploadController extends Controller
 {
-    /*
-     *
-     */
+
+
     public function __construct ()
     {
 //        parent::__construct();
@@ -85,7 +85,7 @@ class UploadController extends Controller
         if ( !$request->exists('image')) {
             return response()->json([
                 'status' => 0,
-                'message' => trans('_web_message.upload.fail'),
+                'message' => trans('web_message.upload.fail'),
             ], 204);
         }
 
@@ -145,27 +145,6 @@ class UploadController extends Controller
 
 
     /*
-     *
-     */
-    public function _addFile ( $file_info )
-    {
-        $Dao = new SysFiles ();
-        $Dao->iMemberId = session()->get( 'member.iId' );
-        $Dao->iType = 2;
-        $Dao->vFileType = $file_info->type;
-        $tmp_arr = explode( config()->get( '_config.file_path' ), dirname( $file_info->url ), 2 );
-        $Dao->vFileServer = $tmp_arr [0];
-        $Dao->vFilePath = config()->get( '_config.file_path' ) . $tmp_arr [1];
-        $Dao->vFileName = $file_info->name;
-        $Dao->iFileSize = $file_info->size;
-        $Dao->iCreateTime = $Dao->iUpdateTime = time();
-        $Dao->save();
-
-        return $Dao->iId;
-    }
-
-
-    /*
      * 這裡做上傳檔案 *.pdf
      */
     public function doUploadFile(Request $request)
@@ -173,7 +152,7 @@ class UploadController extends Controller
         if ( !$request->hasFile('file') || !$request->file( 'file' ) || !$request->file('file')->isValid() ) {
             return response()->json([
                 'status' => 0,
-                'message' => trans('_web_message.upload.fail'),
+                'message' => trans('web_message.upload.fail'),
             ], 204);
         }
 
@@ -193,7 +172,7 @@ class UploadController extends Controller
             if ($extension!='pdf' || $mime!='application/pdf'){
                 return response()->json([
                     'status' => 0,
-                    'message' => trans('_web_message.upload.fail').' : not PDF !!',
+                    'message' => trans('web_message.upload.fail').' : not PDF !!',
                 ], 204);
             }
 //            $image = explode(',', $request->file('file'));
@@ -250,8 +229,60 @@ class UploadController extends Controller
 
         return response()->json([
             'status' => 1,
-            'message' => trans( '_web_message.upload.success' ),
+            'message' => trans( 'web_message.upload.success' ),
             'fileid' => $Dao->id,
         ], 200);
+    }
+
+
+
+    /*****
+     * 2016版本 檔案上傳 view
+     */
+    function index()
+    {
+        return view('uploadfile');
+    }
+
+    /*** 2016版本 檔案上傳 redirect ***/
+    function upload(Request $request)
+    {
+        $this->validate($request, [
+            'select_file'  => 'required|image|mimes:jpeg,jpg,png,gif|max:2048'
+        ]);
+
+        $image = $request->file('select_file');
+
+        $new_name = rand() . '.' . $image->getClientOriginalExtension();
+
+        $image->move(public_path('images'), $new_name);
+        return back()->with('success', 'Image Uploaded Successfully')->with('path', $new_name);
+    }
+
+    /*** 2016版本 檔案上傳 ajax ***/
+    function AjaxUpload(Request $request)
+    {
+        $validation = Validator::make($request->all(), [
+            'select_file' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+        ]);
+        if($validation->passes())
+        {
+            $image = $request->file('select_file');
+            $new_name = rand() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images'), $new_name);
+            return response()->json([
+                'message'   => 'Image Upload Successfully',
+                'uploaded_image' => '<img src="/images/'.$new_name.'" class="img-thumbnail" width="300" />',
+                'class_name'  => 'alert-success'
+            ]);
+        }
+        else
+        {
+            return response()->json([
+                'message'   => $validation->errors()->all(),
+                'uploaded_image' => '',
+                'class_name'  => 'alert-danger'
+            ]);
+        }
     }
 }

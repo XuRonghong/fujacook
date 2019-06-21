@@ -284,12 +284,12 @@
                     resetForm: true,
                     success: function (rtndata) {
                         if (rtndata.status) {
-                            swal("{{trans('_web_alert.notice')}}", rtndata.message, "success");
+                            swal("{{trans('web_alert.notice')}}", rtndata.message, "success");
                             setTimeout(function () {
                                 location.href = rtndata.rtnurl;
                             }, 1000)
                         } else {
-                            swal("{{trans('_web_alert.notice')}}", rtndata.message, "error");
+                            swal("{{trans('web_alert.notice')}}", rtndata.message, "error");
                         }
                     }
                 });

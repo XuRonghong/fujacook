@@ -72,17 +72,17 @@
             resetForm: true,
             success: function (data) {
                 if (data.status) {
-                    toastr.success(data.message, "{{trans('_web_alert.notice')}}").css("width","360px")
+                    toastr.success(data.message, "{{trans('web_alert.notice')}}").css("width","360px")
                     setTimeout(function () {
                         location.href = data.redirectUrl
                     }, 500)
                 } else {
-                    toastr.error(data.message, "{{trans('_web_alert.notice')}}").css("width","360px")
+                    toastr.error(data.message, "{{trans('web_alert.notice')}}").css("width","360px")
                 }
             },
             error: function (err) {
                 console.log(err.responseJSON)
-                Swal.fire("{{trans('_web_alert.notice')}}", JSON.stringify(err.responseJSON), "error");
+                Swal.fire("{{trans('web_alert.notice')}}", JSON.stringify(err.responseJSON), "error");
             }
         })
     }
@@ -100,17 +100,17 @@
             //async: false,
             success: function (data) {
                 if (data.status) {
-{{--                    Swal.fire("{{trans('_web_alert.notice')}}", data.message, "success");--}}
+{{--                    Swal.fire("{{trans('web_alert.notice')}}", data.message, "success");--}}
 //                     setTimeout(function () {
                         DOM.api().ajax.reload(null, false);
                     // }, 100);
                 } else {
-                    toastr.error(data.message, "{{trans('_web_alert.notice')}}").css("width","360px")
+                    toastr.error(data.message, "{{trans('web_alert.notice')}}").css("width","360px")
                 }
             },
             error: function (err) {
                 console.log(err.responseJSON)
-                Swal.fire("{{trans('_web_alert.notice')}}", JSON.stringify(err.responseJSON), "error");
+                Swal.fire("{{trans('web_alert.notice')}}", JSON.stringify(err.responseJSON), "error");
             }
         })
     }
@@ -130,12 +130,12 @@
                 if (data.status) {
                     file_id = data.fileid;
                 } else {
-                    toastr.error(data.message, "{{trans('_web_alert.notice')}}").css("width","360px")
+                    toastr.error(data.message, "{{trans('web_alert.notice')}}").css("width","360px")
                 }
             },
             error: function (err) {
                 console.log(err.responseJSON)
-                Swal.fire("{{trans('_web_alert.notice')}}", JSON.stringify(err.responseJSON), "error");
+                Swal.fire("{{trans('web_alert.notice')}}", JSON.stringify(err.responseJSON), "error");
             }
         })
         return file_id
@@ -144,14 +144,14 @@
     function doDelete(url, data, table)
     {
         Swal.fire({
-            title: "{{trans('_web_alert.del.title')}}",
-            text: "{{trans('_web_alert.del.note')}}",
+            title: "{{trans('web_alert.del.title')}}",
+            text: "{{trans('web_alert.del.note')}}",
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: "{{trans('_web_alert.ok')}}",
-            cancelButtonText: "{{trans('_web_alert.cancel')}}",
+            confirmButtonText: "{{trans('web_alert.ok')}}",
+            cancelButtonText: "{{trans('web_alert.cancel')}}",
         }).then((result) => {
             if (result.value) {
                 $.ajax({
@@ -162,7 +162,7 @@
                     success: function (rtndata) {
                         if (rtndata.status) {
                             Swal.fire(
-                                "{{trans('_web_alert.notice')}}",
+                                "{{trans('web_alert.notice')}}",
                                 rtndata.message,
                                 'success'
                             )
@@ -171,7 +171,7 @@
                             }, 100)
                         } else {
                             Swal.fire(
-                                "{{trans('_web_alert.notice')}}",
+                                "{{trans('web_alert.notice')}}",
                                 rtndata.message,
                                 'error'
                             )
@@ -179,7 +179,7 @@
                     },
                     error: function (err) {
                         console.log(err.responseJSON)
-                        Swal.fire("{{trans('_web_alert.notice')}}", JSON.stringify(err.responseJSON), "error");
+                        Swal.fire("{{trans('web_alert.notice')}}", JSON.stringify(err.responseJSON), "error");
                     }
                 })
             }
@@ -189,13 +189,13 @@
     function doDelete_2016(id, data)
     {
         swal({
-            title: "{{trans('_web_alert.del.title')}}",
-            text: "{{trans('_web_alert.del.note')}}",
+            title: "{{trans('web_alert.del.title')}}",
+            text: "{{trans('web_alert.del.note')}}",
             type: "warning",
             showCancelButton: true,
-            confirmButtonText: "{{trans('_web_alert.ok')}}",
+            confirmButtonText: "{{trans('web_alert.ok')}}",
             confirmButtonColor: "#DD6B55",
-            cancelButtonText: "{{trans('_web_alert.cancel')}}",
+            cancelButtonText: "{{trans('web_alert.cancel')}}",
             closeOnConfirm: true,
         }, function () {
             $.ajax({
@@ -205,17 +205,17 @@
                 //async: false,
                 success: function (rtndata) {
                     if (rtndata.status) {
-                        toastr.success(rtndata.message, "{{trans('_web_alert.notice')}}")
+                        toastr.success(rtndata.message, "{{trans('web_alert.notice')}}")
                         setTimeout(function () {
                             table.api().ajax.reload(null, false)
                         }, 100)
                     } else {
-                        swal("{{trans('_web_alert.notice')}}", rtndata.message, "error")
+                        swal("{{trans('web_alert.notice')}}", rtndata.message, "error")
                     }
                 },
                 error: function (err) {
                     console.log(err.responseJSON)
-                    toastr.error(JSON.stringify(err.responseJSON), "{{trans('_web_alert.notice')}}")
+                    toastr.error(JSON.stringify(err.responseJSON), "{{trans('web_alert.notice')}}")
                 }
             })
         })

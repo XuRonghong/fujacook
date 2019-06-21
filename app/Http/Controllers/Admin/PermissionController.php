@@ -7,6 +7,7 @@ use App\Repositories\Admin\PermissionRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+
 class PermissionController extends Controller
 {
     protected $repository;

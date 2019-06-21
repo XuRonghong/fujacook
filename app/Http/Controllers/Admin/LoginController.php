@@ -28,8 +28,18 @@ class LoginController extends Controller
         $mapBanner['bDel'] = 0;
         $DaoBanner = ModBanner::query()->where( $mapBanner )->get() or [];
 
+        // set_meta_og
+        $og = [
+            "url"           => url('login'),
+            "type"          => "website",
+            "title"         => config( '_website.web_title' ),
+            "description"   => config( '_website.web_description' ),
+            "images"        => 'portal_assets/dist/img/logo.png',
+        ];
+
         return view('admin.login', compact('DaoBanner'));
     }
+
     public function doLogin ()
     {
         $vAccount = ( Input::has( 'vAccount' ) ) ? Input::get( 'vAccount' ) : "";
@@ -39,19 +49,19 @@ class LoginController extends Controller
         $DaoMember = SysMember::where( $mapMember )->first();
         if ( !$DaoMember) {
             $this->rtndata ['status'] = 0;
-            $this->rtndata ['message'] = trans( '_web_message.login.error_account' );
+            $this->rtndata ['message'] = trans( 'web_message.login.error_account' );
 
             return response()->json( $this->rtndata );
         }
         if ($DaoMember->vPassword != hash( 'sha256', $DaoMember->vAgentCode . $vPassword . $DaoMember->vUserCode )) {
             $this->rtndata ['status'] = 0;
-            $this->rtndata ['message'] = trans( '_web_message.login.error_password' );
+            $this->rtndata ['message'] = trans( 'web_message.login.error_password' );
 
             return response()->json( $this->rtndata );
         }
         if ($DaoMember->iAcType >= 999) {
             $this->rtndata ['status'] = 0;
-            $this->rtndata ['message'] = trans( '_web_message.login.error_account' );
+            $this->rtndata ['message'] = trans( 'web_message.login.error_account' );
 
             return response()->json( $this->rtndata );
         }
@@ -143,8 +153,163 @@ class LoginController extends Controller
         FuncController::_addLog( 'login' );
 
         $this->rtndata ['status'] = 1;
-        $this->rtndata ['message'] = trans( '_web_message.login.success' );
+        $this->rtndata ['message'] = trans( 'web_message.login.success' );
         $this->rtndata ['rtnurl'] = url( 'web' );
+
+        return response()->json( $this->rtndata );
+    }
+
+    /*
+     * 其他方登入
+     */
+    public function doLoginOther ( Request $request )
+    {
+
+        $vAccount  = ( $request->exists( 'vAccount' ) ) ? $request->input( 'vAccount' ) : "";
+        $vPassword = ( $request->exists( 'vPassword' ) ) ? $request->input( 'vPassword' ) : "";
+        $type = ( $request->exists( 'type' ) ) ? $request->input( 'type' ) : "other";
+
+        if ($vAccount == "")
+        {
+            $this->rtndata ['status'] = 0;
+            $this->rtndata ['message'] = trans( '_web_message.login.error_account' );
+            return response()->json( $this->rtndata );
+        }
+
+        $mapMember ['vAccount'] = $vAccount;
+        $DaoMember = SysMember::where( $mapMember )->first();
+        if ( !$DaoMember) {
+            $str = md5( uniqid( mt_rand(), true ) );
+            $uuid = substr( $str, 0, 8 ) . '-';
+            $uuid .= substr( $str, 8, 4 ) . '-';
+            $uuid .= substr( $str, 12, 4 ) . '-';
+            $uuid .= substr( $str, 16, 4 ) . '-';
+            $uuid .= substr( $str, 20, 12 );
+            do {
+                $userid = rand( 1000000001, 1099999999 );
+                $check = SysMember::where( "iUserId", $userid )->first();
+            } while ($check);
+
+            $date_time = time();
+            $DaoMember = new SysMember ();
+            $DaoMember->iUserId = $userid;
+            $DaoMember->vUserCode = $uuid;
+            $DaoMember->vAgentCode = config( '_config.agent_code' ) . "-" . $type;
+            $DaoMember->iAcType = 999; //
+            $DaoMember->vAccount = $vAccount;
+            $DaoMember->vPassword = hash( 'sha256', $DaoMember->vAgentCode . $vPassword . $DaoMember->vUserCode );
+            $DaoMember->iCreateTime = $DaoMember->iUpdateTime = $date_time;
+            $DaoMember->vCreateIP = $request->ip();
+            $DaoMember->bActive = 1;
+            $DaoMember->iStatus = 1;
+
+            if ($DaoMember->save()) {
+                $DaoMemberInfo = new SysMemberInfo();
+                $DaoMemberInfo->iMemberId = $DaoMember->iId;
+                $DaoMemberInfo->vUserImage = "/images/empty.jpg";
+                $DaoMemberInfo->vUserName = ( $request->exists( 'vUserName' ) ) ? $request->input( 'vUserName' ) : $vAccount;
+                $DaoMemberInfo->vUserID =   ( $request->exists( 'vUserID' ) ) ? $request->input( 'vUserID' ) : "";
+                $DaoMemberInfo->iUserBirthday = time();
+                $DaoMemberInfo->vUserContact = ( $request->exists( 'vUserContact' ) ) ? $request->input( 'vUserContact' ) : "";
+                $DaoMemberInfo->vUserEmail = "";
+                $DaoMemberInfo->save();
+
+                $this->rtndata ['status'] = 1;
+                $this->rtndata ['message'] = trans( '_web_message.register.success' );
+                $this->rtndata ['rtnurl'] = ( session()->has( 'rtnurl' ) ) ? session()->pull( 'rtnurl' ) : url( 'login' );
+
+                $DaoGroupMember = new SysGroupMember();
+                $DaoGroupMember->iGroupId = 5;
+                $DaoGroupMember->iMemberId = $DaoMember->iId;
+                $DaoGroupMember->iCreateTime = $DaoGroupMember->iUpdateTime = time();
+                $DaoGroupMember->iStatus = 1;
+                $DaoGroupMember->save();
+
+                //
+                // CoinController::_CheckActivityRegister( $DaoMember->iId );
+
+            } else {
+                $this->rtndata ['status'] = 0;
+                $this->rtndata ['message'] = trans( '_web_message.register.fail' );
+                return response()->json( $this->rtndata );
+            }
+        } else {
+//            switch ($type) {
+//                case 'FB':
+//                    $access_token = $request->input( 'accessToken' );
+//                    $fb = new Facebook( [
+//                        'app_id' => config( '_config.fb_appid' ),
+//                        'app_secret' => config( '_config.fb_secret' ),
+//                        'default_graph_version' => config( '_config.fb_ver' ),
+//                    ] );
+//                    try {
+//                        $response = $fb->get( '/me', $access_token );
+//                    }
+//                    catch (FacebookResponseException $e) {
+//                        // When Graph returns an error
+//                        $this->rtndata ['status'] = 0;
+//                        $this->rtndata ['message'] = trans( '_web_message.login.error_account' );
+//                        return response()->json( $this->rtndata );
+//                    }
+//                    catch (FacebookSDKException $e) {
+//                        // When validation fails or other local issues
+//                        $this->rtndata ['status'] = 0;
+//                        $this->rtndata ['message'] = trans( '_web_message.login.error_account' );
+//                        return response()->json( $this->rtndata );
+//                    }
+//                    //$me = $response->getGraphUser();
+//                    break;
+//                case 'GPLUS':
+//                    break;
+//                default:
+//            }
+        }
+
+        //帳號是否有啟用
+        if ( !$DaoMember->bActive)
+        {
+            $this->rtndata ['status'] = 0;
+            $this->rtndata ['message'] = trans( '_web_message.login.error_active' );
+            return response()->json( $this->rtndata );
+        }
+        //帳號狀態是否正常
+        if ($DaoMember->iStatus == 0)
+        {
+            $this->rtndata ['status'] = 0;
+            $this->rtndata ['message'] = trans( '_web_message.login.error_status' );
+            return response()->json( $this->rtndata );
+        }
+
+        // Member
+        session()->put( 'shop_member', json_decode( json_encode( $DaoMember ), true ) );
+        // MemberInfo
+        $DaoMemberInfo = SysMemberInfo::query()->find( $DaoMember->iId );
+        session()->put( 'shop_member.info', json_decode( json_encode( $DaoMemberInfo ), true ) );
+
+        // MemberGroup join ModActivitySchedule
+        $iGroupId = SysGroupMember::query()->where('iMemberId', '=', $DaoMember->iId)->first()->iGroupId;
+        if ( !$iGroupId) {
+            $this->rtndata ['status'] = 0;
+            $this->rtndata ['message'] = '會員無群組';
+            return response()->json( $this->rtndata );
+        }
+        $iActivityScheduleId = ModActivityScheduleGroup::query()->where('iGroupId', '=', $iGroupId)->first()->iActivityScheduleId;
+        // ActivitySchedule
+        $DaoActivitySchedule = ModActivitySchedule::query()->where( 'iId', '=', $iActivityScheduleId )->first();
+        $DaoActivityScheduleInfo = ModActivityScheduleInfo::query()->where( 'iActivityScheduleId', '=', $iActivityScheduleId )->first();
+        session()->put('shop_activity_schedule', json_decode( json_encode( $DaoActivitySchedule ), true ) );
+        session()->put('shop_activity_schedule_info', json_decode( json_encode( $DaoActivityScheduleInfo ), true ) );
+        //
+        $this->order_limit_price = $DaoActivityScheduleInfo->iOrderLimitPrice ;
+        $this->order_code = $DaoActivityScheduleInfo->vOrderCode ;
+
+
+        //Activity
+        //CoinController::_CheckActivityLogin();
+
+        $this->rtndata ['status'] = 1;
+        $this->rtndata ['message'] = trans( '_web_message.login.success' );
+        $this->rtndata ['rtnurl'] = ( session()->has( 'rtnurl' ) ) ? session()->pull( 'rtnurl' ) : url( 'member_center/information' );
 
         return response()->json( $this->rtndata );
     }
@@ -163,7 +328,7 @@ class LoginController extends Controller
         $email = Input::get('email', '');
         $Dao = Admin::query()->where('email', '=', $email)->first();
         if ( !$Dao) {
-            return redirect()->back()->withErrors(['email'=>trans( '_web_message.login.error_account' )])->withInput();
+            return redirect()->back()->withErrors(['email'=>trans( 'web_message.login.error_account' )])->withInput();
         }
 
         //產生驗證碼
@@ -205,13 +370,13 @@ class LoginController extends Controller
             //Laravel sending..
 //            Mail::send( $mail_tmp, $mail_arr, function( $message ) use ( $verification, $email ) {
 //                $message->from( config( 'mail.from.address' ), config( 'mail.from.name' ) );
-//                $message->subject( trans( '_web_message.verification.forgot_password' ) );
+//                $message->subject( trans( 'web_message.verification.forgot_password' ) );
 //                $message->to( $email );
 //            } );
             //Fujacook sending..
             $finish = PHPsendMail_fuja(
                 $email,
-                trans( '_web_message.verification.forgot_password' ),
+                trans( 'web_message.verification.forgot_password' ),
                 $mail_arr,
                 config( 'mail.from.address' )
             );
@@ -242,7 +407,7 @@ class LoginController extends Controller
             ->orWhere('id', session('verification.memberid'))
             ->first();
         if ( !$User) {
-            return redirect()->back()->withErrors(['email'=>trans( '_web_message.verification.no_user' )])->withInput();
+            return redirect()->back()->withErrors(['email'=>trans( 'web_message.verification.no_user' )])->withInput();
         }
 
         //比對有沒有此驗證資訊
@@ -253,7 +418,7 @@ class LoginController extends Controller
         ];
         $Verification = UserVerification::query()->where($map)->first();
         if ( !$Verification) {
-            return redirect()->back()->withErrors(['verification'=>trans( '_web_message.verification.error' )])->withInput();
+            return redirect()->back()->withErrors(['verification'=>trans( 'web_message.verification.error' )])->withInput();
         }
 
 //        $User->password = hash( 'sha256', $User->vAgentCode . $vPassword . $User->vUserCode );
@@ -269,10 +434,31 @@ class LoginController extends Controller
             session()->flush();
         } catch (\Exception $e) {
             return redirect()->back()->withErrors([
-                'verification'=> htmlspecialchars_decode(trans( '_web_message.verification.fail' ).': '. $e->getMessage())
+                'verification'=> htmlspecialchars_decode(trans( 'web_message.verification.fail' ).': '. $e->getMessage())
             ])->withInput();
         }
 
         return redirect( route('admin.login.index'));
+    }
+
+
+
+    /*
+     *
+     */
+    public function logout(Request $request)
+    {
+        $request->session()->flush();
+        $request->session()->regenerate();
+        return redirect ()->guest ( 'web/login' );
+    }
+
+    /*  */
+    public function doLogout()
+    {
+        session ()->flush ();
+        $this->rtndata ['status'] = 1;
+        $this->rtndata ['message'] = trans ( '_web_message.logout.success' );
+        return response ()->json ( $this->rtndata );
     }
 }

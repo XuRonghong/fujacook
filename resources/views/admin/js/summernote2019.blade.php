@@ -52,7 +52,7 @@
 
     function sendFile(files, editor) {
         if (files.size > 2 * 1024 * 1024) {
-            swal("{{trans('_web_alert.notice')}}", "{{trans('_web_alert.cropper_image_too_big')}}:2 MB", "error");
+            swal("{{trans('web_alert.notice')}}", "{{trans('web_alert.cropper_image_too_big')}}:2 MB", "error");
             return;
         }
         data = new FormData();

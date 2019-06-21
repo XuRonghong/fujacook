@@ -24,7 +24,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">{{trans('_web_alert.cropper_image')}}</h4>
+                <h4 class="modal-title">{{trans('web_alert.cropper_image')}}</h4>
             </div>
             <div class="modal-body">
                 <div class="row">
@@ -34,13 +34,13 @@
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        <h4>{{trans('_web_alert.upload.image_preview')}}</h4>
+                        <h4>{{trans('web_alert.upload.image_preview')}}</h4>
                         <div class="img-preview img-preview-sm"></div>
                         <div class="btn-group">
                             <label title="Upload image file" for="inputImage" class="btn btn-primary"> <input type="file" accept="image/*" name="file" id="inputImage"
-                                                                                                              class="hide"> {{trans('_web_alert.upload.image_new')}}
+                                                                                                              class="hide"> {{trans('web_alert.upload.image_new')}}
                             </label>
-                            <button class="btn btn-warning" id="setDrag" type="button">{{trans('_web_alert.upload.image_crop')}}</button>
+                            <button class="btn btn-warning" id="setDrag" type="button">{{trans('web_alert.upload.image_crop')}}</button>
                         </div>
                     </div>
                 </div>
@@ -79,7 +79,7 @@
 
                 file = files[0];
                 if (file.size > 1 * 1024 * 1024) {
-                    swal("{{trans('_web_alert.notice')}}", "{{trans('_web_alert.cropper_image_too_big')}}:1 MB", "error");
+                    swal("{{trans('web_alert.notice')}}", "{{trans('web_alert.cropper_image_too_big')}}:1 MB", "error");
                     return;
                 }
                 if (/^image\/\w+$/.test(file.type)) {
@@ -115,7 +115,7 @@
         $("#setDrag").click(function () {
             $('#image-form').modal('hide');
             $image.cropper("setDragMode", "crop");
-            swal("{{trans('_web_alert.notice')}}", "{{trans('_web_alert.cropper_success')}}", "success");
+            swal("{{trans('web_alert.notice')}}", "{{trans('web_alert.cropper_success')}}", "success");
             var image = $image.cropper("getDataURL", "image/jpeg");
             sendImage(image);
             current_modal.find('img').attr('src', imagedata.path);

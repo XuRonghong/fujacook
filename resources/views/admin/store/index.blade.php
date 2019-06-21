@@ -270,7 +270,7 @@
                         html += '</div>';
                     }
                     document.querySelector('#form_result').innerHTML = html;
-                    {{--toastr.error(JSON.stringify(err.responseJSON), "{{trans('_web_alert.notice')}}");--}}
+                    {{--toastr.error(JSON.stringify(err.responseJSON), "{{trans('web_alert.notice')}}");--}}
                 }
             });
         });

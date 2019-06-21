@@ -82,7 +82,7 @@ class LoginController extends _WebController
                     //帳號email格式是否正確
                     if ($vAccount != "" && !FuncController::_isValidEmail($vAccount)) {
                         $this->rtndata ['status'] = 0;
-                        $this->rtndata ['message'] = 'login.error_accoutn:\n' . trans('_web_message.register.error_account');
+                        $this->rtndata ['message'] = 'login.error_accoutn:\n' . trans('web_message.register.error_account');
                         return response()->json($this->rtndata);
                     }
                     //帳號是否存在
@@ -90,25 +90,25 @@ class LoginController extends _WebController
                     $DaoMember = SysMember::query()->where($mapMember)->first();
                     if (!$DaoMember) {
                         $this->rtndata ['status'] = 0;
-                        $this->rtndata ['message'] = 'account is empty:\n' . trans('_web_message.login.error_account');
+                        $this->rtndata ['message'] = 'account is empty:\n' . trans('web_message.login.error_account');
                         return response()->json($this->rtndata);
                     }
                     //密碼是否一樣
                     if ($DaoMember->vPassword != hash('sha256', $DaoMember->vAgentCode . $vPassword . $DaoMember->vUserCode)) {
                         $this->rtndata ['status'] = 0;
-                        $this->rtndata ['message'] = 'error_password:\n' . trans('_web_message.login.error_password');
+                        $this->rtndata ['message'] = 'error_password:\n' . trans('web_message.login.error_password');
                         return response()->json($this->rtndata);
                     }
                     //帳號是否有啟用
                     if (!$DaoMember->bActive) {
                         $this->rtndata ['status'] = 0;
-                        $this->rtndata ['message'] = 'no active:\n' . trans('_web_message.login.error_active');
+                        $this->rtndata ['message'] = 'no active:\n' . trans('web_message.login.error_active');
                         return response()->json($this->rtndata);
                     }
                     //帳號狀態是否正常
                     if ($DaoMember->iStatus == 0) {
                         $this->rtndata ['status'] = 0;
-                        $this->rtndata ['message'] = 'no status:\n' . trans('_web_message.login.error_status');
+                        $this->rtndata ['message'] = 'no status:\n' . trans('web_message.login.error_status');
                         return response()->json($this->rtndata);
                     }
 
@@ -198,7 +198,7 @@ class LoginController extends _WebController
                                 $DaoGroupMember->save();
 
 //                                $this->rtndata ['status'] = 1;
-//                                $this->rtndata ['message'] = 'register success:\n'.trans('_web_message.register.success') . trans('_web_message.register.verification');
+//                                $this->rtndata ['message'] = 'register success:\n'.trans('web_message.register.success') . trans('web_message.register.verification');
 //                                $this->rtndata ['url'] = url('/api/auth/doActive') .'/'. $uuid;
 
                                 /*Mail::send('_email.welcome', ['url' => url('/api/auth/doActive') .'/'. $uuid], function ($message) use ($vAccount) {
@@ -207,14 +207,14 @@ class LoginController extends _WebController
 
                             } catch (\Exception $e){
                                 $this->rtndata ['status'] = 0;
-                                $this->rtndata ['message'] = $e->getMessage() .'\n'. trans( '_web_message.register.send_active' );
+                                $this->rtndata ['message'] = $e->getMessage() .'\n'. trans( 'web_message.register.send_active' );
                                 return response()->json( $this->rtndata );
                             }
                             //
                             //CoinController::_CheckActivityRegister( $DaoMember->iId );
                         } else {
                             $this->rtndata ['status'] = 0;
-                            $this->rtndata ['message'] = 'register.save_fail:\n'.trans( '_web_message.register.fail' );
+                            $this->rtndata ['message'] = 'register.save_fail:\n'.trans( 'web_message.register.fail' );
                             return response()->json( $this->rtndata );
                         }
 
@@ -229,7 +229,7 @@ class LoginController extends _WebController
 
 
         $this->rtndata ['status'] = 1;
-        $this->rtndata ['message'] = 'login success:\n'.trans( '_web_message.login.success' );
+        $this->rtndata ['message'] = 'login success:\n'.trans( 'web_message.login.success' );
 //        $this->rtndata ['rtnurl'] =  session()->has( 'rtnurl' ) ? session()->get( 'rtnurl' ) : url('web/member');
 //        $this->rtndata ['isMobile'] = false;
         $this->rtndata ['uid'] = $DaoMember->iId;
@@ -249,13 +249,13 @@ class LoginController extends _WebController
 
         if (  $vAccount!="" && !FuncController::_isValidEmail( $vAccount )) {
             $this->rtndata ['status'] = 0;
-            $this->rtndata ['message'] = 'forgetpw.error_account:\n'.trans( '_web_message.register.error_account' );
+            $this->rtndata ['message'] = 'forgetpw.error_account:\n'.trans( 'web_message.register.error_account' );
             return response()->json( $this->rtndata );
         }
         if ($vAccount == "" /*&& $iUserId == ""*/)
         {
             $this->rtndata ['status'] = 0;
-            $this->rtndata ['message'] = 'input empty:\n'.trans( '_web_message.login.error_account' ).time();
+            $this->rtndata ['message'] = 'input empty:\n'.trans( 'web_message.login.error_account' ).time();
             return response()->json( $this->rtndata );
         }
 
@@ -266,7 +266,7 @@ class LoginController extends _WebController
         if ( !$DaoMember)
         {
             $this->rtndata ['status'] = 0;
-            $this->rtndata ['message'] = 'error_account:\n'.trans( '_web_message.login.error_account' );
+            $this->rtndata ['message'] = 'error_account:\n'.trans( 'web_message.login.error_account' );
             return response()->json( $this->rtndata );
         }
 
@@ -309,16 +309,16 @@ class LoginController extends _WebController
                     'url' => 'https://actualminer.herokuapp.com/'.$mail_url_lang.'verify-password',
                 ] ,
                 function( $message ) use ( $vAccount ) {
-                    $message->to( $vAccount )->subject( trans( '_web_message.verification.forgot_password' ) );
+                    $message->to( $vAccount )->subject( trans( 'web_message.verification.forgot_password' ) );
             } );
 
             session()->put( 'verification.memberid', $DaoMember->iId );
             $this->rtndata ['status'] = 1;
-            $this->rtndata ['message'] = trans( '_web_message.verification.success' );
+            $this->rtndata ['message'] = trans( 'web_message.verification.success' );
             $this->rtndata ['verification'] = $verification;
         } else {
             $this->rtndata ['status'] = 0;
-            $this->rtndata ['message'] = trans( '_web_message.verification.dail' );
+            $this->rtndata ['message'] = trans( 'web_message.verification.dail' );
         }
 
         return response()->json( $this->rtndata );
@@ -346,7 +346,7 @@ class LoginController extends _WebController
         if ( !$DaoMember)
         {
             $this->rtndata ['status'] = 0;
-            $this->rtndata ['message'] = 'not find member:\n'.trans( '_web_message.verification.error' );
+            $this->rtndata ['message'] = 'not find member:\n'.trans( 'web_message.verification.error' );
             return response()->json( $this->rtndata );
         }
 
@@ -360,7 +360,7 @@ class LoginController extends _WebController
         if ( !$DaoMemberVerification)
         {
             $this->rtndata ['status'] = 0;
-            $this->rtndata ['message'] = 'verification.error:\n'.trans( '_web_message.verification.error' );
+            $this->rtndata ['message'] = 'verification.error:\n'.trans( 'web_message.verification.error' );
             return response()->json( $this->rtndata );
         }
 
@@ -377,11 +377,11 @@ class LoginController extends _WebController
 
             session()->flush();
             $this->rtndata ['status'] = 1;
-            $this->rtndata ['message'] = 'resetpw.save_success:\n'.trans( '_web_message.save_success' );
+            $this->rtndata ['message'] = 'resetpw.save_success:\n'.trans( 'web_message.save_success' );
 //            $this->rtndata ['rtnurl'] = url( 'web/login' );
         } else {
             $this->rtndata ['status'] = 0;
-            $this->rtndata ['message'] = 'resetpw.save_fail:\n'.trans( '_web_message.save_fail' );
+            $this->rtndata ['message'] = 'resetpw.save_fail:\n'.trans( 'web_message.save_fail' );
         }
 
         return response()->json( $this->rtndata );
@@ -409,7 +409,7 @@ class LoginController extends _WebController
         //帳號email格式錯誤，退回
         if ( !FuncController::_isValidEmail( $vAccount )) {
             $this->rtndata ['status'] = 0;
-            $this->rtndata ['message'] = 'register.error_account:\n'.trans( '_web_message.register.error_account' );
+            $this->rtndata ['message'] = 'register.error_account:\n'.trans( 'web_message.register.error_account' );
             return response()->json( $this->rtndata );
         }
         //帳號存在，退回
@@ -417,7 +417,7 @@ class LoginController extends _WebController
         $DaoMember = SysMember::query()->where( $map )->first();
         if ($DaoMember) {
             $this->rtndata ['status'] = 0;
-            $this->rtndata ['message'] = 'register.account_not_empty:\n'.trans( '_web_message.register.account_not_empty' );
+            $this->rtndata ['message'] = 'register.account_not_empty:\n'.trans( 'web_message.register.account_not_empty' );
             return response()->json( $this->rtndata );
         }
 
@@ -470,7 +470,7 @@ class LoginController extends _WebController
                 $DaoGroupMember->save();
 
                 $this->rtndata ['status'] = 1;
-                $this->rtndata ['message'] = 'register success:\n'.trans('_web_message.register.success') . trans('_web_message.register.verification');
+                $this->rtndata ['message'] = 'register success:\n'.trans('web_message.register.success') . trans('web_message.register.verification');
                 $this->rtndata ['url'] = url('/api/auth/doActive') .'/'. $uuid;
 
                 Mail::send('_email.welcome', ['url' => url('/api/auth/doActive') .'/'. $uuid .'?lang='.$mail_url_lang ], function ($message) use ($vAccount) {
@@ -482,12 +482,12 @@ class LoginController extends _WebController
 
             } catch (\Exception $e){
                 $this->rtndata ['status'] = 0;
-                $this->rtndata ['message'] = $e->getMessage() .'\n'. trans( '_web_message.register.send_active' );
+                $this->rtndata ['message'] = $e->getMessage() .'\n'. trans( 'web_message.register.send_active' );
             }
 
         } else {
             $this->rtndata ['status'] = 0;
-            $this->rtndata ['message'] = 'register.save_fail:\n'.trans( '_web_message.register.fail' );
+            $this->rtndata ['message'] = 'register.save_fail:\n'.trans( 'web_message.register.fail' );
         }
 
         return response()->json( $this->rtndata );
@@ -544,7 +544,7 @@ class LoginController extends _WebController
 //        session()->forget( 'shop_member' );
 //        session()->forget( 'shop_member.iId' );
         $this->rtndata ['status'] = 1;
-        $this->rtndata ['message'] = trans( '_web_message.logout.success' );
+        $this->rtndata ['message'] = trans( 'web_message.logout.success' );
         $this->rtndata ['rtnurl'] = url('web');
         return response()->json( $this->rtndata );
     }
@@ -559,7 +559,7 @@ class LoginController extends _WebController
         $id =  $request->exists( 'uid' ) ? $request->input( 'uid' ) : 0;
         if ( !$id ) {
             $this->rtndata ['status'] = 0;
-            $this->rtndata ['message'] = trans( '_web_message.login.error_account' );
+            $this->rtndata ['message'] = trans( 'web_message.login.error_account' );
             return response()->json( $this->rtndata );
         }
 
@@ -581,7 +581,7 @@ class LoginController extends _WebController
                 ->first();
             if (!$Dao) {
                 $this->rtndata ['status'] = 0;
-                $this->rtndata ['message'] = 'memberinfo.empty_id:\n' . trans('_web_message.empty_id');
+                $this->rtndata ['message'] = 'memberinfo.empty_id:\n' . trans('web_message.empty_id');
                 return response()->json($this->rtndata);
             }
 
@@ -589,7 +589,7 @@ class LoginController extends _WebController
             $Dao->iUserBirthday = date('Y-m-d', $Dao->iUserBirthday);
         }catch (\Exception $e){
             $this->rtndata ['status'] = 0;
-            $this->rtndata ['message'] = $e->getMessage().':\n' . trans('_web_message.empty_id');
+            $this->rtndata ['message'] = $e->getMessage().':\n' . trans('web_message.empty_id');
             return response()->json($this->rtndata);
         }
 
@@ -622,12 +622,12 @@ class LoginController extends _WebController
         $DaoMember = SysMember::query()->find( $uid );
         if ( !$DaoMember) {
             $this->rtndata ['status'] = 0;
-            $this->rtndata ['message'] = 'resetpw.account_not_empty:\n'.trans( '_web_message.register.account_not_empty' );
+            $this->rtndata ['message'] = 'resetpw.account_not_empty:\n'.trans( 'web_message.register.account_not_empty' );
             return response()->json( $this->rtndata );
         }
         if ($DaoMember->vPassword != hash( 'sha256', $DaoMember->vAgentCode . $vPassword . $DaoMember->vUserCode )) {
             $this->rtndata ['status'] = 0;
-            $this->rtndata ['message'] = 'resetpw.error_password:\n'.trans( '_web_message.login.error_password' );
+            $this->rtndata ['message'] = 'resetpw.error_password:\n'.trans( 'web_message.login.error_password' );
             return response()->json( $this->rtndata );
         }
 
@@ -636,7 +636,7 @@ class LoginController extends _WebController
 
         if ($DaoMember->save()) {
             $this->rtndata ['status'] = 1;
-            $this->rtndata ['message'] = 'resetpw.success:\n'.trans( '_web_message.save_success' );
+            $this->rtndata ['message'] = 'resetpw.success:\n'.trans( 'web_message.save_success' );
 //            $this->rtndata ['rtnurl'] = url( 'login' );
             //Logs
             $this->_saveLogAction( $DaoMember->getTable(), $DaoMember->iId, 'api-edit-password from '.$request->ip(), json_encode( $DaoMember, JSON_UNESCAPED_UNICODE ) );
@@ -644,7 +644,7 @@ class LoginController extends _WebController
             session()->forget( 'shop_member.info' );
         } else {
             $this->rtndata ['status'] = 0;
-            $this->rtndata ['message'] = trans( '_web_message.save_fail' );
+            $this->rtndata ['message'] = trans( 'web_message.save_fail' );
         }
 
         return response()->json( $this->rtndata );
@@ -660,7 +660,7 @@ class LoginController extends _WebController
         $id = $request->exists( 'uid' ) ? $request->input( 'uid' ) : 0;
         if ( !$id ) {
             $this->rtndata ['status'] = 0;
-            $this->rtndata ['message'] = trans( '_web_message.login.error_account' );
+            $this->rtndata ['message'] = trans( 'web_message.login.error_account' );
             return response()->json( $this->rtndata );
         }
 
@@ -668,7 +668,7 @@ class LoginController extends _WebController
         $Dao = SysMember::query()->where('iId', '=', $id)->first();
         if ( !$Dao) {
             $this->rtndata ['status'] = 0;
-            $this->rtndata ['message'] = 'member.empty_id:\n'.trans( '_web_message.empty_id' );
+            $this->rtndata ['message'] = 'member.empty_id:\n'.trans( 'web_message.empty_id' );
             return response()->json( $this->rtndata );
         }
 
@@ -678,7 +678,7 @@ class LoginController extends _WebController
             if ($Dao->vPassword != hash( 'sha256', $Dao->vAgentCode . $vPassword . $Dao->vUserCode ))
             {
                 $this->rtndata ['status'] = 0;
-                $this->rtndata ['message'] = 'error_password:\n'.trans( '_web_message.login.error_password' );
+                $this->rtndata ['message'] = 'error_password:\n'.trans( 'web_message.login.error_password' );
                 return response()->json( $this->rtndata );
             }
         }else{  //社群登入，原來沒有密碼
@@ -737,12 +737,12 @@ class LoginController extends _WebController
             $this->_saveLogAction( $DaoMemberInfo->getTable(), $DaoMemberInfo->iMemberId, 'api-edit 2 from '.$request->ip(), json_encode( $DaoMemberInfo, JSON_UNESCAPED_UNICODE ) );
 
             $this->rtndata ['status'] = 1;
-            $this->rtndata ['message'] = trans( '_web_message.save_success' );
+            $this->rtndata ['message'] = trans( 'web_message.save_success' );
             //            $this->rtndata ['rtnurl'] = url( 'member_center' );
            
         } else {
             $this->rtndata ['status'] = 0;
-            $this->rtndata ['message'] = 'memberinfo.save_fail:\n'.trans( '_web_message.save_fail' );
+            $this->rtndata ['message'] = 'memberinfo.save_fail:\n'.trans( 'web_message.save_fail' );
         }
 
         return response()->json( $this->rtndata );
@@ -775,7 +775,7 @@ class LoginController extends _WebController
             $DaoMember = SysMember::query()->whereNotNull('vWallet')->where($mapMember)->select($select)->groupBy($select)->get();
             if ( !$DaoMember) {
                 $this->rtndata ['status'] = 204;
-                $this->rtndata ['message'] = 'no data !!' . trans('_web_message.empty_id');
+                $this->rtndata ['message'] = 'no data !!' . trans('web_message.empty_id');
                 return response()->json($this->rtndata);
             }
 
@@ -822,7 +822,7 @@ class LoginController extends _WebController
             $DaoRevenueDaily = ModRevenueDaily::query()->where($mapRevenueDaily)->select($select)->orderBy('vDate','DESC')->get();
             if ( !$DaoRevenueDaily) {
                 $this->rtndata ['status'] = 204 ;
-                $this->rtndata ['message'] = 'no data !!' . trans('_web_message.empty_id');
+                $this->rtndata ['message'] = 'no data !!' . trans('web_message.empty_id');
                 return response()->json($this->rtndata);
             }
 

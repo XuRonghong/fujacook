@@ -45,12 +45,14 @@ Route::group([
     Route::get('/', 'IndexController@index');
     Route::get('/home', 'HomeController@index')->name('home');
 
+
     /**********************************************************
      * Upload Images
      *********************************************************/
     Route::post( 'upload_image', 'UploadController@doUploadImage' );
     Route::post( 'upload_image_base64', 'UploadController@doUploadImageBase64' );
     Route::post( 'upload_file', 'UploadController@doUploadFile' );
+
 
     /**********************************************************
      * Import Excel
@@ -62,6 +64,7 @@ Route::group([
     Route::group([
         'middleware' => ['admin.checkPermission']       //權限通過
     ],function(){
+
 
 
         /**********************************************************
@@ -128,6 +131,7 @@ Route::group([
         Route::resource($index['url'], $index['C']);
         Route::post($index['url'].'/update/{id}', $index['C'].'@update')->name($index['name'].'.update');
         Route::post($index['url'].'/destroy/{id}', $index['C'].'@destroy')->name($index['name'].'.destroy');
+
 
 
 
