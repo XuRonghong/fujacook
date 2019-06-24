@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Auth;
 
 use App\Admin;
+use App\Http\Controllers\FuncController;
 use App\LogLogin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -120,13 +121,7 @@ class LoginController extends Controller
             return null;
         } else {
             //紀錄登入log
-            $user_id = $this->guard()->user()->id;
-            $log_login = new LogLogin();
-            $log_login->user_id = $user_id; //session( 'store.iId', 0 );
-            $log_login->user_type = Admin::query()->find($user_id)->type;
-            $log_login->action = 'admin login';
-            $log_login->ip = $request->ip();
-            $log_login->save();
+            FuncController::addLog('admin login', $this->guard()->user()->id);
 
             // set the remember me cookie if the user check the box
             $remember = ($request->filled('remember')) ? true : false;
@@ -135,8 +130,8 @@ class LoginController extends Controller
                 setcookie('admin_us', $request->input('account'), time()+60*60);
                 setcookie('admin_pw', $request->input('password'), time()+60*60);
             } else {
-                setcookie('admin_us', $request->input('account'), time()+1);
-                setcookie('admin_pw', $request->input('password'), time()+1);
+                setcookie('admin_us', '', time()+1);
+                setcookie('admin_pw', '', time()+1);
             }
 
             return redirect()->intended($this->redirectPath());

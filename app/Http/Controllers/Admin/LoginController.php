@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Admin;
+use App\AdminInfo;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\FuncController;
 use App\UserVerification;
@@ -45,122 +46,68 @@ class LoginController extends Controller
         $vAccount = ( Input::has( 'vAccount' ) ) ? Input::get( 'vAccount' ) : "";
         $vPassword = ( Input::has( 'vPassword' ) ) ? Input::get( 'vPassword' ) : "";
         //$mapMember ['vAgentCode'] = $this->vAgentCode;
-        $mapMember ['vAccount'] = $vAccount;
-        $DaoMember = SysMember::where( $mapMember )->first();
-        if ( !$DaoMember) {
-            $this->rtndata ['status'] = 0;
-            $this->rtndata ['message'] = trans( 'web_message.login.error_account' );
-
-            return response()->json( $this->rtndata );
+        $map ['account'] = Input::get('vAccount','');
+        $User = Admin::query()->where($map)->first();
+        if ( !$User) {
+//            return redirect()->back()->withErrors(['email'=>trans( 'web_message.login.error_account' )])->withInput();
+            return response()->json([
+                'status' => 0,
+                'message' => trans( 'web_message.login.error_account' ),    //"帳號不存在",
+            ], 204);    //No Content : 伺服器成功處理了請求，沒有返回任何內容。
         }
-        if ($DaoMember->vPassword != hash( 'sha256', $DaoMember->vAgentCode . $vPassword . $DaoMember->vUserCode )) {
-            $this->rtndata ['status'] = 0;
-            $this->rtndata ['message'] = trans( 'web_message.login.error_password' );
-
-            return response()->json( $this->rtndata );
+//        $password = hash( 'sha256', $DaoMember->vAgentCode . $vPassword . $DaoMember->vUserCode );
+        $password = Hash::make(Input::get('password',''));
+        if ($User->password != $password) {
+//            return redirect()->back()->withErrors(['email'=>trans( 'web_message.login.error_password' )])->withInput();
+            return response()->json([
+                'status' => 0,
+                'message' => trans( 'web_message.login.error_password' ),    //"密碼錯誤",
+            ], 202);  //Accepted : 伺服器已接受請求，但尚未處理。最終該請求可能會也可能不會被執行，並且可能在處理發生時被禁止。
         }
-        if ($DaoMember->iAcType >= 999) {
-            $this->rtndata ['status'] = 0;
-            $this->rtndata ['message'] = trans( 'web_message.login.error_account' );
-
-            return response()->json( $this->rtndata );
+        if ($User->type > 99) {
+//            return redirect()->back()->withErrors(['email'=>trans( 'web_message.login.error_access' )])->withInput();
+            return response()->json([
+                'status' => 0,
+                'message' => trans( 'web_message.login.error_access' ), //"帳號權限異常，請聯絡管理員"
+            ], 202);  //Accepted : 伺服器已接受請求，但尚未處理。最終該請求可能會也可能不會被執行，並且可能在處理發生時被禁止。
         }
-        if ( !$DaoMember->iStatus || !$DaoMember->bActive) {
-            $this->rtndata ['status'] = 0;
-            $this->rtndata ['message'] = "您已被停權";
-
-            return response()->json( $this->rtndata );
+        if ( !$User->status || !$User->active) {
+//            return redirect()->back()->withErrors(['email'=>trans( 'web_message.login.error_active' )])->withInput();
+            return response()->json([
+                'status' => 0,
+                'message' => trans( 'web_message.login.error_active' ), //"帳號被停權"
+            ], 403);  // Forbidden : 用戶端並無訪問權限，所以伺服器給予應有的回應。
         }
-        $DaoMember->vSessionId = session()->getId();
-        $DaoMember->iLoginTime = time();
-        $DaoMember->save();
 
-        $DaoSysAgentAccessLV = $DaoMember->iAcType;
-        // 選單列表
-        $DaoSysMenu = SysMenu::get();
+        $User->session_id = session()->getId();
+        $User->login_time = date('Y-m-d H:i:s');
+        $User->save();
 
-        // 會員選單權限
-        $mapMemberAccess = [
-            "iMemberId" => $DaoMember->iId,
-            "bSet" => 0
-        ];
-        $DaoMemberAccessList = SysMemberAccess::where( $mapMemberAccess )->pluck( 'iMenuId' );
-        $DaoMemberAccessList = json_decode( json_encode( $DaoMemberAccessList ), true );
 
-        // 會員已存在特別功能權限
-        $mapMemberAccess = [
-            "iMemberId" => $DaoMember->iId,
-            "bSet" => 1
-        ];
-        $DaoMemberAccessListSet = SysMemberAccess::where( $mapMemberAccess )->pluck( 'iMenuId' );
-        $DaoMemberAccessListSet = json_decode( json_encode( $DaoMemberAccessListSet ), true );
-        foreach ($DaoSysMenu as $key => $var) {
-            if ( !in_array( $var->iId, $DaoMemberAccessListSet )) {
-                $vAccess_arr = explode( ",", $var->vAccess );
-                if ( !in_array( $var->iId, $DaoMemberAccessList )) {
-                    $DaoAccess = new SysMemberAccess ();
-                    $DaoAccess->iMemberId = $DaoMember->iId;
-                    $DaoAccess->iMenuId = $var->iId;
-                    $DaoAccess->bOpen = ( $DaoSysAgentAccessLV && in_array( $DaoSysAgentAccessLV, $vAccess_arr ) ) ? 1 : 0;
-                    $DaoAccess->bSet = 0;
-                    $DaoAccess->save();
-                } else {
-                    $mapMemberAccess2 = [
-                        "iMemberId" => $DaoMember->iId,
-                        "iMenuId" => $var->iId
-                    ];
-                    $DaoAccess2 = SysMemberAccess::where( $mapMemberAccess2 )->first();
-                    $DaoAccess2->bOpen = ( $DaoSysAgentAccessLV && in_array( $DaoSysAgentAccessLV, $vAccess_arr ) ) ? 1 : 0;
-                    $DaoAccess2->save();
-                }
-            }
-        }
-        // 取得會員已存在功能權限array
-        $mapMemberAccess = [
-            "iMemberId" => $DaoMember->iId
-        ];
-        $DaoMemberAccessArr = SysMemberAccess::where( $mapMemberAccess )->select( 'iMenuId', 'bOpen' )->get();
-        foreach ($DaoMemberAccessArr as $key => $var) {
-            session()->put( 'access.' . $var->iMenuId, $var->bOpen );
-        }
-        // Member
-        session()->put( 'member', json_decode( json_encode( $DaoMember ), true ) );
-        // MemberInfo
-        $DaoMemberInfo = SysMemberInfo::find( $DaoMember->iId );
-        session()->put( 'member.info', json_decode( json_encode( $DaoMemberInfo ), true ) );
+        //$this->getMemberAccessList_fun2016($User);
 
-        //Group
-        $DaoGroupMember = SysGroupMember::join( 'sys_group', function( $join ) {
-            $join->on( 'sys_group.iId', '=', 'sys_group_member.iGroupId' );
-        } )->where( 'sys_group_member.iMemberId', $DaoMember->iId )->select( 'sys_group.*' )->get();
-        foreach ($DaoGroupMember as $item) {
-            switch ($item->iGroupType) {
-                case 3:
-                    session()->put( 'employee', json_decode( json_encode( $item ), true ) );
-                    break;
-                case 4:
-                    session()->put( 'store', json_decode( json_encode( $item ), true ) );
-                    break;
-                case 5:
-                    session()->put( 'blogger', json_decode( json_encode( $item ), true ) );
-                    break;
-                case 6:
-                    session()->put( 'supplier', json_decode( json_encode( $item ), true ) );
-                    break;
-            }
-        }
-        //
-        FuncController::_addLog( 'login' );
 
-        $this->rtndata ['status'] = 1;
-        $this->rtndata ['message'] = trans( 'web_message.login.success' );
-        $this->rtndata ['rtnurl'] = url( 'web' );
+        // Session save User
+        session()->put('user', json_decode( json_encode($User), true));
+        // Session save UserInfo
+        $UserInfo = AdminInfo::query()->where('user_id', $User->id )->first();
+        session()->put('user.info', json_decode( json_encode($UserInfo), true));
 
-        return response()->json( $this->rtndata );
+        // User Group for fun2016
+        //$this->sessionMemberGroup_fun2016()
+
+        // recode log..
+        FuncController::addLog('admin login', $User->id);
+
+        return response()->json([
+            'status' => 1,
+            'message' => trans('web_message.login.success'),
+            'rtnurl' => url( 'admin' )
+        ], 200);
     }
 
     /*
-     * 其他方登入
+     * 其他方登入 (未整理)
      */
     public function doLoginOther ( Request $request )
     {
@@ -460,5 +407,83 @@ class LoginController extends Controller
         $this->rtndata ['status'] = 1;
         $this->rtndata ['message'] = trans ( '_web_message.logout.success' );
         return response ()->json ( $this->rtndata );
+    }
+
+
+
+    // 2016 function ~~
+    public function getMemberAccessList_fun2016($User)
+    {
+        $DaoSysAgentAccessLV = $User->type;
+        // 選單列表
+        $DaoSysMenu = SysMenu::get();
+
+        // 會員選單權限
+        $mapMemberAccess = [
+            "iMemberId" => $User->id,
+            "bSet" => 0
+        ];
+        $DaoMemberAccessList = SysMemberAccess::where( $mapMemberAccess )->pluck( 'iMenuId' );
+        $DaoMemberAccessList = json_decode( json_encode( $DaoMemberAccessList ), true );
+
+        // 會員已存在特別功能權限
+        $mapMemberAccess = [
+            "iMemberId" => $User->id,
+            "bSet" => 1
+        ];
+        $DaoMemberAccessListSet = SysMemberAccess::where( $mapMemberAccess )->pluck( 'iMenuId' );
+        $DaoMemberAccessListSet = json_decode( json_encode( $DaoMemberAccessListSet ), true );
+        foreach ($DaoSysMenu as $key => $var) {
+            if ( !in_array( $var->iId, $DaoMemberAccessListSet )) {
+                $vAccess_arr = explode( ",", $var->vAccess );
+                if ( !in_array( $var->iId, $DaoMemberAccessList )) {
+                    $DaoAccess = new SysMemberAccess ();
+                    $DaoAccess->iMemberId = $DaoMember->iId;
+                    $DaoAccess->iMenuId = $var->iId;
+                    $DaoAccess->bOpen = ( $DaoSysAgentAccessLV && in_array( $DaoSysAgentAccessLV, $vAccess_arr ) ) ? 1 : 0;
+                    $DaoAccess->bSet = 0;
+                    $DaoAccess->save();
+                } else {
+                    $mapMemberAccess2 = [
+                        "iMemberId" => $DaoMember->iId,
+                        "iMenuId" => $var->iId
+                    ];
+                    $DaoAccess2 = SysMemberAccess::where( $mapMemberAccess2 )->first();
+                    $DaoAccess2->bOpen = ( $DaoSysAgentAccessLV && in_array( $DaoSysAgentAccessLV, $vAccess_arr ) ) ? 1 : 0;
+                    $DaoAccess2->save();
+                }
+            }
+        }
+        // 取得會員已存在功能權限array
+        $mapMemberAccess = [
+            "iMemberId" => $DaoMember->iId
+        ];
+        $DaoMemberAccessArr = SysMemberAccess::where( $mapMemberAccess )->select( 'iMenuId', 'bOpen' )->get();
+        foreach ($DaoMemberAccessArr as $key => $var) {
+            session()->put( 'access.' . $var->iMenuId, $var->bOpen );
+        }
+    }
+
+    public function sessionMemberGroup_fun2016()
+    {
+        $DaoGroupMember = SysGroupMember::join( 'sys_group', function( $join ) {
+            $join->on( 'sys_group.iId', '=', 'sys_group_member.iGroupId' );
+        } )->where( 'sys_group_member.iMemberId', $DaoMember->iId )->select( 'sys_group.*' )->get();
+        foreach ($DaoGroupMember as $item) {
+            switch ($item->iGroupType) {
+                case 3:
+                    session()->put( 'employee', json_decode( json_encode( $item ), true ) );
+                    break;
+                case 4:
+                    session()->put( 'store', json_decode( json_encode( $item ), true ) );
+                    break;
+                case 5:
+                    session()->put( 'blogger', json_decode( json_encode( $item ), true ) );
+                    break;
+                case 6:
+                    session()->put( 'supplier', json_decode( json_encode( $item ), true ) );
+                    break;
+            }
+        }
     }
 }

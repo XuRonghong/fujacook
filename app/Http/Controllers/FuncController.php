@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Admin;
 use App\File;
 use App\LogLogin;
 use Illuminate\Support\Facades\Request;
@@ -196,15 +197,14 @@ class FuncController
     /*
      *
      */
-    static function _addLog ( $action )
+    static function addLog( $action, $user_id )
     {
-        $Dao = new LogLogin();
-        $Dao->iStoreId = session( 'store.iId', 0 );
-        $Dao->iMemberId = session( 'member.iId', 0 );
-        $Dao->vAction = $action;
-        $Dao->iDateTime = time();
-        $Dao->vIP = Request::ip();
-        $Dao->save();
+        $log_login = new LogLogin();
+        $log_login->user_id = $user_id; //session( 'store.iId', 0 );
+        $log_login->user_type = Admin::query()->find($user_id)->type;
+        $log_login->action = $action;
+        $log_login->ip = Request::ip();
+        $log_login->save();
     }
 
     /**

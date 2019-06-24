@@ -25,6 +25,7 @@ class CreateAdminsTable extends Migration
             $table->string('createIP')->comment('註冊的網路位置');
             $table->tinyInteger('active')->comment('啟用')->default( 0 );
             $table->rememberToken();
+            $table->string( 'session_id' )->nullable();
             $table->dateTime('login_time')->comment('最後登入時間')->nullable();
             $table->timestamps();
         });

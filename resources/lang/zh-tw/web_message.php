@@ -24,7 +24,8 @@ return [
             "success" => "成功登入",
             "error_account" => "帳號不存在",
             "error_password" => "密碼錯誤",
-            "error_access" => "帳號權限異常，請聯絡管理員"
+            "error_access" => "帳號權限異常，請聯絡管理員",
+            "error_active" => "帳號被停權"
         ],
     "logout" =>
         [
