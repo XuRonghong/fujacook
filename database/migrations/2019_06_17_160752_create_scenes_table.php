@@ -27,6 +27,7 @@ class CreateScenesTable extends Migration
             $table->string( 'image' )->nullable()->comment('圖片');
             $table->string( 'image_mobile' )->nullable()->comment('手機圖片');
             $table->string( 'url' )->nullable()->comment('連結');
+            $table->string( 'style' )->nullable()->comment('風格樣式');
             $table->dateTime( 'start_time' )->comment('開始時間');
             $table->dateTime( 'end_time' )->comment('結束時間');
             $table->tinyInteger('open')->default( 0 );

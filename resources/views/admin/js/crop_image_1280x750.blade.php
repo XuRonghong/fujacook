@@ -13,6 +13,10 @@
 
 
     /*多圖片*/
+    img {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
     .image-box {
         float: left;
     }

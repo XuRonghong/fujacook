@@ -67,7 +67,7 @@ class AdminTableSeeder extends Seeder
                 "user_contact" => ""
             ],
             [
-                "user_image" => env('APP_URL') . "/images/manager.jpg",
+                "user_image" => env('APP_URL') . "/images/admin.jpg",
                 "user_name" => "Manager",
                 "user_email" => "fujacook@fujacook.com",
                 "user_contact" => ""

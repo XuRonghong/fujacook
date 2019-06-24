@@ -29,14 +29,18 @@
 
     <!-- Master styles -->
     <style type="text/css">
+        /* 新增按鈕 */
         #create_record {
             float: right;
             /*clear: both;*/
             margin-top: -25px;
         }
+        /* 上方列 */
         #main-wrapper[data-layout=vertical] .topbar .navbar-collapse[data-navbarbg=skin1], #main-wrapper[data-layout=vertical] .topbar[data-navbarbg=skin1], #main-wrapper[data-layout=horizontal] .topbar .navbar-collapse[data-navbarbg=skin1], #main-wrapper[data-layout=horizontal] .topbar[data-navbarbg=skin1] {
-            background-color: black;
+            /*background-color: black;*/
+            background-color: #82191d;
         }
+        /* 報表按鈕 */
         .btn {
             margin-left: 5px;
         }

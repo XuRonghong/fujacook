@@ -3,18 +3,34 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
+use App\Repositories\Admin\ScenesRepository;
+use App\Repositories\Repository;
+use App\Scene;
 use Illuminate\Http\Request;
 
 
 class IndexController extends Controller
 {
+    protected $repository;
+
+    function __construct(ScenesRepository $repository)
+    {
+        $this->repository = $repository;
+    }
+
 
     /*
      *
      */
-    function __construct ()
+    function index ()
     {
+        $data = []; //config('app.app_title')
+        //
+        $data['arr'] = Scene::query()->where('type','LIKE', 'home.slider')->first();
+        //
+        $data['arr'] = $this->repository->transFileIdtoImage($data['arr']);
 
+        return view('front.index', compact('data'));
     }
 
 

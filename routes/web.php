@@ -17,16 +17,12 @@ Route::get( 'playgame1', 'IndexController@playGame1');
 Route::post('playgame1', 'IndexController@init');
 
 
-
-Route::get('/', function () {
+Route::get('/welcome', function () {
     return view('welcome');
 });
 
+
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-
 
 //Route::get('login', 'LoginController@index')->name('login.index');
 //Route::post('login/checklogin', 'LoginController@checklogin')->name('login.check');
@@ -35,6 +31,34 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //Route::get('/register', 'LoginController@registerView');
 Route::post('register/check', 'LoginController@registerCheck')->name('register.check');
+
+
+//
+Route::group([
+    'middleware' => ['assign.guard:admin,admin/login'/*,'LoginThrottle:5,10'*/]
+],function() {
+
+    //首頁
+    Route::get('/', 'IndexController@index');
+    Route::get('/home', 'HomeController@index')->name('home');
+
+
+    Route::group([
+        'middleware' => ['admin.checkPermission']       //權限通過
+    ], function () {
+
+        /**********************************************************
+         *
+         *********************************************************/
+        $index = array('url' => 'admins', 'C' => 'AdminsController', 'name' => 'admins');
+        Route::get($index['url'] . '/list', $index['C'] . '@list')->name($index['name'] . '.list');
+        Route::resource($index['url'], $index['C']);
+        Route::post($index['url'] . '/update/{id}', $index['C'] . '@update')->name($index['name'] . '.update');
+        Route::post($index['url'] . '/destroy/{id}', $index['C'] . '@destroy')->name($index['name'] . '.destroy');
+    });
+});
+
+
 
 
 

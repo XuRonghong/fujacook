@@ -70,6 +70,12 @@
                                         <input type="text" name="url" value="{{data_get($data['arr'], 'url')}}" class="form-control url" id="com5" placeholder="">
                                     </div>
                                 </div>
+                                <div class="form-group row">
+                                    <label for="com6" class="col-sm-3 text-right control-label col-form-label">樣式</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" name="style" value="{{data_get($data['arr'], 'style')}}" class="form-control style" id="com6" placeholder="">
+                                    </div>
+                                </div>
 
 {{--                                <div class="form-group row">--}}
 {{--                                    <label for="lname" class="col-sm-3 text-right control-label col-form-label">上傳PDF</label>--}}
