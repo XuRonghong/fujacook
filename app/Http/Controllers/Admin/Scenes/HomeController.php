@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers\Admin\Scenes;
 
-use App\Http\Controllers\FuncController;
 use App\Presenters\Admin\ScenesPresenter;
 use App\Repositories\Admin\ScenesRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
+
 
 class HomeController extends Controller
 {
@@ -20,8 +19,6 @@ class HomeController extends Controller
         $this->repository = $repository;
         $this->presenter = $presenter;
 
-        //
-//        $this->presenter->setRouteName('admin.scenes.home');
         //所有關於route::resource的位置
         $this->route_url = $this->presenter->getRouteResource($this->presenter->setRouteName('admin.scenes.home'));
     }
@@ -82,11 +79,11 @@ class HomeController extends Controller
     public function store(Request $request)
     {
         //
-        $data = $this->repository->validate($request);
+        $this->repository->validate($request);
         //
-        $permissions = $this->repository->create($request->all());
+        $data = $this->repository->create($request->all());
 
-        return $this->presenter->responseJson($permissions['errors'], 'store');
+        return $this->presenter->responseJson($data['errors'], 'store');
     }
 
     /**
@@ -99,8 +96,8 @@ class HomeController extends Controller
     {
         //
         $data = $this->presenter->getParameters('show');
-        //
-        $data['arr'] = $this->repository->findOrFail($id);
+        //若資料庫沒有該id 則404畫面
+        $data['arr'] = $this->repository->findOrFail($id) or abort(404);
         //從資料串裡依據file_id找到image
         $data['arr'] = $this->repository->transFileIdtoImage($data['arr']);
         //to ajax url
@@ -119,8 +116,8 @@ class HomeController extends Controller
     {
         //
         $data = $this->presenter->getParameters('edit');
-        //
-        $data['arr'] = $this->repository->findOrFail($id);
+        //若資料庫沒有該id 則404畫面
+        $data['arr'] = $this->repository->findOrFail($id) or abort(404);
         //從資料串裡依據file_id找到image
         $data['arr'] = $this->repository->transFileIdtoImage($data['arr']);
         //to ajax url
@@ -138,12 +135,12 @@ class HomeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-//        $this->repository->validate($request);
+        // 非單純修改狀態的話，一律驗證資料
+//        if($request->get('open','')!="change") $this->repository->validate($request);
 
-        $permissions = $this->repository->update($request->all(), $id);
+        $data = $this->repository->update($request->all(), $id);
 
-        return $this->presenter->responseJson($permissions['errors'], 'update');
+        return $this->presenter->responseJson($data['errors'], 'update');
     }
 
     /**

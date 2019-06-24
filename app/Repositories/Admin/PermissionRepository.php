@@ -5,6 +5,7 @@ namespace App\Repositories\Admin;
 use App\Permission;
 use App\Repositories\Repository;
 
+
 class PermissionRepository extends Repository
 {
     protected $model;
@@ -31,6 +32,10 @@ class PermissionRepository extends Repository
     public function update($attributes, $id)
     {
         try{
+            $attributes = array_merge($attributes, [
+//                'author_id' => auth()->guard('admin')->user()->id,
+            ]);
+
             return parent::update($attributes, $id);
         } catch (\Exception $e){
             return ['errors'=> $e->getMessage()];

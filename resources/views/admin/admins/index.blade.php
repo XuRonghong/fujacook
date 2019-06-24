@@ -115,9 +115,21 @@
                         // "width": '100px',
                         "mRender": function (data, type, row) {
                             // current_data[row.id] = row;
-                            let btn = '<button class="btn btn-xs btn-show" title="詳情"><i class="fa fa-book" aria-hidden="true"></i></button>';
-                                btn += '<button class="btn btn-xs btn-edit" title="修改"><i class="fa fa-pencil-alt" aria-hidden="true"></i></button>';
-                                btn += '<button class="btn btn-xs btn-del pull-right" title="刪除"><i class="fa fa-trash" aria-hidden="true"></i></button>';
+                            let btn = "無功能";
+                            switch (row.active) {
+                                case 1:
+                                    btn = '<button class="btn btn-xs btn-success btn-open">已啟用</button>';
+                                    break;
+                                case 0:
+                                    btn = '<button class="btn btn-xs btn-primary btn-open">未啟用</button>';
+                                    break;
+                                // default:
+                                //     btn = '<button class="btn btn-xs btn-primary btn-status">未上架</button>';
+                                //     break;
+                            }
+                            btn += '<button class="btn btn-xs btn-show" title="詳情"><i class="fa fa-book" aria-hidden="true"></i></button>';
+                            btn += '<button class="btn btn-xs btn-edit" title="修改"><i class="fa fa-pencil-alt" aria-hidden="true"></i></button>';
+                            btn += '<button class="btn btn-xs btn-del pull-right" title="刪除"><i class="fa fa-trash" aria-hidden="true"></i></button>';
                             $('.waitme').waitMe('hide');
                             return btn;
                         }
@@ -150,6 +162,12 @@
                 location.href = '{{$data['route_url']['create']}}'
             })
 
+            //
+            data_table.on('click', '.btn-open', function () {
+                let id = $(this).closest('tr').attr('id')
+                url = '{{data_get($data['route_url'], "update")}}'.replace('-10', id)
+                ajaxOpen(url, {active: 'change'}, 'POST', table)
+            })
             //
             data_table.on('click', '.btn-show', function () {
                 // var id = $(this).closest('tr').attr('id');

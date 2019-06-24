@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 //use Illuminate\Database\Eloquent\Builder;
+use App\Http\Controllers\FuncController;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -209,11 +210,11 @@ abstract class Repository
     /*
      *
      */
-
     public function validate($request)
     {
         return $this->model->validate($request);
     }
+
 
     public function searchQuery($search_arr=[], $search_word='' )
     {
@@ -223,6 +224,7 @@ abstract class Repository
             }
         });
     }
+
 
     public function getDataTable2($request = null)
     {
@@ -291,5 +293,30 @@ abstract class Repository
             'iTotalRecords'=>$total_count,
             'aaData'=> $total_count ? $data_arr : []
         ];
+    }
+
+
+    //
+
+    /*
+     * table - file_id to find File trans image.
+     */
+    public function transFileIdtoImage($data)
+    {
+        if ( !$data) return $data;
+        //
+        $image_arr = [];
+        $tmp_arr = explode( ';', $data->file_id );
+        $tmp_arr = array_filter( $tmp_arr );
+        foreach ($tmp_arr as $key => $item) {
+            //主要要讓前端編輯器可以正確讀取file id，很重要
+            $image_arr[$item] = FuncController::_getFilePathById( $item );
+        }
+        if ($tmp_arr){
+            $data->image = $image_arr;
+        } else {
+            $data->image = [];
+        }
+        return $data;
     }
 }

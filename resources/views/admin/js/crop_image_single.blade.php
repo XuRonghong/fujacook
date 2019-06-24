@@ -17,4 +17,4 @@
     var current_modal;
     var imagedata = {};
 </script>
-@include('_template_web._js._crop_image_single')
+@include('admin.js._crop_image_single')

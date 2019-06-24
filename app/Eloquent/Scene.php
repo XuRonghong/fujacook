@@ -30,19 +30,47 @@ class Scene extends Model
     public function validate($request)
     {
         $rules = [
-//            'title' => 'required',
-//            'summary' => 'required',
-//            'hashtag_name' => 'required|array',
-//            'startTime' => 'nullable',
-//            'endTime' => 'nullable',
-//            'open' => 'nullable'
+//            'rank',
+//            'category',
+//            'type',
+            'title' => 'required|unique:scenes',
+            'summary' => 'required',
+//            'detail',
+//            'lang' => 'required',
+            'file_id' => 'required',
+//            'image',
+//            'image_mobile',
+//            'url',
+//            'start_time',
+//            'end_time',
+//            'open',
         ];
         $messages = [
-//            'title.required' => '標題為必填項目',
-//            'summary.required' => '概要為必填項目',
-//            'category_id.required' => '商品分類為必填項目',
-//            'hashtag_name.required' => '標籤為必填項目',
+//            'rank',
+//            'category',
+//            'type',
+            'title.required' => '標題為必填項目',
+            'title.unique' => '標題不能重複',
+            'summary.required' => '概要為必填項目',
+//            'detail',
+//            'lang' => 'required',
+            'file_id.required' => '沒有圖片',
+//            'image',
+//            'image_mobile',
+//            'url',
+//            'start_time',
+//            'end_time',
+//            'open',
         ];
         return $request->validate($rules, $messages);
+    }
+
+    public function admin()
+    {
+        return $this->belongsTo(
+            'App\Admin',
+            'author_id',
+            'id'
+        );
     }
 }

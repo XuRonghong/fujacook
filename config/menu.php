@@ -300,7 +300,7 @@ return [
                 "name" => "information.messages",
                 "link" => "admin/messages",
                 "access" => "1,2,11,12",
-                "open" => 1,
+                "open" => 0,
                 "sub_menu" => 0,
             ],
         ]

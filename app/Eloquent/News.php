@@ -16,6 +16,7 @@ class News extends Model
         'title',
         'summary',
         'image',
+        'file_id',
         'url',
         'detail',
         'startTime',
@@ -29,9 +30,9 @@ class News extends Model
             'title' => 'required',
             'summary' => 'required',
 //            'hashtag_name' => 'required|array',
-            'startTime' => 'nullable',
-            'endTime' => 'nullable',
-            'open' => 'nullable'
+//            'startTime' => 'nullable',
+//            'endTime' => 'nullable',
+//            'open' => 'nullable'
         ];
         $messages = [
             'title.required' => '標題為必填項目',

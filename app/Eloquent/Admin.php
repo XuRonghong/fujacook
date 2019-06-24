@@ -59,7 +59,7 @@ class Admin extends Authenticatable
     {
         return $this->belongsToMany(
             'App\Permission'
-//            'admin_permissions',
+//            'admin_permission',
 //            'admin_id',
 //            'id'
         );

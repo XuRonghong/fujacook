@@ -34,7 +34,7 @@ class Permission extends Model
     {
         return $this->belongsToMany(
             'App\Admin'
-//            'admin_permissions',
+//            'admin_permission',
 //            'permission_id',
 //            'id'
         );

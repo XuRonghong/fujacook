@@ -2,10 +2,9 @@
 
 namespace App\Repositories\Admin;
 
-use App\Http\Controllers\FuncController;
-use App\Menu;
 use App\Repositories\Repository;
 use App\Scene;
+
 
 class ScenesRepository extends Repository
 {
@@ -40,9 +39,11 @@ class ScenesRepository extends Repository
             $attributes = array_merge($attributes, [
                 'author_id' => auth()->guard('admin')->user()->id,
             ]);
-            //
-            $scene = Scene::query()->find($id);
-            $attributes['open'] = ($attributes['open']=="change")? !$scene->open : $scene->open;
+            // 啟用 或 不啟用
+            if (isset($attributes['open'])) {
+                $scene = $this->model->find($id);
+                $attributes['open'] = ($attributes['open'] == "change") ? !$scene->open : $scene->open;
+            }
 
             return parent::update($attributes, $id);
         } catch (\Exception $e){
@@ -54,7 +55,6 @@ class ScenesRepository extends Repository
     {
         return parent::delete($id);
     }
-
 
 
     /*
@@ -70,26 +70,4 @@ class ScenesRepository extends Repository
         }
         return $arr;
     }
-
-    /*
-     * table - file_id to find File trans image.
-     */
-    public function transFileIdtoImage($data)
-    {
-        if ( !$data) return $data;
-        //
-        $image_arr = [];
-        $tmp_arr = explode( ';', $data->file_id );
-        $tmp_arr = array_filter( $tmp_arr );
-        foreach ($tmp_arr as $item) {
-            $image_arr[$item] = FuncController::_getFilePathById( $item );
-        }
-        if ($tmp_arr){
-            $data->image = $image_arr;
-        } else {
-            $data->image = [];
-        }
-        return $data;
-    }
-
 }

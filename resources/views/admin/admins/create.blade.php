@@ -1,6 +1,15 @@
 
 @extends('admin.layouts.master')
 
+@section('style')
+    <style>
+        /* 圖片 btn */
+        .btn {
+            margin-left: 10px;
+        }
+    </style>
+@endsection
+
 @section('content')
     <!-- ============================================================== -->
     <!-- Page wrapper  -->
@@ -32,18 +41,18 @@
                         <form id="sample_form" class="form-horizontal">
                             <div class="card-body messageInfo-modal">
                                 <h4 class="card-title"></h4>
-                                <div class="form-group row">
-                                    <label for="com2" class="col-sm-3 text-right control-label col-form-label">目標階層</label>
-                                    <div class="col-sm-9">
-                                        <select class="form-control iHead" id="com2" name="type">
-                                            @if(isset($info))
-                                                <option value="10" @if($info->iHead<20) selected @endif>{{$permission['2'] or ''}}</option>
-                                                <option value="20" @if($info->iHead<30 && $info->iHead>19) selected @endif>1.{{$permission['10'] or ''}}</option>
-                                            @endif
-                                            <option value="3">管理者</option>
-                                        </select>
-                                    </div>
-                                </div>
+{{--                                <div class="form-group row">--}}
+{{--                                    <label for="com2" class="col-sm-3 text-right control-label col-form-label">目標階層</label>--}}
+{{--                                    <div class="col-sm-9">--}}
+{{--                                        <select class="form-control iHead" id="com2" name="type">--}}
+{{--                                            @if(isset($info))--}}
+{{--                                                <option value="10" @if($info->iHead<20) selected @endif>{{$permission['2'] or ''}}</option>--}}
+{{--                                                <option value="20" @if($info->iHead<30 && $info->iHead>19) selected @endif>1.{{$permission['10'] or ''}}</option>--}}
+{{--                                            @endif--}}
+{{--                                            <option value="3">管理者</option>--}}
+{{--                                        </select>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
                                 <div class="form-group row">
                                     <label for="com3" class="col-sm-3 text-right control-label col-form-label">name</label>
                                     <div class="col-sm-9">
@@ -114,42 +123,55 @@
     <!-- Public Crop_Image -->
     @include('admin.js.crop_image')
     <!-- Public SummerNote -->
-    @include('admin.js.summernote')
+    @include('admin.js.summernote2019')
     <!-- end -->
     <script type="text/javascript">
         $(document).ready(function () {
+
             // 只顯示詳情不開啟編輯功能
             let disable = '{{data_get($data, 'Disable')}}'
             if (disable){
                 $('input[type=text],input[type=password]').attr('disabled','disabled')
                 $('form select').attr('disabled','disabled')
-                $('form #detail').summernote('disable');        //編輯器關閉
+                //$('form #detail').summernote('disable');        //編輯器關閉
                 $('form .image-del').css("visibility","hidden");    //刪除區塊隱藏
                 $('form #Image').css("display","none");     //加載圖片關閉
             }
 
-            //
+            // 為了做圖片編輯
+            var modal = $('#manage-modal')
+            current_modal = modal.find('.messageInfo-modal')
+
+            //返回上一頁
             $(".btn-cancel").click(function (e) {
                 e.preventDefault()
                 history.back()
             })
-            //
+
+            //新增模式
             $(".btn-doadd").click(function (e) {
                 e.preventDefault();
-                let self = document.querySelector('#sample_form')
+
+                //寫入資料庫
                 let url = '{{data_get($data['route_url'], "store")}}'
-                let data = new FormData(self)
-                //
+                let self = document.querySelector('#sample_form')
+                //let data = new FormData(self)
+                let data = prop_fromData_fun(self)  //為了放file_id or image
+
                 ajax(url, data, 'POST')
             })
-            //
+
+            //編輯模式
             $(".btn-dosave").click(function (e) {
                 e.preventDefault()
-                let self = document.querySelector('#sample_form')
+
+                //寫入資料庫
                 let id = $(this).data('id')
                 let url = '{{data_get($data['route_url'], "update")}}'.replace('-10', id)  //-10代替字元為id
-                let data = new FormData(self)
-                // data._method = 'PUT'
+                let self = document.querySelector('#sample_form')
+                //let data = new FormData(self)
+                let data = prop_fromData_fun(self)  //為了放file_id or image
+
                 ajax(url, data, 'POST')
             })
         })

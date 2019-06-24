@@ -3,9 +3,8 @@
 namespace App\Repositories\Admin;
 
 use App\Admin;
-use App\Menu;
 use App\Repositories\Repository;
-use Illuminate\Http\Request;
+
 
 class AdminsRepository extends Repository
 {
@@ -19,13 +18,6 @@ class AdminsRepository extends Repository
     public function all($attributes='')
     {
         return $this->model::all();
-    }
-
-    //
-    public function findOrFail($id)
-    {
-//        return $this->model->findOrFail($id);
-        return $this->model->where('no', $id)->first();
     }
 
     public function create($attributes)
@@ -47,11 +39,16 @@ class AdminsRepository extends Repository
     {
         try{
             $attributes = array_merge($attributes, [
-                'no' => 'a'. auth()->guard('admin')->user()->id. time(). rand('00','99'), //以時間當亂數種子
+                //'no' => 'a'. auth()->guard('admin')->user()->id. time(). rand('00','99'), //以時間當亂數種子
                 'createIP' => getUserIpAddr(),
 //                'active' => 1,
 //                'remember_token' =>  str_random(10),
             ]);
+            // 啟用 或 不啟用
+            if (isset($attributes['open'])) {
+                $admin = $this->model->find($id);
+                $attributes['active'] = ($attributes['active'] == "change") ? !$admin->active : $admin->active;
+            }
             return parent::update($attributes, $id);
         } catch (\Exception $e){
             return ['errors'=> $e->getMessage()];
@@ -61,5 +58,30 @@ class AdminsRepository extends Repository
     public function delete($id)
     {
         return parent::delete($id);
+    }
+
+
+    /*
+     * data object or array forEach to do.
+     */
+    public function eachOne_aaData($arr)
+    {
+        if ( $arr['aaData']) {
+            foreach ($arr['aaData'] as $key => $var) {
+                //
+                $var->Title = trans('menu.'. $var->name. '.title');
+                //找圖片檔案
+//                $var = $this->transFileIdtoImage($var);
+            }
+        }
+        return $arr;
+    }
+
+
+    //
+    public function findOrFail($id)
+    {
+//        return $this->model->findOrFail($id);
+        return $this->model->where('no', $id)->first();
     }
 }

@@ -3,6 +3,7 @@
 
 @section('style')
     <style>
+        /* 圖片 btn */
         .btn {
             margin-left: 10px;
         }
@@ -52,13 +53,13 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="com3" class="col-sm-3 text-right control-label col-form-label">標頭</label>
+                                    <label for="com3" class="col-sm-3 text-right control-label col-form-label">標頭<span style="color:red">*</span></label>
                                     <div class="col-sm-9">
                                         <input type="text" name="title" value="{{data_get($data['arr'], 'title')}}" id="com3" class="form-control title" placeholder="">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="com4" class="col-sm-3 text-right control-label col-form-label">概要</label>
+                                    <label for="com4" class="col-sm-3 text-right control-label col-form-label">概要<span style="color:red">*</span></label>
                                     <div class="col-sm-9">
                                         <input type="text" name="summary" value="{{data_get($data['arr'], 'summary')}}" id="com4" class="form-control summary" placeholder="">
                                     </div>
@@ -77,17 +78,8 @@
 {{--                                    </div>--}}
 {{--                                </div>--}}
 
-{{--                                <div class="form-group row">--}}
-{{--                                    <label for="img1" class="col-sm-3 text-right control-label col-form-label">圖片</label>--}}
-{{--                                    <div class="col-sm-9">--}}
-{{--                                        <a class="btn-image-modal" data-modal="image-form" data-id="">--}}
-{{--                                            <img src="{{data_get($data['arr'], 'image', url('images/empty.jpg'))}}" style="height:140px" alt="">--}}
-{{--                                        </a>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-
                                 <div class="form-group row">
-                                    <label for="img2" class="col-sm-3 text-right control-label col-form-label">圖片s</label>
+                                    <label for="img2" class="col-sm-3 text-right control-label col-form-label">圖片s<span style="color:red">*</span></label>
                                     <div class="col-sm-9 cropper_image">
                                     @if(isset($data['arr']['image']))
                                         @foreach(data_get( $data['arr'], 'image', []) as $key => $var)
@@ -98,7 +90,7 @@
                                         @endforeach
                                         <a class="btn-image-modal" data-modal="image-form" data-id="">
                                             @if(count(data_get( $data['arr'], 'image', [])) < 5)
-                                                <img id="Image" data-data="" src="{{array_get( $data['arr'], 'image.0', url('images/empty.jpg'))}}" style="height:140px">
+                                                <img id="Image" data-data="" src="{{url('images/addimg.jpg')}}" style="height:140px">
                                             @endif
                                         </a>
                                     @else
@@ -149,7 +141,7 @@
 
 @section('inline-js')
     <!-- Public Crop_Image -->
-    @include('admin.js.crop_image')
+    @include('admin.js.crop_image_1280x750')
     <!-- Public SummerNote -->
     @include('admin.js.summernote2019')
     <!-- end -->
@@ -200,7 +192,7 @@
             let id = $(this).data('id')
             let url = '{{data_get($data['route_url'], "update")}}'.replace('-10', id)  //-10代替字元為id
             let self = document.querySelector('#sample_form')
-            let data = put_fromData_fun(self)
+            let data = prop_fromData_fun(self)
 
             ajax(url, data, 'POST')
         })

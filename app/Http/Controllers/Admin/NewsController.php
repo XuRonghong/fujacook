@@ -7,11 +7,11 @@ use App\Repositories\Admin\NewsRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+
 class NewsController extends Controller
 {
     protected $repository;
     protected $presenter;
-    protected $view_group_name = 'news';
     protected $route_url;
 
     public function __construct(NewsRepository $repository, NewsPresenter $presenter)
@@ -19,7 +19,8 @@ class NewsController extends Controller
         $this->repository = $repository;
         $this->presenter = $presenter;
 
-        $this->route_url = $this->presenter->getRouteResource('admin.news');    //所有關於route::resource的位置
+        //所有關於route::resource的位置
+        $this->route_url = $this->presenter->getRouteResource($this->presenter->setRouteName('admin.news'));
     }
 
     /**
@@ -34,7 +35,7 @@ class NewsController extends Controller
         //to ajax url
         $data['route_url'] = $this->route_url;
 
-        return view('admin.'.$this->view_group_name.'.index', compact('data'));
+        return view('admin.'.$this->presenter->getViewName().'.index', compact('data'));
     }
 
     /* ajax datatable */
@@ -44,6 +45,8 @@ class NewsController extends Controller
         if(request()->ajax())
         {
             $data = $this->repository->getDataTable($request);
+
+            //$data = $this->repository->eachOne_aaData($data);     //每一項目要做甚麼事,有需要在使用
 
             return response()->json($data,200);
         }
@@ -64,7 +67,7 @@ class NewsController extends Controller
         //to ajax url
         $data['route_url'] = $this->route_url;
 
-        return view('admin.'.$this->view_group_name.'.create', compact('data'));
+        return view('admin.'.$this->presenter->getViewName().'.create', compact('data'));
     }
 
     /**
@@ -76,11 +79,11 @@ class NewsController extends Controller
     public function store(Request $request)
     {
         //
-        $data = $this->repository->validate($request);
+        $this->repository->validate($request);
         //
-        $permissions = $this->repository->create($request->all());
+        $data = $this->repository->create($request->all());
 
-        return $this->presenter->responseJson($permissions['errors'], 'store');
+        return $this->presenter->responseJson($data['errors'], 'store');
     }
 
     /**
@@ -93,12 +96,14 @@ class NewsController extends Controller
     {
         //
         $data = $this->presenter->getParameters('show');
-        //
-        $data['arr'] = $this->repository->findOrFail($id);
+        //若資料庫沒有該id 則404畫面
+        $data['arr'] = $this->repository->findOrFail($id) or abort(404);
+        //從資料串裡依據file_id找到image
+        $data['arr'] = $this->repository->transFileIdtoImage($data['arr']);
         //to ajax url
         $data['route_url'] = $this->route_url;
 
-        return view('admin.'.$this->view_group_name.'.create', compact('data'));
+        return view('admin.'.$this->presenter->getViewName().'.create', compact('data'));
     }
 
     /**
@@ -111,12 +116,14 @@ class NewsController extends Controller
     {
         //
         $data = $this->presenter->getParameters('edit');
-        //
-        $data['arr'] = $this->repository->findOrFail($id);
+        //若資料庫沒有該id 則404畫面
+        $data['arr'] = $this->repository->findOrFail($id) or abort(404);
+        //從資料串裡依據file_id找到image
+        $data['arr'] = $this->repository->transFileIdtoImage($data['arr']);
         //to ajax url
         $data['route_url'] = $this->route_url;
 
-        return view('admin.'.$this->view_group_name.'.create', compact('data'));
+        return view('admin.'.$this->presenter->getViewName().'.create', compact('data'));
     }
 
     /**
@@ -128,12 +135,12 @@ class NewsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-        $this->repository->validate($request);
+        // 非單純修改狀態的話，一律驗證資料
+        if($request->get('open','')!="change") $this->repository->validate($request);
 
-        $permissions = $this->repository->update($request->all(), $id);
+        $data = $this->repository->update($request->all(), $id);
 
-        return $this->presenter->responseJson($permissions['errors'], 'update');
+        return $this->presenter->responseJson($data['errors'], 'update');
     }
 
     /**

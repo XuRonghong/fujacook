@@ -1,6 +1,15 @@
 
 @extends('admin.layouts.master')
 
+@section('style')
+    <style>
+        /* 圖片 btn */
+        .btn {
+            margin-left: 10px;
+        }
+    </style>
+@endsection
+
 @section('content')
     <!-- ============================================================== -->
     <!-- Page wrapper  -->
@@ -82,14 +91,23 @@
                                 {{--<input type="text" class="form-control vDetail" id="com5" placeholder="" value="{{ $info->vDetail or ''}}">--}}
                                 {{--</div>--}}
                                 {{--</div>--}}
-                                {{--<div class="form-group row">--}}
-                                    {{--<label for="img1" class="col-sm-3 text-right control-label col-form-label">圖片</label>--}}
-                                    {{--<div class="col-sm-9">--}}
-                                        {{--<a class="btn-image-modal" data-modal="image-form" data-id="">--}}
-                                            {{--<img src="{{$info->vImages or url('images/empty.jpg')}}" style="height:140px">--}}
-                                        {{--</a>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
+                                <div class="form-group row">
+                                    <label for="img1" class="col-sm-3 text-right control-label col-form-label">圖片</label>
+                                    <div class="col-sm-9">
+                                        <a class="btn-image-modal" data-modal="image-form" data-id="">
+                                            @forelse(data_get( $data['arr'], 'image', []) as $key => $var)
+                                                <img id="{{$key}}" src="{{$var or ''}}" style="height:140px" alt="">
+                                            @empty
+                                                <img src="{{url('images/empty.jpg')}}" style="height:140px" alt="">
+                                            @endforelse
+                                        </a>
+                                        @forelse(data_get( $data['arr'], 'image', []) as $key => $var)
+                                            <img id="img1" src="{{$var or ''}}" style="height:140px" alt="">
+                                        @empty
+                                            <img id="img1" src="{{url('images/empty.jpg')}}" style="height:140px" alt="">
+                                        @endforelse
+                                    </div>
+                                </div>
                             </div>
                             <hr>
                             <div class="card-body">
@@ -126,38 +144,70 @@
 <!-- ================== inline-js ================== -->
 @section('inline-js')
     <!-- Public Crop_Image -->
-    @include('admin.js.crop_image')
+    @include('admin.js.crop_image_single')
     <!-- Public SummerNote -->
-    @include('admin.js.summernote')
+    @include('admin.js.summernote2019')
     <!-- end -->
     <script type="text/javascript">
         $(document).ready(function () {
-            //
-            let disable = '{{data_get($data, 'Disable')}}'
-            if (disable) $('input[type=text]').attr('disabled','disabled')
 
-            //
+            // 只顯示詳情不開啟編輯功能
+            let disable = '{{data_get($data, 'Disable')}}'
+            if (disable){
+                $('input[type=text]').attr('disabled','disabled')
+                $('form select').attr('disabled','disabled')
+                $('form #detail').summernote('disable');        //編輯器關閉
+                $('form .image-del').css("visibility","hidden");    //刪除區塊隱藏
+                $('form #Image').css("display","none");     //加載圖片關閉
+                //唯讀
+                $('form .btn-image-modal').hide()
+            } else { $('#img1').hide() }
+
+
+            // 為了做圖片編輯
+            var modal = $('#manage-modal')
+            current_modal = modal.find('.messageInfo-modal')
+
+            //文字編輯器
+            do_textarea_summernote_fun( $('#detail'))
+            // do_textarea_summernote_fun( $('#detail'))
+
+            //返回上一頁
             $(".btn-cancel").click(function (e) {
                 e.preventDefault()
                 history.back()
             })
-            //
+
+            //新增模式
             $(".btn-doadd").click(function (e) {
                 e.preventDefault();
-                let self = document.querySelector('#sample_form')
+
+                //寫入資料庫
                 let url = '{{data_get($data['route_url'], "store")}}'
+                let self = document.querySelector('#sample_form')
                 let data = new FormData(self)
-                //
+                // let data = prop_fromData_fun(self)
+
+                /*** 上傳檔案資料庫，需要再呼叫，回傳file id ***/
+                data.append('file_id', current_modal.find("img").attr('id'))
+
                 ajax(url, data, 'POST')
             })
-            //
+
+            //編輯模式
             $(".btn-dosave").click(function (e) {
                 e.preventDefault()
-                let self = document.querySelector('#sample_form')
+
+                //寫入資料庫
                 let id = $(this).data('id')
                 let url = '{{data_get($data['route_url'], "update")}}'.replace('-10', id)  //-10代替字元為id
+                let self = document.querySelector('#sample_form')
                 let data = new FormData(self)
-                // data._method = 'PUT'
+                // let data = prop_fromData_fun(self)
+
+                /*** 上傳檔案資料庫，需要再呼叫，回傳file id ***/
+                data.append('file_id', current_modal.find("img").attr('id'))
+
                 ajax(url, data, 'POST')
             })
         })

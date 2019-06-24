@@ -7,7 +7,7 @@
     }
 
     .img-preview-sm {
-        width: 150px;
+        width: 256px;
         height: 150px;
     }
 
@@ -81,12 +81,12 @@ $(document).ready(function() {
 
     let $image = $(".image-crop > img");
     $($image).cropper({
-        aspectRatio: 1,
-        //aspectRatio: 3.097,
+        // aspectRatio: 1,
+        aspectRatio: 1.707,
         preview: ".img-preview",
         data: {
-            width: 800,
-            height: 800
+            width: 1280,
+            height: 750
         },
         done: function(data) {
             // Output the result data for cropping image.
