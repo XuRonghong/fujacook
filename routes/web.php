@@ -35,7 +35,7 @@ Route::post('register/check', 'LoginController@registerCheck')->name('register.c
 
 //
 Route::group([
-    'middleware' => ['assign.guard:admin,admin/login'/*,'LoginThrottle:5,10'*/]
+    //'middleware' => ['assign.guard:admin,admin/login'/*,'LoginThrottle:5,10'*/]
 ],function() {
 
     //首頁
