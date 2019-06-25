@@ -131,8 +131,16 @@ Route::group([
         Route::resource($index['url'], $index['C']);
         Route::post($index['url'].'/update/{id}', $index['C'].'@update')->name($index['name'].'.update');
         Route::post($index['url'].'/destroy/{id}', $index['C'].'@destroy')->name($index['name'].'.destroy');
-
-
+            /******* 管理者選項 ********/
+            $index = array('url'=>'menu/admin_menu', 'C'=>'AdminMenuController', 'name'=>'admin_menu');
+            Route::get( $index['url'].'/list',   $index['C'].'@list')->name($index['name'].'.list');
+            Route::get( $index['url'],           $index['C'].'@index')->name($index['name'].'.index');
+            Route::get( $index['url'].'/create', $index['C'].'@create')->name($index['name'].'.create');
+            Route::post($index['url'],           $index['C'].'@store')->name($index['name'].'.store');
+            Route::get( $index['url'].'/{id}',   $index['C'].'@show')->name($index['name'].'.show');
+            Route::get( $index['url'].'/{id}'.'/edit', $index['C'].'@edit')->name($index['name'].'.edit');
+            Route::post($index['url'].'/update/{id}',  $index['C'].'@update')->name($index['name'].'.update');
+            Route::post($index['url'].'/destroy/{id}', $index['C'].'@destroy')->name($index['name'].'.destroy');
 
 
         /**********************************************************

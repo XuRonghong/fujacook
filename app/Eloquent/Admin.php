@@ -64,4 +64,14 @@ class Admin extends Authenticatable
 //            'id'
         );
     }
+
+    public function menu()
+    {
+        return $this->belongsToMany(
+            'App\Menu'
+//            'admin_menu',
+//            'admin_id',
+//            'id'
+        );
+    }
 }

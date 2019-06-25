@@ -38,7 +38,7 @@ class AdminTableSeeder extends Seeder
             'name'    => 'fujacook',
             'email'    => 'fujacook@fujacook.com',
             'account'   => 'fujacook',
-            'password'   =>  Hash::make('123123'),
+            'password'   =>  Hash::make('fujacook'),
             'createIP'  => env('APP_URL', '127.0.0.1'),
             'remember_token' =>  str_random(10),
             'active'    =>  1

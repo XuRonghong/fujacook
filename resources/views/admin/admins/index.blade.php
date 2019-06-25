@@ -183,7 +183,7 @@
             //
             data_table.on('click', '.btn-del', function () {
                 var id = $(this).closest('tr').attr('id');
-                let url = '{{$data['route_url']['destroy']}}'+'/'+id
+                let url = '{{$data['route_url']['destroy']}}'.replace('-10', id)  //-10代替字元為id
                 let data = {
                     "_token": "{{ csrf_token() }}"
                 };

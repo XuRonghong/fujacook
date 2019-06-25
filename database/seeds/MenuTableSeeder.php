@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 use App\Menu;
+use App\AdminMenu;
 
 class MenuTableSeeder extends Seeder
 {
@@ -64,6 +65,22 @@ class MenuTableSeeder extends Seeder
                     }
                 }
             }
+        }
+
+
+        /******* Role **********/
+//        Role::create(['name' => 'role.1', 'description' => '系統管理者']);
+//        Role::create(['name' => 'role.2', 'description' => '會計']);
+//        Role::create(['name' => 'role.3', 'description' => '業務']);
+//        Role::create(['name' => 'role.4', 'description' => '供應商']);
+//        Role::create(['name' => 'role.5', 'description' => '操作員']);
+
+        AdminMenu::truncate();
+        $menus = Menu::query()->where('open', '<>', 0)->get();
+        foreach ($menus as $menu){
+            AdminMenu::query()->create(['menu_id' => $menu['id'], 'admin_id'  => 1]);
+            AdminMenu::query()->create(['menu_id' => $menu['id'], 'admin_id'  => 2]);
+            AdminMenu::query()->create(['menu_id' => $menu['id'], 'admin_id'  => 3]);
         }
     }
 }

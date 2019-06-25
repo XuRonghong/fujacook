@@ -18,6 +18,7 @@ return [
 		],
 		"not_work" => "功能尚未開放",
 		"notice" => "提示訊息",
+        "error" => "錯誤訊息",
 		'ok' => '確認',
 		"register" => [ 
 				"repassword_err" => "確認密碼與密碼不符" 

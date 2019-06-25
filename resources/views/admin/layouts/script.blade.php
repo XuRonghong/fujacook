@@ -82,7 +82,10 @@
             },
             error: function (err) {
                 console.log(err.responseJSON)
-                Swal.fire("{{trans('web_alert.notice')}}", JSON.stringify(err.responseJSON), "error");
+                Swal.fire("{{trans('web_alert.error')}}"+err.status,
+                    JSON.stringify(err.responseJSON.message)+"<br>"+
+                    JSON.stringify(err.responseJSON.errors),
+                    "error");
             }
         })
     }
@@ -179,7 +182,7 @@
                     },
                     error: function (err) {
                         console.log(err.responseJSON)
-                        Swal.fire("{{trans('web_alert.notice')}}", JSON.stringify(err.responseJSON), "error");
+                        Swal.fire("{{trans('web_alert.error')}}", JSON.stringify(err.responseJSON.message), "error");
                     }
                 })
             }

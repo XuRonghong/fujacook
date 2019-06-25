@@ -127,8 +127,8 @@ class LoginController extends Controller
             $remember = ($request->filled('remember')) ? true : false;
             //記得我
             if ($remember) {
-                setcookie('admin_us', $request->input('account'), time()+60*60);
-                setcookie('admin_pw', $request->input('password'), time()+60*60);
+                setcookie('admin_us', $request->input('account'), time()+60*60*24);
+                setcookie('admin_pw', $request->input('password'), time()+60*60*24);
             } else {
                 setcookie('admin_us', '', time()+1);
                 setcookie('admin_pw', '', time()+1);

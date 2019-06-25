@@ -82,6 +82,28 @@ return [
             'menu' =>
                 [
                     'title' => '選項管理',
+                    'list' => [
+                        'title' => '選項列表',
+                        'add' =>
+                            [
+                                'title' => '新增'
+                            ],
+                        'edit' =>
+                            [
+                                'title' => '編輯'
+                            ]
+                    ],
+                    'admin_menu' => [
+                        'title' => '管理者選項',
+                        'add' =>
+                            [
+                                'title' => '新增'
+                            ],
+                        'edit' =>
+                            [
+                                'title' => '編輯'
+                            ]
+                    ],
                 ],
             'group' =>
                 [

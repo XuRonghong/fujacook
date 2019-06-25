@@ -4,9 +4,39 @@ namespace App\Presenters\Admin;
 
 use App\Menu;
 use App\Permission;
+use DB;
 
 abstract class Presenter
 {
+
+    public function setTitle($title)
+    {
+        return $this->title = $title;
+    }
+
+    public function setViewName($name)
+    {
+        return $this->view_group_name = $name;
+    }
+
+    public function setRouteName($name)
+    {
+        $this->route_name = $name;
+        $this->gotoUrl = route($this->route_name.'.index');
+        return $this->route_name;
+    }
+
+    public function getViewName()
+    {
+        return $this->view_group_name;
+    }
+
+    public function getRouteName()
+    {
+        return $this->route_name;
+    }
+
+
     public function getRouteResource($route_name = '')
     {
         return [
@@ -17,7 +47,8 @@ abstract class Presenter
             'edit'  => route($route_name.'.index'),
 //            'update' => url(str_replace('.','/',$route_name), [1]),
             'update' => route($route_name.'.update', [-10]),    //-10暫定代替字元
-            'destroy' => url(str_replace('.','/',$route_name).'/destroy'),
+//            'destroy' => url(str_replace('.','/',$route_name).'/destroy'),
+            'destroy' => route($route_name.'.destroy', [-10]),
             'show' => route($route_name.'.index'),
         ];
     }
@@ -97,7 +128,15 @@ abstract class Presenter
 //        session()->put( 'menu_parent', config( '_menu.' . $this->func . '.menu_parent' ) );
 //        session()->put( 'menu_access', config( '_menu.' . $this->func . '.menu_access' ) );
         $mapSysMenu ['open'] = 1;
-        $DaoSysMenu = Menu::query()->where( $mapSysMenu )->orderBy( 'rank', 'ASC' )->get();
+        $DaoSysMenu = Menu::query()->where( $mapSysMenu )
+            ->whereExists(function($query)
+            {
+                $query->select(DB::raw(1))
+                    ->from('admin_menu')
+                    ->whereRaw('admin_menu.menu_id = menus.id')
+                    ->whereRaw('admin_id = '.auth()->guard('admin')->user()->id);
+            })
+            ->orderBy( 'rank', 'ASC' )->get();
         $sys_menu = $DaoSysMenu->where('parent_id', '=', 0);
         foreach ($sys_menu as $key => $var) {
             if ($var->sub_menu) {

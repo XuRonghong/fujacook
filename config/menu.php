@@ -78,10 +78,32 @@ return [
                 "id" => 19,
                 "parent_id" => 1,
                 "name" => "admin.menu",
-                "link" => "admin/menus",
+                "link" => "",
                 "access" => "1,2",
                 "open" => 1,
-                "sub_menu" => 0,
+                "sub_menu" => 1,
+                "child" => [
+                    [
+                        //選項列表
+                        "id" => 191,
+                        "parent_id" => 19,
+                        "name" => "admin.menu.list",
+                        "link" => 'admin/menus',
+                        "access" => "1,2",
+                        "open" => 1,
+                        "sub_menu" => 0,
+                    ],
+                    [
+                        //管理者選項
+                        "id" => 192,
+                        "parent_id" => 19,
+                        "name" => "admin.menu.admin_menu",
+                        "link" => 'admin/menu/admin_menu',
+                        "access" => "1,2",
+                        "open" => 1,
+                        "sub_menu" => 0,
+                    ],
+                ]
             ],
             [
                 //群組管理

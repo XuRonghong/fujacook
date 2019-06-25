@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Admin;
 
+use App\AdminMenu;
 use App\Menu;
 use App\Repositories\Repository;
 
@@ -12,6 +13,11 @@ class MenuRepository extends Repository
     public function __construct(Menu $model)
     {
         $this->model = $model;
+    }
+
+    public function setModel_AdminMenu()
+    {
+        $this->model = new AdminMenu;
     }
 
     public function all($attributes='')

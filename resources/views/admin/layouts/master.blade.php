@@ -44,6 +44,10 @@
         .btn {
             margin-left: 5px;
         }
+        /* Swal.fire({}) */
+        .swal2-modal {
+            width: auto !important;
+        }
     </style>
 
     @yield('style')

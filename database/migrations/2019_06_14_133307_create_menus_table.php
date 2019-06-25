@@ -25,6 +25,21 @@ class CreateMenusTable extends Migration
             $table->tinyInteger('open')->common('開放')->default(1);
             $table->timestamps();
         });
+
+        Schema::create('admin_menu', function (Blueprint $table) {
+            $table->increments('id')->comment('流水編號');
+            $table->unsignedInteger('admin_id')->comment('對應admin.id');
+            $table->unsignedInteger('menu_id')->comment('對應menus.id');
+            $table->timestamps();
+
+//            $table->morphs('model');
+
+//            $table->foreign('permission_id')
+//                ->references('id')
+//                ->on($table_names['permissions'])
+//                ->onDelete('cascade');
+
+        });
     }
 
     /**
@@ -34,6 +49,7 @@ class CreateMenusTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('admin_menu');
         Schema::dropIfExists('menus');
     }
 }
