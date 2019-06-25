@@ -85,36 +85,54 @@
 {{--                                </div>--}}
 
                                 <div class="form-group row">
-                                    <label for="img2" class="col-sm-3 text-right control-label col-form-label">圖片s<span style="color:red">*</span></label>
-                                    <div class="col-sm-9 cropper_image">
-                                    @if(isset($data['arr']['image']))
-                                        @foreach(data_get( $data['arr'], 'image', []) as $key => $var)
-                                            <div class="image-box">
-                                                <img id="{{$key}}" src="{{$var or ''}}">
-                                                <a class="image-del">X</a>
-                                            </div>
-                                        @endforeach
+                                    <label for="img1" class="col-sm-3 text-right control-label col-form-label">圖片</label>
+                                    <div class="col-sm-9">
                                         <a class="btn-image-modal" data-modal="image-form" data-id="">
-                                            @if(count(data_get( $data['arr'], 'image', [])) < 5)
-                                                <img id="Image" data-data="" src="{{url('images/addimg.jpg')}}" style="height:140px">
-                                            @endif
+                                            @forelse(data_get( $data['arr'], 'image', []) as $key => $var)
+                                                <img id="{{$key}}" src="{{$var or ''}}" style="height:140px" alt="">
+                                            @empty
+                                                <img src="{{url('images/empty.jpg')}}" style="height:140px" alt="">
+                                            @endforelse
                                         </a>
-                                    @else
-                                        <a class="btn-image-modal" data-modal="image-form" data-id="">
-                                            <img id="Image" data-data="" src="{{url('images/empty.jpg')}}" style="height:140px">
-                                        </a>
-                                    @endif
+                                        @forelse(data_get( $data['arr'], 'image', []) as $key => $var)
+                                            <img id="img1" src="{{$var or ''}}" style="height:140px" alt="">
+                                        @empty
+                                            <img id="img1" src="{{url('images/empty.jpg')}}" style="height:140px" alt="">
+                                        @endforelse
                                     </div>
                                 </div>
 
-                                <div class="form-group row">
-                                    <label for="detail" class="col-sm-3 text-right control-label col-form-label">內容</label>
-                                    <div class="col-sm-9 note-editable">
-                                        <textarea id="detail" name="detail">
-                                            {!! data_get($data['arr'], 'detail') !!}
-                                        </textarea>
-                                    </div>
-                                </div>
+{{--                                <div class="form-group row">--}}
+{{--                                    <label for="img2" class="col-sm-3 text-right control-label col-form-label">圖片s<span style="color:red">*</span></label>--}}
+{{--                                    <div class="col-sm-9 cropper_image">--}}
+{{--                                    @if(isset($data['arr']['image']))--}}
+{{--                                        @foreach(data_get( $data['arr'], 'image', []) as $key => $var)--}}
+{{--                                            <div class="image-box">--}}
+{{--                                                <img id="{{$key}}" src="{{$var or ''}}">--}}
+{{--                                                <a class="image-del">X</a>--}}
+{{--                                            </div>--}}
+{{--                                        @endforeach--}}
+{{--                                        <a class="btn-image-modal" data-modal="image-form" data-id="">--}}
+{{--                                            @if(count(data_get( $data['arr'], 'image', [])) < 5)--}}
+{{--                                                <img id="Image" data-data="" src="{{url('images/addimg.jpg')}}" style="height:140px">--}}
+{{--                                            @endif--}}
+{{--                                        </a>--}}
+{{--                                    @else--}}
+{{--                                        <a class="btn-image-modal" data-modal="image-form" data-id="">--}}
+{{--                                            <img id="Image" data-data="" src="{{url('images/empty.jpg')}}" style="height:140px">--}}
+{{--                                        </a>--}}
+{{--                                    @endif--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+
+{{--                                <div class="form-group row">--}}
+{{--                                    <label for="detail" class="col-sm-3 text-right control-label col-form-label">內容</label>--}}
+{{--                                    <div class="col-sm-9 note-editable">--}}
+{{--                                        <textarea id="detail" name="detail">--}}
+{{--                                            {!! data_get($data['arr'], 'detail') !!}--}}
+{{--                                        </textarea>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
                             </div>
                             <hr>
                             <div class="card-body">
@@ -147,7 +165,7 @@
 
 @section('inline-js')
     <!-- Public Crop_Image -->
-    @include('admin.js.crop_image_1280x750')
+    @include('admin.js.crop_image_single_1280x750')
     <!-- Public SummerNote -->
     @include('admin.js.summernote2019')
     <!-- end -->
@@ -162,7 +180,9 @@
             $('form #detail').summernote('disable');        //編輯器關閉
             $('form .image-del').css("visibility","hidden");    //刪除區塊隱藏
             $('form #Image').css("display","none");     //加載圖片關閉
-        }
+            //唯讀
+            $('form .btn-image-modal').hide()
+        } else { $('#img1').hide() }
 
         // 為了做圖片編輯
         var modal = $('#manage-modal')

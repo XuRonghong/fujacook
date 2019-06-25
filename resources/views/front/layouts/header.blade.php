@@ -5,11 +5,11 @@
         <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                 <?php $i=1; ?>
-                @forelse(data_get($data['arr'], 'image', []) as $key => $var)
+                @forelse(data_get($data['arr'], 'aaData', []) as $key => $var)
                 <div class="carousel-item <?php if ($i==1){ ?> active <?php } ?>">
                     <div class="w100-bg type{{$i}}">
 {{--                        <img src="{{asset('/web0617/img/slide01.jpg')}}" alt="...">--}}
-                        <img src="{{$var or ''}}" alt="">
+                        <img src="{{asset( array_first($var->image) )}}" alt="">
                     </div>
                 </div>
                     <?php $i++; ?>

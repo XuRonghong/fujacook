@@ -26,9 +26,12 @@ class IndexController extends Controller
     {
         $data = []; //config('app.app_title')
         //
-        $data['arr'] = Scene::query()->where('type','LIKE', 'home.slider')->first();
+        $map['open'] = 1;
+        $data['arr']['aaData'] = Scene::query()->where($map)
+            ->where('type','LIKE', 'home.slider')
+            ->get();
         //
-        $data['arr'] = $this->repository->transFileIdtoImage($data['arr']);
+        $data['arr'] = $this->repository->eachOne_aaData($data['arr']);
 
         return view('front.index', compact('data'));
     }

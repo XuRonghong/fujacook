@@ -242,6 +242,26 @@
         /*** 上傳檔案資料庫，需要再呼叫，回傳file id ***/
         // let file_id = do_upload_file_fun();
 
+        form_data.append('file_id', current_modal.find("img").attr('id'))
+
+        //撈取html content
+        // let detail = $('#detail').summernote('code')
+
+        //假如還有資料就填充上去
+        for (let key in datas) {
+            form_data.append(key, datas[key])
+        }
+
+        return form_data
+    }
+
+    function prop_fromData_multpleFile(formHTML, datas=[])
+    {
+        let form_data = new FormData(formHTML)
+
+        /*** 上傳檔案資料庫，需要再呼叫，回傳file id ***/
+        // let file_id = do_upload_file_fun();
+
         /*** 多圖片串連 ***/
         let images = ""
         $(".cropper_image").find('img').each(function () {
@@ -249,9 +269,9 @@
                 images = images + $(this).attr('id') + ";"
             }
         });
-        // data.append('file_id', file_id)
-        // data.append('file_id', current_modal.find("img").attr('id'))
-        // data.append('image', current_modal.find("img").attr('src'))
+        // form_data.append('file_id', file_id)
+        // form_data.append('file_id', current_modal.find("img").attr('id'))
+        // form_data.append('image', current_modal.find("img").attr('src'))
         form_data.append('file_id', images)
 
         //撈取html content

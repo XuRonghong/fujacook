@@ -185,11 +185,7 @@
                 //寫入資料庫
                 let url = '{{data_get($data['route_url'], "store")}}'
                 let self = document.querySelector('#sample_form')
-                let data = new FormData(self)
-                // let data = prop_fromData_fun(self)
-
-                /*** 上傳檔案資料庫，需要再呼叫，回傳file id ***/
-                data.append('file_id', current_modal.find("img").attr('id'))
+                let data = prop_fromData_fun(self)
 
                 ajax(url, data, 'POST')
             })
@@ -202,11 +198,7 @@
                 let id = $(this).data('id')
                 let url = '{{data_get($data['route_url'], "update")}}'.replace('-10', id)  //-10代替字元為id
                 let self = document.querySelector('#sample_form')
-                let data = new FormData(self)
-                // let data = prop_fromData_fun(self)
-
-                /*** 上傳檔案資料庫，需要再呼叫，回傳file id ***/
-                data.append('file_id', current_modal.find("img").attr('id'))
+                let data = prop_fromData_fun(self)
 
                 ajax(url, data, 'POST')
             })
