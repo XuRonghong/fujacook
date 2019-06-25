@@ -46,9 +46,9 @@
                                     <div class="col-sm-9">
                                         <select class="form-control type" id="com2" name="type">
                                             <option value="home.slider">首頁輪播圖</option>
-                                            <option value="home.header">首頁上方圖</option>
-                                            <option value="home.advertising">首頁廣告圖</option>
-                                            <option value="home.footer">首頁下方圖</option>
+{{--                                            <option value="home.header">首頁上方圖</option>--}}
+{{--                                            <option value="home.advertising">首頁廣告圖</option>--}}
+{{--                                            <option value="home.footer">首頁下方圖</option>--}}
                                         </select>
                                     </div>
                                 </div>
