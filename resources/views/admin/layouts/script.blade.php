@@ -78,6 +78,7 @@
                     }, 500)
                 } else {
                     toastr.error(data.message, "{{trans('web_alert.notice')}}").css("width","360px")
+                    Swal.fire("{{trans('web_alert.error')}}", JSON.stringify(data.errors), "error");
                 }
             },
             error: function (err) {
@@ -109,11 +110,15 @@
                     // }, 100);
                 } else {
                     toastr.error(data.message, "{{trans('web_alert.notice')}}").css("width","360px")
+                    Swal.fire("{{trans('web_alert.error')}}", JSON.stringify(data.errors), "error");
                 }
             },
             error: function (err) {
                 console.log(err.responseJSON)
-                Swal.fire("{{trans('web_alert.notice')}}", JSON.stringify(err.responseJSON), "error");
+                Swal.fire("{{trans('web_alert.error')}}"+err.status,
+                    JSON.stringify(err.responseJSON.message)+"<br>"+
+                    JSON.stringify(err.responseJSON.errors),
+                    "error");
             }
         })
     }
@@ -134,6 +139,7 @@
                     file_id = data.fileid;
                 } else {
                     toastr.error(data.message, "{{trans('web_alert.notice')}}").css("width","360px")
+                    Swal.fire("{{trans('web_alert.error')}}"+data.status, JSON.stringify(data.errors), "error");
                 }
             },
             error: function (err) {
@@ -242,7 +248,9 @@
         /*** 上傳檔案資料庫，需要再呼叫，回傳file id ***/
         // let file_id = do_upload_file_fun();
 
-        form_data.append('file_id', current_modal.find("img").attr('id'))
+        if (current_modal.find("img").attr('id')) {
+            form_data.append('file_id', current_modal.find("img").attr('id'))
+        }
 
         //撈取html content
         // let detail = $('#detail').summernote('code')

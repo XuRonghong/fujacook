@@ -59,7 +59,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="com4" class="col-sm-3 text-right control-label col-form-label">概要<span style="color:red">*</span></label>
+                                    <label for="com4" class="col-sm-3 text-right control-label col-form-label">概要</label>
                                     <div class="col-sm-9">
                                         <input type="text" name="summary" value="{{data_get($data['arr'], 'summary')}}" id="com4" class="form-control summary" placeholder="">
                                     </div>
@@ -85,7 +85,7 @@
 {{--                                </div>--}}
 
                                 <div class="form-group row">
-                                    <label for="img1" class="col-sm-3 text-right control-label col-form-label">圖片</label>
+                                    <label for="img1" class="col-sm-3 text-right control-label col-form-label">圖片<span style="color:red">*</span></label>
                                     <div class="col-sm-9">
                                         <a class="btn-image-modal" data-modal="image-form" data-id="">
                                             @forelse(data_get( $data['arr'], 'image', []) as $key => $var)

@@ -301,22 +301,20 @@ abstract class Repository
     /*
      * table - file_id to find File trans image.
      */
-    public function transFileIdtoImage($data)
+    public function transFileIdtoImage($file_id)
     {
-        if ( !$data) return $data;
+        if ( !$file_id) return [];
         //
         $image_arr = [];
-        $tmp_arr = explode( ';', $data->file_id );
+        $tmp_arr = explode( ';', $file_id );
         $tmp_arr = array_filter( $tmp_arr );
         foreach ($tmp_arr as $key => $item) {
             //主要要讓前端編輯器可以正確讀取file id，很重要
             $image_arr[$item] = FuncController::_getFilePathById( $item );
         }
         if ($tmp_arr){
-            $data->image = $image_arr;
-        } else {
-            $data->image = [];
+            return $image_arr;
         }
-        return $data;
+        return [];
     }
 }

@@ -200,7 +200,7 @@ abstract class Presenter
                 'status' => 0,
                 'message' => $errors,
 //                'redirectUrl' => $this->gotoUrl
-            ], 200);
+            ], 422);
         }
     }
 

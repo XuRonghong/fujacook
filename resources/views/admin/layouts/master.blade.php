@@ -48,6 +48,16 @@
         .swal2-modal {
             width: auto !important;
         }
+        /* my profile item of top self */
+        .bg-primary {
+            background-color: #82191d !important;
+        }
+        /* 背景 */
+        .page-wrapper {
+            background: #fbf2f2;
+            position: relative;
+            display: none;
+        }
     </style>
 
     @yield('style')

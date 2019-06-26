@@ -23,17 +23,15 @@ class CreateScenesTable extends Migration
             $table->string( 'summary' )->nullable()->comment('簡介');
             $table->string( 'detail' )->nullable()->comment('詳細');
             $table->string( 'lang' )->nullable()->comment('語言');
-            $table->string( 'file_id' )->nullable()->comment('檔案');
+            $table->integer( 'file_id' )->nullable()->comment('檔案');
             $table->string( 'image' )->nullable()->comment('圖片');
             $table->string( 'image_mobile' )->nullable()->comment('手機圖片');
             $table->string( 'url' )->nullable()->comment('連結');
             $table->string( 'style' )->nullable()->comment('風格樣式');
-            // $table->dateTime( 'start_time' )->default(0)->comment('開始時間');
-            // $table->dateTime( 'end_time' )->default(0)->comment('結束時間');
+            $table->dateTime( 'start_time' )->default('')->comment('開始時間');
+            $table->dateTime( 'end_time' )->default('')->comment('結束時間');
             $table->tinyInteger('open')->default( 0 );
-            $table->integer( 'created_at' )->default(0)->comment('開始時間');
-            $table->integer( 'updated_at' )->default(0)->comment('結束時間');
-            // $table->timestamps();
+            $table->timestamps();
         });
     }
 

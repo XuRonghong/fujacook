@@ -28,7 +28,7 @@ class Scene extends Model
         'end_time',
         'open',
     ];
-    public $timestamps = false;
+    // public $timestamps = false;
 
     public function validate($request)
     {
@@ -37,7 +37,7 @@ class Scene extends Model
 //            'category',
 //            'type',
             'title' => 'required|unique:scenes',
-            'summary' => 'required',
+            // 'summary' => 'required',
 //            'detail',
 //            'lang' => 'required',
             'file_id' => 'required',
