@@ -24,7 +24,7 @@ class CreateMembersTable extends Migration
             $table->string('password');
             $table->string('createIP')->comment('註冊的網路位置');
             $table->tinyInteger('active')->comment('啟用')->default( 0 );
-            $table->string('code')->comment('代號');
+            $table->string('code')->comment('代號')->nullable();
             $table->rememberToken();
             $table->string('api_token', 64)->nullable()->unique();
             $table->string('avatar')->nullable()->comment('會員大頭貼');
