@@ -19,6 +19,7 @@ class MenuTableSeeder extends Seeder
         //
         Menu::truncate();
 
+        DB::unprepared('SET IDENTITY_INSERT menus ON;');
         $maxRank = 1;
         foreach ($menus as $key => $menu) {
             $DaoMenu = new Menu();
@@ -66,6 +67,7 @@ class MenuTableSeeder extends Seeder
                 }
             }
         }
+        DB::unprepared('SET IDENTITY_INSERT menus OFF;');
 
 
         /******* Role **********/

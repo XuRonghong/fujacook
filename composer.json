@@ -52,7 +52,8 @@
         "classmap": [
             "database/seeds",
             "database/factories",
-            "app/Eloquent"
+            "app/Eloquent",
+            "app/Repositories" 
         ]
     },
     "autoload-dev": {

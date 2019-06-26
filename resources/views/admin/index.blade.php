@@ -24,10 +24,10 @@
                         <div class="card-body">
                             <div class="d-md-flex align-items-center">
                                 <div>
-                                    <h4 class="card-title">Projects of the Month</h4>
-                                    <h5 class="card-subtitle">Overview of Latest Month</h5>
+                                    <h4 class="card-title">Welcome to Admin Backend</h4>
+                                    <h5 class="card-subtitle">From fujacook.com</h5>
                                 </div>
-                                <div class="ml-auto d-flex no-block align-items-center">
+                                <!-- <div class="ml-auto d-flex no-block align-items-center">
                                     <div class="dl">
                                         <select class="custom-select">
                                             <option value="0" selected>Monthly</option>
@@ -36,9 +36,9 @@
                                             <option value="3">Yearly</option>
                                         </select>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
-                            <div class="table-responsive">
+                            <!-- <div class="table-responsive">
                                 <table class="table no-wrap v-middle">
                                     <thead>
                                     <tr class="border-0">
@@ -134,7 +134,7 @@
                                     </tr>
                                     </tbody>
                                 </table>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Scene extends Model
 {
@@ -27,6 +28,7 @@ class Scene extends Model
         'end_time',
         'open',
     ];
+    public $timestamps = false;
 
     public function validate($request)
     {
