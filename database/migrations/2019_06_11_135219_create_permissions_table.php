@@ -56,7 +56,7 @@ class CreatePermissionsTable extends Migration
             $table->increments('id')->comment('流水編號');
             $table->string('name', 50)->comment('功能對應route name');
             $table->string('description', 50)->comment('描述');
-            $table->string('guard_name', 10)->comment('權限對應guard');
+            $table->string('guard_name', 10)->comment('權限對應guard')->default('admin');
             $table->timestamps();
         });
 
