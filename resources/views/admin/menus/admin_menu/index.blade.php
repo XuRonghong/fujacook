@@ -64,7 +64,7 @@
                     {
                         "sTitle": "ID",
                         "mData": "id",
-                        "sName": "id",
+                        "sName": "admin_menu.id",
                         // "width": "40px",
                         "bSearchable": false,
                         "mRender": function (data, type, row) {
@@ -72,25 +72,25 @@
                         }
                     },
                     {
-                        "sTitle": "admin_type",
-                        // "mData": "type",
-                        // "sName": "type",
-                        "width": "40px",
-                        "bSortable": false,
+                        "sTitle": "a_type",
+                        "mData": "type",
+                        "sName": "admins.type",
+                        // "width": "40px",
+                        "bSortable": true,
                         "bSearchable": false,
                         "mRender": function (data, type, row) {
-                            return row.admin_type;
+                            return data;
                         }
                     },
                     {
-                        "sTitle": "admin",
-                        // "mData": "admin_id",
+                        "sTitle": "admin_name",
+                        "mData": "name",
                         // "width": "100px",
-                        // "sName": "admin_id",
+                        "sName": "admins.name",
                         "bSortable": false,
-                        "bSearchable": false,
+                        "bSearchable": true,
                         "mRender": function (data, type, row) {
-                            return row.admin_name;
+                            return data;
                             // data2=data;
                             // if (data=='')data='-';
                             // return '<input class="isEdit admin_id" data-id="admin_id" size="10" style="width: 100%; display: none;" type="text" value="' + data2 + '"></input>'+'<div class="aaa">'+data+'</div>';
@@ -100,9 +100,9 @@
                         "sTitle": "menu_name",
                         // "mData": "menu_id",
                         // "width": "100px",
-                        // "sName": "menu_id",
+                        "sName": "menus.name",
                         "bSortable": false,
-                        "bSearchable": false,
+                        "bSearchable": true,
                         "mRender": function (data, type, row) {
                             return row.menu_name;
                             // data2=data;
@@ -114,7 +114,7 @@
                         "sTitle": "created_at",
                         "mData": "created_at",
                         // "width": "100px",
-                        "sName": "created_at",
+                        "sName": "admin_menu.created_at",
                         "bSortable": true,
                         "bSearchable": true,
                         "mRender": function (data, type, row) {
@@ -125,7 +125,9 @@
                         "sTitle": "updated_at",
                         "mData": "updated_at",
                         // "width": "100px",
-                        "sName": "updated_at",
+                        "sName": "admin_menu.updated_at",
+                        "bSortable": true,
+                        "bSearchable": true,
                         "mRender": function (data, type, row) {
                             return data;
                         }
@@ -143,6 +145,12 @@
                                     btn = '<button class="btn btn-xs btn-default btn-open">開啟</button>';
                                     break;
                                 case '0':
+                                    btn = '<button class="btn btn-xs btn-danger btn-open">關閉</button>';
+                                    break;
+                                case 1:
+                                    btn = '<button class="btn btn-xs btn-default btn-open">開啟</button>';
+                                    break;
+                                case 0:
                                     btn = '<button class="btn btn-xs btn-danger btn-open">關閉</button>';
                                     break;
                                 // default:

@@ -64,7 +64,7 @@
                     {
                         "sTitle": "ID",
                         "mData": "id",
-                        "sName": "id",
+                        "sName": "admin_permission.id",
                         // "width": "40px",
                         "bSearchable": false,
                         "mRender": function (data, type, row) {
@@ -73,38 +73,38 @@
                     },
                     {
                         "sTitle": "admin_type",
-                        // "mData": "type",
-                        // "sName": "type",
-                        "width": "40px",
-                        "bSortable": false,
+                        "mData": "type",
+                        "sName": "admins.type",
+                        // "width": "40px",
+                        "bSortable": true,
                         "bSearchable": false,
                         "mRender": function (data, type, row) {
-                            return row.admin_type;
+                            return data;
                         }
                     },
                     {
                         "sTitle": "admin",
-                        // "mData": "admin_id",
+                        "mData": "name",
                         // "width": "100px",
-                        // "sName": "admin_id",
+                        "sName": "admins.name",
                         "bSortable": false,
                         "bSearchable": true,
                         "mRender": function (data, type, row) {
-                            return row.admin_name;
+                            return data;
                             // data2=data;
                             // if (data=='')data='-';
                             // return '<input class="isEdit admin_id" data-id="admin_id" size="10" style="width: 100%; display: none;" type="text" value="' + data2 + '"></input>'+'<div class="aaa">'+data+'</div>';
                         }
                     },
                     {
-                        "sTitle": "permission",
-                        // "mData": "menu_id",
+                        "sTitle": "permissions",
+                        "mData": "description",
                         // "width": "100px",
-                        // "sName": "menu_id",
+                        "sName": "permissions.description",
                         "bSortable": false,
-                        "bSearchable": false,
+                        "bSearchable": true,
                         "mRender": function (data, type, row) {
-                            return row.description;
+                            return data;
                             // data2=data;
                             // if (data=='')data='-';
                             // return '<input class="isEdit menu_id" data-id="menu_id" size="10" style="width: 100%; display: none;" type="text" value="' + data2 + '"></input>'+'<div class="aaa">'+data+'</div>';
@@ -114,7 +114,7 @@
                         "sTitle": "created_at",
                         "mData": "created_at",
                         // "width": "100px",
-                        "sName": "created_at",
+                        "sName": "admin_permission.created_at",
                         "bSortable": true,
                         "bSearchable": true,
                         "mRender": function (data, type, row) {
@@ -125,7 +125,9 @@
                         "sTitle": "updated_at",
                         "mData": "updated_at",
                         // "width": "100px",
-                        "sName": "updated_at",
+                        "sName": "admin_permission.updated_at",
+                        "bSortable": true,
+                        "bSearchable": true,
                         "mRender": function (data, type, row) {
                             return data;
                         }

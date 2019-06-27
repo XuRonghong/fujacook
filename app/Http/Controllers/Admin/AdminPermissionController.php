@@ -51,9 +51,7 @@ class AdminPermissionController extends Controller
         //
         if(request()->ajax())
         {
-            $data = $this->repository->getDataTable($request, 'admin_id <> 1');
-
-            $data = $this->repository->eachOne_aaData_admin_permission($data);     //每一項目要做甚麼事,有需要在使用
+            $data = $this->repository->getDataTable_alone($request, 'admin_id <> 1');
 
             return response()->json($data,200);
         }

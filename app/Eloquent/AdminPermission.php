@@ -14,4 +14,9 @@ class AdminPermission extends Model
         'permission_id',
         'open',
     ];
+
+    public function permission()
+    {
+        return $this->belongsTo('App\Permission', 'permission_id', 'id');
+    }
 }

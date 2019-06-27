@@ -61,13 +61,13 @@
                                 <div class="form-group row">
                                     <label for="com3" class="col-sm-3 text-right control-label col-form-label">name</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="title" value="{{data_get($data['arr'], 'name')}}" class="form-control title" id="com3" placeholder="">
+                                        <input type="text" name="name" value="{{data_get($data['arr'], 'name')}}" class="form-control name" id="com3" placeholder="">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="com4" class="col-sm-3 text-right control-label col-form-label">description</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="summary" value="{{data_get($data['arr'], 'description')}}" class="form-control summary" id="com4" placeholder="">
+                                        <input type="text" name="description" value="{{data_get($data['arr'], 'description')}}" class="form-control description" id="com4" placeholder="">
                                     </div>
                                 </div>
                                 {{--<div class="form-group row">--}}

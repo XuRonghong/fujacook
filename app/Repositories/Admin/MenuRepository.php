@@ -82,14 +82,128 @@ class MenuRepository extends Repository
         if ( $arr['aaData']) {
             foreach ($arr['aaData'] as $key => $var) {
                 //
-                $admin = Admin::query()->find($var->admin_id);
-                $var->admin_name = $admin->name;
-                $var->admin_type = $admin->type;
-                //
                 $menu = Menu::query()->find($var->menu_id);
-                $var->menu_name = trans('menu.'. $menu->name. '.title');
+                $var->menu_name = trans('menu.'. $menu->name. '.title') .'&nbsp;<b>('.$menu->name.')</b>';
             }
         }
         return $arr;
     }
+
+
+    /*
+     * 自己獨立做一個 data table
+     */
+    public function getDataTable_alone($request, $whereQuery='1 = 1')
+    {
+        //
+        $sort_arr = [];
+        $search_arr = [];   //要搜尋的目標欄位名稱
+        $search_word = $request->input('sSearch', '');
+        $iDisplayLength = $request->input('iDisplayLength', 10);
+        $iDisplayStart = $request->input('iDisplayStart', 0);
+        $sEcho = $request->input('sEcho', '');
+        $column_arr = explode(',', $request->input('sColumns', ''));
+        foreach ($column_arr as $key => $item)
+        {
+            if ($item == "") {
+                unset( $column_arr[$key] );
+                continue;
+            }
+            if ($request->input( 'bSearchable_' . $key ) == "true") {
+                $search_arr[$key] = $item;
+            }
+            if ($request->input( 'bSortable_' . $key ) == "true") {
+                $sort_arr[$key] = $item;
+            }
+        }
+        $sort_name = $sort_arr[ $request->input( 'iSortCol_0' ) ];
+        $sort_dir = $request->input( 'sSortDir_0' );
+
+
+        $total_count = $this->model
+            ->join('admins', function($join) {
+                $join->on('admins.id', '=', 'admin_menu.admin_id')
+                    ->select(['name','type']);
+            })
+            ->join('menus', function($join) {
+                $join->on('menus.id', '=', 'admin_menu.menu_id')
+                    ->select(['name','link']);
+            })
+            ->where(function( $query ) use ( $search_arr, $search_word ) {
+                foreach ($search_arr as $item) {
+                    $query->orWhere( $item, 'like', '%' . $search_word . '%' );
+                }
+            })
+//            ->where(function ($query) use ($orderStartDate, $orderEndDate, $orderPayStatus, $orderStatus) {
+//                if ($orderStartDate && $orderEndDate) {
+//                    $query->whereBetween('mod_order.iCreateTime', [$orderStartDate, $orderEndDate + 86400]);
+//                }
+//                if ($orderPayStatus != "") {
+//                    $query->where('mod_order.iPayStatus', $orderPayStatus);
+//                }
+//                if ($orderStatus != "") {
+//                    $query->where('mod_order.iStatus', $orderStatus);
+//                }
+//            })
+            ->whereRaw($whereQuery)
+            ->count();
+
+
+        $data_arr = $this->model
+            ->join('admins', function($join) {
+                $join->on('admins.id', '=', 'admin_menu.admin_id')
+                    ->select(['name','type']);
+            })
+            ->join('menus', function($join) {
+                $join->on('menus.id', '=', 'admin_menu.menu_id')
+                    ->select(['name','link']);
+            })
+            ->where(function( $query ) use ( $search_arr, $search_word ) {
+                foreach ($search_arr as $item) {
+                    $query->orWhere( $item, 'like', '%' . $search_word . '%' );
+                }
+            })
+//            ->where(function ($query) use ($orderStartDate, $orderEndDate, $orderPayStatus, $orderStatus) {
+//                if ($orderStartDate && $orderEndDate) {
+//                    $query->whereBetween('mod_order.iCreateTime', [$orderStartDate, $orderEndDate + 86400]);
+//                }
+//                if ($orderPayStatus != "") {
+//                    $query->where('mod_order.iPayStatus', $orderPayStatus);
+//                }
+//                if ($orderStatus != "") {
+//                    $query->where('mod_order.iStatus', $orderStatus);
+//                }
+//            })
+            ->whereRaw($whereQuery)
+            ->select([
+                'admins.name',
+                'admins.type',
+                'admin_menu.*',
+                'menus.link'
+            ])
+            ->orderBy( $sort_name, $sort_dir )
+            ->offset($iDisplayStart)->limit($iDisplayLength)
+            ->get();
+
+        if ( !$data_arr) {
+            return response()->json([
+                'status'=> 0,
+                'message'=> ['Oops! 沒有資料!']
+            ],204);
+        } else {
+            foreach ($data_arr as $key => $data) {
+                $data->DT_RowId = $data->id;
+            }
+        };
+
+        return [
+            'status'=> 1,
+            'message'=> sprintf("已得到 %s", $total_count."筆資料"),
+            'sEcho'=> $sEcho,
+            'iTotalDisplayRecords'=>$total_count,
+            'iTotalRecords'=>$total_count,
+            'aaData'=> $total_count ? $data_arr : []
+        ];
+    }
+
 }
