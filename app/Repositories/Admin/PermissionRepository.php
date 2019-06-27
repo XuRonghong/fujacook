@@ -2,6 +2,8 @@
 
 namespace App\Repositories\Admin;
 
+use App\Admin;
+use App\AdminPermission;
 use App\Permission;
 use App\Repositories\Repository;
 
@@ -13,6 +15,11 @@ class PermissionRepository extends Repository
     public function __construct(Permission $model)
     {
         $this->model = $model;
+    }
+
+    public function setModel_AdminPermission()
+    {
+        $this->model = new AdminPermission();
     }
 
     public function all($attributes='')
@@ -45,6 +52,23 @@ class PermissionRepository extends Repository
     public function delete($id)
     {
         return parent::delete($id);
+    }
+
+    /* data object or array forEach to do. for admin_permission */
+    public function eachOne_aaData_admin_permission($arr)
+    {
+        if ( $arr['aaData']) {
+            foreach ($arr['aaData'] as $key => $var) {
+                //
+                $admin = Admin::query()->find($var->admin_id);
+                $var->admin_name = $admin->name;
+                $var->admin_type = $admin->type;
+                //
+                $permission = Permission::query()->find($var->permission_id);
+                $var->description = $permission->description;
+            }
+        }
+        return $arr;
     }
 
 

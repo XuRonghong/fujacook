@@ -67,11 +67,33 @@ return [
                 //Permission管理
                 "id" => 18,
                 "parent_id" => 1,
-                "name" => "admin.permissions",
-                "link" => "admin/permissions",
+                "name" => "admin.permission",
+                "link" => "",
                 "access" => "1,2",
                 "open" => 1,
-                "sub_menu" => 0,
+                "sub_menu" => 1,
+                "child" => [
+                    [
+                        //permission列表
+                        "id" => 181,
+                        "parent_id" => 18,
+                        "name" => "admin.permission.list",
+                        "link" => 'admin/permissions',
+                        "access" => "1,2",
+                        "open" => 1,
+                        "sub_menu" => 0,
+                    ],
+                    [
+                        //管理者權限
+                        "id" => 182,
+                        "parent_id" => 18,
+                        "name" => "admin.permission.admin_permission",
+                        "link" => 'admin/permission/admin_permission',
+                        "access" => "1,2",
+                        "open" => 1,
+                        "sub_menu" => 0,
+                    ],
+                ]
             ],
             [
                 //選單管理

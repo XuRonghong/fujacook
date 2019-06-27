@@ -5,6 +5,7 @@ namespace App\Repositories\Admin;
 use App\Admin;
 use App\AdminMenu;
 use App\Menu;
+use App\Permission;
 use App\Repositories\Repository;
 
 class MenuRepository extends Repository
@@ -75,20 +76,18 @@ class MenuRepository extends Repository
         }
         return $arr;
     }
-    /*
-     * data object or array forEach to do. 2
-     */
-    public function eachOne_aaData_2($arr)
+    /* data object or array forEach to do. for admin_menu */
+    public function eachOne_aaData_adminMenu($arr)
     {
         if ( $arr['aaData']) {
             foreach ($arr['aaData'] as $key => $var) {
                 //
                 $admin = Admin::query()->find($var->admin_id);
-                $var->admin_id = $admin->name;
-                $var->type = $admin->type;
+                $var->admin_name = $admin->name;
+                $var->admin_type = $admin->type;
                 //
                 $menu = Menu::query()->find($var->menu_id);
-                $var->menu_id = trans('menu.'. $menu->name. '.title');
+                $var->menu_name = trans('menu.'. $menu->name. '.title');
             }
         }
         return $arr;

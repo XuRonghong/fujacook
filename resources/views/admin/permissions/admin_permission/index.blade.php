@@ -88,7 +88,7 @@
                         // "width": "100px",
                         // "sName": "admin_id",
                         "bSortable": false,
-                        "bSearchable": false,
+                        "bSearchable": true,
                         "mRender": function (data, type, row) {
                             return row.admin_name;
                             // data2=data;
@@ -97,14 +97,14 @@
                         }
                     },
                     {
-                        "sTitle": "menu_name",
+                        "sTitle": "permission",
                         // "mData": "menu_id",
                         // "width": "100px",
                         // "sName": "menu_id",
                         "bSortable": false,
                         "bSearchable": false,
                         "mRender": function (data, type, row) {
-                            return row.menu_name;
+                            return row.description;
                             // data2=data;
                             // if (data=='')data='-';
                             // return '<input class="isEdit menu_id" data-id="menu_id" size="10" style="width: 100%; display: none;" type="text" value="' + data2 + '"></input>'+'<div class="aaa">'+data+'</div>';
@@ -143,6 +143,12 @@
                                     btn = '<button class="btn btn-xs btn-default btn-open">開啟</button>';
                                     break;
                                 case '0':
+                                    btn = '<button class="btn btn-xs btn-danger btn-open">關閉</button>';
+                                    break;
+                                case 1:
+                                    btn = '<button class="btn btn-xs btn-default btn-open">開啟</button>';
+                                    break;
+                                case 0:
                                     btn = '<button class="btn btn-xs btn-danger btn-open">關閉</button>';
                                     break;
                                 // default:

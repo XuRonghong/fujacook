@@ -3,29 +3,31 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Presenters\Admin\MenuPresenter;
+use App\Presenters\Admin\PermissionPresenter;
 use App\Repositories\Admin\MenuRepository;
+use App\Repositories\Admin\PermissionRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 
-class AdminMenuController extends Controller
+class AdminPermissionController extends Controller
 {
     protected $repository;
     protected $presenter;
     protected $route_url;
 
-    public function __construct(MenuRepository $repository, MenuPresenter $presenter)
+    public function __construct(PermissionRepository $repository, PermissionPresenter $presenter)
     {
         $this->repository = $repository;
         //設定指定model
-        $this->repository->setModel_AdminMenu();
+        $this->repository->setModel_AdminPermission();
 
         $this->presenter = $presenter;
         //指定view的位置
-        $this->presenter->setTitle('Admin_menu');
-        $this->presenter->setViewName('menus.admin_menu');
+        $this->presenter->setTitle('Admin_permission');
+        $this->presenter->setViewName('permissions.admin_permission');
         //所有關於route::resource的位置
-        $this->route_url = $this->presenter->getRouteResource($this->presenter->setRouteName('admin.admin_menu'));
+        $this->route_url = $this->presenter->getRouteResource($this->presenter->setRouteName('admin.admin_permission'));
     }
 
     /**
@@ -51,7 +53,7 @@ class AdminMenuController extends Controller
         {
             $data = $this->repository->getDataTable($request, 'admin_id <> 1');
 
-            $data = $this->repository->eachOne_aaData_adminMenu($data);     //每一項目要做甚麼事,有需要在使用
+            $data = $this->repository->eachOne_aaData_admin_permission($data);     //每一項目要做甚麼事,有需要在使用
 
             return response()->json($data,200);
         }

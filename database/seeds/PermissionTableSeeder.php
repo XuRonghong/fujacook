@@ -142,8 +142,33 @@ class PermissionTableSeeder extends Seeder
         /*
          * 系統參數設定
          */
-        $permissions[] = Permission::create(['name' => 'admin.permissions.index', 'description' => '系統參數設定-權限設定 總覽']);
-        $permissions[] = Permission::create(['name' => 'admin.permissions.update', 'description' => '系統參數設定-權限設定 更新']);
+        $index = ['permissions', '系統參數設定-權限列表'];
+        $permissions[] = Permission::create(['name' => 'admin.'.$index[0].'.index', 'description' => $index[1].' 總覽']);
+        $permissions[] = Permission::create(['name' => 'admin.'.$index[0].'.show', 'description' => $index[1].' 檢視']);
+        $permissions[] = Permission::create(['name' => 'admin.'.$index[0].'.create', 'description' => $index[1].' 新增']);
+        $permissions[] = Permission::create(['name' => 'admin.'.$index[0].'.edit', 'description' => $index[1].' 更新']);
+        $permissions[] = Permission::create(['name' => 'admin.'.$index[0].'.destroy', 'description' => $index[1].' 刪除']);
+        $index = ['admin_permission', '系統參數設定-管理員權限'];
+        $permissions[] = Permission::create(['name' => 'admin.'.$index[0].'.index', 'description' => $index[1].' 總覽']);
+        $permissions[] = Permission::create(['name' => 'admin.'.$index[0].'.show', 'description' => $index[1].' 檢視']);
+        $permissions[] = Permission::create(['name' => 'admin.'.$index[0].'.create', 'description' => $index[1].' 新增']);
+        $permissions[] = Permission::create(['name' => 'admin.'.$index[0].'.edit', 'description' => $index[1].' 更新']);
+        $permissions[] = Permission::create(['name' => 'admin.'.$index[0].'.destroy', 'description' => $index[1].' 刪除']);
+
+
+        $index = ['menus', '系統參數設定-menu列表'];
+        $permissions[] = Permission::create(['name' => 'admin.'.$index[0].'.index', 'description' => $index[1].' 總覽']);
+        $permissions[] = Permission::create(['name' => 'admin.'.$index[0].'.show', 'description' => $index[1].' 檢視']);
+        $permissions[] = Permission::create(['name' => 'admin.'.$index[0].'.create', 'description' => $index[1].' 新增']);
+        $permissions[] = Permission::create(['name' => 'admin.'.$index[0].'.edit', 'description' => $index[1].' 更新']);
+        $permissions[] = Permission::create(['name' => 'admin.'.$index[0].'.destroy', 'description' => $index[1].' 刪除']);
+        $index = ['admin_menu', '系統參數設定-管理員menu'];
+        $permissions[] = Permission::create(['name' => 'admin.'.$index[0].'.index', 'description' => $index[1].' 總覽']);
+        $permissions[] = Permission::create(['name' => 'admin.'.$index[0].'.show', 'description' => $index[1].' 檢視']);
+        $permissions[] = Permission::create(['name' => 'admin.'.$index[0].'.create', 'description' => $index[1].' 新增']);
+        $permissions[] = Permission::create(['name' => 'admin.'.$index[0].'.edit', 'description' => $index[1].' 更新']);
+        $permissions[] = Permission::create(['name' => 'admin.'.$index[0].'.destroy', 'description' => $index[1].' 刪除']);
+
 
         $permissions[] = Permission::create(['name' => 'admin.parameters.index', 'description' => '系統參數設定-meta參數設定 總覽']);
         $permissions[] = Permission::create(['name' => 'admin.parameters.store', 'description' => '系統參數設定-meta參數設定 新增']);

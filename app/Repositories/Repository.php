@@ -11,6 +11,10 @@ use Illuminate\Http\Request;
 
 abstract class Repository
 {
+    protected $search_arr;
+    protected $search_word;
+
+
     /**
      * Create a new instance of the given model.
      *
@@ -225,6 +229,16 @@ abstract class Repository
         });
     }
 
+    public function searchQueryWithModel($model=null, $search_arr=[], $search_word='' )
+    {
+        if ( !$model) return null;
+        return $model::query()->where(function( $query ) use ( $search_arr, $search_word ) {
+            foreach ($search_arr as $item) {
+                $query->orWhere( $item, 'like', '%' . $search_word . '%' );
+            }
+        });
+    }
+
 
     public function getDataTable2($request = null)
     {
@@ -285,6 +299,10 @@ abstract class Repository
                 $data->DT_RowId = $data->id;
             }
         };
+
+        //另一個model做搜尋用
+        $this->search_arr = $search_arr;
+        $this->search_word = $search_word;
 
         return [
             'status'=> 1,

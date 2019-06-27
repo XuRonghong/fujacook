@@ -75,9 +75,31 @@ return [
                             ],
                     ],
                 ],
-            'permissions' =>
+            'permission' =>
                 [
                     'title' => '權限管理',
+                    'list' => [
+                        'title' => '權限列表',
+                        'add' =>
+                            [
+                                'title' => '新增'
+                            ],
+                        'edit' =>
+                            [
+                                'title' => '編輯'
+                            ]
+                    ],
+                    'admin_permission' => [
+                        'title' => '管理者權限',
+                        'add' =>
+                            [
+                                'title' => '新增'
+                            ],
+                        'edit' =>
+                            [
+                                'title' => '編輯'
+                            ]
+                    ],
                 ],
             'menu' =>
                 [

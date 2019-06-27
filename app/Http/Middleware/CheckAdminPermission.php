@@ -31,6 +31,7 @@ class CheckAdminPermission
             $admin = Admin::query()->where($map)
                 ->whereHas('permission', function ($query) use ($request) {
                     $query->where('name', $request->route()->getName());
+                    $query->where('admin_permission.open', 1);
                 });
 
             $can = $admin->count() ? true : false;
