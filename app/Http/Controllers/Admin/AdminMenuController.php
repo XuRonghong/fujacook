@@ -49,9 +49,9 @@ class AdminMenuController extends Controller
         //
         if(request()->ajax())
         {
-            $data = $this->repository->getDataTable($request);
+            $data = $this->repository->getDataTable($request, 'admin_id <> 1');
 
-            //$data = $this->repository->eachOne_aaData($data);     //每一項目要做甚麼事,有需要在使用
+            $data = $this->repository->eachOne_aaData_2($data);     //每一項目要做甚麼事,有需要在使用
 
             return response()->json($data,200);
         }
@@ -136,8 +136,8 @@ class AdminMenuController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-        if ($request->get('not_edit', 1))$this->repository->validate($request);
+        // 除特殊情況不驗證
+        if ($request->get('doValidate', 1))$this->repository->validate($request);
 
         $data = $this->repository->update($request->all(), $id);
 

@@ -10,6 +10,7 @@ class Scene extends Model
     //
     protected $table = 'scenes';
     protected $primaryKey = 'id';
+    // public $timestamps = false;
     protected $fillable = [
         'author_id',
         'rank',
@@ -28,7 +29,6 @@ class Scene extends Model
         'end_time',
         'open',
     ];
-    // public $timestamps = false;
 
     public function validate($request)
     {

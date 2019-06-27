@@ -12,5 +12,6 @@ class AdminPermission extends Model
     protected $fillable = [
         'admin_id',
         'permission_id',
+        'open',
     ];
 }

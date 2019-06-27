@@ -50,6 +50,8 @@ class CreatePermissionsTable extends Migration
      */
     public function up()
     {
+        if (env('DB_REFRESH')) {
+        }
         $table_names = $this->table_names;
 
         Schema::create($table_names['permissions'], function (Blueprint $table) {
@@ -64,6 +66,7 @@ class CreatePermissionsTable extends Migration
             $table->increments('id')->comment('流水編號');
             $table->unsignedInteger('admin_id')->comment('對應admin.id');
             $table->unsignedInteger('permission_id')->comment('對應permissions.id');
+            $table->tinyInteger('open')->comment('開放')->default(1);
             $table->timestamps();
 
 //            $table->morphs('model');
@@ -131,6 +134,8 @@ class CreatePermissionsTable extends Migration
      */
     public function down()
     {
+        if (env('DB_REFRESH')) {
+        }
         $tableNames = $this->table_names;
 //        Schema::dropIfExists($tableNames['role_has_permissions']);
 //        Schema::dropIfExists($tableNames['model_has_roles']);

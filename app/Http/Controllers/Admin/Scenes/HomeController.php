@@ -99,7 +99,7 @@ class HomeController extends Controller
         //若資料庫沒有該id 則404畫面
         $data['arr'] = $this->repository->findOrFail($id) or abort(404);
         //從資料串裡依據file_id找到image
-        $data['arr'] = $this->repository->transFileIdtoImage($data['arr']);
+        $data['arr']->image = $this->repository->transFileIdtoImage($data['arr']->file_id);
         //to ajax url
         $data['route_url'] = $this->route_url;
 
@@ -119,7 +119,7 @@ class HomeController extends Controller
         //若資料庫沒有該id 則404畫面
         $data['arr'] = $this->repository->findOrFail($id) or abort(404);
         //從資料串裡依據file_id找到image
-        $data['arr'] = $this->repository->transFileIdtoImage($data['arr']);
+        $data['arr']->image = $this->repository->transFileIdtoImage($data['arr']->file_id);
         //to ajax url
         $data['route_url'] = $this->route_url;
 
@@ -135,8 +135,8 @@ class HomeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // 非單純修改狀態的話，一律驗證資料
-//        if($request->get('open','')!="change") $this->repository->validate($request);
+        // 除特殊情況不驗證
+        if ($request->get('doValidate', 1)) $this->repository->validate($request);
 
         $data = $this->repository->update($request->all(), $id);
 

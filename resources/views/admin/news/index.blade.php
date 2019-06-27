@@ -141,7 +141,7 @@
             data_table.on('click', '.btn-open', function () {
                 let id = $(this).closest('tr').attr('id')
                 url = '{{data_get($data['route_url'], "update")}}'.replace('-10', id)
-                ajaxOpen(url, {open: 'change'}, 'POST', table)
+                ajaxOpen(url, {open: 'change', doValidate: 0}, 'POST', table)
             })
             //
             data_table.on('click', '.btn-show', function () {

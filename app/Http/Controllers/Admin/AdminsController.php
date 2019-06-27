@@ -100,7 +100,7 @@ class AdminsController extends Controller
         //若資料庫沒有該id 則404畫面
         $data['arr'] = $this->repository->findOrFail($id) or abort(404);
         //從資料串裡依據file_id找到image
-//        $data['arr'] = $this->repository->transFileIdtoImage($data['arr']);
+        //$data['arr']->image = $this->repository->transFileIdtoImage($data['arr']->file_id);
         //to ajax url
         $data['route_url'] = $this->route_url;
 
@@ -120,7 +120,7 @@ class AdminsController extends Controller
         //若資料庫沒有該id 則404畫面
         $data['arr'] = $this->repository->findOrFail($id) or abort(404);
         //從資料串裡依據file_id找到image
-//        $data['arr'] = $this->repository->transFileIdtoImage($data['arr']);
+//        $data['arr']->image = $this->repository->transFileIdtoImage($data['arr']->file_id);
         //to ajax url
         $data['route_url'] = $this->route_url;
 

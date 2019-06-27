@@ -107,6 +107,7 @@
 {{--                    Swal.fire("{{trans('web_alert.notice')}}", data.message, "success");--}}
 //                     setTimeout(function () {
                         DOM.api().ajax.reload(null, false);
+                        // table.api().ajax.reload(null, false);
                     // }, 100);
                 } else {
                     toastr.error(data.message, "{{trans('web_alert.notice')}}").css("width","360px")

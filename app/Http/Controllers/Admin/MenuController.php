@@ -131,8 +131,8 @@ class MenuController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-//        $this->repository->validate($request);
+        // 除特殊情況不驗證
+        if ($request->get('doValidate', 1))$this->repository->validate($request);
 
         $data = $this->repository->update($request->all(), $id);
 

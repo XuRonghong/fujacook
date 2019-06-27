@@ -242,7 +242,7 @@ abstract class Repository
             ->make(true);
     }
 
-    public function getDataTable($request)
+    public function getDataTable($request, $whereQuery='1')
     {
         //
         $sort_arr = [];
@@ -268,9 +268,10 @@ abstract class Repository
         $sort_name = $sort_arr[ $request->input( 'iSortCol_0' ) ];
         $sort_dir = $request->input( 'sSortDir_0' );
 
-        $total_count = $this->searchQuery($search_arr, $search_word )->count();
+        $total_count = $this->searchQuery($search_arr, $search_word )->whereRaw($whereQuery)->count();
 
         $data_arr = $this->searchQuery($search_arr, $search_word )
+            ->whereRaw($whereQuery)
             ->orderBy( $sort_name, $sort_dir )
             ->offset($iDisplayStart)->limit($iDisplayLength)
             ->get();

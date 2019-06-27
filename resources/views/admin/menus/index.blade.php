@@ -55,9 +55,9 @@
             let data_table = $('#data_table');
             let table = data_table.dataTable({
                 "serverSide": true,
-                // "stateSave": true,
-                // "scrollX": true,
-                // "scrollY": '60vh',
+                "stateSave": true,
+                "scrollX": true,
+                "scrollY": '60vh',
                 // 'bProcessing': true,
                 // 'sServerMethod': 'GET',
                 "aoColumns": [
@@ -247,7 +247,7 @@
                 let data = {
                     "_token": "{{ csrf_token() }}"
                 };
-                data.not_edit = 0
+                data.doValidate = 0
                 data[$(this).data('id')] = $(this).val();
                 //
                 $.ajax({

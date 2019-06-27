@@ -58,7 +58,7 @@ class UploadController extends Controller
 
                 $Dao = new SysFiles ();
                 $Dao->iMemberId = session()->get( 'member.iId' );
-                $Dao->iType = 2;
+                $Dao->iType = 2;      //'1.S3原檔 2.local原檔 3.S3裁切 4.local裁切'
                 $Dao->vFileType = 'image/jpeg';
                 $Dao->vFileServer = env( 'APP_URL' );
                 $Dao->vFilePath = '/upload/userdata/' . $filePath . '/';
@@ -123,7 +123,7 @@ class UploadController extends Controller
                 //
                 $Dao = new File();
                 $Dao->author_id = Auth::guard('admin')->user()->id; //session()->get( 'member.iId' );
-                $Dao->type = 4;
+                $Dao->type = 4;         //'1.S3原檔 2.local原檔 3.S3裁切 4.local裁切'
                 $Dao->file_type = 'image/jpeg';
                 $Dao->file_server = env( 'APP_URL' );
                 $Dao->file_path = '/storage' . $filePath . '/';
@@ -187,7 +187,7 @@ class UploadController extends Controller
                     //
                     $Dao = new SysFiles ();
                     $Dao->iMemberId = session()->get( 'member.iId' );
-                    $Dao->iType = 3;
+                    $Dao->iType = 3;    // '1.S3原檔 2.local原檔 3.S3裁切 4.local裁切'
                     $Dao->vFileType = 'image/jpeg';
                     $Dao->vFileServer = env( 'AWS_S3_SERVER' );
                     $Dao->vFilePath = '/' . env( 'AWS_BUCKET' ) . $filePath . '/';

@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Admin;
 
+use App\Admin;
 use App\AdminMenu;
 use App\Menu;
 use App\Repositories\Repository;
@@ -44,6 +45,12 @@ class MenuRepository extends Repository
             $attributes = array_merge($attributes, [
                 'author_id' => auth()->guard('admin')->user()->id,
             ]);
+            // 啟用 或 不啟用
+            if (isset($attributes['open'])) {
+                $admin_menu = $this->model->find($id);
+                $attributes['open'] = ($attributes['open'] == "change") ? !$admin_menu->open : $admin_menu->open;
+            }
+
             return parent::update($attributes, $id);
         } catch (\Exception $e){
             return ['errors'=> $e->getMessage()];
@@ -64,8 +71,24 @@ class MenuRepository extends Repository
         if ( $arr['aaData']) {
             foreach ($arr['aaData'] as $key => $var) {
                 $var->Title = trans('menu.'. $var->name. '.title');
-                //找圖片檔案
-                //$var = $this->transFileIdtoImage($var);
+            }
+        }
+        return $arr;
+    }
+    /*
+     * data object or array forEach to do. 2
+     */
+    public function eachOne_aaData_2($arr)
+    {
+        if ( $arr['aaData']) {
+            foreach ($arr['aaData'] as $key => $var) {
+                //
+                $admin = Admin::query()->find($var->admin_id);
+                $var->admin_id = $admin->name;
+                $var->type = $admin->type;
+                //
+                $menu = Menu::query()->find($var->menu_id);
+                $var->menu_id = trans('menu.'. $menu->name. '.title');
             }
         }
         return $arr;

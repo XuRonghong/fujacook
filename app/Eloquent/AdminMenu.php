@@ -12,6 +12,7 @@ class AdminMenu extends Model
     protected $fillable = [
         'admin_id',
         'menu_id',
+        'open',
     ];
 
     public function validate($request)

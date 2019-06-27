@@ -72,6 +72,17 @@
                         }
                     },
                     {
+                        "sTitle": "type",
+                        // "mData": "type",
+                        // "sName": "type",
+                        "width": "40px",
+                        // "bSortable": true,
+                        // "bSearchable": false,
+                        "mRender": function (data, type, row) {
+                            return row.type;
+                        }
+                    },
+                    {
                         "sTitle": "admin_id",
                         "mData": "admin_id",
                         // "width": "100px",
@@ -79,10 +90,10 @@
                         "bSortable": true,
                         "bSearchable": true,
                         "mRender": function (data, type, row) {
-                            // return data;
-                            data2=data;
-                            if (data=='')data='-';
-                            return '<input class="isEdit admin_id" data-id="admin_id" size="10" style="width: 100%; display: none;" type="text" value="' + data2 + '"></input>'+'<div class="aaa">'+data+'</div>';
+                            return data;
+                            // data2=data;
+                            // if (data=='')data='-';
+                            // return '<input class="isEdit admin_id" data-id="admin_id" size="10" style="width: 100%; display: none;" type="text" value="' + data2 + '"></input>'+'<div class="aaa">'+data+'</div>';
                         }
                     },
                     {
@@ -93,10 +104,10 @@
                         "bSortable": true,
                         "bSearchable": true,
                         "mRender": function (data, type, row) {
-                            // return data;
-                            data2=data;
-                            if (data=='')data='-';
-                            return '<input class="isEdit menu_id" data-id="menu_id" size="10" style="width: 100%; display: none;" type="text" value="' + data2 + '"></input>'+'<div class="aaa">'+data+'</div>';
+                            return data;
+                            // data2=data;
+                            // if (data=='')data='-';
+                            // return '<input class="isEdit menu_id" data-id="menu_id" size="10" style="width: 100%; display: none;" type="text" value="' + data2 + '"></input>'+'<div class="aaa">'+data+'</div>';
                         }
                     },
                     {
@@ -126,10 +137,21 @@
                         // "width": '100px',
                         "mRender": function (data, type, row) {
                             // current_data[row.id] = row;
-                            let btn = '';
+                            let btn = "無功能";
+                            switch (row.open) {
+                                case 1:
+                                    btn = '<button class="btn btn-xs btn-default btn-open">開啟</button>';
+                                    break;
+                                case 0:
+                                    btn = '<button class="btn btn-xs btn-danger btn-open">關閉</button>';
+                                    break;
+                                // default:
+                                //     btn = '<button class="btn btn-xs btn-primary btn-status">未上架</button>';
+                                //     break;
+                            }
                             // btn += '<button class="btn btn-xs btn-show" title="詳情"><i class="fa fa-book" aria-hidden="true"></i></button>';
                             // btn += '<button class="btn btn-xs btn-edit" title="修改"><i class="fa fa-pencil-alt" aria-hidden="true"></i></button>';
-                            btn += '<button class="btn btn-xs btn-del pull-right" title="刪除"><i class="fa fa-trash" aria-hidden="true"></i></button>';
+                            // btn += '<button class="btn btn-xs btn-del pull-right" title="刪除"><i class="fa fa-trash" aria-hidden="true"></i></button>';
                             $('.waitme').waitMe('hide');
                             return btn;
                         }
@@ -163,6 +185,12 @@
                 location.href = '{{$data['route_url']['create']}}'
             })
 
+            //
+            data_table.on('click', '.btn-open', function () {
+                let id = $(this).closest('tr').attr('id')
+                url = '{{data_get($data['route_url'], "update")}}'.replace('-10', id)
+                ajaxOpen(url, {open: 'change', doValidate: 0}, 'POST', table)
+            })
             //
             data_table.on('click', '.btn-show', function () {
                 var id = $(this).closest('tr').attr('id');

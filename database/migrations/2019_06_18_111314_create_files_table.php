@@ -13,19 +13,21 @@ class CreateFilesTable extends Migration
      */
     public function up()
     {
-        Schema::create('files', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer( 'rank')->nullable();
-            $table->integer( 'author_id');
-            $table->smallInteger( 'type')->default(0)->common('1.S3原檔 2.local原檔 3.S3裁切 4.local裁切');
-            $table->string( 'file_type')->common('附檔名')->nullable();
-            $table->string( 'file_server')->common('APP_URL')->nullable();
-            $table->string( 'file_path')->common('')->nullable();
-            $table->string( 'file_name')->common('');
-            $table->integer( 'file_size')->common('')->nullable();
-            $table->tinyInteger( 'open' )->default(1);
-            $table->timestamps();
-        });
+        if (env('DB_REFRESH')) {
+            Schema::create('files', function (Blueprint $table) {
+                $table->increments('id');
+                $table->integer('rank')->nullable();
+                $table->integer('author_id')->nullable();
+                $table->smallInteger('type')->default(0)->common('1.S3原檔 2.local原檔 3.S3裁切 4.local裁切');
+                $table->string('file_type')->common('附檔名')->nullable();
+                $table->string('file_server')->common('APP_URL')->nullable();
+                $table->string('file_path')->common('')->nullable();
+                $table->string('file_name')->common('');
+                $table->integer('file_size')->common('')->nullable();
+                $table->tinyInteger('open')->default(1);
+                $table->timestamps();
+            });
+        }
     }
 
     /**
@@ -35,6 +37,8 @@ class CreateFilesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('files');
+        if (env('DB_REFRESH')) {
+            Schema::dropIfExists('files');
+        }
     }
 }

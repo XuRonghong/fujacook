@@ -13,11 +13,13 @@ class CreateCacheTable extends Migration
      */
     public function up()
     {
-        Schema::create('cache', function (Blueprint $table) {
-            $table->string('key')->unique();
-            $table->mediumText('value');
-            $table->integer('expiration');
-        });
+        if (env('DB_REFRESH')) {
+            Schema::create('cache', function (Blueprint $table) {
+                $table->string('key')->unique();
+                $table->mediumText('value');
+                $table->integer('expiration');
+            });
+        }
     }
 
     /**
@@ -27,6 +29,8 @@ class CreateCacheTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cache');
+        if (env('DB_REFRESH')) {
+            Schema::dropIfExists('cache');
+        }
     }
 }
