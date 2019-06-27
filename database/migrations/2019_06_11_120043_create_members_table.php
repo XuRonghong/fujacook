@@ -37,7 +37,7 @@ class CreateMembersTable extends Migration
                 $table->string('address')->nullable()->comment('地址');
                 $table->integer('bonus')->default(0)->comment('購物金');
                 $table->boolean('confirm_terms')->default(0)->comment('同意會員條款/隱私權政策');
-                $table->dateTime('login_time')->nullable('')->comment('最後登入時間');
+                $table->dateTime('login_time')->nullable()->comment('最後登入時間');
                 $table->timestamps();
             });
 
