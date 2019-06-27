@@ -127,10 +127,10 @@
                             // current_data[row.id] = row;
                             let btn = "無功能";
                             switch (row.open) {
-                                case 1:
+                                case '1':
                                     btn = '<button class="btn btn-xs btn-success btn-open">已上架</button>';
                                     break;
-                                case 0:
+                                case '0':
                                     btn = '<button class="btn btn-xs btn-primary btn-open">未上架</button>';
                                     break;
                                 // default:

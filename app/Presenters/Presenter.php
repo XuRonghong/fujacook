@@ -135,7 +135,7 @@ abstract class Presenter
                     ->from('admin_menu')
                     ->whereRaw('admin_menu.menu_id = menus.id')
                     ->whereRaw('admin_id = '.auth()->guard('admin')->user()->id)
-                    ->whereRaw('admin_menu.open = 1');
+                    ->where('open',1);
             })
             ->orderBy( 'rank', 'ASC' )->get();
         $sys_menu = $DaoSysMenu->where('parent_id', '=', 0);

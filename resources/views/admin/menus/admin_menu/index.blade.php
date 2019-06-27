@@ -139,10 +139,10 @@
                             // current_data[row.id] = row;
                             let btn = "無功能";
                             switch (row.open) {
-                                case 1:
+                                case '1':
                                     btn = '<button class="btn btn-xs btn-default btn-open">開啟</button>';
                                     break;
-                                case 0:
+                                case '0':
                                     btn = '<button class="btn btn-xs btn-danger btn-open">關閉</button>';
                                     break;
                                 // default:

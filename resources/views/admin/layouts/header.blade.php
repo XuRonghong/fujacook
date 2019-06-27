@@ -75,7 +75,7 @@
                 <!-- ============================================================== -->
                 <!-- create new -->
                 <!-- ============================================================== -->
-                <li class="nav-item dropdown">
+                <!--<li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="flag-icon flag-icon-tw"></i>
                     </a>
@@ -86,7 +86,7 @@
 {{--                        <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-de"></i> German</a>--}}
                         <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-tw"></i> Taiwan</a>
                     </div>
-                </li>
+                </li>-->
                 <!-- ============================================================== -->
                 <!-- User profile and search -->
                 <!-- ============================================================== -->

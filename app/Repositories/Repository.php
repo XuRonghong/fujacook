@@ -242,7 +242,7 @@ abstract class Repository
             ->make(true);
     }
 
-    public function getDataTable($request, $whereQuery='1')
+    public function getDataTable($request, $whereQuery='1 = 1')
     {
         //
         $sort_arr = [];
