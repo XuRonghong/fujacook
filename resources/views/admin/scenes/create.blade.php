@@ -184,7 +184,7 @@
             $('form .btn-image-modal').hide()
         } else { $('#img1').hide() }
 
-        // 為了做圖片編輯
+        //
         var modal = $('#manage-modal')
         current_modal = modal.find('.messageInfo-modal')
 

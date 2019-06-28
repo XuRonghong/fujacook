@@ -256,7 +256,9 @@
         }
 
         //撈取html content
-        // let detail = $('#detail').summernote('code')
+        if (document.getElementById("content")) {
+            form_data.append('content', $('#content').summernote('code'))
+        }
 
         //假如還有資料就填充上去
         for (let key in datas) {

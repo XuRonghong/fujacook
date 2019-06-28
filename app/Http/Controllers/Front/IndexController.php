@@ -24,7 +24,7 @@ class IndexController extends Controller
      */
     function index ()
     {
-        $data = []; //config('app.app_title')
+        $data = []; //config('app.title')
         //
         $map['open'] = 1;
         $data['arr']['aaData'] = Scene::query()->where($map)

@@ -15,7 +15,7 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
     'copyright' => env('APP_COPYRIGHT', 'Laravel'),
-    'app_title' => env('APP_TITLE', 'Industrious by TEMPLATED'),
+    'title' => env('APP_TITLE', 'Industrious by TEMPLATED'),
 
     /*
     |--------------------------------------------------------------------------

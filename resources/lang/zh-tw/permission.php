@@ -1,171 +1,103 @@
 <?php
 return [
-    'member' =>
-        [
-            'title' => '會員',
-            'userinfo' =>
-                [
-                    'title' => '個人資料',
-                ]
-        ],
     'admin' =>
         [
-            'title' => '管理員功能',
-            'user' =>
+            'admins' =>
                 [
-                    'title' => '帳號管理',
-                    'admins' => [
-                        'title' => '管理員帳號管理',
-                        'add' =>
-                            [
-                                'title' => '新增管理員'
-                            ],
-                        'edit' =>
-                            [
-                                'title' => '編輯'
-                            ],
-                        'access' =>
-                            [
-                                'title' => '權限設置',
-                            ],
-                    ],
-                    'members' => [
-                        'title' => '一般會員帳號',
-                        'add' =>
-                            [
-                                'title' => '新增一般會員'
-                            ],
-                        'edit' =>
-                            [
-                                'title' => '編輯'
-                            ],
-                        'access' =>
-                            [
-                                'title' => '權限設置',
-                            ],
-                    ],
-                    'store' => [
-                        'title' => '自營店家帳號',
-                        'add' =>
-                            [
-                                'title' => '新增店家'
-                            ],
-                        'edit' =>
-                            [
-                                'title' => '編輯'
-                            ],
-                        'access' =>
-                            [
-                                'title' => '權限設置',
-                            ],
-                    ],
-                    'supplier' => [
-                        'title' => '供應商帳號',
-                        'add' =>
-                            [
-                                'title' => '新增'
-                            ],
-                        'edit' =>
-                            [
-                                'title' => '編輯'
-                            ],
-                        'access' =>
-                            [
-                                'title' => '權限設置',
-                            ],
-                    ],
+                    'title'  => '帳號管理-後台帳號管理',
+                    'index'  => ' 總覽',
+                    'show'   => ' 檢視',
+                    'create' => ' 新增',
+                    'edit'   => ' 更新',
+                    'destroy'=> ' 刪除',
                 ],
-            'permission' =>
+            'permissions' =>
                 [
-                    'title' => '權限管理',
-                    'list' => [
-                        'title' => '權限列表',
-                        'add' =>
-                            [
-                                'title' => '新增'
-                            ],
-                        'edit' =>
-                            [
-                                'title' => '編輯'
-                            ]
-                    ],
-                    'admin_permission' => [
-                        'title' => '管理者權限',
-                        'add' =>
-                            [
-                                'title' => '新增'
-                            ],
-                        'edit' =>
-                            [
-                                'title' => '編輯'
-                            ]
-                    ],
+                    'title'  => '系統參數設定-權限列表',
+                    'index'  => ' 總覽',
+                    'show'   => ' 檢視',
+                    'create' => ' 新增',
+                    'edit'   => ' 更新',
+                    'destroy'=> ' 刪除',
                 ],
-            'menu' =>
+            'admin_permission' =>
                 [
-                    'title' => '選項管理',
-                    'list' => [
-                        'title' => '選項列表',
-                        'add' =>
-                            [
-                                'title' => '新增'
-                            ],
-                        'edit' =>
-                            [
-                                'title' => '編輯'
-                            ]
-                    ],
-                    'admin_menu' => [
-                        'title' => '管理者選項',
-                        'add' =>
-                            [
-                                'title' => '新增'
-                            ],
-                        'edit' =>
-                            [
-                                'title' => '編輯'
-                            ]
-                    ],
+                    'title'  => '系統參數設定-管理員權限',
+                    'index'  => ' 總覽',
+                    'show'   => ' 檢視',
+                    'create' => ' 新增',
+                    'edit'   => ' 更新',
+                    'destroy'=> ' 刪除',
                 ],
-            'group' =>
+            'menus' =>
                 [
-                    'title' => '群組設置',
-                    'member' => [
-                        'title' => '一般會員群組',
-                        'add' =>
-                            [
-                                'title' => '新增'
-                            ],
-                        'edit' =>
-                            [
-                                'title' => '編輯'
-                            ]
-                    ],
+                    'title'  => '系統參數設定-menu列表',
+                    'index'  => ' 總覽',
+                    'show'   => ' 檢視',
+                    'create' => ' 新增',
+                    'edit'   => ' 更新',
+                    'destroy'=> ' 刪除',
                 ],
-            'category' =>
+            'admin_menu' =>
                 [
-                    'title' => '系統類別管理',
-                    'sub' =>
+                    'title'  => '系統參數設定-管理員menu',
+                    'index'  => ' 總覽',
+                    'show'   => ' 檢視',
+                    'create' => ' 新增',
+                    'edit'   => ' 更新',
+                    'destroy'=> ' 刪除',
+                ],
+            'scenes' =>
+                [
+                    'home' =>
                         [
-                            'title' => '類別項目'
-                        ]
+                            'title' => '首頁場景',
+                            'index'  => ' 總覽',
+                            'show'   => ' 檢視',
+                            'create' => ' 新增',
+                            'edit'   => ' 更新',
+                            'destroy'=> ' 刪除',
+                        ],
+                    'news' =>
+                        [
+                            'title' => '新聞場景',
+                            'index'  => ' 總覽',
+                            'show'   => ' 檢視',
+                            'create' => ' 新增',
+                            'edit'   => ' 更新',
+                            'destroy'=> ' 刪除',
+                        ],
                 ],
-            'config' =>
+            'setting' =>
                 [
-                    'title' => '系統參數管理',
+                    'search_keywords' =>
+                        [
+                            'title' => '前台網站設定-搜尋關鍵字',
+                            'index'  => ' 總覽',
+                            'show'   => ' 檢視',
+                            'create' => ' 新增',
+                            'edit'   => ' 更新',
+                            'destroy'=> ' 刪除',
+                        ],
+                    'parameters' =>
+                        [
+                            'title' => '系統參數設定',
+                            'index'  => ' 總覽',
+                            'show'   => ' 檢視',
+                            'create' => ' 新增',
+                            'edit'   => ' 更新',
+                            'destroy'=> ' 刪除',
+                        ],
                 ],
-        ],
-    'setting' =>
-        [
-            'title' => '系統設置',
-            'search_keywords' =>
+            'news' =>
                 [
-                    'title' => '搜尋關鍵字',
+                    'title' => '最新消息',
+                    'index'  => ' 總覽',
+                    'show'   => ' 檢視',
+                    'create' => ' 新增',
+                    'edit'   => ' 更新',
+                    'destroy'=> ' 刪除',
                 ],
-            'parameters' =>
-                [
-                    'title' => '系統參數設定',
-                ]
         ],
 
     'advertising' =>

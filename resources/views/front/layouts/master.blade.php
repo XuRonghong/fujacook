@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 <head>
-    <title>{{data_get($data,'Title', config('app.app_title'))}}</title>
+    <title>{{data_get($data,'Title', config('app.title'))}}</title>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">

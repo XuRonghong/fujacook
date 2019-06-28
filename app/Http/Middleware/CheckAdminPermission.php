@@ -48,7 +48,11 @@ class CheckAdminPermission
         if ($can === true) {
             return $next($request);
         } else {
-            return redirect('/admin/home')->withErrors(['permission' => '權限不足']);
+            if(request()->ajax()) {
+                return response()->json(['message' => '權限不足'], 422);
+            } else {
+                return redirect('/admin/home')->withErrors(['permission' => '權限不足']);
+            }
         }
 
     }

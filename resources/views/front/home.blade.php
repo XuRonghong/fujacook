@@ -1,7 +1,7 @@
 @extends('front.layouts.master')
 
 @section('title')
-    <title>{{ data_get($data, 'title', config('app_title')) }}</title>
+    <title>{{ data_get($data, 'title', config('app.title')) }}</title>
 @endsection
 
 @section('style')

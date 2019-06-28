@@ -55,58 +55,78 @@
             let data_table = $('#data_table');
             let table = data_table.dataTable({
                 "serverSide": true,
-                // "stateSave": true,
+                "stateSave": true,
                 // "scrollX": true,
                 // "scrollY": '60vh',
                 // 'bProcessing': true,
                 // 'sServerMethod': 'GET',
                 "aoColumns": [
+                    {
+                        "sTitle": "ID",
+                        "mData": "id",
+                        "sName": "id",
+                        // "width": "40px",
+                        "bSortable": true,
+                        "bSearchable": false,
+                        "mRender": function (data, type, row) {
+                            return data;
+                        }
+                    },
+                    {
+                        "sTitle": "rank",
+                        "mData": "rank",
+                        "sName": "rank",
+                        // "width": "100px",
+                        "bSortable": true,
+                        "bSearchable": false,
+                        "mRender": function (data, type, row) {
+                            // return data;
+                            data2=data;
+                            if (data=='')data='-';
+                            return '<input class="isEdit rank" data-id="rank" size="10" style="width: 100%; display: none;" type="text" value="' + data2 + '"></input>'+
+                                '<div class="aaa">'+data+'</div>';
+                        }
+                    },
                     // {
-                    //     "sTitle": "ID",
-                    //     "mData": "id",
-                    //     "sName": "id",
-                    //     // "width": "40px",
-                    //     "bSearchable": false,
+                    //     "sTitle": "type",
+                    //     "mData": "type",
+                    //     "sName": "type",
+                    //     // "width": "100px",
+                    //     "bSortable": true,
+                    //     "bSearchable": true,
                     //     "mRender": function (data, type, row) {
                     //         return data;
                     //     }
                     // },
                     {
-                        "sTitle": "no",
-                        "mData": "no",
-                        // "width": "100px",
-                        "sName": "no"
-                    },
-                    {
-                        "sTitle": "rank",
-                        "mData": "rank",
-                        // "width": "100px",
-                        "sName": "rank",
-                        "bSortable": false,
-                    },
-                    {
                         "sTitle": "name",
                         "mData": "name",
-                        // "width": "100px",
                         "sName": "name",
+                        // "width": "100px",
+                        "bSortable": false,
+                        "bSearchable": true,
+                        "mRender": function (data, type, row) {
+                            // return data;
+                            data2=data;
+                            if (data=='')data='-';
+                            return '<input class="isEdit name" data-id="name" size="10" style="width: 100%; display: none;" type="text" value="' + data2 + '"></input>'+
+                                '<div class="aaa">'+data+'</div>';
+                        }
                     },
                     {
-                        "sTitle": "account",
-                        "mData": "account",
+                        "sTitle": "word",
+                        "mData": "value",
+                        "sName": "value",
                         // "width": "100px",
-                        "sName": "account",
-                    },
-                    {
-                        "sTitle": "createIP",
-                        "mData": "createIP",
-                        // "width": "100px",
-                        "sName": "createIP",
-                    },
-                    {
-                        "sTitle": "active",
-                        "mData": "active",
-                        // "width": "100px",
-                        "sName": "active",
+                        "bSortable": false,
+                        "bSearchable": true,
+                        "mRender": function (data, type, row) {
+                            // return data;
+                            data2=data;
+                            if (data=='')data='-';
+                            return '<input class="isEdit value" data-id="value" size="10" style="width: 100%; display: none;" type="text" value="' + data2 + '"></input>'+
+                                '<div class="aaa">'+data+'</div>';
+                        }
                     },
                     {
                         "sTitle": "",
@@ -114,9 +134,8 @@
                         "bSearchable": false,
                         // "width": '100px',
                         "mRender": function (data, type, row) {
-                            // current_data[row.id] = row;
                             let btn = "無功能";
-                            switch (row.active) {
+                            switch (row.open) {
                                 case 1:
                                     btn = '<button class="btn btn-xs btn-success btn-open">已啟用</button>';
                                     break;
@@ -138,6 +157,7 @@
                         }
                     },
                 ],
+                "lengthMenu": [50, 100, 200, 500, 25, 10, 5],
                 "sAjaxSource": '{{$data['route_url']['list']}}',
                 "ajax": '{{$data['route_url']['list']}}',
                 // "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
@@ -169,18 +189,17 @@
             data_table.on('click', '.btn-open', function () {
                 let id = $(this).closest('tr').attr('id')
                 url = '{{data_get($data['route_url'], "update")}}'.replace('-10', id)
-                ajaxOpen(url, {active: 'change', doValidate: 0}, 'POST', table)
+                ajaxOpen(url, {open: 'change', doValidate: 0}, 'POST', table)
             })
             //
             data_table.on('click', '.btn-show', function () {
-                // var id = $(this).closest('tr').attr('id');
-                var id = $(this).closest('tr').find('td').first().text();
+                var id = $(this).closest('tr').attr('id');
+                // var id = $(this).closest('tr').find('td').first().text();
                 location.href = '{{$data['route_url']['show']}}'+'/'+id;
             });
             //
             data_table.on('click', '.btn-edit', function () {
-                // var id = $(this).closest('tr').attr('id');
-                var id = $(this).closest('tr').find('td').first().text();
+                var id = $(this).closest('tr').attr('id');
                 location.href = '{{$data['route_url']['edit']}}'+'/'+id+'/edit';
             })
             //
@@ -191,6 +210,50 @@
                     "_token": "{{ csrf_token() }}"
                 };
                 doDelete(url, data, table)          // from layout.master
+            });
+
+
+            // 按一下進入編輯模式
+            data_table.on('click', '.aaa', function () {
+                $('div.aaa').show();
+                $('input.isEdit').hide();
+                $(this).parent().find('input.isEdit').show();
+                $(this).hide();
+            });
+            // 編輯完成退回瀏覽模式
+            data_table.on('change', '.isEdit', function (e) {
+                //
+                toastr.info('Wait me ...');
+                //
+                $(this).hide();
+                $(this).parent().find('.aaa').show();
+                //
+
+                let id = $(this).closest('tr').attr('id');
+                let url = '{{data_get($data['route_url'], "update")}}'.replace('-10', id)  //-10代替字元為id
+                let data = {
+                    "_token": "{{ csrf_token() }}"
+                };
+                data.doValidate = 0
+                data[$(this).data('id')] = $(this).val();
+                //
+                $.ajax({
+                    url: url,
+                    data: data,
+                    type: "POST",
+                    //async: false,
+                    success: function (rtndata) {
+                        // $('.waitme').waitMe('hide');
+                        if (rtndata.status) {
+                            toastr.success(rtndata.message, "{{trans('web_alert.notice')}}");
+                            setTimeout(function () {
+                                table.api().ajax.reload(null, false);
+                            }, 100);
+                        } else {
+                            swal("{{trans('web_alert.notice')}}", rtndata.message, "error");
+                        }
+                    }
+                });
             });
         });
     </script>

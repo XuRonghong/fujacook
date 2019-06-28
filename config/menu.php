@@ -204,7 +204,38 @@ return [
             ],
         ],
     ],
-    //
+    [
+        //系統設置
+        "id" => 9,
+        "parent_id" => 0,
+        "name" => "setting",
+        "link" => "",
+        "sub_menu" => 1,
+        "access" => "1,2",
+        "open" => 1,
+        "child" => [
+            [
+                //關鍵字
+                "id" => 901,
+                "parent_id" => 9,
+                "name" => "setting.search_keywords",
+                "link" => 'admin/setting/search_keywords',
+                "access" => "1,2",
+                "open" => 1,
+                "sub_menu" => 0,
+            ],
+            [
+                //系統參數 meta
+                "id" => 902,
+                "parent_id" => 9,
+                "name" => "setting.parameters",
+                "link" => 'admin/setting/parameters',
+                "access" => "1,2",
+                "open" => 1,
+                "sub_menu" => 0,
+            ],
+        ]
+    ],
     [
         //廣告管理
         "id" => 5,
