@@ -210,9 +210,9 @@ abstract class Repository
     /*
      *
      */
-    public function validate($request)
+    public function validate($request, $noUnique=0)
     {
-        return $this->model->validate($request);
+        return $this->model->validate($request, $noUnique);
     }
 
 

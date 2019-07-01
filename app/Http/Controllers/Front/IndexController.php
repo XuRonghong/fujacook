@@ -28,11 +28,23 @@ class IndexController extends Controller
         //
         $map['open'] = 1;
         $data['arr']['aaData'] = Scene::query()->where($map)
-            ->where('type','LIKE', 'home.slider')
+            ->where('type','LIKE', 'slider.home')
             ->orderBy('updated_at', 'desc')
             ->get();
         //
         $data['arr'] = $this->repository->eachOne_aaData($data['arr']);
+
+
+        $data['arr']['navbar'] = Scene::query()->where($map)
+            ->where('type','LIKE', 'navbar.home')
+            ->orderBy('rank', 'asc')
+            ->get();
+
+
+        $data['arr']['introduce'] = Scene::query()->where($map)
+            ->where('type','LIKE', 'introduce.home')
+            ->orderBy('rank', 'asc')
+            ->get();
 
         return view('front.index', compact('data'));
     }

@@ -30,17 +30,17 @@ class Scene extends Model
         'open',
     ];
 
-    public function validate($request)
+    public function validate($request, $noUnique=0)
     {
         $rules = [
 //            'rank',
 //            'category',
 //            'type',
-            'title' => 'required|unique:scenes',
+            'title' => 'required'. ($noUnique?'':'|unique:scenes'),
             // 'summary' => 'required',
 //            'detail',
 //            'lang' => 'required',
-            'file_id' => 'required',
+//            'file_id' => 'required',
 //            'image',
 //            'image_mobile',
 //            'url',
@@ -58,7 +58,7 @@ class Scene extends Model
             'summary.required' => '概要為必填項目',
 //            'detail',
 //            'lang' => 'required',
-            'file_id.required' => '沒有圖片',
+//            'file_id.required' => '沒有圖片',
 //            'image',
 //            'image_mobile',
 //            'url',

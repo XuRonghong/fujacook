@@ -72,17 +72,30 @@
                         }
                     },
                     {
-                        "sTitle": "author_id",
-                        "mData": "author_id",
+                        "sTitle": "rank",
+                        "mData": "rank",
                         // "width": "100px",
-                        "sName": "author_id"
+                        "sName": "rank",
+                        "mRender": function (data, type, row) {
+                            // return data;
+                            data2=data;
+                            if (data=='')data='-';
+                            return '<input class="isEdit rank" data-id="rank" size="10" style="width: 100%; display: none;" type="text" value="' + data2 + '"></input>'+
+                                '<div class="aaa">'+data+'</div>';
+                        }
                     },
-                    {
-                        "sTitle": "category",
-                        "mData": "category",
-                        // "width": "100px",
-                        "sName": "category"
-                    },
+                    // {
+                    //     "sTitle": "author_id",
+                    //     "mData": "author_id",
+                    //     // "width": "100px",
+                    //     "sName": "author_id"
+                    // },
+                    // {
+                    //     "sTitle": "category",
+                    //     "mData": "category",
+                    //     // "width": "100px",
+                    //     "sName": "category"
+                    // },
                     {
                         "sTitle": "type",
                         "mData": "type",
@@ -96,27 +109,33 @@
                         "sName": "title"
                     },
                     {
-                        "sTitle": "image",
-                        "mData": "image",
-                        "width": "180px",
-                        "sName": "image",
-                        "bSortable": false,
-                        "bSearchable": false,
-                        "mRender": function (data, type, row) {
-                            var html_str = "";
-                            for (var key in data) {
-                                html_str += "<img width='75px' src=" + data[key] + " style='margin:5px;'>";
-                            }
-                            return html_str;
-                            // return "<img width='100%' src=" + data + ">";
-                        }
-                    },
-                    {
-                        "sTitle": "url",
-                        "mData": "url",
+                        "sTitle": "summary",
+                        "mData": "summary",
                         // "width": "100px",
-                        "sName": "url"
+                        "sName": "summary"
                     },
+                    // {
+                    //     "sTitle": "image",
+                    //     "mData": "image",
+                    //     "width": "180px",
+                    //     "sName": "image",
+                    //     "bSortable": false,
+                    //     "bSearchable": false,
+                    //     "mRender": function (data, type, row) {
+                    //         var html_str = "";
+                    //         for (var key in data) {
+                    //             html_str += "<img width='75px' src=" + data[key] + " style='margin:5px;'>";
+                    //         }
+                    //         return html_str;
+                    //         // return "<img width='100%' src=" + data + ">";
+                    //     }
+                    // },
+                    // {
+                    //     "sTitle": "url",
+                    //     "mData": "url",
+                    //     // "width": "100px",
+                    //     "sName": "url"
+                    // },
                     {
                         "sTitle": "",
                         "bSortable": false,
@@ -124,13 +143,18 @@
                         // "width": '100px',
                         "sName": "operate",
                         "mRender": function (data, type, row) {
-                            // current_data[row.id] = row;
-                            let btn = "無功能";
+                            let btn = "";
                             switch (row.open) {
                                 case '1':
                                     btn = '<button class="btn btn-xs btn-success btn-open">已上架</button>';
                                     break;
                                 case '0':
+                                    btn = '<button class="btn btn-xs btn-primary btn-open">未上架</button>';
+                                    break;
+                                case 1:
+                                    btn = '<button class="btn btn-xs btn-success btn-open">已上架</button>';
+                                    break;
+                                case 0:
                                     btn = '<button class="btn btn-xs btn-primary btn-open">未上架</button>';
                                     break;
                                 // default:
@@ -198,6 +222,31 @@
                 }
                 doDelete(url, data, table)          // from layout.master
             })
+
+
+            // 按一下進入編輯模式
+            data_table.on('click', '.aaa', function () {
+                $('div.aaa').show();
+                $('input.isEdit').hide();
+                $(this).parent().find('input.isEdit').show();
+                $(this).hide();
+            });
+            // 編輯完成退回瀏覽模式
+            data_table.on('change', '.isEdit', function (e) {
+                //
+                toastr.info('Wait me', "等我一下...");
+                //
+                $(this).hide();
+                $(this).parent().find('.aaa').show();
+                //
+                let id = $(this).closest('tr').attr('id');
+                let url = '{{data_get($data['route_url'], "update")}}'.replace('-10', id)  //-10代替字元為id
+                let data = {}
+                data[$(this).data('id')] = $(this).val()
+                data['doValidate'] = 0
+                //
+                ajaxOpen(url, data, 'POST', table)
+            });
         })
     </script>
 @endsection

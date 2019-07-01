@@ -297,21 +297,9 @@ return [
     'scenes' =>
         [
             'title' => '平台介面管理',
-            'login' =>
+            'navbar' =>
                 [
-                    'title' => '登入畫面',
-                    'background' =>
-                        [
-                            'title' => '背景圖編輯',
-                        ],
-                ],
-            'home' =>
-                [
-                    'title' => '首頁畫面',
-                    'slider' =>
-                        [
-                            'title' => '滑動圖編輯',
-                        ],
+                    'title' => '選單欄編輯',
                 ],
             'header' =>
                 [
@@ -321,12 +309,34 @@ return [
                             'title' => '連結編輯',
                         ],
                 ],
+            'slider' =>
+                [
+                    'title' => '滑動圖編輯',
+                ],
+            'banner' =>
+                [
+                    'title' => 'banner編輯',
+                ],
+            'introduce' =>
+                [
+                    'title' => '文字介紹編輯',
+                ],
             'footer' =>
                 [
-                    'title' => 'footer',
+                    'title' => 'footer編輯',
                     'url' =>
                         [
                             'title' => '連結編輯',
+                        ],
+                ],
+
+
+            'login' =>
+                [
+                    'title' => '登入畫面',
+                    'background' =>
+                        [
+                            'title' => '背景圖編輯',
                         ],
                 ],
             'category' =>

@@ -42,103 +42,45 @@
                             <div class="card-body messageInfo-modal">
                                 <h4 class="card-title"></h4>
                                 <div class="form-group row">
-                                    <label for="com2" class="col-sm-3 text-right control-label col-form-label">type</label>
-                                    <div class="col-sm-9">
+                                    <label for="com2" class="col-sm-1 text-right control-label col-form-label">type</label>
+                                    <div class="col-sm-11">
                                         <select class="form-control type" id="com2" name="type">
-                                            <option value="home.slider">首頁輪播圖</option>
-{{--                                            <option value="home.header">首頁上方圖</option>--}}
-{{--                                            <option value="home.advertising">首頁廣告圖</option>--}}
-{{--                                            <option value="home.footer">首頁下方圖</option>--}}
+                                            {!! data_get($data['arr'], 'options') !!}
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="com3" class="col-sm-3 text-right control-label col-form-label">標頭<span style="color:red">*</span></label>
-                                    <div class="col-sm-9">
+                                    <label for="com3" class="col-sm-1 text-right control-label col-form-label">標頭<span style="color:red">*</span></label>
+                                    <div class="col-sm-11">
                                         <input type="text" name="title" value="{{data_get($data['arr'], 'title')}}" id="com3" class="form-control title" placeholder="">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="com4" class="col-sm-3 text-right control-label col-form-label">概要</label>
-                                    <div class="col-sm-9">
+                                    <label for="com4" class="col-sm-1 text-right control-label col-form-label">註解</label>
+                                    <div class="col-sm-11">
                                         <input type="text" name="summary" value="{{data_get($data['arr'], 'summary')}}" id="com4" class="form-control summary" placeholder="">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="com5" class="col-sm-3 text-right control-label col-form-label">url</label>
-                                    <div class="col-sm-9">
+                                    <label for="com5" class="col-sm-1 text-right control-label col-form-label">url</label>
+                                    <div class="col-sm-11">
                                         <input type="text" name="url" value="{{data_get($data['arr'], 'url')}}" class="form-control url" id="com5" placeholder="">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="com6" class="col-sm-3 text-right control-label col-form-label">樣式</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" name="style" value="{{data_get($data['arr'], 'style')}}" class="form-control style" id="com6" placeholder="">
+                                    <label for="detail" class="col-sm-1 text-right control-label col-form-label">內容</label>
+                                    <div class="col-sm-11 note-editable">
+                                        <textarea id="detail" name="detail">
+                                            {!! data_get($data['arr'], 'detail') !!}
+                                        </textarea>
                                     </div>
                                 </div>
-
-{{--                                <div class="form-group row">--}}
-{{--                                    <label for="lname" class="col-sm-3 text-right control-label col-form-label">上傳PDF</label>--}}
-{{--                                    <div class="col-sm-9">--}}
-{{--                                        <input type="file" name="files[]" value="{{$info->vFile[0] or ''}}" id="lname" accept="application/*" class="form-control uploadfile" multiple="multiple">--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-
-                                <div class="form-group row">
-                                    <label for="img1" class="col-sm-3 text-right control-label col-form-label">圖片<span style="color:red">*</span></label>
-                                    <div class="col-sm-9">
-                                        <a class="btn-image-modal" data-modal="image-form" data-id="">
-                                            @forelse(data_get( $data['arr'], 'image', []) as $key => $var)
-                                                <img id="{{$key}}" src="{{$var or ''}}" style="height:140px" alt="">
-                                            @empty
-                                                <img src="{{url('images/empty.jpg')}}" style="height:140px" alt="">
-                                            @endforelse
-                                        </a>
-                                        @forelse(data_get( $data['arr'], 'image', []) as $key => $var)
-                                            <img id="img1" src="{{$var or ''}}" style="height:140px" alt="">
-                                        @empty
-                                            <img id="img1" src="{{url('images/empty.jpg')}}" style="height:140px" alt="">
-                                        @endforelse
-                                    </div>
-                                </div>
-
-{{--                                <div class="form-group row">--}}
-{{--                                    <label for="img2" class="col-sm-3 text-right control-label col-form-label">圖片s<span style="color:red">*</span></label>--}}
-{{--                                    <div class="col-sm-9 cropper_image">--}}
-{{--                                    @if(isset($data['arr']['image']))--}}
-{{--                                        @foreach(data_get( $data['arr'], 'image', []) as $key => $var)--}}
-{{--                                            <div class="image-box">--}}
-{{--                                                <img id="{{$key}}" src="{{$var or ''}}">--}}
-{{--                                                <a class="image-del">X</a>--}}
-{{--                                            </div>--}}
-{{--                                        @endforeach--}}
-{{--                                        <a class="btn-image-modal" data-modal="image-form" data-id="">--}}
-{{--                                            @if(count(data_get( $data['arr'], 'image', [])) < 5)--}}
-{{--                                                <img id="Image" data-data="" src="{{url('images/addimg.jpg')}}" style="height:140px">--}}
-{{--                                            @endif--}}
-{{--                                        </a>--}}
-{{--                                    @else--}}
-{{--                                        <a class="btn-image-modal" data-modal="image-form" data-id="">--}}
-{{--                                            <img id="Image" data-data="" src="{{url('images/empty.jpg')}}" style="height:140px">--}}
-{{--                                        </a>--}}
-{{--                                    @endif--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-
-{{--                                <div class="form-group row">--}}
-{{--                                    <label for="detail" class="col-sm-3 text-right control-label col-form-label">內容</label>--}}
-{{--                                    <div class="col-sm-9 note-editable">--}}
-{{--                                        <textarea id="detail" name="detail">--}}
-{{--                                            {!! data_get($data['arr'], 'detail') !!}--}}
-{{--                                        </textarea>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
                             </div>
                             <hr>
                             <div class="card-body">
                                 <div class="form-group m-b-0 text-right">
                                     @if( !data_get($data, 'Disable'))
-                                        @if($data['arr'])
+                                        @if(data_get($data['arr'], 'id'))
                                             <button type="button" class="btn btn-success waves-effect waves-light btn-dosave" data-id="{{data_get($data['arr'], 'id')}}">Save</button>
                                         @else
                                             <button type="button" class="btn btn-info waves-effect waves-light btn-doadd">Add</button>

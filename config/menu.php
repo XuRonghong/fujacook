@@ -260,7 +260,7 @@ return [
     ],
     //
     [
-        //介面管理
+        //介面管理-前台
         "id" => 6,
         "parent_id" => 0,
         "name" => "scenes",
@@ -270,21 +270,21 @@ return [
         "sub_menu" => 1,
         "child" => [
             [
-                //登入畫面
+                //選單欄
                 "id" => 601,
                 "parent_id" => 6,
-                "name" => "scenes.login",
-                "link" => "",
+                "name" => "scenes.navbar",
+                "link" => "admin/scenes/navbar",
                 "access" => "1,2",
-                "open" => 0,
-                "sub_menu" => 1,
+                "open" => 1,
+                "sub_menu" => 0,
                 "child" => [
                     [
-                        //背景圖
+                        //首頁
                         "id" => 60101,
                         "parent_id" => 601,
-                        "name" => "scenes.login.background",
-                        "link" => "admin/scenes/login/background",
+                        "name" => "scenes.slider.home",
+                        "link" => "admin/scenes/slider",
                         "access" => "1,2",
                         "open" => 1,
                         "sub_menu" => 0,
@@ -292,21 +292,21 @@ return [
                 ]
             ],
             [
-                //首頁畫面
+                //滑動圖
                 "id" => 602,
                 "parent_id" => 6,
-                "name" => "scenes.home",
-                "link" => "",
+                "name" => "scenes.slider",
+                "link" => "admin/scenes/slider",
                 "access" => "1,2",
                 "open" => 1,
-                "sub_menu" => 1,
+                "sub_menu" => 0,
                 "child" => [
                     [
-                        //滑動圖
+                        //首頁
                         "id" => 60201,
                         "parent_id" => 602,
-                        "name" => "scenes.home.slider",
-                        "link" => "admin/scenes/home",
+                        "name" => "scenes.slider.home",
+                        "link" => "",
                         "access" => "1,2",
                         "open" => 1,
                         "sub_menu" => 0,
@@ -327,12 +327,55 @@ return [
                         //連結編輯
                         "id" => 60301,
                         "name" => "scenes.header.url",
-                        "link" => "web/scenes/header/url",
+                        "link" => "admin/scenes/header/url",
                         "vCss" => "",
                         "parent_id" => 603,
                         "access" => "1,2",
                         "sub_menu" => 0,
                         "open" => 1,
+                    ],
+                ]
+            ],
+            [
+                //文字介紹
+                "id" => 605,
+                "parent_id" => 6,
+                "name" => "scenes.introduce",
+                "link" => "admin/scenes/introduce",
+                "access" => "1,2",
+                "open" => 1,
+                "sub_menu" => 0,
+            ],
+            [
+                //footer
+                "id" => 608,
+                "parent_id" => 6,
+                "name" => "scenes.footer",
+                "link" => "admin/scenes/footer",
+                "access" => "1,2",
+                "open" => 1,
+                "sub_menu" => 0,
+            ],
+
+            [
+                //登入畫面
+                "id" => 610,
+                "parent_id" => 6,
+                "name" => "scenes.login",
+                "link" => "",
+                "access" => "1,2",
+                "open" => 0,
+                "sub_menu" => 1,
+                "child" => [
+                    [
+                        //背景圖
+                        "id" => 61001,
+                        "parent_id" => 610,
+                        "name" => "scenes.login.background",
+                        "link" => "admin/scenes/login/background",
+                        "access" => "1,2",
+                        "open" => 1,
+                        "sub_menu" => 0,
                     ],
                 ]
             ],

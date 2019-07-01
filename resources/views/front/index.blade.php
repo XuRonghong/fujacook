@@ -9,22 +9,28 @@
 @section('content')
 
         <!--鍋子介紹A-->
-        <section class="fuja-introduceA">
-            <div class="container">
-                <div class="row">
-                    <div class="fuja-introduce-left">
-                        <img src="{{asset('/web0617/img/introduce01.jpg')}}" alt="">
-                    </div>
-                    <div class="fuja-introduce-right">
-                        <img src="{{asset('/web0617/img/introduce02.jpg')}}" alt="">
-                    </div>
-                </div>
-            </div>
-        </section>
+{{--        <section class="fuja-introduceA">--}}
+{{--            <div class="container">--}}
+{{--                <div class="row">--}}
+{{--                    @foreach(data_get($data['arr'], 'introduce') as $var)--}}
+{{--                        {!! $var->detail !!}--}}
+{{--                    @endforeach--}}
+{{--                    <div class="fuja-introduce-left">--}}
+{{--                        <img src="{{asset('/web0617/img/introduce01.jpg')}}" alt="">--}}
+{{--                    </div>--}}
+{{--                    <div class="fuja-introduce-right">--}}
+{{--                        <img src="{{asset('/web0617/img/introduce02.jpg')}}" alt="">--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </section>--}}
+        @foreach(data_get($data['arr'], 'introduce') as $var)
+            {!! $var->detail !!}
+        @endforeach
         <!--鍋子介紹B-->
-        <section class="fuja-introduceB">
-            <img src="{{asset('/web0617/img/introduce03.jpg')}}" alt="">
-        </section>
+{{--        <section class="fuja-introduceB">--}}
+{{--            <img src="{{asset('/web0617/img/introduce03.jpg')}}" alt="">--}}
+{{--        </section>--}}
         <!--鍋子介紹C-->
         <section class="fuja-introduceC"></section>
         <!--鍋子介紹D-->

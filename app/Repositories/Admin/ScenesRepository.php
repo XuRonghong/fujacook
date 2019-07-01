@@ -65,12 +65,22 @@ class ScenesRepository extends Repository
         if ( $arr['aaData']) {
             foreach ($arr['aaData'] as $key => $var) {
                 switch ($var->type) {
-                    case 'home.slider':
+                    case 'navbar.home':
+                        $var->type = '首頁選項欄';
+                        break;
+                    case 'slider.home':
                         $var->type = '首頁輪播圖';
+                        break;
+                    case 'introduce.home':
+                        $var->type = '首頁文字';
                         break;
                 }
                 //找圖片檔案
-                $var->image = $this->transFileIdtoImage($var->file_id);
+//                if ( $var->image) {
+//                    $var->image = array($var->image);
+//                } else {
+                    $var->image = $this->transFileIdtoImage($var->file_id);
+//                }
             }
         }
         return $arr;

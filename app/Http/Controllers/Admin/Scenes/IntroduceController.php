@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 
-class HomeController extends Controller
+class IntroduceController extends Controller
 {
     protected $repository;
     protected $presenter;
@@ -19,8 +19,11 @@ class HomeController extends Controller
         $this->repository = $repository;
         $this->presenter = $presenter;
 
+        $this->presenter->setViewName('scenes.introduce');
+        $this->presenter->setTitle('Scenes introduce');
+
         //所有關於route::resource的位置
-        $this->route_url = $this->presenter->getRouteResource($this->presenter->setRouteName('admin.scenes.home'));
+        $this->route_url = $this->presenter->getRouteResource($this->presenter->setRouteName('admin.scenes.introduce'));
     }
 
     /**
@@ -28,7 +31,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($type=null)
+    public function index()
     {
         //meta data
         $data = $this->presenter->getParameters('index');
@@ -44,7 +47,7 @@ class HomeController extends Controller
         //
         if(request()->ajax())
         {
-            $data = $this->repository->getDataTable($request);
+            $data = $this->repository->getDataTable($request, 'type = "introduce.home"');
 
             $data = $this->repository->eachOne_aaData($data);     //每一項目要做甚麼事,有需要在使用
 
@@ -62,8 +65,8 @@ class HomeController extends Controller
     {
         //
         $data = $this->presenter->getParameters('create');
-        //
-        $data['arr'] = [];
+        //get option for select
+        $data['arr']['options'] = $this->presenter->getSelectOption_introduct();
         //to ajax url
         $data['route_url'] = $this->route_url;
 
@@ -98,6 +101,8 @@ class HomeController extends Controller
         $data = $this->presenter->getParameters('show');
         //若資料庫沒有該id 則404畫面
         $data['arr'] = $this->repository->findOrFail($id) or abort(404);
+        //get option for select
+        $data['arr']['options'] = $this->presenter->getSelectOption_introduct($data['arr']['type']);
         //從資料串裡依據file_id找到image
         $data['arr']->image = $this->repository->transFileIdtoImage($data['arr']->file_id);
         //to ajax url
@@ -118,6 +123,8 @@ class HomeController extends Controller
         $data = $this->presenter->getParameters('edit');
         //若資料庫沒有該id 則404畫面
         $data['arr'] = $this->repository->findOrFail($id) or abort(404);
+        //get option for select
+        $data['arr']['options'] = $this->presenter->getSelectOption_introduct($data['arr']['type']);
         //從資料串裡依據file_id找到image
         $data['arr']->image = $this->repository->transFileIdtoImage($data['arr']->file_id);
         //to ajax url
@@ -136,7 +143,7 @@ class HomeController extends Controller
     public function update(Request $request, $id)
     {
         // 除特殊情況不驗證
-        if ($request->get('doValidate', 1)) $this->repository->validate($request);
+        if ($request->get('doValidate', 1)) $this->repository->validate($request, 1);
 
         $data = $this->repository->update($request->all(), $id);
 

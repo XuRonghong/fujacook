@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Setting;
+use App\Scene;
 
 class SettingTableSeeder extends Seeder
 {
@@ -13,12 +14,11 @@ class SettingTableSeeder extends Seeder
     public function run()
     {
         Setting::truncate();
-
         $parameters = [
             [
                 'type' => 'app',
                 'name' => 'app_id',
-                'content' => str_random(15),
+                'content' => rand(1000000000000001, 1999999999999999),
             ], [
                 'type' => 'meta',
                 'name' => 'meta_title',
@@ -81,9 +81,73 @@ class SettingTableSeeder extends Seeder
                 'content' => '',
             ]
         ];
-
         foreach ($parameters as $parameter) {
             Setting::create($parameter);
+        }
+
+
+        Scene::truncate();
+        $data = ['type' => 'navbar.home', 'open'=> 1];
+        $scenes = [
+            [
+                'type' => $data['type'],
+                'title' => '首頁',
+                'url' => env('APP_URL').'/',
+                'open' => $data['open'],
+            ], [
+                'type' => $data['type'],
+                'title' => '關於FUJACOOK',
+                'url' => env('APP_URL').'/about',
+                'open' => $data['open'],
+            ], [
+                'type' => $data['type'],
+                'title' => '媒體報導',
+                'url' => env('APP_URL').'/reports',
+                'open' => $data['open'],
+            ], [
+                'type' => $data['type'],
+                'title' => '即食鍋',
+                'url' => env('APP_URL').'#',
+                'open' => $data['open'],
+            ], [
+                'type' => $data['type'],
+                'title' => '即時餐',
+                'url' => env('APP_URL').'#',
+                'open' => $data['open'],
+            ], [
+                'type' => $data['type'],
+                'title' => '最新消息',
+                'url' => env('APP_URL').'/news',
+                'open' => $data['open'],
+            ], [
+                'type' => $data['type'],
+                'title' => '聯繫我們',
+                'url' => env('APP_URL').'/contactus',
+                'open' => $data['open'],
+            ],
+        ];
+        foreach ($scenes as $scene) {
+            Scene::create($scene);
+        }
+
+        $data = ['type' => 'slider.home', 'open'=> 1];
+        $scenes = [
+            [
+                'type' => $data['type'],
+                'title' => 'banner01',
+                'image' => env('APP_URL').'/web0617/img/slide01.jpg',
+                'url' => env('APP_URL').'/#',
+                'open' => $data['open'],
+            ], [
+                'type' => $data['type'],
+                'title' => 'banner02',
+                'image' => env('APP_URL').'/web0617/img/slide02.jpg',
+                'url' => env('APP_URL').'/#',
+                'open' => $data['open'],
+            ],
+        ];
+        foreach ($scenes as $scene) {
+            Scene::create($scene);
         }
     }
 }

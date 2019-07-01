@@ -55,6 +55,7 @@
         }
     }
 
+
     function ajax(url='', data={}, method='POST')
     {
         $.ajax({
@@ -91,6 +92,7 @@
         })
     }
 
+
     function ajaxOpen(url='', data={}, method='POST', DOM=null)
     {
         toastr.info('Wait me ...').css("width","240px")
@@ -126,6 +128,7 @@
         })
     }
 
+
     function ajaxUploadFile(url='', data={}, method='POST')
     {
         let file_id
@@ -152,6 +155,7 @@
         })
         return file_id
     }
+
 
     function doDelete(url, data, table)
     {
@@ -198,6 +202,7 @@
         })
     }
 
+
     function doDelete_2016(id, data)
     {
         swal({
@@ -233,6 +238,7 @@
         })
     }
 
+
     function do_upload_file_fun()
     {
         //上傳檔案資料庫，回傳file id
@@ -243,6 +249,7 @@
         data.append('file', file_data)
         return ajaxUploadFile(url, data, 'POST')
     }
+
 
     function prop_fromData_fun(formHTML, datas=[])
     {
@@ -259,6 +266,10 @@
         if (document.getElementById("content")) {
             form_data.append('content', $('#content').summernote('code'))
         }
+        //撈取html content
+        if (document.getElementById("detail")) {
+            form_data.append('detail', $('#detail').summernote('code'))
+        }
 
         //假如還有資料就填充上去
         for (let key in datas) {
@@ -267,6 +278,7 @@
 
         return form_data
     }
+
 
     function prop_fromData_multpleFile(formHTML, datas=[])
     {

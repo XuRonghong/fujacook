@@ -137,8 +137,37 @@ Route::group([
             'namespace' => 'Scenes',
         ], function() {
             //
-            $index = array('url'=>'home', 'C'=>'HomeController', 'name'=>'scenes.home');
-            Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
+            $index = array('url'=>'navbar', 'C'=>'NavbarController', 'name'=>'scenes.navbar');
+            Route::get( $index['url'].'/list',   $index['C'].'@list'  )->name($index['name'].'.list');
+            Route::get( $index['url'],           $index['C'].'@index' )->name($index['name'].'.index');
+            Route::get( $index['url'].'/create', $index['C'].'@create')->name($index['name'].'.create');
+            Route::post($index['url'],           $index['C'].'@store' )->name($index['name'].'.store');
+            Route::get( $index['url'].'/{id}',   $index['C'].'@show'  )->name($index['name'].'.show');
+            Route::get( $index['url'].'/{id}'.'/edit', $index['C'].'@edit'   )->name($index['name'].'.edit');
+            Route::post($index['url'].'/update/{id}',  $index['C'].'@update' )->name($index['name'].'.update');
+            Route::post($index['url'].'/destroy/{id}', $index['C'].'@destroy')->name($index['name'].'.destroy');
+
+            //
+            $index = array('url'=>'slider', 'C'=>'SliderController', 'name'=>'scenes.slider');
+            Route::get( $index['url'].'/list',   $index['C'].'@list'  )->name($index['name'].'.list');
+            Route::get( $index['url'],           $index['C'].'@index' )->name($index['name'].'.index');
+            Route::get( $index['url'].'/create', $index['C'].'@create')->name($index['name'].'.create');
+            Route::post($index['url'],           $index['C'].'@store' )->name($index['name'].'.store');
+            Route::get( $index['url'].'/{id}',   $index['C'].'@show'  )->name($index['name'].'.show');
+            Route::get( $index['url'].'/{id}'.'/edit', $index['C'].'@edit'   )->name($index['name'].'.edit');
+            Route::post($index['url'].'/update/{id}',  $index['C'].'@update' )->name($index['name'].'.update');
+            Route::post($index['url'].'/destroy/{id}', $index['C'].'@destroy')->name($index['name'].'.destroy');
+
+            //
+            $index = array('url'=>'introduce', 'C'=>'IntroduceController', 'name'=>'scenes.introduce');
+            Route::get( $index['url'].'/list',   $index['C'].'@list'  )->name($index['name'].'.list');
+            Route::resource($index['url'], $index['C'], ['as'=> 'scenes', 'name'=> $index['name'] ]);
+            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
+            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
+
+            //
+            $index = array('url'=>'footer', 'C'=>'FooterController', 'name'=>'scenes.footer');
+            Route::get( $index['url'].'/list',   $index['C'].'@list'  )->name($index['name'].'.list');
             Route::resource($index['url'], $index['C'], ['as'=> 'scenes', 'name'=> $index['name'] ]);
             Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
             Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
