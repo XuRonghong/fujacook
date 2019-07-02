@@ -73,7 +73,7 @@ class LoginController extends Controller
     {
         $this->guard()->logout();
 //        $request->session()->invalidate();
-        return redirect('/admin');
+        return redirect('admin/login');
     }
 
     /** 登入驗證 複寫 **/
