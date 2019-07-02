@@ -258,8 +258,11 @@
         /*** 上傳檔案資料庫，需要再呼叫，回傳file id ***/
         // let file_id = do_upload_file_fun();
 
-        if (current_modal.find("img").attr('id')) {
+        if (current_modal.find("img").attr('id')!=='') {
             form_data.append('file_id', current_modal.find("img").attr('id'))
+        }
+        if (current_modal.find("img").attr('src')!=='') {
+            form_data.append('image', current_modal.find("img").attr('src'))
         }
 
         //撈取html content

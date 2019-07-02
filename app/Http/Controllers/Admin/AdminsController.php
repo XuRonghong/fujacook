@@ -45,7 +45,7 @@ class AdminsController extends Controller
         //
         if(request()->ajax())
         {
-            $data = $this->repository->getDataTable($request);
+            $data = $this->repository->getDataTable($request, 'id<>1');
 
             $data = $this->repository->eachOne_aaData($data);     //每一項目要做甚麼事,有需要在使用
 
@@ -119,8 +119,6 @@ class AdminsController extends Controller
         $data = $this->presenter->getParameters('edit');
         //若資料庫沒有該id 則404畫面
         $data['arr'] = $this->repository->findOrFail($id) or abort(404);
-        //從資料串裡依據file_id找到image
-//        $data['arr']->image = $this->repository->transFileIdtoImage($data['arr']->file_id);
         //to ajax url
         $data['route_url'] = $this->route_url;
 

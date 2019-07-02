@@ -82,7 +82,29 @@
                         "mData": "rank",
                         // "width": "100px",
                         "sName": "rank",
+                        "mRender": function (data, type, row) {
+                            // return data;
+                            data2=data;
+                            if (data=='')data='-';
+                            return '<input class="isEdit rank" data-id="rank" size="10" style="width: 100%; display: none;" type="text" value="' + data2 + '"></input>'+
+                                '<div class="aaa">'+data+'</div>';
+                        }
+                    },
+                    {
+                        "sTitle": "image",
+                        "mData": "info",
+                        "sName": "info",
                         "bSortable": false,
+                        "bSearchable": false,
+                        // "width": '100px',
+                        "mRender": function (data, type, row) {
+                            // var html_str = "";
+                            // for (var key in row.user_image) {
+                            //     html_str += "<img width='75px' src=" + data[key] + " style='margin:5px;'>";
+                            // }
+                            // return html_str;
+                            return "<img width='100%' src=" + data.user_image + ">";
+                        }
                     },
                     {
                         "sTitle": "name",
@@ -102,12 +124,12 @@
                         // "width": "100px",
                         "sName": "createIP",
                     },
-                    {
-                        "sTitle": "active",
-                        "mData": "active",
-                        // "width": "100px",
-                        "sName": "active",
-                    },
+                    // {
+                    //     "sTitle": "active",
+                    //     "mData": "active",
+                    //     // "width": "100px",
+                    //     "sName": "active",
+                    // },
                     {
                         "sTitle": "",
                         "bSortable": false,
@@ -169,7 +191,7 @@
             data_table.on('click', '.btn-open', function () {
                 let id = $(this).closest('tr').attr('id')
                 url = '{{data_get($data['route_url'], "update")}}'.replace('-10', id)
-                ajaxOpen(url, {active: 'change', doValidate: 0}, 'POST', table)
+                ajaxOpen(url, {open: 'change', doValidate: 0}, 'POST', table)
             })
             //
             data_table.on('click', '.btn-show', function () {
@@ -191,6 +213,31 @@
                     "_token": "{{ csrf_token() }}"
                 };
                 doDelete(url, data, table)          // from layout.master
+            });
+
+
+            // 按一下進入編輯模式
+            data_table.on('click', '.aaa', function () {
+                $('div.aaa').show();
+                $('input.isEdit').hide();
+                $(this).parent().find('input.isEdit').show();
+                $(this).hide();
+            });
+            // 編輯完成退回瀏覽模式
+            data_table.on('change', '.isEdit', function (e) {
+                //
+                toastr.info('Wait me', "等我一下...");
+                //
+                $(this).hide();
+                $(this).parent().find('.aaa').show();
+                //
+                let id = $(this).closest('tr').attr('id');
+                let url = '{{data_get($data['route_url'], "update")}}'.replace('-10', id)  //-10代替字元為id
+                let data = {}
+                data[$(this).data('id')] = $(this).val()
+                data['doValidate'] = 0
+                //
+                ajaxOpen(url, data, 'POST', table)
             });
         });
     </script>

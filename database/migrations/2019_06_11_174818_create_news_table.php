@@ -17,7 +17,7 @@ class CreateNewsTable extends Migration
         }
         Schema::create('news', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('rank')->comment('順序')->nullable();
+            $table->integer('rank')->comment('順序')->nullable()->default(0);
             $table->integer('type')->comment('類')->nullable();
             $table->integer('author_id')->comment('發布者')->default(1);
             $table->string('title', 127)->nullable();

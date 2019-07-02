@@ -17,7 +17,7 @@ class CreateAdminsTable extends Migration
             Schema::create('admins', function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('no', 14)->comment('管理者編號:a + auth()->id + time()');
-                $table->integer('rank')->comment('順序')->nullable();
+                $table->integer('rank')->comment('順序')->nullable()->default(0);
                 $table->integer('type')->comment('類')->nullable();
                 $table->string('name');
                 $table->string('email')->nullable();

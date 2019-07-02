@@ -1,6 +1,5 @@
 <?php
 
-use App\SysMemberInfo;
 use Illuminate\Http\Request;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
@@ -19,8 +18,8 @@ class AdminTableSeeder extends Seeder
         Admin::truncate();
         //
         Admin::create([
-            'no'    => 'a1000000000001',
-            'rank'  => 1,
+            'no'    => 'a0000000000009',
+            'rank'  => 0,
             'type'  => 1,
             'name'    => 'Superdo',
             'email'    => 'hello080810@gmail.com',
@@ -32,13 +31,13 @@ class AdminTableSeeder extends Seeder
         ]);
         //
         Admin::create([
-            'no'    => 'a1000000000002',
-            'rank'  => 2,
+            'no'    => 'a1000000000001',
+            'rank'  => 1,
             'type'  => 2,
-            'name'    => 'fujacook',
-            'email'    => 'fujacook@fujacook.com',
-            'account'   => 'fujacook',
-            'password'   =>  Hash::make('fujacook'),
+            'name'    => 'Manage',
+            'email'    => 'manage@gmail.com',
+            'account'   => 'manage',
+            'password'   =>  Hash::make('123123'),
             'createIP'  => env('APP_URL', '127.0.0.1'),
             'remember_token' =>  str_random(10),
             'active'    =>  1
@@ -46,12 +45,12 @@ class AdminTableSeeder extends Seeder
         //
         Admin::create([
             'no'    => 'a1'.time().rand('00','99'), //以時間當亂數種子
-            'rank'  => 3,
+            'rank'  => 2,
             'type'  => 3,
-            'name'    => 'Ronghong',
-            'email'    => 'hello080810@gmail.com',
-            'account'   => 'ronghong',
-            'password'   =>  Hash::make('123123'),
+            'name'    => 'fujacook',
+            'email'    => 'fujacook@fujacook.com',
+            'account'   => 'fujacook',
+            'password'   =>  Hash::make('fujacook'),
             'createIP'  => env('APP_URL', '127.0.0.1'),
             'remember_token' =>  str_random(10),
             'active'    =>  1
@@ -67,15 +66,15 @@ class AdminTableSeeder extends Seeder
                 "user_contact" => ""
             ],
             [
-                "user_image" => env('APP_URL') . "/images/admin.jpg",
+                "user_image" => env('APP_URL') . "/xtreme-admin/assets/images/users/3.jpg",
                 "user_name" => "Manager",
-                "user_email" => "fujacook@fujacook.com",
+                "user_email" => "manage@gmail.com",
                 "user_contact" => ""
             ],
             [
-                "user_image" => env('APP_URL') . "/xtreme-admin/assets/images/users/3.jpg",
-                "user_name" => "Ronghong",
-                "user_email" => "ronghong@fujacook.com",
+                "user_image" => env('APP_URL') . "/images/admin.jpg",
+                "user_name" => "Fujacook",
+                "user_email" => "fujacook@fujacook.com",
                 "user_contact" => ""
             ],
         ];
