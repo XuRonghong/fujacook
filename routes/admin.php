@@ -41,7 +41,7 @@ Route::post( 'doResetPassword' , $controller . '@doResetPassword' )->name('passw
 Route::get('/home', 'HomeController@index')->name('home');
 //
 Route::group([
-        'middleware' => ['assign.guard:admin', 'CheckAdmin:admin' /*,admin/login','LoginThrottle:5,10'*/]
+        'middleware' => ['assign.guard:admin,admin/login', 'CheckAdmin:admin' /*,admin/login','LoginThrottle:5,10'*/]
     ],function(){
 
     Route::get('/', 'IndexController@index');
