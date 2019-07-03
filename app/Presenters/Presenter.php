@@ -43,7 +43,7 @@ abstract class Presenter
     /*
      * data object or array forEach to do.
      */
-    function eachOne_aaData($arr)
+    public function eachOne_aaData($arr)
     {
         if ( $arr['aaData']) {
             foreach ($arr['aaData'] as $key => $var) {
@@ -51,6 +51,19 @@ abstract class Presenter
             }
         }
         return $arr;
+    }
+
+    /*
+     * trans each one data for output view.
+     */
+    public function transOne($data, $other=0)
+    {
+        //從資料串裡依據file_id找到image
+        $data->image = $this->transFileIdtoImage($data->file_id);
+        if ($other){
+
+        }
+        return $data;
     }
 
 
@@ -173,15 +186,14 @@ abstract class Presenter
                 ]);
         }
 
-        $nav = [
-            'admins' => route('admin.admins.index'),
-            'news' => route('admin.news.index'),
-            'store' => route('admin.store.index'),
-            'permissions' => route('admin.permissions.index'),
-        ];
-        $data['nav'] = $nav;
-        $menu = $this->getMenu2();
-        $data['menu'] = $menu;
+//        $nav = [
+//            'admins' => route('admin.admins.index'),
+//            'news' => route('admin.news.index'),
+//            'store' => route('admin.store.index'),
+//            'permissions' => route('admin.permissions.index'),
+//        ];
+//        $data['nav'] = $nav;
+        $data['menu'] = $this->getMenu2();
 
         return $data;
     }

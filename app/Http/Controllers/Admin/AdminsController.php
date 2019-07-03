@@ -99,8 +99,6 @@ class AdminsController extends Controller
         $data = $this->presenter->getParameters('show');
         //若資料庫沒有該id 則404畫面
         $data['arr'] = $this->repository->findOrFail($id) or abort(404);
-        //從資料串裡依據file_id找到image
-        //$data['arr']->image = $this->presenter->transFileIdtoImage($data['arr']->file_id);
         //to ajax url
         $data['route_url'] = $this->route_url;
 

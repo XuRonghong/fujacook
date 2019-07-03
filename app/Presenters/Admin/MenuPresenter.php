@@ -14,9 +14,7 @@ class MenuPresenter extends Presenter
     protected $route_name;      //Route->name()
 
 
-    /*
-     * data object or array forEach to do.
-     */
+    // data object or array forEach to do from menus.
     public function eachOne_aaData($arr)
     {
         if ( $arr['aaData']) {
@@ -27,8 +25,7 @@ class MenuPresenter extends Presenter
         return $arr;
     }
 
-
-    /* data object or array forEach to do. for admin_menu */
+    // data object or array forEach to do from admin_menu.
     public function eachOne_aaData_adminMenu($arr)
     {
         if ( $arr['aaData']) {

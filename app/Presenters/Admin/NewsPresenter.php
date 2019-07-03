@@ -11,10 +11,7 @@ class NewsPresenter extends Presenter
     protected $route_name;      //Route->name()
 
 
-
-    /*
-     * data object or array forEach to do.
-     */
+    // data object or array forEach to do from news.
     public function eachOne_aaData($arr)
     {
         if ( $arr['aaData']) {
@@ -24,5 +21,15 @@ class NewsPresenter extends Presenter
             }
         }
         return $arr;
+    }
+
+    // trans each one data for output view from news.
+    function tranOne($data, $other=0)
+    {
+        $data = parent::transOne($data);
+        //
+        if ($other){
+        }
+        return $data;
     }
 }

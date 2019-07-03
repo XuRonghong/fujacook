@@ -13,9 +13,7 @@ class AdminsPresenter extends Presenter
     protected $route_name;      //Route->name()
 
 
-    /*
-     * data object or array forEach to do.
-     */
+    // data object or array forEach to do from admins.
     public function eachOne_aaData($arr)
     {
         if ( $arr['aaData']) {

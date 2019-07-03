@@ -11,4 +11,15 @@ class SettingPresenter extends Presenter
     protected $view_group_name = 'setting';       //document of view group
     protected $route_name;      //Route->name()
 
+
+    // data object or array forEach to do from setting.
+    public function eachOne_aaData($arr)
+    {
+        if ( $arr['aaData']) {
+            foreach ($arr['aaData'] as $key => $var) {
+
+            }
+        }
+        return $arr;
+    }
 }

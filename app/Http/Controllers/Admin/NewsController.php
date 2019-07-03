@@ -46,7 +46,7 @@ class NewsController extends Controller
         {
             $data = $this->repository->getDataTable($request);
 
-            //$data = $this->presenter->eachOne_aaData($data);     //每一項目要做甚麼事,有需要在使用
+            $data = $this->presenter->eachOne_aaData($data);     //每一項目要做甚麼事,有需要在使用
 
             return response()->json($data,200);
         }
@@ -98,8 +98,8 @@ class NewsController extends Controller
         $data = $this->presenter->getParameters('show');
         //若資料庫沒有該id 則404畫面
         $data['arr'] = $this->repository->findOrFail($id) or abort(404);
-        //從資料串裡依據file_id找到image
-        $data['arr']->image = $this->presenter->transFileIdtoImage($data['arr']->file_id);
+        //轉換顯示數據
+        $data['arr'] = $this->presenter->tranOne($data['arr']);
         //to ajax url
         $data['route_url'] = $this->route_url;
 
@@ -118,8 +118,8 @@ class NewsController extends Controller
         $data = $this->presenter->getParameters('edit');
         //若資料庫沒有該id 則404畫面
         $data['arr'] = $this->repository->findOrFail($id) or abort(404);
-        //從資料串裡依據file_id找到image
-        $data['arr']->image = $this->presenter->transFileIdtoImage($data['arr']->file_id);
+        //轉換顯示數據
+        $data['arr'] = $this->presenter->tranOne($data['arr']);
         //to ajax url
         $data['route_url'] = $this->route_url;
 

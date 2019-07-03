@@ -2,11 +2,10 @@
 
 namespace App\Repositories\Admin;
 
-use App\Admin;
 use App\LogAction;
 use App\LogLogin;
-use Illuminate\Http\Request;
 use App\Repositories\Repository;
+
 
 class LogRepository extends Repository
 {

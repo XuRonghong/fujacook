@@ -11,9 +11,7 @@ class LogPresenter extends Presenter
     protected $route_name;      //Route->name()
 
 
-    /*
-     * data object or array forEach to do.
-     */
+    // data object or array forEach to do from log.
     function eachOne_aaData($arr)
     {
         if ( $arr['aaData']) {
@@ -31,6 +29,7 @@ class LogPresenter extends Presenter
         return $arr;
     }
 
+    // trans each one data for output view from log.
     function tranOne($data, $other=0)
     {
         $data['type'] = $this->transAdminType($data['type']);

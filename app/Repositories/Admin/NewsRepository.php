@@ -54,4 +54,9 @@ class NewsRepository extends Repository
     {
         return parent::delete($id);
     }
+
+    public function findOrFail($id)
+    {
+        return $this->model->findOrFail($id);
+    }
 }

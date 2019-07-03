@@ -11,9 +11,7 @@ class ScenesPresenter extends Presenter
     protected $route_name;      //Route->name()
 
 
-    /*
-     * data object or array forEach to do.
-     */
+    // data object or array forEach to do from scenes.
     public function eachOne_aaData($arr)
     {
         if ( $arr['aaData']) {
@@ -38,6 +36,22 @@ class ScenesPresenter extends Presenter
             }
         }
         return $arr;
+    }
+
+
+    // trans each one data for output view from scenes.
+    public function transOne($data, $other=0)
+    {
+        $data = parent::transOne($data);
+
+        //get option for select with scenes type
+        switch ($other){
+            case 'navbar': $data['options'] = $this->getSelectOption_navbar($data['type']); break;
+            case 'slider': $data['options'] = $this->getSelectOption_slider($data['type']); break;
+            case 'introduce': $data['options'] = $this->getSelectOption_introduce($data['type']); break;
+            case 'footer': $data['options'] = $this->getSelectOption_footer($data['type']); break;
+        }
+        return $data;
     }
 
 
@@ -85,7 +99,7 @@ class ScenesPresenter extends Presenter
         return $opt;
     }
 
-    public function getSelectOption_introduct($type='', $opt = '')
+    public function getSelectOption_introduce($type='', $opt = '')
     {
         $arr = $this->getSelectOption();
         foreach ($arr['introduce'] as $key => $val){
