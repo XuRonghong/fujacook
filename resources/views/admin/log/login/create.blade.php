@@ -33,38 +33,45 @@
                             <div class="card-body messageInfo-modal">
                                 <h4 class="card-title"></h4>
                                 <div class="form-group row">
-                                    <label for="com2" class="col-sm-3 text-right control-label col-form-label">type</label>
-                                    <div class="col-sm-9">
-                                        <select id="com2" name="type" class="form-control type">
-                                            <option value="app">app</option>
-                                            <option value="meta" selected>meta</option>
-                                            <option value="search_keyword">search_keyword</option>
-{{--                                            <option value="20" @if($info->iHead<30 && $info->iHead>19) selected @endif>1.{{$permission['10'] or ''}}</option>--}}
-{{--                                            <option value="30" @if($info->iHead<40 && $info->iHead>29) selected @endif>2.{{$permission['20'] or ''}}</option>--}}
-{{--                                            <option value="40" @if($info->iHead<50 && $info->iHead>39) selected @endif>3.{{$permission['30'] or ''}}</option>--}}
-{{--                                            <option value="50" @if($info->iHead<60 && $info->iHead>49) selected @endif>4.{{$permission['40'] or ''}}</option>--}}
-                                        </select>
+                                    <label for="com3" class="col-sm-2 text-right control-label col-form-label">User name</label>
+                                    <div class="col-sm-10">
+                                        {{data_get($data['arr'], 'name')}}
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="com3" class="col-sm-3 text-right control-label col-form-label">name</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" name="name" value="{{data_get($data['arr'], 'name')}}" class="form-control name" id="com3" placeholder="">
+                                    <label for="com4" class="col-sm-2 text-right control-label col-form-label">User id</label>
+                                    <div class="col-sm-10">
+                                        {{data_get($data['arr'], 'type')}}
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="content" class="col-sm-3 text-right control-label col-form-label">content</label>
-                                    <div class="col-sm-9 note-editable">
-                                        <textarea id="content" name="content">
-                                            {!! data_get($data['arr'], 'content') !!}
-                                        </textarea>
+                                    <label for="com2" class="col-sm-2 text-right control-label col-form-label">User no</label>
+                                    <div class="col-sm-10">
+                                        {{data_get($data['arr'], 'no')}}
                                     </div>
                                 </div>
-                                <br>
                                 <div class="form-group row">
-                                    <label for="com4" class="col-sm-3 text-right control-label col-form-label">value<span style="color:red">*</span></label>
-                                    <div class="col-sm-9">
-                                        <input type="text" name="value" value="{{data_get($data['arr'], 'value')}}" class="form-control value" id="com4" placeholder="">
+                                    <label for="com6" class="col-sm-2 text-right control-label col-form-label">IP</label>
+                                    <div class="col-sm-10">
+                                        {{data_get($data['arr'], 'ip')}}
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="com5" class="col-sm-2 text-right control-label col-form-label">Action</label>
+                                    <div class="col-sm-10">
+                                        {{data_get($data['arr'], 'action')}}
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="com7" class="col-sm-2 text-right control-label col-form-label">Create at</label>
+                                    <div class="col-sm-10">
+                                        {{data_get($data['arr'], 'created_at')}}
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="com8" class="col-sm-2 text-right control-label col-form-label">Update at</label>
+                                    <div class="col-sm-10">
+                                        {{data_get($data['arr'], 'updated_at')}}
                                     </div>
                                 </div>
                             </div>
@@ -101,9 +108,6 @@
 
 <!-- ================== inline-js ================== -->
 @section('inline-js')
-    <!-- Public SummerNote -->
-    @include('admin.js.summernote2019')
-    <!-- end -->
     <script type="text/javascript">
         $(document).ready(function () {
 
@@ -111,47 +115,12 @@
             let disable = '{{data_get($data, 'Disable')}}'
             if (disable){
                 $('input[type=text]').attr('disabled','disabled')
-                $('form #detail').summernote('disable');        //編輯器關閉
             }
-
-            var modal = $('#manage-modal')
-            current_modal = modal.find('.messageInfo-modal')
-
-            //文字編輯器
-            do_textarea_summernote_fun( $('#content'))
-            // do_textarea_summernote_fun( $('#detail'))
 
             //返回上一頁
             $(".btn-cancel").click(function (e) {
                 e.preventDefault()
                 history.back()
-            })
-
-            //新增模式
-            $(".btn-doadd").click(function (e) {
-                e.preventDefault();
-
-                //寫入資料庫
-                let url = '{{data_get($data['route_url'], "store")}}'
-                let self = document.querySelector('#sample_form')
-                // let data = new FormData(self)
-                let data = prop_fromData_fun(self)
-
-                ajax(url, data, 'POST')
-            })
-
-            //編輯模式
-            $(".btn-dosave").click(function (e) {
-                e.preventDefault()
-
-                //寫入資料庫
-                let id = $(this).data('id')
-                let url = '{{data_get($data['route_url'], "update")}}'.replace('-10', id)  //-10代替字元為id
-                let self = document.querySelector('#sample_form')
-                // let data = new FormData(self)
-                let data = prop_fromData_fun(self)
-
-                ajax(url, data, 'POST')
             })
         })
     </script>

@@ -113,7 +113,7 @@
                             <div class="card-body">
                                 <div class="form-group m-b-0 text-right">
                                     @if( !data_get($data, 'Disable'))
-                                        @if($data['arr'])
+                                        @if(data_get($data['arr'], 'id'))
                                             <button type="button" class="btn btn-success waves-effect waves-light btn-dosave" data-id="{{data_get($data['arr'], 'id')}}">Save</button>
                                         @else
                                             <button type="button" class="btn btn-info waves-effect waves-light btn-doadd">Add</button>

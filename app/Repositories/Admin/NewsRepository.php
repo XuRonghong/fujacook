@@ -54,19 +54,4 @@ class NewsRepository extends Repository
     {
         return parent::delete($id);
     }
-
-
-    /*
-     * data object or array forEach to do.
-     */
-    public function eachOne_aaData($arr)
-    {
-        if ( $arr['aaData']) {
-            foreach ($arr['aaData'] as $key => $var) {
-                //找圖片檔案
-                $var = $this->transFileIdtoImage($var);
-            }
-        }
-        return $arr;
-    }
 }

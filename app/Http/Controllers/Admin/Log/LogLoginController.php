@@ -1,26 +1,27 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Scenes;
+namespace App\Http\Controllers\Admin\log;
 
-use App\Presenters\Admin\ScenesPresenter;
-use App\Repositories\Admin\ScenesRepository;
+use App\Presenters\Admin\LogPresenter;
+use App\Repositories\Admin\LogRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 
-class HomeController extends Controller
+class LogLoginController extends Controller
 {
     protected $repository;
     protected $presenter;
     protected $route_url;
 
-    public function __construct(ScenesRepository $repository, ScenesPresenter $presenter)
+    public function __construct(LogRepository $repository, LogPresenter $presenter)
     {
         $this->repository = $repository;
         $this->presenter = $presenter;
-
+        $this->presenter->setTitle('Log Login');
+        $this->presenter->setViewName('log.login');
         //所有關於route::resource的位置
-        $this->route_url = $this->presenter->getRouteResource($this->presenter->setRouteName('admin.scenes.home'));
+        $this->route_url = $this->presenter->getRouteResource($this->presenter->setRouteName('admin.log.login'));
     }
 
     /**
@@ -98,8 +99,8 @@ class HomeController extends Controller
         $data = $this->presenter->getParameters('show');
         //若資料庫沒有該id 則404畫面
         $data['arr'] = $this->repository->findOrFail($id) or abort(404);
-        //從資料串裡依據file_id找到image
-        $data['arr']->image = $this->presenter->transFileIdtoImage($data['arr']->file_id);
+        //轉換顯示數據
+        $data['arr'] = $this->presenter->tranOne($data['arr']);
         //to ajax url
         $data['route_url'] = $this->route_url;
 
@@ -118,8 +119,6 @@ class HomeController extends Controller
         $data = $this->presenter->getParameters('edit');
         //若資料庫沒有該id 則404畫面
         $data['arr'] = $this->repository->findOrFail($id) or abort(404);
-        //從資料串裡依據file_id找到image
-        $data['arr']->image = $this->presenter->transFileIdtoImage($data['arr']->file_id);
         //to ajax url
         $data['route_url'] = $this->route_url;
 

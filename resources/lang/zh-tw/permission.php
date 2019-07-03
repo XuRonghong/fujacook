@@ -47,6 +47,27 @@ return [
                     'edit'   => ' 更新',
                     'destroy'=> ' 刪除',
                 ],
+            'log' =>
+                [
+                    'login' =>
+                        [
+                            'title' => '登入紀錄',
+                            'index'  => ' 總覽',
+                            'show'   => ' 檢視',
+                            'create' => ' 新增',
+                            'edit'   => ' 更新',
+                            'destroy'=> ' 刪除',
+                        ],
+                    'action' =>
+                        [
+                            'title' => '操作紀錄',
+                            'index'  => ' 總覽',
+                            'show'   => ' 檢視',
+                            'create' => ' 新增',
+                            'edit'   => ' 更新',
+                            'destroy'=> ' 刪除',
+                        ],
+                ],
             'scenes' =>
                 [
                     'home' =>

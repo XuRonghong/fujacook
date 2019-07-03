@@ -128,6 +128,38 @@ return [
                 ]
             ],
             [
+                //log管理
+                "id" => 17,
+                "parent_id" => 1,
+                "name" => "admin.log",
+                "link" => "",
+                "access" => "1,2",
+                "open" => 1,
+                "sub_menu" => 1,
+                "child" => [
+                    [
+                        //login
+                        "id" => 171,
+                        "parent_id" => 17,
+                        "name" => "admin.log.login",
+                        "link" => 'admin/log/login',
+                        "access" => "1,2",
+                        "open" => 1,
+                        "sub_menu" => 0,
+                    ],
+                    [
+                        //action
+                        "id" => 172,
+                        "parent_id" => 17,
+                        "name" => "admin.log.action",
+                        "link" => 'admin/log/action',
+                        "access" => "1,2",
+                        "open" => 1,
+                        "sub_menu" => 0,
+                    ],
+                ]
+            ],
+            [
                 //群組管理
                 "id" => 12,
                 "parent_id" => 1,
@@ -188,16 +220,6 @@ return [
                 "name" => "admin.category",
                 "link" => "admin.category",
                 "vCss" => "",
-                "access" => "1,2",
-                "open" => 0,
-                "sub_menu" => 0,
-            ],
-            [
-                //系統參數設置
-                "id" => 17,
-                "parent_id" => 1,
-                "name" => "admin.config",
-                "link" => "web.admin.config",
                 "access" => "1,2",
                 "open" => 0,
                 "sub_menu" => 0,

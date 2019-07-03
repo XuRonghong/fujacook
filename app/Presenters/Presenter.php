@@ -2,6 +2,9 @@
 
 namespace App\Presenters\Admin;
 
+use App\Admin;
+use App\Http\Controllers\FuncController;
+use App\Member;
 use App\Menu;
 use App\Permission;
 use DB;
@@ -35,6 +38,71 @@ abstract class Presenter
     {
         return $this->route_name;
     }
+
+
+    /*
+     * data object or array forEach to do.
+     */
+    function eachOne_aaData($arr)
+    {
+        if ( $arr['aaData']) {
+            foreach ($arr['aaData'] as $key => $var) {
+                //
+            }
+        }
+        return $arr;
+    }
+
+
+    function getUserName($model, $id)
+    {
+        switch ($model) {
+            case 'admin': $model = new Admin(); break;
+            case 'member': $model = new Member(); break;
+            default: return null;
+        }
+        if ( !$id) {
+            return null;
+        } else {
+            return $model->query()->where('id', $id)->first()->name;
+        }
+    }
+
+    public function transAdminType($type=null)
+    {
+        if ( !$type) {
+            return null;
+        } elseif ($type < 5) {
+            return trans('web.user_type.administrator');
+        } elseif ($type < 10) {
+            return trans('web.user_type.manager');
+        } else {
+            return '超出可以判斷的範圍';
+        }
+    }
+
+
+
+    /*
+     * table - file_id to find File trans image.
+     */
+    public function transFileIdtoImage($file_id)
+    {
+        if ( !$file_id) return [];
+        //
+        $image_arr = [];
+        $tmp_arr = explode( ';', $file_id );
+        $tmp_arr = array_filter( $tmp_arr );
+        foreach ($tmp_arr as $key => $item) {
+            //主要要讓前端編輯器可以正確讀取file id，很重要
+            $image_arr[$item] = FuncController::_getFilePathById( $item );
+        }
+        if ($tmp_arr){
+            return $image_arr;
+        }
+        return [];
+    }
+
 
 
     public function getRouteResource($route_name = '')

@@ -30,7 +30,7 @@ Auth::routes();
 //Route::get('login/logout', 'LoginController@logout')->name('logout');
 
 //Route::get('/register', 'LoginController@registerView');
-Route::post('register/check', 'LoginController@registerCheck')->name('register.check');
+//Route::post('register/check', 'LoginController@registerCheck')->name('register.check');
 
 
 //
@@ -40,7 +40,7 @@ Route::group([
 
     //首頁
     Route::get('/', 'IndexController@index');
-    Route::get('/home', 'HomeController@index')->name('home');
+//    Route::get('/home', 'HomeController@index')->name('home');
 
 
     Route::group([
@@ -50,17 +50,17 @@ Route::group([
         /**********************************************************
          *
          *********************************************************/
-        $index = array('url' => 'admins', 'C' => 'AdminsController', 'name' => 'admins');
-        Route::get($index['url'] . '/list', $index['C'] . '@list')->name($index['name'] . '.list');
-        Route::resource($index['url'], $index['C']);
-        Route::post($index['url'] . '/update/{id}', $index['C'] . '@update')->name($index['name'] . '.update');
-        Route::post($index['url'] . '/destroy/{id}', $index['C'] . '@destroy')->name($index['name'] . '.destroy');
+//        $index = array('url' => 'admins', 'C' => 'AdminsController', 'name' => 'admins');
+//        Route::get($index['url'] . '/list', $index['C'] . '@list')->name($index['name'] . '.list');
+//        Route::resource($index['url'], $index['C']);
+//        Route::post($index['url'] . '/update/{id}', $index['C'] . '@update')->name($index['name'] . '.update');
+//        Route::post($index['url'] . '/destroy/{id}', $index['C'] . '@destroy')->name($index['name'] . '.destroy');
     });
 });
 
 
 
-
+/*
 
 Route::get('/live_search', 'AjaxController@live_search');
 Route::get('/live_search/action', 'AjaxController@search')->name('live_search.search');
@@ -135,3 +135,4 @@ Route::post('message/insert', 'MessageController@insert')->name('message.insert'
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+*/

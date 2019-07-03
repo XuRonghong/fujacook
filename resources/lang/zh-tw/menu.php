@@ -127,6 +127,32 @@ return [
                             ]
                     ],
                 ],
+            'log' =>
+                [
+                    'title' => 'Log',
+                    'login' => [
+                        'title' => '登入紀錄',
+                        'add' =>
+                            [
+                                'title' => '新增'
+                            ],
+                        'edit' =>
+                            [
+                                'title' => '編輯'
+                            ]
+                    ],
+                    'action' => [
+                        'title' => '操作記錄',
+                        'add' =>
+                            [
+                                'title' => '新增'
+                            ],
+                        'edit' =>
+                            [
+                                'title' => '編輯'
+                            ]
+                    ],
+                ],
             'group' =>
                 [
                     'title' => '群組設置',

@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Admin;
 use App\File;
+use App\LogAction;
 use App\LogLogin;
 use Illuminate\Support\Facades\Request;
+use Auth;
 
 class FuncController
 {
@@ -203,6 +205,22 @@ class FuncController
         $log_login->user_id = $user_id; //session( 'store.iId', 0 );
         $log_login->user_type = Admin::query()->find($user_id)->type;
         $log_login->action = $action;
+        $log_login->ip = Request::ip();
+        $log_login->save();
+    }
+
+    /*
+     *
+     */
+    static function addActionLog( $action, $user_id, $value='', $table_id=0, $table_name='')
+    {
+        $log_login = new LogAction();
+        $log_login->user_id = $user_id;
+        $log_login->user_type = Admin::query()->find($user_id)->type;
+        $log_login->table_id = $table_id;
+        $log_login->table_name = $table_name;
+        $log_login->action = $action;
+        $log_login->value = $value;
         $log_login->ip = Request::ip();
         $log_login->save();
     }

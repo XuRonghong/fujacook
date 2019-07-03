@@ -57,8 +57,8 @@ Route::group([
     /**********************************************************
      * Import Excel
      *********************************************************/
-    Route::get( 'import_excel', 'ExcelController@index')->name('excel_index');
-    Route::post('import_excel', 'ExcelController@import')->name('import');
+//    Route::get( 'import_excel', 'ExcelController@index')->name('excel_index');
+//    Route::post('import_excel', 'ExcelController@import')->name('import');
 
 
     Route::group([
@@ -124,6 +124,28 @@ Route::group([
         Route::post($index['url'].'/update/{id}',  $index['C'].'@update' )->name($index['name'].'.update');
         Route::post($index['url'].'/destroy/{id}', $index['C'].'@destroy')->name($index['name'].'.destroy');
 
+
+
+    /**********************************************************
+     *
+     * log 管理
+     *
+     *********************************************************/
+        Route::group(['prefix' => 'log', 'namespace' => 'log'], function() {
+            //
+            $index = array('url'=>'login', 'C'=>'LogLoginController', 'name'=>'log.login');
+            Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
+            Route::resource($index['url'], $index['C'], ['as'=> 'log', 'name'=> $index['name'] ]);
+            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
+            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
+
+            //
+            $index = array('url'=>'action', 'C'=>'LogActionController', 'name'=>'log.action');
+            Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
+            Route::resource($index['url'], $index['C'], ['as'=> 'log', 'name'=> $index['name'] ]);
+            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
+            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
+        });
 
 
     /**********************************************************
@@ -217,30 +239,30 @@ Route::group([
 
 
         /******* member管理 ********/
-        Route::group([
-//                'prefix' => 'members',
-//                'namespace' => 'Member',
-                'middleware' => 'CheckAuthLogin'
-            ], function() {
-            //
-            $index = array('url'=>'members', 'C'=>'MemberController', 'name'=>'members');
-            Route::get($index['url'].'/list', $index['C'].'@list')->name($index['name'].'.list');
-            Route::resource($index['url'], $index['C']);
-            Route::post($index['url'].'/update/{id}', $index['C'].'@update')->name($index['name'].'.update');
-            Route::post($index['url'].'/destroy/{id}', $index['C'].'@destroy')->name($index['name'].'.destroy');
-            Route::post('dosaveshow', $index['C'].'@doSaveShow' );
-            Route::post('dosavepassword', $index['C'].'@doSavePassword' );
-
-            Route::group([
-                    'prefix' => $index['url'].'/info',
-                ], function() {
-                //
-                Route::get( '', 'InfoController@index' );
-                Route::any( 'getlist', 'InfoController@getList' );
-                Route::get( 'edit/{id}', 'InfoController@edit' );
-                Route::post( 'dosave', 'InfoController@doSave' );
-            });
-        });
+//        Route::group([
+////                'prefix' => 'members',
+////                'namespace' => 'Member',
+//                'middleware' => 'CheckAuthLogin'
+//            ], function() {
+//            //
+//            $index = array('url'=>'members', 'C'=>'MemberController', 'name'=>'members');
+//            Route::get($index['url'].'/list', $index['C'].'@list')->name($index['name'].'.list');
+//            Route::resource($index['url'], $index['C']);
+//            Route::post($index['url'].'/update/{id}', $index['C'].'@update')->name($index['name'].'.update');
+//            Route::post($index['url'].'/destroy/{id}', $index['C'].'@destroy')->name($index['name'].'.destroy');
+//            Route::post('dosaveshow', $index['C'].'@doSaveShow' );
+//            Route::post('dosavepassword', $index['C'].'@doSavePassword' );
+//
+//            Route::group([
+//                    'prefix' => $index['url'].'/info',
+//                ], function() {
+//                //
+//                Route::get( '', 'InfoController@index' );
+//                Route::any( 'getlist', 'InfoController@getList' );
+//                Route::get( 'edit/{id}', 'InfoController@edit' );
+//                Route::post( 'dosave', 'InfoController@doSave' );
+//            });
+//        });
 
         /******* 商店店家 ********/
         $index = array('url'=>'store', 'C'=>'StoreController', 'name'=>'store');
@@ -250,16 +272,19 @@ Route::group([
         Route::post($index['url'].'/destroy/{id}', $index['C'].'@destroy')->name($index['name'].'.destroy');
 
         /******* 群組管理 ********/
-        $index = array('url'=>'group', 'C'=>'GroupController', 'name'=>'group');
-        Route::get($index['url'].'/list', $index['C'].'@list')->name($index['name'].'.list');
-        Route::resource($index['url'], $index['C']);
-        Route::post($index['url'].'/update/{id}', $index['C'].'@update')->name($index['name'].'.update');
-        Route::post($index['url'].'/destroy/{id}', $index['C'].'@destroy')->name($index['name'].'.destroy');
+//        $index = array('url'=>'group', 'C'=>'GroupController', 'name'=>'group');
+//        Route::get($index['url'].'/list', $index['C'].'@list')->name($index['name'].'.list');
+//        Route::resource($index['url'], $index['C']);
+//        Route::post($index['url'].'/update/{id}', $index['C'].'@update')->name($index['name'].'.update');
+//        Route::post($index['url'].'/destroy/{id}', $index['C'].'@destroy')->name($index['name'].'.destroy');
 
 
     });
 
 });
+
+/*
+
 // Registration Routes...
 //Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 //Route::post('register', 'Auth\RegisterController@register');
@@ -329,5 +354,5 @@ Route::post('/loadmore/load_data', 'ArticleController@load_data')->name('loadmor
 
 Route::get('message', 'MessageController@index')->name('message.index');
 Route::post('message/insert', 'MessageController@insert')->name('message.insert');
-
+*/
 

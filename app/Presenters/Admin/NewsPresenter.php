@@ -11,25 +11,18 @@ class NewsPresenter extends Presenter
     protected $route_name;      //Route->name()
 
 
-    public function setViewName($name)
-    {
-        return $this->view_group_name = $name;
-    }
 
-    public function setRouteName($name)
+    /*
+     * data object or array forEach to do.
+     */
+    public function eachOne_aaData($arr)
     {
-        $this->route_name = $name;
-        $this->gotoUrl = route($this->route_name.'.index');
-        return $this->route_name;
-    }
-
-    public function getViewName()
-    {
-        return $this->view_group_name;
-    }
-
-    public function getRouteName()
-    {
-        return $this->route_name;
+        if ( $arr['aaData']) {
+            foreach ($arr['aaData'] as $key => $var) {
+                //找圖片檔案
+                $var = $this->transFileIdtoImage($var);
+            }
+        }
+        return $arr;
     }
 }

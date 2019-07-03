@@ -65,32 +65,6 @@ class MenuRepository extends Repository
 
 
     /*
-     * data object or array forEach to do.
-     */
-    public function eachOne_aaData($arr)
-    {
-        if ( $arr['aaData']) {
-            foreach ($arr['aaData'] as $key => $var) {
-                $var->Title = trans('menu.'. $var->name. '.title');
-            }
-        }
-        return $arr;
-    }
-    /* data object or array forEach to do. for admin_menu */
-    public function eachOne_aaData_adminMenu($arr)
-    {
-        if ( $arr['aaData']) {
-            foreach ($arr['aaData'] as $key => $var) {
-                //
-                $menu = Menu::query()->find($var->menu_id);
-                $var->menu_name = trans('menu.'. $menu->name. '.title') .'&nbsp;<b>('.$menu->name.')</b>';
-            }
-        }
-        return $arr;
-    }
-
-
-    /*
      * 自己獨立做一個 data table
      */
     public function getDataTable_alone($request, $whereQuery='1 = 1')

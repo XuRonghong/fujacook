@@ -121,7 +121,7 @@ class LoginController extends Controller
             return null;
         } else {
             //紀錄登入log
-            FuncController::addLog('admin login', $this->guard()->user()->id);
+            FuncController::addLog('admin login for '. $this->guard()->user()->name, $this->guard()->user()->id);
 
             // set the remember me cookie if the user check the box
             $remember = ($request->filled('remember')) ? true : false;

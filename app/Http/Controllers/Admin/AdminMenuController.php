@@ -51,7 +51,7 @@ class AdminMenuController extends Controller
         {
             $data = $this->repository->getDataTable_alone($request, 'admin_id <> 1');
 
-            $data = $this->repository->eachOne_aaData_adminMenu($data);     //每一項目要做甚麼事,有需要在使用
+            $data = $this->presenter->eachOne_aaData_adminMenu($data);     //每一項目要做甚麼事,有需要在使用
 
             return response()->json($data,200);
         }

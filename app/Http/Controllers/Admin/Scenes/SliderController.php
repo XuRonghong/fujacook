@@ -49,7 +49,7 @@ class SliderController extends Controller
         {
             $data = $this->repository->getDataTable($request, 'type="slider.home"');
 
-            $data = $this->repository->eachOne_aaData($data);     //每一項目要做甚麼事,有需要在使用
+            $data = $this->presenter->eachOne_aaData($data);     //每一項目要做甚麼事,有需要在使用
 
             return response()->json($data,200);
         }
@@ -104,7 +104,7 @@ class SliderController extends Controller
         //get option for select
         $data['arr']['options'] = $this->presenter->getSelectOption_slider($data['arr']['type']);
         //從資料串裡依據file_id找到image
-        $data['arr']->image = $this->repository->transFileIdtoImage($data['arr']->file_id);
+        $data['arr']->image = $this->presenter->transFileIdtoImage($data['arr']->file_id);
         //to ajax url
         $data['route_url'] = $this->route_url;
 
@@ -126,7 +126,7 @@ class SliderController extends Controller
         //get option for select
         $data['arr']['options'] = $this->presenter->getSelectOption_slider($data['arr']['type']);
         //從資料串裡依據file_id找到image
-        $data['arr']->image = $this->repository->transFileIdtoImage($data['arr']->file_id);
+        $data['arr']->image = $this->presenter->transFileIdtoImage($data['arr']->file_id);
         //to ajax url
         $data['route_url'] = $this->route_url;
 

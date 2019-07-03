@@ -1,5 +1,14 @@
 <?php
 return [
+    'user_type' => [
+        'administrator' => '系統管理員',
+        'manager' => '管理員',
+        'director' => '經理',
+        'senior' => '前輩',
+        'junior' => '初級',
+        'member' => '會員',
+        'user' => '使用者',
+    ],
     'account' => '帳號',
     'account_input' => '請輸入帳號 / Email',
     'account_type' => '帳號類型',

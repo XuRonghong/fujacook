@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 //use Illuminate\Database\Eloquent\Builder;
+use App\AdminInfo;
 use App\Http\Controllers\FuncController;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -32,7 +33,15 @@ abstract class Repository
      */
     public function create($attributes)
     {
-        return $this->model->create($attributes);
+        $model = $this->model->create($attributes);
+        FuncController::addActionLog(
+            'create',
+            auth()->guard('admin')->user()->id,
+            json_encode( $model ),
+            $model->id,
+            $model->getTable()
+        );
+        return $model;
     }
 
     /**
@@ -66,7 +75,13 @@ abstract class Repository
         $model = $this->model->find($id);
         if (filled($model)) {
             $model->update($attributes);
-
+            FuncController::addActionLog(
+                'update',
+                auth()->guard('admin')->user()->id,
+                json_encode( $model ),
+                $model->id,
+                $model->getTable()
+            );
             return $model;
         }
         return null;
@@ -82,7 +97,15 @@ abstract class Repository
      */
     public function delete($id)
     {
-        return $this->findOrFail($id)->delete();
+        $model = $this->findOrFail($id)->delete();
+        FuncController::addActionLog(
+            'delete',
+            auth()->guard('admin')->user()->id,
+            json_encode( $model ),
+            $id,
+            $this->model->getTable()
+        );
+        return $model;
     }
 
     /**
@@ -297,25 +320,16 @@ abstract class Repository
     }
 
 
-    //
-
     /*
-     * table - file_id to find File trans image.
+     * data object or array forEach to do.
      */
-    public function transFileIdtoImage($file_id)
+    public function eachOne_aaData($arr)
     {
-        if ( !$file_id) return [];
-        //
-        $image_arr = [];
-        $tmp_arr = explode( ';', $file_id );
-        $tmp_arr = array_filter( $tmp_arr );
-        foreach ($tmp_arr as $key => $item) {
-            //主要要讓前端編輯器可以正確讀取file id，很重要
-            $image_arr[$item] = FuncController::_getFilePathById( $item );
+        if ( $arr['aaData']) {
+            foreach ($arr['aaData'] as $key => $var) {
+                //
+            }
         }
-        if ($tmp_arr){
-            return $image_arr;
-        }
-        return [];
+        return $arr;
     }
 }

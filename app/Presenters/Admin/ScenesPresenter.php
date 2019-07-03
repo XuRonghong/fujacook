@@ -11,27 +11,35 @@ class ScenesPresenter extends Presenter
     protected $route_name;      //Route->name()
 
 
-    public function setViewName($name)
+    /*
+     * data object or array forEach to do.
+     */
+    public function eachOne_aaData($arr)
     {
-        return $this->view_group_name = $name;
+        if ( $arr['aaData']) {
+            foreach ($arr['aaData'] as $key => $var) {
+                switch ($var->type) {
+                    case 'navbar.home':
+                        $var->type = '首頁選項欄';
+                        break;
+                    case 'slider.home':
+                        $var->type = '首頁輪播圖';
+                        break;
+                    case 'introduce.home':
+                        $var->type = '首頁文字';
+                        break;
+                }
+                //找圖片檔案
+//                if ( $var->image) {
+//                    $var->image = array($var->image);
+//                } else {
+                $var->image = $this->transFileIdtoImage($var->file_id);
+//                }
+            }
+        }
+        return $arr;
     }
 
-    public function setRouteName($name)
-    {
-        $this->route_name = $name;
-        $this->gotoUrl = route($this->route_name.'.index');
-        return $this->route_name;
-    }
-
-    public function getViewName()
-    {
-        return $this->view_group_name;
-    }
-
-    public function getRouteName()
-    {
-        return $this->route_name;
-    }
 
     /*
      * Select options design
