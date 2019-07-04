@@ -63,19 +63,19 @@ class AdminTableSeeder extends Seeder
                 "user_image" => env('APP_URL') . "/images/admin.jpg",
                 "user_name" => "Superdo",
                 "user_email" => "superdo@fujacook.com",
-                "user_contact" => ""
+                // "user_contact" => ""
             ],
             [
                 "user_image" => env('APP_URL') . "/xtreme-admin/assets/images/users/3.jpg",
                 "user_name" => "Manager",
                 "user_email" => "manage@gmail.com",
-                "user_contact" => ""
+                // "user_contact" => ""
             ],
             [
                 "user_image" => env('APP_URL') . "/images/admin.jpg",
                 "user_name" => "Fujacook",
                 "user_email" => "fujacook@fujacook.com",
-                "user_contact" => ""
+                // "user_contact" => ""
             ],
         ];
         $admin_id = 1;
@@ -85,7 +85,7 @@ class AdminTableSeeder extends Seeder
             $Dao->user_image = $var['user_image'];
             $Dao->user_name = $var['user_name'];
             $Dao->user_email = $var['user_email'];
-            $Dao->user_contact = $var['user_contact'];
+            // $Dao->user_contact = $var['user_contact'];
             $Dao->save();
         }
     }

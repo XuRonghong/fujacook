@@ -49,53 +49,57 @@
                                         <img id="img1" src="{{data_get($data['arr']['info'], '0.user_image', url('images/empty.jpg'))}}" style="height:140px" alt="">
                                     </div>
                                 </div>
+
+                                <!--放一個假的，不顯示的，讓Chrome去填入-->
+                                <!-- <input type="password" style="dispslay:none" > -->
+
                                 <div class="form-group row">
-                                    <label for="com5" class="col-sm-3 text-right control-label col-form-label">account<span style="color:red">*</span></label>
+                                    <label for="com1" class="col-sm-3 text-right control-label col-form-label">account<span style="color:red">*</span></label>
                                     <div class="col-sm-9">
                                         <input type="text" name="account" value="{{data_get($data['arr'], 'account')}}"
-                                               class="form-control account" id="com5" placeholder="" required>
+                                               class="form-control account" id="com1" placeholder="" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="com6" class="col-sm-3 text-right control-label col-form-label">
+                                    <label for="com2" class="col-sm-3 text-right control-label col-form-label">
                                         password
                                         @if( !data_get($data['arr'], 'id')) <span style="color:red">*</span>
                                         @endif
                                     </label>
                                     <div class="col-sm-9">
                                         <input type="password" name="password" value="{{data_get($data['arr'], 'password')}}"
-                                               class="form-control password" id="com6" placeholder=""
+                                               class="form-control password" id="com2" autocomplete="off" 
                                                @if( !data_get($data['arr'], 'id')) required @endif>
                                         <span style="color:red">若不需要更改密碼 , 此欄位無需理會</span>
                                     </div>
                                 </div>
                                 <hr>
                                 <div class="form-group row">
-                                    <label for="com2" class="col-sm-3 text-right control-label col-form-label">type</label>
+                                    <label for="com5" class="col-sm-3 text-right control-label col-form-label">type</label>
                                     <div class="col-sm-9">
-                                        <select class="form-control type" id="com2" name="type">
+                                        <select class="form-control type" id="com5" name="type">
                                             <option value="5">管理者</option>
                                             <option value="10">普通者</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="com3" class="col-sm-3 text-right control-label col-form-label">name<span style="color:red">*</span></label>
+                                    <label for="com4" class="col-sm-3 text-right control-label col-form-label">name<span style="color:red">*</span></label>
                                     <div class="col-sm-9">
                                         <input type="text" name="name" value="{{data_get($data['arr'], 'name')}}"
-                                               class="form-control name" id="com3" placeholder="" required>
+                                               class="form-control name" id="com4" placeholder="" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="com4" class="col-sm-3 text-right control-label col-form-label">email</label>
+                                    <label for="com3" class="col-sm-3 text-right control-label col-form-label">email</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="email" value="{{data_get($data['arr']['info'], '0.user_email')}}" class="form-control email" id="com4" placeholder="">
+                                        <input type="text" name="email" value="{{data_get($data['arr']['info'], '0.user_email')}}" class="form-control email" id="com3" placeholder="">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="com5" class="col-sm-3 text-right control-label col-form-label">contact</label>
+                                    <label for="com7" class="col-sm-3 text-right control-label col-form-label">contact</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="user_contact" value="{{data_get($data['arr']['info'], '0.user_contact')}}" class="form-control user_contact" id="com5" placeholder="">
+                                        <input type="text" name="user_contact" value="{{data_get($data['arr']['info'], '0.user_contact','?')}}" class="form-control user_contact" id="com7" placeholder="contact number">
                                     </div>
                                 </div>
                             </div>
