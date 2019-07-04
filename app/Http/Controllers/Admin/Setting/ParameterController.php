@@ -119,6 +119,7 @@ class ParameterController extends Controller
         $data = $this->presenter->getParameters('edit');
         //若資料庫沒有該id 則404畫面
         $data['arr'] = $this->repository->findOrFail($id) or abort(404);
+        $data['arr'] = $this->presenter->transOne($data['arr']);
         //to ajax url
         $data['route_url'] = $this->route_url;
 

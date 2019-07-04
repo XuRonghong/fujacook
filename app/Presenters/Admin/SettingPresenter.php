@@ -22,4 +22,14 @@ class SettingPresenter extends Presenter
         }
         return $arr;
     }
+
+
+    public function transOne($data, $other=0)
+    {
+        $data['content'] = json_decode($data['content']);
+        if ($other){
+
+        }
+        return $data;
+    }
 }

@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 <head>
-    <title>{{data_get($data,'Title', config('app.title'))}}</title>
+    <title>{{data_get($data['arr']['parameters'],'meta_title', data_get($data,'Title', config('app.title')))}}</title>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="">
-    <meta name="keywords" content="鍋具品牌,鍋具料理,鍋具推薦,鍋具介紹,鍋具收納,鍋具配件,鍋具不沾鍋,鍋具專賣店,如何挑選鍋具,多功能鍋具,鍋子品牌,鍋子料理,鍋子推薦,鍋子介紹,鍋子收納,鍋子配件,鍋子不沾鍋,鍋子專賣店,如何挑選鍋子多功能鍋子,即食鍋具,即食鍋子,即食鍋,即時餐,各國料理,各式料理,fujacook,FUJACOOK即食鍋,富呷一方" />
-    <meta name="description" content="即時的歡樂趴，永恆的幸福感。 富呷一方, fujacook, 即食鍋, FUJACOOK即食鍋" />
+    <meta name="keywords" content="{{data_get($data['arr']['parameters'], 'meta_keyword')}}" />
+    <meta name="description" content="{{data_get($data['arr']['parameters'], 'meta_description')}}" />
 
     <link rel=”alternate” href=”https://www.fujacook.com” hreflang=”zh-TW” />
     <link rel=”canonical” href=”https://www.fujacook.com”>
 
+    @foreach(data_get($data['arr']['parameters'], 'master_style', []) as $var)
+        <link rel="{{ $var->name }}" href="{{ json_decode( $var->content) }}" hreflang="{{ $var->value }}" />
+    @endforeach
 
 {{--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js')}}"></script>--}}
     <!-- jQuery Mobile -->

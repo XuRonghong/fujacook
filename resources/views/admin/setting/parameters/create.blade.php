@@ -39,6 +39,7 @@
                                             <option value="app">app</option>
                                             <option value="meta" selected>meta</option>
                                             <option value="search_keyword">search_keyword</option>
+{{--                                            <option value="master_style">全局style</option>--}}
 {{--                                            <option value="20" @if($info->iHead<30 && $info->iHead>19) selected @endif>1.{{$permission['10'] or ''}}</option>--}}
 {{--                                            <option value="30" @if($info->iHead<40 && $info->iHead>29) selected @endif>2.{{$permission['20'] or ''}}</option>--}}
 {{--                                            <option value="40" @if($info->iHead<50 && $info->iHead>39) selected @endif>3.{{$permission['30'] or ''}}</option>--}}
@@ -47,13 +48,13 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="com3" class="col-sm-3 text-right control-label col-form-label">name</label>
+                                    <label for="com3" class="col-sm-3 text-right control-label col-form-label">name<span style="color:red">*</span></label>
                                     <div class="col-sm-9">
                                         <input type="text" name="name" value="{{data_get($data['arr'], 'name')}}" class="form-control name" id="com3" placeholder="">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="content" class="col-sm-3 text-right control-label col-form-label">content</label>
+                                    <label for="content" class="col-sm-3 text-right control-label col-form-label">content<span style="color:red">*</span></label>
                                     <div class="col-sm-9 note-editable">
                                         <textarea id="content" name="content">
                                             {!! data_get($data['arr'], 'content') !!}
@@ -64,7 +65,7 @@
                                 <div class="form-group row">
                                     <label for="com4" class="col-sm-3 text-right control-label col-form-label">value<span style="color:red">*</span></label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="value" value="{{data_get($data['arr'], 'value')}}" class="form-control value" id="com4" placeholder="">
+                                        <input type="text" name="value" value="{{data_get($data['arr'], 'value', '0')}}" class="form-control value" id="com4" placeholder="">
                                     </div>
                                 </div>
                             </div>

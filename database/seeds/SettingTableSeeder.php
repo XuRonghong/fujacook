@@ -22,15 +22,19 @@ class SettingTableSeeder extends Seeder
             ], [
                 'type' => 'meta',
                 'name' => 'meta_title',
-                'content' => config('app.title'),
+                'content' => json_encode(config('app.title'), JSON_UNESCAPED_UNICODE),
+            ], [
+                'type' => 'meta',
+                'name' => 'meta_keyword',
+                'content' => json_encode(trans('web.meta_keyword'), JSON_UNESCAPED_UNICODE),
             ], [
                 'type' => 'meta',
                 'name' => 'meta_description',
-                'content' => '',
-            ], [
+                'content' => json_encode(trans('web.meta_description'), JSON_UNESCAPED_UNICODE),
+            ],[
                 'type' => 'meta',
                 'name' => 'meta_url',
-                'content' => config('app.url'),
+                'content' => json_encode(config('app.url'), JSON_UNESCAPED_UNICODE),
             ], [
                 'type' => 'meta',
                 'name' => 'meta_image',
@@ -86,7 +90,8 @@ class SettingTableSeeder extends Seeder
         }
 
 
-        Scene::truncate();
+//        Scene::truncate();
+        Scene::query()->where('type', 'navbar.home')->delete();
         $data = ['type' => 'navbar.home', 'open'=> 1];
         $scenes = [
             [
@@ -130,6 +135,7 @@ class SettingTableSeeder extends Seeder
             Scene::create($scene);
         }
 
+        Scene::query()->where('type', 'slider.home')->delete();
         $data = ['type' => 'slider.home', 'open'=> 1];
         $scenes = [
             [

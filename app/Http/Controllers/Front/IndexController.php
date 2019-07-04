@@ -7,6 +7,7 @@ use App\Presenters\Admin\ScenesPresenter;
 use App\Repositories\Admin\ScenesRepository;
 use App\Repositories\Repository;
 use App\Scene;
+use App\Setting;
 use Illuminate\Http\Request;
 
 
@@ -28,6 +29,8 @@ class IndexController extends Controller
     function index ()
     {
         $data = []; //config('app.title')
+        $data['arr']['parameters'] = $this->getParameters();
+
         //
         $map['open'] = 1;
         $data['arr']['aaData'] = Scene::query()->where($map)
@@ -65,6 +68,16 @@ class IndexController extends Controller
 
 
         return view('front.index', compact('data'));
+    }
+
+
+    public function getParameters()
+    {
+        return [
+            'meta_title' => json_decode( Setting::query()->where('name', 'meta_title')->first()->content ),
+            'meta_keyword' => json_decode( Setting::query()->where('name', 'meta_keyword')->first()->content ),
+            'meta_description' => json_decode( Setting::query()->where('name', 'meta_description')->first()->content ),
+        ];
     }
 
 
