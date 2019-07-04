@@ -60,6 +60,7 @@
                 "scrollY": '60vh',
                 // 'bProcessing': true,
                 // 'sServerMethod': 'GET',
+                "order": [[ 5, "desc" ]],
                 "aoColumns": [
                     {
                         "sTitle": "Num",
@@ -105,21 +106,21 @@
                         "bSearchable": true,
                     },
                     {
-                        "sTitle": "created_at",
+                        "sTitle": "date time",
                         "mData": "created_at",
                         // "width": "100px",
                         "sName": "created_at",
                         "bSortable": true,
                         "bSearchable": true,
                     },
-                    {
-                        "sTitle": "updated_at",
-                        "mData": "updated_at",
-                        // "width": "100px",
-                        "sName": "updated_at",
-                        "bSortable": true,
-                        "bSearchable": true,
-                    },
+                    // {
+                    //     "sTitle": "updated_at",
+                    //     "mData": "updated_at",
+                    //     // "width": "100px",
+                    //     "sName": "updated_at",
+                    //     "bSortable": true,
+                    //     "bSearchable": true,
+                    // },
                     {
                         "sTitle": "",
                         "bSortable": false,

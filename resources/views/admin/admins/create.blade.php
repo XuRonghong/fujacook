@@ -37,10 +37,18 @@
                             <h4 class="card-title modalTitle">{{data_get($data,'Title')}}</h4>
                             {{--<h6 class="card-subtitle">{{data_get($data,'Summary')}}</h6>--}}
                         </div>
-                        <hr>
                         <form id="sample_form" class="form-horizontal">
                             <div class="card-body messageInfo-modal">
-                                <h4 class="card-title">沒有要更改密碼,不需填寫</h4>
+                                <h4 class="card-title"></h4>
+                                <div class="form-group row">
+                                    <label for="img1" class="col-sm-5 text-right control-label col-form-label"></label>
+                                    <div class="col-sm-7">
+                                        <a class="btn-image-modal" data-modal="image-form" data-id="">
+                                            <img src="{{data_get($data['arr']['info'], '0.user_image', url('images/empty.jpg'))}}" style="height:140px">
+                                        </a>
+                                        <img id="img1" src="{{data_get($data['arr']['info'], '0.user_image', url('images/empty.jpg'))}}" style="height:140px" alt="">
+                                    </div>
+                                </div>
                                 <div class="form-group row">
                                     <label for="com5" class="col-sm-3 text-right control-label col-form-label">account<span style="color:red">*</span></label>
                                     <div class="col-sm-9">
@@ -58,8 +66,10 @@
                                         <input type="password" name="password" value="{{data_get($data['arr'], 'password')}}"
                                                class="form-control password" id="com6" placeholder=""
                                                @if( !data_get($data['arr'], 'id')) required @endif>
+                                        <span style="color:red">若不需要更改密碼 , 此欄位無需理會</span>
                                     </div>
                                 </div>
+                                <hr>
                                 <div class="form-group row">
                                     <label for="com2" class="col-sm-3 text-right control-label col-form-label">type</label>
                                     <div class="col-sm-9">
@@ -69,8 +79,6 @@
                                         </select>
                                     </div>
                                 </div>
-                                <hr>
-                                <h4 class="card-title">Information</h4>
                                 <div class="form-group row">
                                     <label for="com3" class="col-sm-3 text-right control-label col-form-label">name<span style="color:red">*</span></label>
                                     <div class="col-sm-9">
@@ -90,15 +98,6 @@
                                         <input type="text" name="user_contact" value="{{data_get($data['arr']['info'], '0.user_contact')}}" class="form-control user_contact" id="com5" placeholder="">
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label for="img1" class="col-sm-3 text-right control-label col-form-label">圖片</label>
-                                    <div class="col-sm-9">
-                                        <a class="btn-image-modal" data-modal="image-form" data-id="">
-                                            <img src="{{data_get($data['arr']['info'], '0.user_image', url('images/empty.jpg'))}}" style="height:140px">
-                                        </a>
-                                        <img id="img1" src="{{data_get($data['arr']['info'], '0.user_image', url('images/empty.jpg'))}}" style="height:140px" alt="">
-                                    </div>
-                                </div>
                             </div>
                             <hr>
                             <div class="card-body">
@@ -113,8 +112,6 @@
                                     <button type="button" class="btn waves-effect waves-light btn-cancel">Cancel</button>
                                 </div>
                             </div>
-{{--                            <input name="_method" type="hidden" value="PUT">--}}
-{{--                            {{csrf_field()}}--}}
                         </form>
                     </div>
                 </div>
