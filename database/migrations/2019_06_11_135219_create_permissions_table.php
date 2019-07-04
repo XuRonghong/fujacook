@@ -51,23 +51,22 @@ class CreatePermissionsTable extends Migration
     public function up()
     {
         if (env('DB_REFRESH')) {
-        }
-        $table_names = $this->table_names;
+            $table_names = $this->table_names;
 
-        Schema::create($table_names['permissions'], function (Blueprint $table) {
-            $table->increments('id')->comment('流水編號');
-            $table->string('name', 64)->comment('功能對應route name');
-            $table->string('description', 128)->comment('描述');
-            $table->string('guard_name', 10)->comment('權限對應guard')->default('admin');
-            $table->timestamps();
-        });
+            Schema::create($table_names['permissions'], function (Blueprint $table) {
+                $table->increments('id')->comment('流水編號');
+                $table->string('name', 64)->comment('功能對應route name');
+                $table->string('description', 128)->comment('描述');
+                $table->string('guard_name', 10)->comment('權限對應guard')->default('admin');
+                $table->timestamps();
+            });
 
-        Schema::create($table_names['admin_permission'], function (Blueprint $table) use ($table_names) {
-            $table->increments('id')->comment('流水編號');
-            $table->unsignedInteger('admin_id')->comment('對應admin.id');
-            $table->unsignedInteger('permission_id')->comment('對應permissions.id');
-            $table->tinyInteger('open')->comment('開放')->default(1);
-            $table->timestamps();
+            Schema::create($table_names['admin_permission'], function (Blueprint $table) use ($table_names) {
+                $table->increments('id')->comment('流水編號');
+                $table->unsignedInteger('admin_id')->comment('對應admin.id');
+                $table->unsignedInteger('permission_id')->comment('對應permissions.id');
+                $table->tinyInteger('open')->comment('開放')->default(1);
+                $table->timestamps();
 
 //            $table->morphs('model');
 
@@ -76,7 +75,8 @@ class CreatePermissionsTable extends Migration
 //                ->on($table_names['permissions'])
 //                ->onDelete('cascade');
 
-        });
+            });
+        }
 
 
 
@@ -135,12 +135,12 @@ class CreatePermissionsTable extends Migration
     public function down()
     {
         if (env('DB_REFRESH')) {
-        }
-        $tableNames = $this->table_names;
+            $tableNames = $this->table_names;
 //        Schema::dropIfExists($tableNames['role_has_permissions']);
 //        Schema::dropIfExists($tableNames['model_has_roles']);
-        Schema::dropIfExists($tableNames['admin_permission']);
+            Schema::dropIfExists($tableNames['admin_permission']);
 //        Schema::dropIfExists($tableNames['roles']);
-        Schema::dropIfExists($tableNames['permissions']);
+            Schema::dropIfExists($tableNames['permissions']);
+        }
     }
 }
