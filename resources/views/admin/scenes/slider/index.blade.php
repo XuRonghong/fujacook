@@ -72,7 +72,7 @@
                         }
                     },
                     {
-                        "sTitle": "rank",
+                        "sTitle": "rank(點擊即可修改)",
                         "mData": "rank",
                         // "width": "100px",
                         "sName": "rank",
@@ -227,9 +227,6 @@
             });
             // 編輯完成退回瀏覽模式
             data_table.on('change', '.isEdit', function (e) {
-                //
-                toastr.info('Wait me', "等我一下...");
-                //
                 $(this).hide();
                 $(this).parent().find('.aaa').show();
                 //

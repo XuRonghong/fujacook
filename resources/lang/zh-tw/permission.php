@@ -250,36 +250,62 @@ return [
     'scenes' =>
         [
             'title' => '平台介面管理',
+            'navbar' =>
+                [
+                    'title' => 'navbar',
+                    'home' =>
+                        [
+                            'title' => '首頁畫面',
+                        ],
+                ],
+            'slider' =>
+                [
+                    'title' => '滑動圖編輯',
+                    'home' =>
+                        [
+                            'title' => '首頁畫面',
+                        ],
+                ],
+            'header' =>
+                [
+                    'title' => 'header',
+                    'home' =>
+                        [
+                            'title' => '首頁畫面',
+                        ],
+                ],
+            'introduce' =>
+                [
+                    'title' => '文字介紹編輯',
+                    'home' =>
+                        [
+                            'title' => '首頁畫面',
+                        ],
+                ],
+            'image' =>
+                [
+                    'title' => 'image編輯',
+                    'home' =>
+                        [
+                            'title' => '首頁畫面',
+                        ],
+                ],
+            'footer' =>
+                [
+                    'title' => 'footer',
+                    'home' =>
+                        [
+                            'title' => '首頁畫面',
+                        ],
+                ],
+
+
             'login' =>
                 [
                     'title' => '登入畫面',
                     'background' =>
                         [
                             'title' => '背景圖編輯',
-                        ],
-                ],
-            'home' =>
-                [
-                    'title' => '首頁畫面',
-                    'slider' =>
-                        [
-                            'title' => '滑動圖編輯',
-                        ],
-                ],
-            'header' =>
-                [
-                    'title' => 'header',
-                    'url' =>
-                        [
-                            'title' => '連結編輯',
-                        ],
-                ],
-            'footer' =>
-                [
-                    'title' => 'footer',
-                    'url' =>
-                        [
-                            'title' => '連結編輯',
                         ],
                 ],
             'category' =>

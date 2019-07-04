@@ -369,6 +369,48 @@ return [
                 "sub_menu" => 0,
             ],
             [
+                //image
+                "id" => 606,
+                "parent_id" => 6,
+                "name" => "scenes.image",
+                "link" => "admin/scenes/image",
+                "access" => "1,2",
+                "open" => 1,
+                "sub_menu" => 0,
+                /*"child" => [
+                    [
+                        // section 1
+                        "id" => 60601,
+                        "parent_id" => 606,
+                        "name" => "scenes.image.60601",
+                        "link" => "admin/scenes/image/60601",
+                        "access" => "1,2",
+                        "open" => 1,
+                        "sub_menu" => 0,
+                    ],
+                    [
+                        // section 2
+                        "id" => 60602,
+                        "parent_id" => 606,
+                        "name" => "scenes.image.60602",
+                        "link" => "admin/scenes/image/60602",
+                        "access" => "1,2",
+                        "open" => 1,
+                        "sub_menu" => 0,
+                    ],
+                    [
+                        // section 3
+                        "id" => 60603,
+                        "parent_id" => 606,
+                        "name" => "scenes.image.60603",
+                        "link" => "admin/scenes/image/60603",
+                        "access" => "1,2",
+                        "open" => 1,
+                        "sub_menu" => 0,
+                    ],
+                ]*/
+            ],
+            [
                 //footer
                 "id" => 608,
                 "parent_id" => 6,

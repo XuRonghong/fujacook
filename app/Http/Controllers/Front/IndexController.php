@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
+use App\Presenters\Admin\ScenesPresenter;
 use App\Repositories\Admin\ScenesRepository;
 use App\Repositories\Repository;
 use App\Scene;
@@ -12,10 +13,12 @@ use Illuminate\Http\Request;
 class IndexController extends Controller
 {
     protected $repository;
+    protected $presenter;
 
-    function __construct(ScenesRepository $repository)
+    function __construct(ScenesRepository $repository, ScenesPresenter $presenter)
     {
         $this->repository = $repository;
+        $this->presenter = $presenter;
     }
 
 
@@ -29,10 +32,10 @@ class IndexController extends Controller
         $map['open'] = 1;
         $data['arr']['aaData'] = Scene::query()->where($map)
             ->where('type','LIKE', 'slider.home')
-            ->orderBy('updated_at', 'desc')
+            ->orderBy('rank', 'asc')
             ->get();
         //
-        $data['arr'] = $this->repository->eachOne_aaData($data['arr']);
+        $data['arr'] = $this->presenter->eachOne_aaData($data['arr']);
 
 
         $data['arr']['navbar'] = Scene::query()->where($map)
@@ -40,14 +43,31 @@ class IndexController extends Controller
             ->orderBy('rank', 'asc')
             ->get();
 
-
-        $data['arr']['introduce'] = Scene::query()->where($map)
-            ->where('type','LIKE', 'introduce.home')
+        //
+        $images = [];
+        $images['aaData'] = Scene::query()->where($map)
+            ->where('type','LIKE', 'image.home.60601')
             ->orderBy('rank', 'asc')
-            ->get();
+            ->get();        //
+        $data['arr']['image']['section1'] = $this->presenter->eachOne_aaData($images)['aaData'];
+        //
+        $images['aaData'] = Scene::query()->where($map)
+            ->where('type','LIKE', 'image.home.60602')
+            ->orderBy('rank', 'asc')
+            ->get();        //
+        $data['arr']['image']['section2'] = $this->presenter->eachOne_aaData($images)['aaData'];
+        //
+        $images['aaData'] = Scene::query()->where($map)
+            ->where('type','LIKE', 'image.home.60603')
+            ->orderBy('rank', 'asc')
+            ->get();        //
+        $data['arr']['image']['section3'] = $this->presenter->eachOne_aaData($images)['aaData'];
+
 
         return view('front.index', compact('data'));
     }
+
+
 
 
     /*

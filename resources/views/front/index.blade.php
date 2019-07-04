@@ -9,33 +9,40 @@
 @section('content')
 
         <!--鍋子介紹A-->
-{{--        <section class="fuja-introduceA">--}}
-{{--            <div class="container">--}}
-{{--                <div class="row">--}}
-{{--                    @foreach(data_get($data['arr'], 'introduce') as $var)--}}
-{{--                        {!! $var->detail !!}--}}
-{{--                    @endforeach--}}
-{{--                    <div class="fuja-introduce-left">--}}
-{{--                        <img src="{{asset('/web0617/img/introduce01.jpg')}}" alt="">--}}
-{{--                    </div>--}}
-{{--                    <div class="fuja-introduce-right">--}}
-{{--                        <img src="{{asset('/web0617/img/introduce02.jpg')}}" alt="">--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </section>--}}
-        @foreach(data_get($data['arr'], 'introduce') as $var)
-            {!! $var->detail !!}
-        @endforeach
+        <section class="fuja-introduceA">
+            <div class="container">
+                <div class="row">
+                    <?php $i=1; ?>
+                    @foreach(data_get($data['arr'], 'image.section1', []) as $key => $var)
+                        @if($i%2)
+                        <div class="fuja-introduce-left">
+                            <img src="{{array_first($var->image)}}" alt="">
+                        </div>
+                        @else
+                        <div class="fuja-introduce-right">
+                            <img src="{{array_first($var->image)}}" alt="">
+                        </div>
+                        @endif
+                            <?php $i++; ?>
+                    @endforeach
+                </div>
+            </div>
+        </section>
         <!--鍋子介紹B-->
-{{--        <section class="fuja-introduceB">--}}
-{{--            <img src="{{asset('/web0617/img/introduce03.jpg')}}" alt="">--}}
-{{--        </section>--}}
+        <section class="fuja-introduceB">
+            @foreach(data_get($data['arr'], 'image.section2', []) as $key => $var)
+                <img src="{{array_first($var->image)}}" alt="">
+{{--                <img src="{{asset('/web0617/img/introduce03.jpg')}}" alt="">--}}
+            @endforeach
+        </section>
         <!--鍋子介紹C-->
         <section class="fuja-introduceC"></section>
         <!--鍋子介紹D-->
         <section class="fuja-introduceD">
-            <img src="{{asset('/web0617/img/introduce05.jpg')}}" alt="">
+            @foreach(data_get($data['arr'], 'image.section3', []) as $key => $var)
+                <img src="{{array_first($var->image)}}" alt="">
+                {{--            <img src="{{asset('/web0617/img/introduce05.jpg')}}" alt="">--}}
+            @endforeach
         </section>
         <!--鍋子介紹E-->
         <section class="fuja-introduceE">

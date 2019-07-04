@@ -49,6 +49,7 @@ class ScenesPresenter extends Presenter
             case 'navbar': $data['options'] = $this->getSelectOption_navbar($data['type']); break;
             case 'slider': $data['options'] = $this->getSelectOption_slider($data['type']); break;
             case 'introduce': $data['options'] = $this->getSelectOption_introduce($data['type']); break;
+            case 'image': $data['options'] = $this->getSelectOption_image($data['type']); break;
             case 'footer': $data['options'] = $this->getSelectOption_footer($data['type']); break;
         }
         return $data;
@@ -73,6 +74,12 @@ class ScenesPresenter extends Presenter
             'introduce' => [
                 'introduce.home' => '首頁文字',
                 'introduce.intr' => '介紹頁文字',
+            ],
+            'image' => [
+                'image.home.60601' => '首頁圖片1',
+                'image.home.60602' => '首頁圖片2',
+                'image.home.60603' => '首頁圖片3',
+                'image.intr' => '介紹頁圖片',
             ],
             'footer' => [
                 'footer.home' => '首頁',
@@ -103,6 +110,15 @@ class ScenesPresenter extends Presenter
     {
         $arr = $this->getSelectOption();
         foreach ($arr['introduce'] as $key => $val){
+            $opt .= '<option value="'.$key.'" '. ($type==$key?'selected':'') .'>'.$val.'</option>';
+        }
+        return $opt;
+    }
+
+    public function getSelectOption_image($type='', $opt = '')
+    {
+        $arr = $this->getSelectOption();
+        foreach ($arr['image'] as $key => $val){
             $opt .= '<option value="'.$key.'" '. ($type==$key?'selected':'') .'>'.$val.'</option>';
         }
         return $opt;

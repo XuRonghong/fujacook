@@ -347,6 +347,10 @@ return [
                 [
                     'title' => '文字介紹編輯',
                 ],
+            'image' =>
+                [
+                    'title' => '圖片管理',
+                ],
             'footer' =>
                 [
                     'title' => 'footer編輯',
