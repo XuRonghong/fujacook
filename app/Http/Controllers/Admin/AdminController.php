@@ -7,7 +7,6 @@ use App\Repositories\Admin\AdminsRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-
 class AdminController extends Controller
 {
     protected $repository;

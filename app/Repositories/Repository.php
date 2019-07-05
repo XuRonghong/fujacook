@@ -2,13 +2,13 @@
 
 namespace App\Repositories;
 
-//use Illuminate\Database\Eloquent\Builder;
 use App\AdminInfo;
 use App\Http\Controllers\FuncController;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use DB;
 
 abstract class Repository
 {
@@ -34,6 +34,7 @@ abstract class Repository
     public function create($attributes)
     {
         $model = $this->model->create($attributes);
+
         FuncController::addActionLog(
             'create',
             auth()->guard('admin')->user()->id,
@@ -75,6 +76,7 @@ abstract class Repository
         $model = $this->model->find($id);
         if (filled($model)) {
             $model->update($attributes);
+
             FuncController::addActionLog(
                 'update',
                 auth()->guard('admin')->user()->id,
@@ -98,6 +100,7 @@ abstract class Repository
     public function delete($id)
     {
         $model = $this->findOrFail($id)->delete();
+
         FuncController::addActionLog(
             'delete',
             auth()->guard('admin')->user()->id,
@@ -229,10 +232,39 @@ abstract class Repository
     }
 
 
-
     /*
      *
      */
+    //
+    public function DBinsertGetId($table, $attributes)
+    {
+        $model = DB::table($table)->insertGetId($attributes);
+
+        FuncController::addActionLog(
+            'DB::insert',
+            auth()->guard('admin')->user()->id,
+            json_encode( 'DB::table()->insertGetId()' ),
+            $model,
+            $table
+        );
+        return $model;
+    }
+
+    //
+    public function DBupdate($table, $attributes, $id, $colume='id')
+    {
+        $model = DB::table($table)->where($colume, $id)->update($attributes);
+
+        FuncController::addActionLog(
+            'DB::update',
+            auth()->guard('admin')->user()->id,
+            json_encode( $model ),
+            $id,
+            $table
+        );
+        return $model;
+    }
+
     public function validate($request, $noUnique=0)
     {
         return $this->model->validate($request, $noUnique);
@@ -247,7 +279,6 @@ abstract class Repository
             }
         });
     }
-
 
     public function getDataTable2($request = null)
     {

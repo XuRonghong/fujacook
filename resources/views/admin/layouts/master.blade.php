@@ -58,6 +58,10 @@
             position: relative;
             display: none;
         }
+        /* breadcrumb */
+        .page-breadcrumb .row {
+            height: 25px;
+        }
     </style>
 
     @yield('style')

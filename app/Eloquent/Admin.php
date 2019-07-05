@@ -10,9 +10,7 @@ class Admin extends Authenticatable
 {
     use Notifiable;
 
-    //
     protected $guard_name = 'admin';
-
     protected $fillable = [
         'no',
         'rank',
@@ -27,51 +25,35 @@ class Admin extends Authenticatable
         'login_time'
     ];
 
-    public function validate($request)
+    public function validate($request, $noUnique=0)
     {
         $rules = [
-//            'title' => 'required',
-//            'summary' => 'required',
-//            'hashtag_name' => 'required|array',
-//            'startTime' => 'nullable',
-//            'endTime' => 'nullable',
-//            'open' => 'nullable'
+            'account' => 'required'. ($noUnique?'':'|unique:admins'),
+            'password' => 'required',
+            'name' => 'required'. ($noUnique?'':'|unique:admins'),
         ];
         $messages = [
-//            'title.required' => '標題為必填項目',
-//            'summary.required' => '概要為必填項目',
-//            'category_id.required' => '商品分類為必填項目',
-//            'hashtag_name.required' => '標籤為必填項目',
+            'account.required' => '帳號為必填項目',
+            'account.unique' => '帳號不能重複',
+            'password.required' => '概要為必填項目',
+            'name.required' => '名稱為必填項目',
+            'name.unique' => '名稱不能重複',
         ];
         return $request->validate($rules, $messages);
     }
 
     public function info()
     {
-        return $this->hasMany(
-            'App\AdminInfo',
-            'admin_id',
-            'id'
-        );
+        return $this->hasMany('App\AdminInfo','admin_id','id');
     }
 
     public function permission()
     {
-        return $this->belongsToMany(
-            'App\Permission'
-//            'admin_permission',
-//            'admin_id',
-//            'id'
-        );
+        return $this->belongsToMany('App\Permission','admin_permission','admin_id','id');
     }
 
     public function menu()
     {
-        return $this->belongsToMany(
-            'App\Menu'
-//            'admin_menu',
-//            'admin_id',
-//            'id'
-        );
+        return $this->belongsToMany('App\Menu','admin_menu','admin_id','id');
     }
 }

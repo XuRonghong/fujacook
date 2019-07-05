@@ -9,7 +9,6 @@ use App\Menu;
 use App\Permission;
 use DB;
 
-
 abstract class Presenter
 {
 
@@ -148,10 +147,10 @@ abstract class Presenter
         $data = [
             'indexUrl' => url('admin'),
             'logoutUrl' => route('admin.logout'),
-            'dark_logo' => asset('xtreme-admin/assets/images/logo-icon.png'),
-            'light_logo' => asset('xtreme-admin/assets/images/logo-light-icon.png'),
-            'dark_logo_text' => asset('xtreme-admin/assets/images/logo-text.png'),
-            'light_logo_text' => asset('xtreme-admin/assets/images/logo-light-text.png'),
+            'dark_logo' => asset('images/logo_icon.png'),
+            'light_logo' => asset('images/logo_icon.png'),
+            'dark_logo_text' => asset('images/logo_icon2.png'),
+            'light_logo_text' => asset('images/logo_icon2.png'),
             'admin_logo' => auth()->guard('admin')->user()->info[0]->user_image, //asset('xtreme-admin/assets/images/users/1.jpg'),
             'admin_name' => auth()->guard('admin')->user()->name, //'Steave Jobs',
             'admin_email' => auth()->guard('admin')->user()->email, //'varun@gmail.com',
@@ -161,6 +160,7 @@ abstract class Presenter
             'upload_image' => url('admin/upload_image'),
             'upload_image_base64_url' => url('admin/upload_image_base64'),
             'upload_file_url' => url('admin/upload_file'),
+            'menu' => $this->getMenu2(),
         ];
         switch ($index){
             case 'index':
@@ -194,70 +194,10 @@ abstract class Presenter
                     'Summary' => '',
                 ]);
         }
-
-//        $nav = [
-//            'admins' => route('admin.admins.index'),
-//            'news' => route('admin.news.index'),
-//            'store' => route('admin.store.index'),
-//            'permissions' => route('admin.permissions.index'),
-//        ];
-//        $data['nav'] = $nav;
-        $data['menu'] = $this->getMenu2();
-
         return $data;
     }
 
-
-    /*
-     *
-     */
-    public function getMenu2()
-    {
-//        $this->view = View()->make( config( '_menu.' . $this->func . '.view' ) );
-//        session()->put( 'menu_parent', config( '_menu.' . $this->func . '.menu_parent' ) );
-//        session()->put( 'menu_access', config( '_menu.' . $this->func . '.menu_access' ) );
-        $mapSysMenu ['open'] = 1;
-        $DaoSysMenu = Menu::query()->where( $mapSysMenu )
-            ->whereExists(function($query)
-            {
-                $query->select(DB::raw(1))
-                    ->from('admin_menu')
-                    ->whereRaw('admin_menu.menu_id = menus.id')
-                    ->whereRaw('admin_id = '.auth()->guard('admin')->user()->id)
-                    ->where('open',1);
-            })
-            ->orderBy( 'rank', 'ASC' )->get();
-        $sys_menu = $DaoSysMenu->where('parent_id', '=', 0);
-        foreach ($sys_menu as $key => $var) {
-            if ($var->sub_menu) {
-                $var->second = $DaoSysMenu->where('parent_id', '=', $var->id);
-                foreach ($var->second as $key2 => $var2) {
-                    if ($var2->sub_menu) {
-                        $var2->third = $DaoSysMenu->where('parent_id', '=', $var2->id);
-                    }
-                }
-            }
-        }
-        return $sys_menu;
-    }
-
-
-    public function getMenu()
-    {
-        $index = '';
-        $permissions = new Permission();
-        foreach ($permissions as $permission){
-            $arr = explode('.', $permission['name']);
-            if ($arr[0] != $index) {
-
-            } else {
-
-            }
-        }
-
-
-    }
-
+    //
     public function responseJson($errors=null, $method=0, $status=200)
     {
         if ( !$errors) {
@@ -281,8 +221,7 @@ abstract class Presenter
                         'redirectUrl' => $this->gotoUrl
                     ], $status);
                 default:
-//                    return redirect(route('admin.news.index', $request->query()))
-//                        ->with('success', sprintf("已新增 %s", "一筆資料"));
+//                    return redirect(route('admin.news.index', $request->query()))->with('success', sprintf("已新增 %s", "一筆資料"));
                     return response()->json([ ], 404);
             }
         } else {
@@ -294,22 +233,94 @@ abstract class Presenter
         }
     }
 
-
-    public function dateTime($column = 'created_at', $format = 'Y-m-d H:i:s')
+    // 製造左邊選單
+    public function getMenu2()
     {
-        if ($this->object->$column) {
-            return $this->object->$column->format($format);
+//        $this->view = View()->make( config( '_menu.' . $this->func . '.view' ) );
+//        session()->put( 'menu_parent', config( '_menu.' . $this->func . '.menu_parent' ) );
+//        session()->put( 'menu_access', config( '_menu.' . $this->func . '.menu_access' ) );
+        $mapSysMenu ['open'] = 1;
+        $DaoSysMenu = Menu::query()->where( $mapSysMenu )->whereExists(function($query) {
+                $query->select(DB::raw(1))
+                    ->from('admin_menu')
+                    ->whereRaw('admin_menu.menu_id = menus.id')
+                    ->whereRaw('admin_id = '.auth()->guard('admin')->user()->id)
+                    ->where('open',1);
+            })
+            ->orderBy( 'rank', 'ASC' )
+            ->get();
+        $sys_menu = $DaoSysMenu->where('parent_id', '=', 0);
+        foreach ($sys_menu as $key => $var) {
+            if ($var->sub_menu) {
+                $var->second = $DaoSysMenu->where('parent_id', '=', $var->id);
+                foreach ($var->second as $key2 => $var2) {
+                    if ($var2->sub_menu) {
+                        $var2->third = $DaoSysMenu->where('parent_id', '=', $var2->id);
+                    }
+                }
+            }
         }
-
-        return null;
+        return $sys_menu;
     }
 
-    public function presentStatus()
+    //
+    public function getMenu()
+    {
+        $index = '';
+        $permissions = new Permission();
+        foreach ($permissions as $permission){
+            $arr = explode('.', $permission['name']);
+            if ($arr[0] != $index) {
+
+            } else {
+
+            }
+        }
+    }
+
+    //
+    public function presentRank($rank)
+    {
+        $cache = $rank;
+        if ($rank=='') $rank = '-';
+        return '<input class="isEdit rank" data-id="rank" size="10" style="width: 100%; display: none;" type="text" value="'. $cache .'" />'.'<div class="aaa">'.$rank.'</div>';
+    }
+
+    //
+    public function presentStatus($status)
+    {
+        switch ($status) {
+            case 1: $btn = '<button class="btn btn-xs btn-success btn-open">已啟用</button>'; break;
+            case 0: $btn = '<button class="btn btn-xs btn-primary btn-open">未啟用</button>'; break;
+            case '1': $btn = '<button class="btn btn-xs btn-success btn-open">已啟用</button>'; break;
+            case '0': $btn = '<button class="btn btn-xs btn-primary btn-open">未啟用</button>'; break;
+            default: $btn = "無功能";
+        }
+        $btn .= '<button class="btn btn-xs btn-show" title="詳情"><i class="fa fa-book" aria-hidden="true"></i></button>';
+        $btn .= '<button class="btn btn-xs btn-edit" title="修改"><i class="fa fa-pencil-alt" aria-hidden="true"></i></button>';
+        $btn .= '<button class="btn btn-xs btn-del pull-right" title="刪除"><i class="fa fa-trash" aria-hidden="true"></i></button>';
+
+        return $btn;
+    }
+
+
+    /*
+     * 目前無入用
+     */
+    public function presentStatus2018()
     {
         if($this->object->status)
         {
             return '<span class="label label-success">啟用</span>';
         }
         return '<span class="label label-danger">停用</span>';
+    }
+
+    public function dateTime($column = 'created_at', $format = 'Y-m-d H:i:s')
+    {
+        if ($this->object->$column) {
+            return $this->object->$column->format($format);
+        }
+        return null;
     }
 }

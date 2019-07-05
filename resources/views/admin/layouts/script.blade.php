@@ -109,7 +109,7 @@
                 if (data.status) {
 {{--                    Swal.fire("{{trans('web_alert.notice')}}", data.message, "success");--}}
 //                     setTimeout(function () {
-                    DOM.api().ajax.reload(null, false); 
+                    DOM.api().ajax.reload(null, false);
                     toastr.success(data.message, "{{trans('web_alert.notice')}}").css("width","360px")
                         // table.api().ajax.reload(null, false);
                     // }, 100);

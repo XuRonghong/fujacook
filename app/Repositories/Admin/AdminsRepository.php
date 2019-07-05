@@ -10,8 +10,6 @@ use App\Permission;
 use App\Menu;
 use App\Repositories\Repository;
 use Hash;
-use DB;
-
 
 class AdminsRepository extends Repository
 {
@@ -54,10 +52,10 @@ class AdminsRepository extends Repository
             unset($attributes['user_contact']);
             $attributes['created_at'] = date('Y-m-d H:i:s', time());
             $attributes['updated_at'] = date('Y-m-d H:i:s', time());
-            $admin_id = DB::table('admins')->insertGetId($attributes);
+            $admin_id = $this->DBinsertGetId('admins', $attributes);
             // insert admin info
             $admin_info['admin_id'] = $admin_id;
-            DB::table('admins_info')->insert($admin_info);
+            $this->DBinsertGetId('admins_info', $admin_info);
             // add permission and menu to admin
             $this->addPermissionAndMenus($admin_id);
 
@@ -104,10 +102,9 @@ class AdminsRepository extends Repository
             unset($attributes['file_id']);
             unset($attributes['user_contact']);
             $attributes['updated_at'] = date('Y-m-d H:i:s', time());
-            DB::table('admins')->where('id', $id)->update($attributes);
+            $this->DBupdate('admins', $attributes, $id);
             // insert admin info
-            DB::table('admins_info')->where('id', $id)->update($admin_info);
-
+            $this->DBupdate('admins_info', $admin_info, $id, 'admin_id');
 
             return ['errors'=> null];
         } catch (\Exception $e){
@@ -119,7 +116,6 @@ class AdminsRepository extends Repository
     {
         return parent::delete($id);
     }
-
 
     //
     public function findOrFail($id)
