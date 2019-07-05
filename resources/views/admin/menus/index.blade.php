@@ -8,16 +8,9 @@
 
 @section('content')
     <div class="page-wrapper">
-        <!-- ============================================================== -->
-        <!-- Bread crumb and right sidebar toggle -->
-        <!-- ============================================================== -->
-        {{--@include('admin.layouts.breadcrumb')--}}
-        <!-- ============================================================== -->
-        <!-- End Bread crumb and right sidebar toggle -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Container fluid  -->
-        <!-- ============================================================== -->
+
+        @include('admin.layouts.breadcrumb')
+
         <div class="container-fluid">
             <!-- ============================================================== -->
             <!-- Tables -->
@@ -26,13 +19,10 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title modalTitle">{{data_get($data,'Title')}}</h4>
-                            {{--<h6 class="card-subtitle">{{data_get($data,'Summary')}}</h6>--}}
-                            <button type="button" name="create_record" id="create_record" class="btn btn-success btn-sm">Create</button>
-                            <br />
+                            <h4 class="card-title modalTitle"></h4>
+                            <h6 class="card-subtitle">{{data_get($data,'Summary')}}</h6>
                             <div class="table-responsive waitme">
                                 <table id="data_table" class="table table-table-striped table-bordered">
-
                                 </table>
                             </div>
                         </div>
@@ -40,16 +30,12 @@
                 </div>
             </div>
         </div>
-        <!-- ============================================================== -->
-        <!-- End Container fluid  -->
-        <!-- ============================================================== -->
     </div>
 @endsection
 
 @section('inline-js')
     <script>
         $(document).ready(function () {
-
             // loading .....
             run_waitMe($('.waitme'));
             let data_table = $('#data_table');
@@ -60,6 +46,7 @@
                 "scrollY": '60vh',
                 // 'bProcessing': true,
                 // 'sServerMethod': 'GET',
+                "order": [[ 0, "asc" ]],
                 "aoColumns": [
                     {
                         "sTitle": "ID",
@@ -77,26 +64,12 @@
                         "sName": "parent_id",
                         // "width": "40px",
                         "bSearchable": false,
-                        "mRender": function (data, type, row) {
-                            // return data;
-                            data2=data;
-                            if (data=='')data='-';
-                            return '<input class="isEdit parent_id" data-id="parent_id" size="10" style="width: 100%; display: none;" type="text" value="' + data2 + '"></input>'+
-                                '<div class="aaa">'+data+'</div>';
-                        }
                     },
                     {
                         "sTitle": "rank",
                         "mData": "rank",
                         // "width": "100px",
                         "sName": "rank",
-                        "mRender": function (data, type, row) {
-                            // return data;
-                            data2=data;
-                            if (data=='')data='-';
-                            return '<input class="isEdit rank" data-id="rank" size="10" style="width: 100%; display: none;" type="text" value="' + data2 + '"></input>'+
-                                '<div class="aaa">'+data+'</div>';
-                        }
                     },
                     {
                         "sTitle": "title",
@@ -112,26 +85,12 @@
                         "mData": "name",
                         // "width": "100px",
                         "sName": "name",
-                        "mRender": function (data, type, row) {
-                            // return data;
-                            data2=data;
-                            if (data=='')data='-';
-                            return '<input class="isEdit name" data-id="name" size="10" style="width: 100%; display: none;" type="text" value="' + data2 + '"></input>'+
-                                '<div class="aaa">'+data+'</div>';
-                        }
                     },
                     {
                         "sTitle": "link",
                         "mData": "link",
                         // "width": "100px",
                         "sName": "link",
-                        "mRender": function (data, type, row) {
-                            // return data;
-                            data2=data;
-                            if (data=='')data='-';
-                            return '<input class="isEdit link" data-id="link" size="10" style="width: 100%; display: none;" type="text" value="' + data2 + '"></input>'+
-                                '<div class="aaa">'+data+'</div>';
-                        }
                     },
                     {
                         "sTitle": "sub_menu",
@@ -140,25 +99,12 @@
                         "sName": "sub_menu",
                         "bSortable": true,
                         "bSearchable": true,
-                        "mRender": function (data, type, row) {
-                            // return data;
-                            data2=data;
-                            if (data=='')data='-';
-                            return '<input class="isEdit sub_menu" data-id="sub_menu" size="10" style="width: 100%; display: none;" type="text" value="' + data2 + '"></input>'+'<div class="aaa">'+data+'</div>';
-                        }
                     },
                     {
                         "sTitle": "open",
                         "mData": "open",
                         // "width": "100px",
                         "sName": "open",
-                        "mRender": function (data, type, row) {
-                            // return data;
-                            data2=data;
-                            if (data=='')data='-';
-                            return '<input class="isEdit open" data-id="open" size="10" style="width: 100%; display: none;" type="text" value="' + data2 + '"></input>'+
-                                '<div class="aaa">'+data+'</div>';
-                        }
                     },
                     {
                         "sTitle": "",
@@ -166,11 +112,7 @@
                         "bSearchable": false,
                         // "width": '100px',
                         "mRender": function (data, type, row) {
-                            // current_data[row.id] = row;
-                            let btn = '';
-                            // btn += '<button class="btn btn-xs btn-show" title="詳情"><i class="fa fa-book" aria-hidden="true"></i></button>';
-                            // btn += '<button class="btn btn-xs btn-edit" title="修改"><i class="fa fa-pencil-alt" aria-hidden="true"></i></button>';
-                            btn += '<button class="btn btn-xs btn-del pull-right" title="刪除"><i class="fa fa-trash" aria-hidden="true"></i></button>';
+                            let btn = row.status;
                             $('.waitme').waitMe('hide');
                             return btn;
                         }

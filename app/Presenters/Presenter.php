@@ -279,11 +279,40 @@ abstract class Presenter
     }
 
     //
-    public function presentRank($rank)
+    public function presentIsEdit($index, $data)
     {
-        $cache = $rank;
-        if ($rank=='') $rank = '-';
-        return '<input class="isEdit rank" data-id="rank" size="10" style="width: 100%; display: none;" type="text" value="'. $cache .'" />'.'<div class="aaa">'.$rank.'</div>';
+        switch ($index){
+            case 'parent_id':
+                $cache = $data;
+                if ($data=='') $data = '-';
+                return '<input class="isEdit '.$index.'" data-id="'.$index.'" size="10" style="width: 100%; display: none;" type="text" value="'. $cache .'" />'.'<div class="aaa">'.$data.'</div>';
+                break;
+            case 'rank':
+                $cache = $data;
+                if ($data=='') $data = '-';
+                return '<input class="isEdit '.$index.'" data-id="'.$index.'" size="10" style="width: 100%; display: none;" type="text" value="'. $cache .'" />'.'<div class="aaa">'.$data.'</div>';
+                break;
+            case 'name':
+                $cache = $data;
+                if ($data=='') $data = '-';
+                return '<input class="isEdit '.$index.'" data-id="'.$index.'" size="10" style="width: 100%; display: none;" type="text" value="'. $cache .'" />'.'<div class="aaa">'.$data.'</div>';
+                break;
+            case 'link':
+                $cache = $data;
+                if ($data=='') $data = '-';
+                return '<input class="isEdit '.$index.'" data-id="'.$index.'" size="10" style="width: 100%; display: none;" type="text" value="'. $cache .'" />'.'<div class="aaa">'.$data.'</div>';
+                break;
+            case 'sub_menu':
+                $cache = $data;
+                if ($data=='') $data = '-';
+                return '<input class="isEdit '.$index.'" data-id="'.$index.'" size="10" style="width: 100%; display: none;" type="text" value="'. $cache .'" />'.'<div class="aaa">'.$data.'</div>';
+                break;
+            case 'open':
+                $cache = $data;
+                if ($data=='') $data = '-';
+                return '<input class="isEdit '.$index.'" data-id="'.$index.'" size="10" style="width: 100%; display: none;" type="text" value="'. $cache .'" />'.'<div class="aaa">'.$data.'</div>';
+                break;
+        }
     }
 
     //

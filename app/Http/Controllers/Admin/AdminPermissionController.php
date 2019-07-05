@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Presenters\Admin\MenuPresenter;
 use App\Presenters\Admin\PermissionPresenter;
-use App\Repositories\Admin\MenuRepository;
 use App\Repositories\Admin\PermissionRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
 
 class AdminPermissionController extends Controller
 {

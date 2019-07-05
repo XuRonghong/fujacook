@@ -7,7 +7,6 @@ use App\Repositories\Admin\MenuRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-
 class AdminMenuController extends Controller
 {
     protected $repository;
@@ -17,13 +16,11 @@ class AdminMenuController extends Controller
     public function __construct(MenuRepository $repository, MenuPresenter $presenter)
     {
         $this->repository = $repository;
-        //設定指定model
-        $this->repository->setModel_AdminMenu();
+        $this->repository->setModel_AdminMenu();    //設定指定model
 
         $this->presenter = $presenter;
-        //指定view的位置
         $this->presenter->setTitle('Admin_menu');
-        $this->presenter->setViewName('menus.admin_menu');
+        $this->presenter->setViewName('menus.admin_menu');      //指定view的位置
         //所有關於route::resource的位置
         $this->route_url = $this->presenter->getRouteResource($this->presenter->setRouteName('admin.admin_menu'));
     }
@@ -137,7 +134,7 @@ class AdminMenuController extends Controller
     public function update(Request $request, $id)
     {
         // 除特殊情況不驗證
-        if ($request->get('doValidate', 1))$this->repository->validate($request);
+        if ($request->get('doValidate', 1))$this->repository->validate($request, 1);
 
         $data = $this->repository->update($request->all(), $id);
 

@@ -39,7 +39,7 @@ class AdminsPresenter extends Presenter
                 //
                 $var->info = AdminInfo::query()->where('admin_id', $var->id)->first();
                 //
-                $var->rank = $this->presentRank($var->rank);
+                $var->rank = $this->presentIsEdit('rank', $var->rank);
                 //
                 $var->user_image = $this->presentImage($var->info['user_image']);
                 //

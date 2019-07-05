@@ -11,6 +11,10 @@ class Admin extends Authenticatable
     use Notifiable;
 
     protected $guard_name = 'admin';
+
+    //
+//    protected $table = 'admins';
+//    protected $primaryKey = 'id';
     protected $fillable = [
         'no',
         'rank',
@@ -49,11 +53,11 @@ class Admin extends Authenticatable
 
     public function permission()
     {
-        return $this->belongsToMany('App\Permission','admin_permission','admin_id','id');
+        return $this->belongsToMany('App\Permission'/*,'admin_permission','admin_id','id'*/);
     }
 
     public function menu()
     {
-        return $this->belongsToMany('App\Menu','admin_menu','admin_id','id');
+        return $this->belongsToMany('App\Menu'/*,'admin_menu','admin_id','id'*/);
     }
 }

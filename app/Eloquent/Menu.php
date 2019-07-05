@@ -23,29 +23,30 @@ class Menu extends Model
     public function validate($request)
     {
         $rules = [
-            'title' => 'required',
-            'summary' => 'required',
-//            'hashtag_name' => 'required|array',
-//            'startTime' => 'nullable',
-//            'endTime' => 'nullable',
+//            'parent_id' => 'required',
+//            'rank' => 'required',
+//            'type' => 'nullable',
+//            'name' => 'nullable',
+            'link' => 'required',
+//            'sub_menu' => 'nullable',
+//            'access' => 'nullable',
 //            'open' => 'nullable'
         ];
         $messages = [
-            'title.required' => '標題為必填項目',
-            'summary.required' => '概要為必填項目',
-//            'category_id.required' => '商品分類為必填項目',
-//            'hashtag_name.required' => '標籤為必填項目',
+//            'parent_id.required' => '父id為必填項目',
+//            'rank.required' => '為必填項目',
+//            'type.required' => '為必填項目',
+            'name.required' => '名稱為必填項目',
+            'link.required' => 'link為必填項目',
+//            'sub_menu.required' => '為必填項目',
+//            'access.required' => '為必填項目',
+//            'open.required' => '為必填項目'
         ];
         return $request->validate($rules, $messages);
     }
 
     public function admin()
     {
-        return $this->belongsToMany(
-            'App\Admin'
-//            'admin_menu',
-//            'menu_id',
-//            'id'
-        );
+        return $this->belongsToMany('App\Admin'/*,'admin_menu','menu_id','id'*/);
     }
 }

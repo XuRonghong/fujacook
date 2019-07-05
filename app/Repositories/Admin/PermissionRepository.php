@@ -2,11 +2,9 @@
 
 namespace App\Repositories\Admin;
 
-use App\Admin;
 use App\AdminPermission;
 use App\Permission;
 use App\Repositories\Repository;
-
 
 class PermissionRepository extends Repository
 {
@@ -175,7 +173,6 @@ class PermissionRepository extends Repository
             'aaData'=> $total_count ? $data_arr : []
         ];
     }
-
 
 
 
