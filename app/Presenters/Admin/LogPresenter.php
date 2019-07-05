@@ -19,7 +19,7 @@ class LogPresenter extends Presenter
                 // Admin
                 if ($var->type < 100) {
                     $var->user_name = $this->getUserName('admin', $var->user_id);
-                    $var->user_type = $this->transAdminType($var->user_type);
+                    $var->user_type = $this->transUserType($var->user_type);
                 }
                 // Member
 //                elseif ($var->type > 100) {
@@ -32,7 +32,7 @@ class LogPresenter extends Presenter
     // trans each one data for output view from log.
     function tranOne($data, $other=0)
     {
-        $data['type'] = $this->transAdminType($data['type']);
+        $data['type'] = $this->transUserType($data['type']);
         if ($other){
             $data['value'] = str_replace(':',': <b>', $data['value']);
             $data['value'] = str_replace(',','</b>,<br>', $data['value']);

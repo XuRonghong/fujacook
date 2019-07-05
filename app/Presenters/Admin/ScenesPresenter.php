@@ -10,58 +10,11 @@ class ScenesPresenter extends Presenter
     protected $view_group_name = 'scenes';       //document of view group
     protected $route_name;      //Route->name()
 
+    protected $selectOptions;   //HTML元素
 
-    // data object or array forEach to do from scenes.
-    public function eachOne_aaData($arr)
+    public function __construct()
     {
-        if ( $arr['aaData']) {
-            foreach ($arr['aaData'] as $key => $var) {
-                switch ($var->type) {
-                    case 'navbar.home':
-                        $var->type = '首頁選項欄';
-                        break;
-                    case 'slider.home':
-                        $var->type = '首頁輪播圖';
-                        break;
-                    case 'introduce.home':
-                        $var->type = '首頁文字';
-                        break;
-                }
-                //找圖片檔案
-//                if ( $var->image) {
-//                    $var->image = array($var->image);
-//                } else {
-                $var->image = $this->transFileIdtoImage($var->file_id);
-//                }
-            }
-        }
-        return $arr;
-    }
-
-
-    // trans each one data for output view from scenes.
-    public function transOne($data, $other=0)
-    {
-        $data = parent::transOne($data);
-
-        //get option for select with scenes type
-        switch ($other){
-            case 'navbar': $data['options'] = $this->getSelectOption_navbar($data['type']); break;
-            case 'slider': $data['options'] = $this->getSelectOption_slider($data['type']); break;
-            case 'introduce': $data['options'] = $this->getSelectOption_introduce($data['type']); break;
-            case 'image': $data['options'] = $this->getSelectOption_image($data['type']); break;
-            case 'footer': $data['options'] = $this->getSelectOption_footer($data['type']); break;
-        }
-        return $data;
-    }
-
-
-    /*
-     * Select options design
-     */
-    public function getSelectOption()
-    {
-        return [
+        $this->selectOptions = [
             'navbar' => [
                 'navbar.home' => '首頁選單欄位',
                 'navbar.intr' => '介紹頁選單',
@@ -76,6 +29,7 @@ class ScenesPresenter extends Presenter
                 'introduce.intr' => '介紹頁文字',
             ],
             'image' => [
+                'image.home' => '首頁圖片',
                 'image.home.60601' => '首頁圖片1',
                 'image.home.60602' => '首頁圖片2',
                 'image.home.60603' => '首頁圖片3',
@@ -88,47 +42,37 @@ class ScenesPresenter extends Presenter
         ];
     }
 
-    public function getSelectOption_navbar($type='', $opt = '')
+    // data object or array forEach to do from scenes.
+    public function eachOne_aaData($arr)
     {
-        $arr = $this->getSelectOption();
-        foreach ($arr['navbar'] as $key => $val){
-            $opt .= '<option value="'.$key.'" '. ($type==$key?'selected':'') .'>'.$val.'</option>';
+        if ( $arr['aaData']) {
+            foreach ($arr['aaData'] as $key => $var) {
+                //翻譯每個type
+                $var->type = $this->tranTypeInSelectOption($var->type, $this->selectOptions);
+                //找圖片檔案
+                $var->image = $this->transFileIdtoImage($var->file_id);
+            }
         }
-        return $opt;
+        return $arr;
     }
 
-    public function getSelectOption_slider($type='', $opt = '')
+    // trans each one data for output view from scenes.
+    public function transOne($data, $other=0)
     {
-        $arr = $this->getSelectOption();
-        foreach ($arr['slider'] as $key => $val){
-            $opt .= '<option value="'.$key.'" '. ($type==$key?'selected':'') .'>'.$val.'</option>';
+        $data = parent::transOne($data);
+
+        //get option for select with scenes type
+        if ($other){
+            $data['options'] = $this->getSelectOption($other, $data['type']);
         }
-        return $opt;
+        return $data;
     }
 
-    public function getSelectOption_introduce($type='', $opt = '')
+    // 製造 HTML 元素 select option
+    public function getSelectOption($type, $selected='', $opt = '')
     {
-        $arr = $this->getSelectOption();
-        foreach ($arr['introduce'] as $key => $val){
-            $opt .= '<option value="'.$key.'" '. ($type==$key?'selected':'') .'>'.$val.'</option>';
-        }
-        return $opt;
-    }
-
-    public function getSelectOption_image($type='', $opt = '')
-    {
-        $arr = $this->getSelectOption();
-        foreach ($arr['image'] as $key => $val){
-            $opt .= '<option value="'.$key.'" '. ($type==$key?'selected':'') .'>'.$val.'</option>';
-        }
-        return $opt;
-    }
-
-    public function getSelectOption_footer($type='', $opt = '')
-    {
-        $arr = $this->getSelectOption();
-        foreach ($arr['footer'] as $key => $val){
-            $opt .= '<option value="'.$key.'" '. ($type==$key?'selected':'') .'>'.$val.'</option>';
+        foreach ($this->selectOptions[$type] as $key => $val) {
+            $opt .= '<option value="'.$key.'" '. ($selected==$key?'selected':'') .'>'.$val.'</option>';
         }
         return $opt;
     }

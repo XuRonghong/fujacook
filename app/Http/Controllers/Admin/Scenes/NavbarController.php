@@ -66,7 +66,7 @@ class NavbarController extends Controller
         //
         $data = $this->presenter->getParameters('create');
         //get option for select
-        $data['arr']['options'] = $this->presenter->getSelectOption_navbar();
+        $data['arr']['options'] = $this->presenter->getSelectOption('navbar');
         //to ajax url
         $data['route_url'] = $this->route_url;
 

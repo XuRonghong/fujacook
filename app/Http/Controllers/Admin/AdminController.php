@@ -3,13 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Presenters\Admin\AdminsPresenter;
-use App\Presenters\Admin\MenuPresenter;
 use App\Repositories\Admin\AdminsRepository;
-use App\Repositories\Admin\MenuRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class AdminsController extends Controller
+
+class AdminController extends Controller
 {
     protected $repository;
     protected $presenter;
@@ -63,8 +62,8 @@ class AdminsController extends Controller
     {
         //
         $data = $this->presenter->getParameters('create');
-        //
-        $data['arr'] = [];
+        //get option for select
+        $data['arr']['options'] = $this->presenter->getSelectOption('admins');
         //to ajax url
         $data['route_url'] = $this->route_url;
 
@@ -99,6 +98,8 @@ class AdminsController extends Controller
         $data = $this->presenter->getParameters('show');
         //若資料庫沒有該id 則404畫面
         $data['arr'] = $this->repository->findOrFail($id) or abort(404);
+        //轉換出顯示數據
+        $data['arr'] = $this->presenter->transOne($data['arr'], 'admins');
         //to ajax url
         $data['route_url'] = $this->route_url;
 
@@ -117,6 +118,8 @@ class AdminsController extends Controller
         $data = $this->presenter->getParameters('edit');
         //若資料庫沒有該id 則404畫面
         $data['arr'] = $this->repository->findOrFail($id) or abort(404);
+        //轉換出顯示數據
+        $data['arr'] = $this->presenter->transOne($data['arr'], 'admins');
         //to ajax url
         $data['route_url'] = $this->route_url;
 

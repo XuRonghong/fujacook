@@ -66,7 +66,7 @@ class SliderController extends Controller
         //
         $data = $this->presenter->getParameters('create');
         //get option for select
-        $data['arr']['options'] = $this->presenter->getSelectOption_slider();
+        $data['arr']['options'] = $this->presenter->getSelectOption('slider');
         //to ajax url
         $data['route_url'] = $this->route_url;
 

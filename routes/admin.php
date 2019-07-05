@@ -72,7 +72,7 @@ Route::group([
      * 帳號管理
      *
      *********************************************************/
-        $index = array('url'=>'admins', 'C'=>'AdminsController', 'name'=>'admins');
+        $index = array('url'=>'admins', 'C'=>'AdminController', 'name'=>'admins');
         Route::get($index['url'].'/list', $index['C'].'@list')->name($index['name'].'.list');
         Route::resource($index['url'], $index['C']);
         Route::post($index['url'].'/update/{id}', $index['C'].'@update')->name($index['name'].'.update');

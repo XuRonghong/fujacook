@@ -9,6 +9,7 @@ use App\Menu;
 use App\Permission;
 use DB;
 
+
 abstract class Presenter
 {
 
@@ -25,8 +26,8 @@ abstract class Presenter
     public function setRouteName($name)
     {
         $this->route_name = $name;
-        $this->gotoUrl = route($this->route_name.'.index');
-        return $this->route_name;
+        $this->gotoUrl = route($name.'.index');
+        return $name;
     }
 
     public function getViewName()
@@ -66,8 +67,8 @@ abstract class Presenter
         return $data;
     }
 
-
-    function getUserName($model, $id)
+    // 給table名稱以及id即可找出使用者名稱
+    public function getUserName($model, $id)
     {
         switch ($model) {
             case 'admin': $model = new Admin(); break;
@@ -81,7 +82,8 @@ abstract class Presenter
         }
     }
 
-    public function transAdminType($type=null)
+    // 轉換 user type 為輸出顯示type
+    public function transUserType($type=null)
     {
         if ( !$type) {
             return null;
@@ -94,10 +96,19 @@ abstract class Presenter
         }
     }
 
+    // 轉換 type 為輸出顯示選項內容之一
+    public function tranTypeInSelectOption($type, $arr=[])
+    {
+        if ( !$type) return null;
+        foreach ($arr as $select) {
+            foreach ($select as $value => $option){
+                if($type == $value) return $option;
+            }
+        }
+    }
 
-
-    /*
-     * table - file_id to find File trans image.
+    /* Output: array()
+     * table - input file_id to find image on filetable.
      */
     public function transFileIdtoImage($file_id)
     {
@@ -116,8 +127,7 @@ abstract class Presenter
         return [];
     }
 
-
-
+    // 例行公事，路由元素
     public function getRouteResource($route_name = '')
     {
         return [
@@ -126,14 +136,13 @@ abstract class Presenter
             'create' => route($route_name.'.create'),
             'store' => route($route_name.'.store'),
             'edit'  => route($route_name.'.index'),
-//            'update' => url(str_replace('.','/',$route_name), [1]),
             'update' => route($route_name.'.update', [-10]),    //-10暫定代替字元
-//            'destroy' => url(str_replace('.','/',$route_name).'/destroy'),
             'destroy' => route($route_name.'.destroy', [-10]),
             'show' => route($route_name.'.index'),
         ];
     }
 
+    // 例行公事，顯示板塊參數
     public function getParameters($index=null)
     {
         $data = [
@@ -301,7 +310,6 @@ abstract class Presenter
         {
             return '<span class="label label-success">啟用</span>';
         }
-
         return '<span class="label label-danger">停用</span>';
     }
 }

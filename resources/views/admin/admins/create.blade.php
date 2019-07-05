@@ -44,9 +44,9 @@
                                     <label for="img1" class="col-sm-5 text-right control-label col-form-label"></label>
                                     <div class="col-sm-7">
                                         <a class="btn-image-modal" data-modal="image-form" data-id="">
-                                            <img src="{{data_get($data['arr']['info'], '0.user_image', url('images/empty.jpg'))}}" style="height:140px">
+                                            <img src="{{data_get($data['arr'], 'info.0.user_image', url('images/empty.jpg'))}}" style="height:140px">
                                         </a>
-                                        <img id="img1" src="{{data_get($data['arr']['info'], '0.user_image', url('images/empty.jpg'))}}" style="height:140px" alt="">
+                                        <img id="img1" src="{{data_get($data['arr'], 'info.0.user_image', url('images/empty.jpg'))}}" style="height:140px" alt="">
                                     </div>
                                 </div>
 
@@ -93,13 +93,13 @@
                                 <div class="form-group row">
                                     <label for="com3" class="col-sm-3 text-right control-label col-form-label">email</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="email" value="{{data_get($data['arr']['info'], '0.user_email')}}" class="form-control email" id="com3" placeholder="">
+                                        <input type="text" name="email" value="{{data_get($data['arr'], 'info.0.user_email')}}" class="form-control email" id="com3" placeholder="">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="com7" class="col-sm-3 text-right control-label col-form-label">contact</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="user_contact" value="{{data_get($data['arr']['info'], '0.user_contact','?')}}" class="form-control user_contact" id="com7" placeholder="contact number">
+                                        <input type="text" name="user_contact" value="{{data_get($data['arr'], 'info.0.user_contact','?')}}" class="form-control user_contact" id="com7" placeholder="contact number">
                                     </div>
                                 </div>
                             </div>

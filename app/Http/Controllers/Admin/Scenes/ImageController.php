@@ -66,7 +66,7 @@ class ImageController extends Controller
         //
         $data = $this->presenter->getParameters('create');
         //get option for select
-        $data['arr']['options'] = $this->presenter->getSelectOption_image();
+        $data['arr']['options'] = $this->presenter->getSelectOption('image');
         //to ajax url
         $data['route_url'] = $this->route_url;
 

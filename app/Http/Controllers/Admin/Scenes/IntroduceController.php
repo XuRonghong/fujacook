@@ -66,7 +66,7 @@ class IntroduceController extends Controller
         //
         $data = $this->presenter->getParameters('create');
         //get option for select
-        $data['arr']['options'] = $this->presenter->getSelectOption_introduce();
+        $data['arr']['options'] = $this->presenter->getSelectOption('introduce');
         //to ajax url
         $data['route_url'] = $this->route_url;
 
