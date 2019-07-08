@@ -39,6 +39,8 @@ class MenuPresenter extends Presenter
                 //
                 $menu = Menu::query()->find($var->menu_id);
                 $var->menu_name = trans('menu.'. $menu->name. '.title') .'&nbsp;<b>('.$menu->name.')</b>';
+                //
+                $var->status = $this->presentStatus_adminMenu($var->open);
             }
         }
         return $arr;
@@ -53,6 +55,22 @@ class MenuPresenter extends Presenter
 //        $btn .= '<button class="btn btn-xs btn-edit" title="修改"><i class="fa fa-pencil-alt" aria-hidden="true"></i></button>';
         $btn .= '<button class="btn btn-xs btn-del pull-right" title="刪除"><i class="fa fa-trash" aria-hidden="true"></i></button>';
 
+        return $btn;
+    }
+
+    //
+    public function presentStatus_adminMenu($status=0)
+    {
+        switch ($status) {
+            case 1: $btn = '<button class="btn btn-xs btn-success btn-open">已啟用</button>'; break;
+            case 0: $btn = '<button class="btn btn-xs btn-primary btn-open">未啟用</button>'; break;
+            case '1': $btn = '<button class="btn btn-xs btn-success btn-open">已啟用</button>'; break;
+            case '0': $btn = '<button class="btn btn-xs btn-primary btn-open">未啟用</button>'; break;
+            default: $btn = "無功能";
+        }
+//        $btn .= '<button class="btn btn-xs btn-show" title="詳情"><i class="fa fa-book" aria-hidden="true"></i></button>';
+//        $btn .= '<button class="btn btn-xs btn-edit" title="修改"><i class="fa fa-pencil-alt" aria-hidden="true"></i></button>';
+        //$btn .= '<button class="btn btn-xs btn-del pull-right" title="刪除"><i class="fa fa-trash" aria-hidden="true"></i></button>';
         return $btn;
     }
 }

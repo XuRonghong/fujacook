@@ -48,6 +48,8 @@ class AdminPermissionController extends Controller
         {
             $data = $this->repository->getDataTable_alone($request, 'admin_id <> 1');
 
+            $data = $this->presenter->eachOne_aaData_adminPermission($data);     //每一項目要做甚麼事,有需要在使用
+
             return response()->json($data,200);
         }
         return response()->json('no ajax data', 204);
@@ -132,7 +134,7 @@ class AdminPermissionController extends Controller
     public function update(Request $request, $id)
     {
         // 除特殊情況不驗證
-        if ($request->get('doValidate', 1))$this->repository->validate($request);
+        if ($request->get('doValidate', 1))$this->repository->validate($request, 1);
 
         $data = $this->repository->update($request->all(), $id);
 

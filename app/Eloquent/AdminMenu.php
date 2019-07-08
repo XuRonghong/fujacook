@@ -22,8 +22,8 @@ class AdminMenu extends Model
             'menu_id' => 'required',
         ];
         $messages = [
-            'admin_id.required' => 'admin_id為必填項目',
-            'menu_id.required' => 'menu_id為必填項目',
+            'admin_id.required' => 'admin id為必填項目',
+            'menu_id.required' => 'menu id為必填項目',
         ];
         return $request->validate($rules, $messages);
     }

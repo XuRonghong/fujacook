@@ -45,7 +45,7 @@
                                     <label for="com1" class="col-sm-3 text-right control-label col-form-label">account<span style="color:red">*</span></label>
                                     <div class="col-sm-9">
                                         <input type="text" name="account" value="{{data_get($data['arr'], 'account')}}"
-                                               class="form-control account" id="com1" placeholder="" required>
+                                               class="form-control account" id="com1" placeholder="" disabled>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -109,9 +109,6 @@
             </div>
             <!-- End Row -->
         </div>
-        <!-- ============================================================== -->
-        <!-- End Container fluid  -->
-        <!-- ============================================================== -->
     </div>
 @endsection
 

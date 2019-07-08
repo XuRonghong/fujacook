@@ -147,17 +147,6 @@
             })
 
             //
-            data_table.on('click', '.btn-show', function () {
-                var id = $(this).closest('tr').attr('id');
-                // var id = $(this).closest('tr').find('td').first().text();
-                location.href = '{{$data['route_url']['show']}}'+'/'+id;
-            });
-            //
-            data_table.on('click', '.btn-edit', function () {
-                var id = $(this).closest('tr').attr('id');
-                location.href = '{{$data['route_url']['edit']}}'+'/'+id+'/edit';
-            })
-            //
             data_table.on('click', '.btn-del', function () {
                 var id = $(this).closest('tr').attr('id');
                 let url = '{{$data['route_url']['destroy']}}'.replace('-10', id)  //-10代替字元為id
@@ -183,32 +172,13 @@
                 $(this).hide();
                 $(this).parent().find('.aaa').show();
                 //
-
                 let id = $(this).closest('tr').attr('id');
                 let url = '{{data_get($data['route_url'], "update")}}'.replace('-10', id)  //-10代替字元為id
-                let data = {
-                    "_token": "{{ csrf_token() }}"
-                };
-                data.doValidate = 0
-                data[$(this).data('id')] = $(this).val();
+                let data = {}
+                data[$(this).data('id')] = $(this).val()
+                data['doValidate'] = 0
                 //
-                $.ajax({
-                    url: url,
-                    data: data,
-                    type: "POST",
-                    //async: false,
-                    success: function (rtndata) {
-                        // $('.waitme').waitMe('hide');
-                        if (rtndata.status) {
-                            toastr.success(rtndata.message, "{{trans('web_alert.notice')}}");
-                            setTimeout(function () {
-                                table.api().ajax.reload(null, false);
-                            }, 100);
-                        } else {
-                            swal("{{trans('web_alert.notice')}}", rtndata.message, "error");
-                        }
-                    }
-                });
+                ajaxOpen(url, data, 'POST', table)
             });
         });
     </script>

@@ -26,7 +26,7 @@ class Menu extends Model
 //            'parent_id' => 'required',
 //            'rank' => 'required',
 //            'type' => 'nullable',
-//            'name' => 'nullable',
+            'name' => 'required',
             'link' => 'required',
 //            'sub_menu' => 'nullable',
 //            'access' => 'nullable',

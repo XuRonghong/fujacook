@@ -135,7 +135,7 @@ class AdminController extends Controller
     public function update(Request $request, $id)
     {
         // 非單純修改狀態的話，一律驗證資料
-        if($request->get('active','')!="change") $this->repository->validate($request, 1);
+        if ($request->get('doValidate', 1))$this->repository->validate($request, 1, 'account');
 
         $data = $this->repository->update($request->all(), $id);
 

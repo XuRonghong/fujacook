@@ -26,6 +26,8 @@
     <link rel="stylesheet" href="{{asset('css/toastr.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/sweetalert.css')}}">
     <link rel="stylesheet" href="{{asset('css/waitMe.css')}}" type="text/css">
+    <!-- 滑動開關切換按鈕﹍CSS 語法產生器 -->
+    <link rel="stylesheet" href="{{asset('css/switch_demo.css')}}" type="text/css">
 
     <!-- Master styles -->
     <style type="text/css">

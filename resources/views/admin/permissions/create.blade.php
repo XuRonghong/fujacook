@@ -1,21 +1,16 @@
 
 @extends('admin.layouts.master')
 
+@section('style')
+    <style>
+    </style>
+@endsection
+
 @section('content')
-    <!-- ============================================================== -->
-    <!-- Page wrapper  -->
-    <!-- ============================================================== -->
     <div class="page-wrapper">
-        <!-- ============================================================== -->
-        <!-- Bread crumb and right sidebar toggle -->
-        <!-- ============================================================== -->
-{{--        @include('layouts2.breadcrumb')--}}
-        <!-- ============================================================== -->
-        <!-- End Bread crumb and right sidebar toggle -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Container fluid  -->
-        <!-- ============================================================== -->
+
+        @include('admin.layouts.breadcrumb')
+
         <div class="container-fluid">
             <!-- ============================================================== -->
             <!-- Start Page Content -->
@@ -25,71 +20,26 @@
                 <div class="col-12">
                     <div class="card" id="manage-modal">
                         <div class="card-body">
-                            <h4 class="card-title modalTitle">{{data_get($data,'Title')}}</h4>
-                            {{--<h6 class="card-subtitle">{{data_get($data,'Summary')}}</h6>--}}
+                            <h4 class="card-title modalTitle"></h4>
+                            <h6 class="card-subtitle">{{data_get($data,'Summary')}}</h6>
                         </div>
-                        <hr>
                         <form id="sample_form" class="form-horizontal">
                             <div class="card-body messageInfo-modal">
                                 <h4 class="card-title"></h4>
-                                {{--<div class="form-group row">--}}
-                                    {{--<label for="com2" class="col-sm-3 text-right control-label col-form-label">目標階層</label>--}}
-                                    {{--<div class="col-sm-9">--}}
-                                        {{--<select class="form-control iHead" id="com2" >--}}
-                                            {{--@if(isset($info))--}}
-                                                {{--<option value="10" @if($info->iHead<20) selected @endif>{{$permission['2'] or ''}}</option>--}}
-                                                {{--<option value="20" @if($info->iHead<30 && $info->iHead>19) selected @endif>1.{{$permission['10'] or ''}}</option>--}}
-                                                {{--<option value="30" @if($info->iHead<40 && $info->iHead>29) selected @endif>2.{{$permission['20'] or ''}}</option>--}}
-                                                {{--<option value="40" @if($info->iHead<50 && $info->iHead>39) selected @endif>3.{{$permission['30'] or ''}}</option>--}}
-                                                {{--<option value="50" @if($info->iHead<60 && $info->iHead>49) selected @endif>4.{{$permission['40'] or ''}}</option>--}}
-                                                {{--<option value="60" @if($info->iHead<70 && $info->iHead>59) selected @endif>5.{{$permission['50'] or ''}}</option>--}}
-                                                {{--<option value="70" @if($info->iHead<80 && $info->iHead>69) selected @endif>6.{{$permission['60'] or ''}}</option>--}}
-                                            {{--@else--}}
-                                                {{--@if(isset($permission))--}}
-                                                {{--@foreach($permission as $key => $value)--}}
-                                                    {{--@if($key=='2')--}}
-                                                        {{--<option value="10">{{$value or ''}}</option>--}}
-                                                    {{--@else--}}
-                                                        {{--<option value="{{ intval($key)+10 }}">{{$value or ''}}</option>--}}
-                                                    {{--@endif--}}
-                                                {{--@endforeach--}}
-                                                {{--@endif--}}
-                                            {{--@endif--}}
-                                        {{--</select>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
                                 <div class="form-group row">
-                                    <label for="com3" class="col-sm-3 text-right control-label col-form-label">name</label>
+                                    <label for="com3" class="col-sm-3 text-right control-label col-form-label">name<span style="color:red">*</span></label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="name" value="{{data_get($data['arr'], 'name')}}" class="form-control name" id="com3" placeholder="">
+                                        <input type="text" name="name" value="{{data_get($data['arr'], 'name')}}"
+                                               class="form-control name" id="com3" placeholder="例: admin.admin.index">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="com4" class="col-sm-3 text-right control-label col-form-label">description</label>
+                                    <label for="com4" class="col-sm-3 text-right control-label col-form-label">description<span style="color:red">*</span></label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="description" value="{{data_get($data['arr'], 'description')}}" class="form-control description" id="com4" placeholder="">
+                                        <input type="text" name="description" value="{{data_get($data['arr'], 'description')}}"
+                                               class="form-control description" id="com4" placeholder="例: 帳號管理-個人資料 檢視">
                                     </div>
                                 </div>
-                                {{--<div class="form-group row">--}}
-                                    {{--<label for="com4" class="col-sm-3 text-right control-label col-form-label">概要</label>--}}
-                                    {{--<div class="col-sm-9">--}}
-                                        {{--<input type="text" class="form-control summary" id="com4" placeholder="" value="{{data_get($news, 'summary')}}">--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                                {{--<div class="form-group row">--}}
-                                {{--<label for="com5" class="col-sm-3 text-right control-label col-form-label">Detail</label>--}}
-                                {{--<div class="col-sm-9">--}}
-                                {{--<input type="text" class="form-control vDetail" id="com5" placeholder="" value="{{ $info->vDetail or ''}}">--}}
-                                {{--</div>--}}
-                                {{--</div>--}}
-                                {{--<div class="form-group row">--}}
-                                    {{--<label for="img1" class="col-sm-3 text-right control-label col-form-label">圖片</label>--}}
-                                    {{--<div class="col-sm-9">--}}
-                                        {{--<a class="btn-image-modal" data-modal="image-form" data-id="">--}}
-                                            {{--<img src="{{$info->vImages or url('images/empty.jpg')}}" style="height:140px">--}}
-                                        {{--</a>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
                             </div>
                             <hr>
                             <div class="card-body">
@@ -111,18 +61,9 @@
             </div>
             <!-- End Row -->
         </div>
-        <!-- ============================================================== -->
-        <!-- End Container fluid  -->
-        <!-- ============================================================== -->
     </div>
-    <!-- ============================================================== -->
-    <!-- End Page wrapper  -->
-    <!-- ============================================================== -->
 @endsection
 
-
-
-<!-- ================== inline-js ================== -->
 @section('inline-js')
     <script type="text/javascript">
         $(document).ready(function () {
@@ -133,10 +74,23 @@
                 $('input[type=text]').attr('disabled','disabled')
             }
 
+            // 為了做圖片編輯
+            var modal = $('#manage-modal')
+            current_modal = modal.find('.messageInfo-modal')
+
             //返回上一頁
             $(".btn-cancel").click(function (e) {
                 e.preventDefault()
                 history.back()
+            })
+
+            // 滑動開關切換按鈕
+            $('#switch_demo').click(function () {
+                if ($(this).val()==1){
+                    $(this).val(0)
+                } else {
+                    $(this).val(1)
+                }
             })
 
             //新增模式
@@ -146,8 +100,7 @@
                 //寫入資料庫
                 let url = '{{data_get($data['route_url'], "store")}}'
                 let self = document.querySelector('#sample_form')
-                let data = new FormData(self)
-                // let data = prop_fromData_fun(self)
+                let data = prop_fromData_fun(self)
 
                 ajax(url, data, 'POST')
             })
@@ -160,12 +113,10 @@
                 let id = $(this).data('id')
                 let url = '{{data_get($data['route_url'], "update")}}'.replace('-10', id)  //-10代替字元為id
                 let self = document.querySelector('#sample_form')
-                let data = new FormData(self)
-                // let data = put_fromData_fun(self)
+                let data = prop_fromData_fun(self)
 
                 ajax(url, data, 'POST')
             })
         })
     </script>
 @endsection
-<!-- ================== /inline-js ================== -->

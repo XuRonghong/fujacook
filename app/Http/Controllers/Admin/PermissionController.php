@@ -46,6 +46,8 @@ class PermissionController extends Controller
         {
             $data = $this->repository->getDataTable($request);
 
+            $data = $this->presenter->eachOne_aaData($data);     //每一項目要做甚麼事,有需要在使用
+
             return response()->json($data,200);
         }
         return response()->json('no ajax data', 204);
@@ -128,8 +130,8 @@ class PermissionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-        $this->repository->validate($request);
+        // 除特殊情況不驗證
+        if ($request->get('doValidate', 1))$this->repository->validate($request);
 
         $data = $this->repository->update($request->all(), $id);
 

@@ -77,7 +77,7 @@ class AdminsRepository extends Repository
 //                'remember_token' =>  str_random(10),
             ]);
             // 啟用 或 不啟用
-            if (isset($attributes['open'])) {
+            if (isset($attributes['open']) && isset($attributes['doValidate'])) {
                 $admin = $this->model->find($id);
                 $attributes['active'] = ($attributes['open'] == "change") ? !$admin->active : $admin->active;
                 return parent::update($attributes, $id);

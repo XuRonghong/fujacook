@@ -29,10 +29,10 @@ class Admin extends Authenticatable
         'login_time'
     ];
 
-    public function validate($request, $noUnique=0)
+    public function validate($request, $noUnique=0, $except='')
     {
         $rules = [
-            'account' => 'required'. ($noUnique?'':'|unique:admins'),
+            'account' => ($except=='account'?'nullable':'required'). ($noUnique?'':'|unique:admins'),
             'password' => 'required',
             'name' => 'required'. ($noUnique?'':'|unique:admins'),
         ];

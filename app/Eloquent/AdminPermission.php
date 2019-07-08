@@ -15,6 +15,19 @@ class AdminPermission extends Model
         'open',
     ];
 
+    public function validate($request)
+    {
+        $rules = [
+            'admin_id' => 'required',
+            'permission_id' => 'required',
+        ];
+        $messages = [
+            'admin_id.required' => 'admin id為必填項目',
+            'permission_id.required' => 'permission id為必填項目',
+        ];
+        return $request->validate($rules, $messages);
+    }
+
     public function permission()
     {
         return $this->belongsTo('App\Permission', 'permission_id', 'id');

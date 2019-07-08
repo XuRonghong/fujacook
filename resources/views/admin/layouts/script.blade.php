@@ -274,6 +274,11 @@
             form_data.append('detail', $('#detail').summernote('code'))
         }
 
+        //撈取html 滑動開關切換按鈕
+        if (document.getElementById("switch_demo")) {
+            form_data.append('open', document.getElementById("switch_demo").value)
+        }
+
         //假如還有資料就填充上去
         for (let key in datas) {
             form_data.append(key, datas[key])
