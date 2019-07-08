@@ -11,20 +11,10 @@
 @endsection
 
 @section('content')
-    <!-- ============================================================== -->
-    <!-- Page wrapper  -->
-    <!-- ============================================================== -->
     <div class="page-wrapper">
-        <!-- ============================================================== -->
-        <!-- Bread crumb and right sidebar toggle -->
-        <!-- ============================================================== -->
-{{--        @include('layouts2.breadcrumb')--}}
-        <!-- ============================================================== -->
-        <!-- End Bread crumb and right sidebar toggle -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Container fluid  -->
-        <!-- ============================================================== -->
+
+        @include('admin.layouts.breadcrumb')
+
         <div class="container-fluid">
             <!-- ============================================================== -->
             <!-- Start Page Content -->
@@ -34,10 +24,9 @@
                 <div class="col-12">
                     <div class="card" id="manage-modal">
                         <div class="card-body">
-                            <h4 class="card-title modalTitle">{{data_get($data,'Title')}}</h4>
-                            {{--<h6 class="card-subtitle">{{data_get($data,'Summary')}}</h6>--}}
+                            <h4 class="card-title modalTitle"></h4>
+                            <h6 class="card-subtitle">{{data_get($data,'Summary')}}</h6>
                         </div>
-                        <hr>
                         <form id="sample_form" class="form-horizontal">
                             <div class="card-body messageInfo-modal">
                                 <h4 class="card-title"></h4>
@@ -91,6 +80,8 @@
                                                 <img src="{{url('images/empty.jpg')}}" style="height:140px" alt="">
                                             @endforelse
                                         </a>
+                                        <br>
+                                        <span style="color:red">如要更換圖片，點擊上方</span>
                                         @forelse(data_get( $data['arr'], 'image', []) as $key => $var)
                                             <img id="img1" src="{{$var or ''}}" style="height:140px" alt="">
                                         @empty
@@ -150,15 +141,8 @@
             </div>
             <!-- End Row -->
         </div>
-        <!-- ============================================================== -->
-        <!-- End Container fluid  -->
-        <!-- ============================================================== -->
     </div>
-    <!-- ============================================================== -->
-    <!-- End Page wrapper  -->
-    <!-- ============================================================== -->
 @endsection
-
 
 @section('inline-js')
     <!-- Public Crop_Image -->
@@ -178,7 +162,7 @@
             $('form .image-del').css("visibility","hidden");    //刪除區塊隱藏
             $('form #Image').css("display","none");     //加載圖片關閉
             //唯讀
-            $('form .btn-image-modal').hide()
+            $('form .btn-image-modal , span').hide()
         } else { $('#img1').hide() }
 
         //

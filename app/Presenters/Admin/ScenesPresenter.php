@@ -47,10 +47,15 @@ class ScenesPresenter extends Presenter
     {
         if ( $arr['aaData']) {
             foreach ($arr['aaData'] as $key => $var) {
+                //
+                $var->rank = $this->presentIsEdit('rank', $var->rank);
                 //翻譯每個type
                 $var->type = $this->tranTypeInSelectOption($var->type, $this->selectOptions);
                 //找圖片檔案
-                $var->image = $this->transFileIdtoImage($var->file_id);
+                $images = $this->transFileIdtoImage($var->file_id);
+                $var->image = $this->presentImages($images);
+                //
+                $var->status = $this->presentStatus($var->open);
             }
         }
         return $arr;

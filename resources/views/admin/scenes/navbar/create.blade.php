@@ -11,20 +11,10 @@
 @endsection
 
 @section('content')
-    <!-- ============================================================== -->
-    <!-- Page wrapper  -->
-    <!-- ============================================================== -->
     <div class="page-wrapper">
-        <!-- ============================================================== -->
-        <!-- Bread crumb and right sidebar toggle -->
-        <!-- ============================================================== -->
-{{--        @include('layouts2.breadcrumb')--}}
-        <!-- ============================================================== -->
-        <!-- End Bread crumb and right sidebar toggle -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Container fluid  -->
-        <!-- ============================================================== -->
+
+        @include('admin.layouts.breadcrumb')
+
         <div class="container-fluid">
             <!-- ============================================================== -->
             <!-- Start Page Content -->
@@ -34,10 +24,9 @@
                 <div class="col-12">
                     <div class="card" id="manage-modal">
                         <div class="card-body">
-                            <h4 class="card-title modalTitle">{{data_get($data,'Title')}}</h4>
-                            {{--<h6 class="card-subtitle">{{data_get($data,'Summary')}}</h6>--}}
+                            <h4 class="card-title modalTitle"></h4>
+                            <h6 class="card-subtitle">{{data_get($data,'Summary')}}</h6>
                         </div>
-                        <hr>
                         <form id="sample_form" class="form-horizontal">
                             <div class="card-body messageInfo-modal">
                                 <h4 class="card-title"></h4>
@@ -73,63 +62,6 @@
                                         <input type="text" name="style" value="{{data_get($data['arr'], 'style')}}" class="form-control style" id="com6" placeholder="">
                                     </div>
                                 </div>
-
-{{--                                <div class="form-group row">--}}
-{{--                                    <label for="lname" class="col-sm-3 text-right control-label col-form-label">上傳PDF</label>--}}
-{{--                                    <div class="col-sm-9">--}}
-{{--                                        <input type="file" name="files[]" value="{{$info->vFile[0] or ''}}" id="lname" accept="application/*" class="form-control uploadfile" multiple="multiple">--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-
-{{--                                <div class="form-group row">--}}
-{{--                                    <label for="img1" class="col-sm-3 text-right control-label col-form-label">圖片</label>--}}
-{{--                                    <div class="col-sm-9">--}}
-{{--                                        <a class="btn-image-modal" data-modal="image-form" data-id="">--}}
-{{--                                            @forelse(data_get( $data['arr'], 'image', []) as $key => $var)--}}
-{{--                                                <img id="{{$key}}" src="{{$var or ''}}" style="height:140px" alt="">--}}
-{{--                                            @empty--}}
-{{--                                                <img src="{{url('images/empty.jpg')}}" style="height:140px" alt="">--}}
-{{--                                            @endforelse--}}
-{{--                                        </a>--}}
-{{--                                        @forelse(data_get( $data['arr'], 'image', []) as $key => $var)--}}
-{{--                                            <img id="img1" src="{{$var or ''}}" style="height:140px" alt="">--}}
-{{--                                        @empty--}}
-{{--                                            <img id="img1" src="{{url('images/empty.jpg')}}" style="height:140px" alt="">--}}
-{{--                                        @endforelse--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-
-{{--                                <div class="form-group row">--}}
-{{--                                    <label for="img2" class="col-sm-3 text-right control-label col-form-label">圖片s<span style="color:red">*</span></label>--}}
-{{--                                    <div class="col-sm-9 cropper_image">--}}
-{{--                                    @if(isset($data['arr']['image']))--}}
-{{--                                        @foreach(data_get( $data['arr'], 'image', []) as $key => $var)--}}
-{{--                                            <div class="image-box">--}}
-{{--                                                <img id="{{$key}}" src="{{$var or ''}}">--}}
-{{--                                                <a class="image-del">X</a>--}}
-{{--                                            </div>--}}
-{{--                                        @endforeach--}}
-{{--                                        <a class="btn-image-modal" data-modal="image-form" data-id="">--}}
-{{--                                            @if(count(data_get( $data['arr'], 'image', [])) < 5)--}}
-{{--                                                <img id="Image" data-data="" src="{{url('images/addimg.jpg')}}" style="height:140px">--}}
-{{--                                            @endif--}}
-{{--                                        </a>--}}
-{{--                                    @else--}}
-{{--                                        <a class="btn-image-modal" data-modal="image-form" data-id="">--}}
-{{--                                            <img id="Image" data-data="" src="{{url('images/empty.jpg')}}" style="height:140px">--}}
-{{--                                        </a>--}}
-{{--                                    @endif--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-
-{{--                                <div class="form-group row">--}}
-{{--                                    <label for="detail" class="col-sm-3 text-right control-label col-form-label">內容</label>--}}
-{{--                                    <div class="col-sm-9 note-editable">--}}
-{{--                                        <textarea id="detail" name="detail">--}}
-{{--                                            {!! data_get($data['arr'], 'detail') !!}--}}
-{{--                                        </textarea>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
                             </div>
                             <hr>
                             <div class="card-body">
@@ -150,15 +82,8 @@
             </div>
             <!-- End Row -->
         </div>
-        <!-- ============================================================== -->
-        <!-- End Container fluid  -->
-        <!-- ============================================================== -->
     </div>
-    <!-- ============================================================== -->
-    <!-- End Page wrapper  -->
-    <!-- ============================================================== -->
 @endsection
-
 
 @section('inline-js')
     <!-- Public Crop_Image -->
@@ -178,7 +103,7 @@
             $('form .image-del').css("visibility","hidden");    //刪除區塊隱藏
             $('form #Image').css("display","none");     //加載圖片關閉
             //唯讀
-            $('form .btn-image-modal').hide()
+            $('form .btn-image-modal , span').hide()
         } else { $('#img1').hide() }
 
         //

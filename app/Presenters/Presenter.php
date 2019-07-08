@@ -337,6 +337,16 @@ abstract class Presenter
         return $btn;
     }
 
+    // 製造 HTML
+    public function presentImages($images)
+    {
+        $html_str = "";
+        foreach($images as $image) {
+            $html_str .= "<img width='75px' src=" . $image . " style='margin:5px;'>";
+        }
+        return $html_str;
+    }
+
 
     /*
      * 目前無入用

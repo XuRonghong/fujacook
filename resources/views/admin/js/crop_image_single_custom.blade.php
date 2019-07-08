@@ -65,7 +65,7 @@
 
     $(document).ready(function() {
 
-        let imagedata = {};
+        // let imagedata = {};
 
         $(".btn-image-modal").click(function () {
             $('#image-form').modal();

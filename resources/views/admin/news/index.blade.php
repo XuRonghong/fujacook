@@ -8,16 +8,9 @@
 
 @section('content')
     <div class="page-wrapper">
-        <!-- ============================================================== -->
-        <!-- Bread crumb and right sidebar toggle -->
-        <!-- ============================================================== -->
-        {{--@include('admin.layouts.breadcrumb')--}}
-        <!-- ============================================================== -->
-        <!-- End Bread crumb and right sidebar toggle -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Container fluid  -->
-        <!-- ============================================================== -->
+
+        @include('admin.layouts.breadcrumb')
+
         <div class="container-fluid">
             <!-- ============================================================== -->
             <!-- Tables -->
@@ -26,13 +19,10 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title modalTitle">{{data_get($data,'Title')}}</h4>
-                            {{--<h6 class="card-subtitle">{{data_get($data,'Summary')}}</h6>--}}
-                            <button type="button" name="create_record" id="create_record" class="btn btn-success btn-sm">Create</button>
-                            <br />
+                            <h4 class="card-title modalTitle"></h4>
+                            <h6 class="card-subtitle">{{data_get($data,'Summary')}}</h6>
                             <div class="table-responsive waitme">
                                 <table id="data_table" class="table table-table-striped table-bordered">
-
                                 </table>
                             </div>
                         </div>
@@ -40,26 +30,23 @@
                 </div>
             </div>
         </div>
-        <!-- ============================================================== -->
-        <!-- End Container fluid  -->
-        <!-- ============================================================== -->
     </div>
 @endsection
 
 @section('inline-js')
     <script>
         $(document).ready(function () {
-
             // loading .....
             run_waitMe($('.waitme'));
             let data_table = $('#data_table');
             let table = data_table.dataTable({
                 "serverSide": true,
-                // "stateSave": true,
+                "stateSave": true,
                 // "scrollX": true,
                 // "scrollY": '60vh',
                 // 'bProcessing': true,
                 // 'sServerMethod': 'GET',
+                "order": [[ 0, "asc" ]],
                 "aoColumns": [
                     {
                         "sTitle": "ID",
@@ -67,6 +54,15 @@
                         "sName": "id",
                         // "width": "40px",
                         "bSearchable": false,
+                        "mRender": function (data, type, row) {
+                            return data;
+                        }
+                    },
+                    {
+                        "sTitle": "rank(點擊即可修改)",
+                        "mData": "rank",
+                        // "width": "100px",
+                        "sName": "rank",
                         "mRender": function (data, type, row) {
                             return data;
                         }
@@ -89,22 +85,7 @@
                         "bSearchable": false,
                         // "width": '100px',
                         "mRender": function (data, type, row) {
-                            // current_data[row.id] = row;
-                            let btn = "無功能";
-                            switch (row.open) {
-                                case 1:
-                                    btn = '<button class="btn btn-xs btn-success btn-open">已開啟</button>';
-                                    break;
-                                case 0:
-                                    btn = '<button class="btn btn-xs btn-primary btn-open">未開啟</button>';
-                                    break;
-                                // default:
-                                //     btn = '<button class="btn btn-xs btn-primary btn-status">未上架</button>';
-                                //     break;
-                            }
-                            btn += '<button class="btn btn-xs btn-show" title="詳情"><i class="fa fa-book" aria-hidden="true"></i></button>';
-                            btn += '<button class="btn btn-xs btn-edit" title="修改"><i class="fa fa-pencil-alt" aria-hidden="true"></i></button>';
-                            btn += '<button class="btn btn-xs btn-del pull-right" title="刪除"><i class="fa fa-trash" aria-hidden="true"></i></button>';
+                            let btn = row.status;
                             $('.waitme').waitMe('hide');
                             return btn;
                         }
@@ -163,7 +144,28 @@
                 };
                 doDelete(url, data, table)          // from layout.master
             });
+
+
+            // 按一下進入編輯模式
+            data_table.on('click', '.aaa', function () {
+                $('div.aaa').show();
+                $('input.isEdit').hide();
+                $(this).parent().find('input.isEdit').show();
+                $(this).hide();
+            });
+            // 編輯完成退回瀏覽模式
+            data_table.on('change', '.isEdit', function (e) {
+                $(this).hide();
+                $(this).parent().find('.aaa').show();
+                //
+                let id = $(this).closest('tr').attr('id');
+                let url = '{{data_get($data['route_url'], "update")}}'.replace('-10', id)  //-10代替字元為id
+                let data = {}
+                data[$(this).data('id')] = $(this).val()
+                data['doValidate'] = 0
+                //
+                ajaxOpen(url, data, 'POST', table)
+            });
         });
     </script>
 @endsection
-<!-- ================== /inline-js ================== -->

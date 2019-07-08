@@ -1,21 +1,20 @@
 
 @extends('admin.layouts.master')
 
+@section('style')
+    <style>
+        /* 圖片 btn */
+        .btn {
+            margin-left: 10px;
+        }
+    </style>
+@endsection
+
 @section('content')
-    <!-- ============================================================== -->
-    <!-- Page wrapper  -->
-    <!-- ============================================================== -->
     <div class="page-wrapper">
-        <!-- ============================================================== -->
-        <!-- Bread crumb and right sidebar toggle -->
-        <!-- ============================================================== -->
-{{--        @include('layouts2.breadcrumb')--}}
-        <!-- ============================================================== -->
-        <!-- End Bread crumb and right sidebar toggle -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Container fluid  -->
-        <!-- ============================================================== -->
+
+        @include('admin.layouts.breadcrumb')
+
         <div class="container-fluid">
             <!-- ============================================================== -->
             <!-- Start Page Content -->
@@ -25,10 +24,9 @@
                 <div class="col-12">
                     <div class="card" id="manage-modal">
                         <div class="card-body">
-                            <h4 class="card-title modalTitle">{{data_get($data,'Title')}}</h4>
-                            {{--<h6 class="card-subtitle">{{data_get($data,'Summary')}}</h6>--}}
+                            <h4 class="card-title modalTitle"></h4>
+                            <h6 class="card-subtitle">{{data_get($data,'Summary')}}</h6>
                         </div>
-                        <hr>
                         <form id="sample_form" class="form-horizontal">
                             <div class="card-body messageInfo-modal">
                                 <h4 class="card-title"></h4>
@@ -114,18 +112,9 @@
             </div>
             <!-- End Row -->
         </div>
-        <!-- ============================================================== -->
-        <!-- End Container fluid  -->
-        <!-- ============================================================== -->
     </div>
-    <!-- ============================================================== -->
-    <!-- End Page wrapper  -->
-    <!-- ============================================================== -->
 @endsection
 
-
-
-<!-- ================== inline-js ================== -->
 @section('inline-js')
     <script type="text/javascript">
         $(document).ready(function () {
@@ -144,4 +133,3 @@
         })
     </script>
 @endsection
-<!-- ================== /inline-js ================== -->

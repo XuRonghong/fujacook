@@ -51,7 +51,6 @@ class LogRepository extends Repository
 
     public function findOrFail($id)
     {
-//        dd($this->model->withAdmin()->findOrFail($id));
         return $this->model->withAdmin()->findOrFail($id);
     }
 }

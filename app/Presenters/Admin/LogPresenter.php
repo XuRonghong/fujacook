@@ -24,6 +24,8 @@ class LogPresenter extends Presenter
                 // Member
 //                elseif ($var->type > 100) {
 //                }
+                //
+                $var->status = $this->presentStatus($var->open);
             }
         }
         return $arr;
@@ -39,5 +41,12 @@ class LogPresenter extends Presenter
             $data['value'] = str_replace('\/','/', $data['value']);
         }
         return $data;
+    }
+
+    //　複寫父方法
+    public function presentStatus($status)
+    {
+        $btn = '<button class="btn btn-xs btn-show" title="詳情"><i class="fa fa-book" aria-hidden="true"></i></button>';
+        return $btn;
     }
 }

@@ -41,7 +41,7 @@ class ScenesRepository extends Repository
                 'author_id' => auth()->guard('admin')->user()->id,
             ]);
             // 啟用 或 不啟用
-            if (isset($attributes['open'])) {
+            if (isset($attributes['open']) && isset($attributes['doValidate'])) {
                 $scene = $this->model->find($id);
                 $attributes['open'] = ($attributes['open'] == "change") ? !$scene->open : $scene->open;
             }
