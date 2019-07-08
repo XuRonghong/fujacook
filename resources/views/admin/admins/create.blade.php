@@ -66,8 +66,7 @@
                                     <label for="com5" class="col-sm-3 text-right control-label col-form-label">type</label>
                                     <div class="col-sm-9">
                                         <select class="form-control type" id="com5" name="type">
-                                            <option value="5">管理者</option>
-                                            <option value="10">普通者</option>
+                                            {!! data_get($data['arr'], 'options') !!}
                                         </select>
                                     </div>
                                 </div>

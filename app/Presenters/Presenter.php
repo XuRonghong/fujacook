@@ -297,6 +297,11 @@ abstract class Presenter
                 if ($data=='') $data = '-';
                 return '<input class="isEdit '.$index.'" data-id="'.$index.'" size="10" style="width: 100%; display: none;" type="text" value="'. $cache .'" />'.'<div class="aaa">'.$data.'</div>';
                 break;
+            case 'value':
+                $cache = $data;
+                if ($data=='') $data = '-';
+                return '<input class="isEdit '.$index.'" data-id="'.$index.'" size="10" style="width: 100%; display: none;" type="text" value="'. $cache .'" />'.'<div class="aaa">'.$data.'</div>';
+                break;
             case 'link':
                 $cache = $data;
                 if ($data=='') $data = '-';

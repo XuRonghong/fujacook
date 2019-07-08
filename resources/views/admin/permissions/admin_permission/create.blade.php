@@ -43,12 +43,12 @@
                                 <div class="form-group row">
                                     <label for="switch_demo" class="col-sm-3 text-right control-label col-form-label">open</label>
                                     <div class="col-sm-9">
-                                        <div class="switch_demo">
-                                            <input type="checkbox" name="switch_demo" class="switch_demo-checkbox" id="switch_demo"
+                                        <div class="onoffswitch">
+                                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switch_demo"
                                                    @if(data_get($data['arr'], 'open')) value="1" checked @else value="0" @endif>
-                                            <label class="switch_demo-label" for="switch_demo">
-                                                <span class="switch_demo-inner"></span>
-                                                <span class="switch_demo-switch"></span>
+                                            <label class="onoffswitch-label" for="switch_demo">
+                                                <span class="onoffswitch-inner"></span>
+                                                <span class="onoffswitch-switch"></span>
                                             </label>
                                         </div>
                                     </div>

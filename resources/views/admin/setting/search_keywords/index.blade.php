@@ -8,16 +8,9 @@
 
 @section('content')
     <div class="page-wrapper">
-        <!-- ============================================================== -->
-        <!-- Bread crumb and right sidebar toggle -->
-        <!-- ============================================================== -->
-        {{--@include('admin.layouts.breadcrumb')--}}
-        <!-- ============================================================== -->
-        <!-- End Bread crumb and right sidebar toggle -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Container fluid  -->
-        <!-- ============================================================== -->
+
+        @include('admin.layouts.breadcrumb')
+
         <div class="container-fluid">
             <!-- ============================================================== -->
             <!-- Tables -->
@@ -26,13 +19,10 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title modalTitle">{{data_get($data,'Title')}}</h4>
-                            {{--<h6 class="card-subtitle">{{data_get($data,'Summary')}}</h6>--}}
-                            <button type="button" name="create_record" id="create_record" class="btn btn-success btn-sm">Create</button>
-                            <br />
+                            <h4 class="card-title modalTitle"></h4>
+                            <h6 class="card-subtitle">{{data_get($data,'Summary')}}</h6>
                             <div class="table-responsive waitme">
                                 <table id="data_table" class="table table-table-striped table-bordered">
-
                                 </table>
                             </div>
                         </div>
@@ -40,16 +30,12 @@
                 </div>
             </div>
         </div>
-        <!-- ============================================================== -->
-        <!-- End Container fluid  -->
-        <!-- ============================================================== -->
     </div>
 @endsection
 
 @section('inline-js')
     <script>
         $(document).ready(function () {
-
             // loading .....
             run_waitMe($('.waitme'));
             let data_table = $('#data_table');
@@ -60,6 +46,7 @@
                 // "scrollY": '60vh',
                 // 'bProcessing': true,
                 // 'sServerMethod': 'GET',
+                "order": [[ 0, "asc" ]],
                 "aoColumns": [
                     {
                         "sTitle": "ID",
@@ -80,11 +67,7 @@
                         "bSortable": true,
                         "bSearchable": false,
                         "mRender": function (data, type, row) {
-                            // return data;
-                            data2=data;
-                            if (data=='')data='-';
-                            return '<input class="isEdit rank" data-id="rank" size="10" style="width: 100%; display: none;" type="text" value="' + data2 + '"></input>'+
-                                '<div class="aaa">'+data+'</div>';
+                            return data;
                         }
                     },
                     // {
@@ -106,11 +89,7 @@
                         "bSortable": false,
                         "bSearchable": true,
                         "mRender": function (data, type, row) {
-                            // return data;
-                            data2=data;
-                            if (data=='')data='-';
-                            return '<input class="isEdit name" data-id="name" size="10" style="width: 100%; display: none;" type="text" value="' + data2 + '"></input>'+
-                                '<div class="aaa">'+data+'</div>';
+                            return data;
                         }
                     },
                     {
@@ -121,11 +100,7 @@
                         "bSortable": false,
                         "bSearchable": true,
                         "mRender": function (data, type, row) {
-                            // return data;
-                            data2=data;
-                            if (data=='')data='-';
-                            return '<input class="isEdit value" data-id="value" size="10" style="width: 100%; display: none;" type="text" value="' + data2 + '"></input>'+
-                                '<div class="aaa">'+data+'</div>';
+                            return data;
                         }
                     },
                     {
@@ -134,24 +109,7 @@
                         "bSearchable": false,
                         // "width": '100px',
                         "mRender": function (data, type, row) {
-                            let btn = "無功能";
-                            switch (row.open) {
-                                case 1:
-                                    btn = '<button class="btn btn-xs btn-success btn-open">已啟用</button>';
-                                    break;
-                                case 0:
-                                    btn = '<button class="btn btn-xs btn-primary btn-open">未啟用</button>';
-                                    break;
-                                case '1':
-                                    btn = '<button class="btn btn-xs btn-success btn-open">已啟用</button>';
-                                    break;
-                                case '0':
-                                    btn = '<button class="btn btn-xs btn-primary btn-open">未啟用</button>';
-                                    break;
-                            }
-                            btn += '<button class="btn btn-xs btn-show" title="詳情"><i class="fa fa-book" aria-hidden="true"></i></button>';
-                            btn += '<button class="btn btn-xs btn-edit" title="修改"><i class="fa fa-pencil-alt" aria-hidden="true"></i></button>';
-                            btn += '<button class="btn btn-xs btn-del pull-right" title="刪除"><i class="fa fa-trash" aria-hidden="true"></i></button>';
+                            let btn = row.status;
                             $('.waitme').waitMe('hide');
                             return btn;
                         }
@@ -223,39 +181,19 @@
             // 編輯完成退回瀏覽模式
             data_table.on('change', '.isEdit', function (e) {
                 //
-                toastr.info('Wait me ...');
+                toastr.info('Wait me', "等我一下...");
                 //
                 $(this).hide();
                 $(this).parent().find('.aaa').show();
                 //
-
                 let id = $(this).closest('tr').attr('id');
                 let url = '{{data_get($data['route_url'], "update")}}'.replace('-10', id)  //-10代替字元為id
-                let data = {
-                    "_token": "{{ csrf_token() }}"
-                };
-                data.doValidate = 0
-                data[$(this).data('id')] = $(this).val();
+                let data = {}
+                data[$(this).data('id')] = $(this).val()
+                data['doValidate'] = 0
                 //
-                $.ajax({
-                    url: url,
-                    data: data,
-                    type: "POST",
-                    //async: false,
-                    success: function (rtndata) {
-                        // $('.waitme').waitMe('hide');
-                        if (rtndata.status) {
-                            toastr.success(rtndata.message, "{{trans('web_alert.notice')}}");
-                            setTimeout(function () {
-                                table.api().ajax.reload(null, false);
-                            }, 100);
-                        } else {
-                            swal("{{trans('web_alert.notice')}}", rtndata.message, "error");
-                        }
-                    }
-                });
+                ajaxOpen(url, data, 'POST', table)
             });
         });
     </script>
 @endsection
-<!-- ================== /inline-js ================== -->

@@ -7,13 +7,11 @@ use App\Repositories\Admin\SettingRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-
 class KeywordController extends Controller
 {
     protected $repository;
     protected $presenter;
     protected $route_url;
-
 
     public function __construct(SettingRepository $repository, SettingPresenter $presenter)
     {
@@ -49,7 +47,7 @@ class KeywordController extends Controller
         {
             $data = $this->repository->getDataTable($request, 'type = "search_keyword"');
 
-            //$data = $this->presenter->eachOne_aaData($data);     //每一項目要做甚麼事,有需要在使用
+            $data = $this->presenter->eachOne_aaData($data, 'search_keyword');     //每一項目要做甚麼事,有需要在使用
 
             return response()->json($data,200);
         }
@@ -65,8 +63,8 @@ class KeywordController extends Controller
     {
         //
         $data = $this->presenter->getParameters('create');
-        //
-        $data['arr'] = [];
+        //get option for select
+        $data['arr']['options'] = $this->presenter->getSelectOption('search_keyword');
         //to ajax url
         $data['route_url'] = $this->route_url;
 
@@ -101,6 +99,8 @@ class KeywordController extends Controller
         $data = $this->presenter->getParameters('show');
         //若資料庫沒有該id 則404畫面
         $data['arr'] = $this->repository->findOrFail($id) or abort(404);
+        //轉換出顯示數據
+        $data['arr'] = $this->presenter->transOne($data['arr'], 'search_keyword');
         //to ajax url
         $data['route_url'] = $this->route_url;
 
@@ -119,6 +119,8 @@ class KeywordController extends Controller
         $data = $this->presenter->getParameters('edit');
         //若資料庫沒有該id 則404畫面
         $data['arr'] = $this->repository->findOrFail($id) or abort(404);
+        //轉換出顯示數據
+        $data['arr'] = $this->presenter->transOne($data['arr'], 'search_keyword');
         //to ajax url
         $data['route_url'] = $this->route_url;
 
@@ -135,7 +137,7 @@ class KeywordController extends Controller
     public function update(Request $request, $id)
     {
         // 除特殊情況不驗證
-        if ($request->get('doValidate', 1)) $this->repository->validate($request);
+        if ($request->get('doValidate', 1)) $this->repository->validate($request, 1);
 
         $data = $this->repository->update($request->all(), $id);
 
