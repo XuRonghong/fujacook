@@ -14,10 +14,10 @@ class NewsPresenter extends Presenter
     public function __construct()
     {
         $this->selectOptions = [
-//            'navbar' => [
+            'news' => [
 //                'navbar.home' => '首頁選單欄位',
 //                'navbar.intr' => '介紹頁選單',
-//            ],
+            ],
 //            'slider' => [
 //                'slider.home' => '首頁滑動圖',
 //                'slider.intr' => '介紹頁滑動圖',
@@ -52,7 +52,7 @@ class NewsPresenter extends Presenter
 //                $var->type = $this->tranTypeInSelectOption($var->type, $this->selectOptions);
                 //找圖片檔案
                 $images = $this->transFileIdtoImage($var->file_id);
-                $var->image = $this->presentImages($images);
+                $var->image = $this->presentImages($images);    //轉換輸出HTML
                 //
                 $var->status = $this->presentStatus($var->open);
             }

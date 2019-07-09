@@ -162,7 +162,7 @@
             $('form .image-del').css("visibility","hidden");    //刪除區塊隱藏
             $('form #Image').css("display","none");     //加載圖片關閉
             //唯讀
-            $('form .btn-image-modal , span').hide()
+            $('form .btn-image-modal ,form span').hide()
         } else { $('#img1').hide() }
 
         //

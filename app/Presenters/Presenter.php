@@ -142,7 +142,7 @@ abstract class Presenter
     }
 
     // 例行公事，顯示板塊參數
-    public function getParameters($index=null)
+    public function getParameters($index=null, $mergeArr=[])
     {
         $data = [
             'indexUrl' => url('admin'),
@@ -162,6 +162,7 @@ abstract class Presenter
             'upload_file_url' => url('admin/upload_file'),
             'menu' => $this->getMenu2(),
         ];
+        if ($mergeArr) $data = array_merge($data, $mergeArr);
         switch ($index){
             case 'index':
                 $data = array_merge($data, [
@@ -198,10 +199,20 @@ abstract class Presenter
     }
 
     //
-    public function responseJson($errors=null, $method=0, $status=200)
+    public function responseJson($data=[], $method=0, $status=200)
     {
-        if ( !$errors) {
+        if ( !data_get($data,'errors')) {
             switch ($method) {
+                case 'ajax':
+                    return response()->json($data, $status);
+                case 'noajax':
+                    return response()->json($data['messages'], $status);
+                case 'index':
+                    return view('admin.'.$this->getViewName().'.index', compact('data'));
+                case 'create':
+                case 'edit':
+                case 'show':
+                    return view('admin.'.$this->getViewName().'.create', compact('data'));
                 case 'store':
                     return response()->json([
                         'status' => 1,
@@ -227,7 +238,7 @@ abstract class Presenter
         } else {
             return response()->json([
                 'status' => 0,
-                'message' => $errors,
+                'message' => $data['errors'],
 //                'redirectUrl' => $this->gotoUrl
             ], 422);
         }

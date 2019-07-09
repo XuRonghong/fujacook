@@ -27,7 +27,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $data = $this->presenter->getParameters('index');
+        $data = $this->presenter->getParameters('index', ['route_url' => $this->route_url]);
 
         return view('admin.home', compact('data'));
     }

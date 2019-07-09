@@ -32,11 +32,9 @@ class ParameterController extends Controller
     public function index()
     {
         //meta data
-        $data = $this->presenter->getParameters('index');
-        //to ajax url
-        $data['route_url'] = $this->route_url;
+        $data = $this->presenter->getParameters('index', ['route_url' => $this->route_url]);
 
-        return view('admin.'.$this->presenter->getViewName().'.index', compact('data'));
+        return $this->presenter->responseJson($data, 'index');
     }
 
     /* ajax datatable */
@@ -49,9 +47,9 @@ class ParameterController extends Controller
 
             $data = $this->presenter->eachOne_aaData($data);     //每一項目要做甚麼事,有需要在使用
 
-            return response()->json($data,200);
+            return $this->presenter->responseJson($data, 'ajax', 200);
         }
-        return response()->json('no ajax data', 204);
+        return $this->presenter->responseJson(['messages'=>'no ajax data'], 'noajax', 204);
     }
 
     /**
@@ -62,13 +60,11 @@ class ParameterController extends Controller
     public function create()
     {
         //
-        $data = $this->presenter->getParameters('create');
+        $data = $this->presenter->getParameters('create', ['route_url' => $this->route_url]);
         //get option for select
         $data['arr']['options'] = $this->presenter->getSelectOption('parameters');
-        //to ajax url
-        $data['route_url'] = $this->route_url;
 
-        return view('admin.'.$this->presenter->getViewName().'.create', compact('data'));
+        return $this->presenter->responseJson($data, 'create');
     }
 
     /**
@@ -96,15 +92,13 @@ class ParameterController extends Controller
     public function show($id)
     {
         //
-        $data = $this->presenter->getParameters('show');
+        $data = $this->presenter->getParameters('show', ['route_url' => $this->route_url]);
         //若資料庫沒有該id 則404畫面
         $data['arr'] = $this->repository->findOrFail($id) or abort(404);
         //轉換出顯示數據
         $data['arr'] = $this->presenter->transOne($data['arr'], 'parameters');
-        //to ajax url
-        $data['route_url'] = $this->route_url;
 
-        return view('admin.'.$this->presenter->getViewName().'.create', compact('data'));
+        return $this->presenter->responseJson($data, 'create');
     }
 
     /**
@@ -116,15 +110,13 @@ class ParameterController extends Controller
     public function edit($id)
     {
         //
-        $data = $this->presenter->getParameters('edit');
+        $data = $this->presenter->getParameters('edit', ['route_url' => $this->route_url]);
         //若資料庫沒有該id 則404畫面
         $data['arr'] = $this->repository->findOrFail($id) or abort(404);
         //轉換出顯示數據
         $data['arr'] = $this->presenter->transOne($data['arr'], 'parameters');
-        //to ajax url
-        $data['route_url'] = $this->route_url;
 
-        return view('admin.'.$this->presenter->getViewName().'.create', compact('data'));
+        return $this->presenter->responseJson($data, 'create');
     }
 
     /**

@@ -27,28 +27,38 @@ class News extends Model
     public function validate($request)
     {
         $rules = [
+            'rank' => 'nullable',
+            'type' => 'nullable',
+            'author_id' => 'nullable',
             'title' => 'required',
             'summary' => 'required',
-//            'hashtag_name' => 'required|array',
-//            'startTime' => 'nullable',
-//            'endTime' => 'nullable',
-//            'open' => 'nullable'
+            'image' => 'nullable',
+            'file_id' => 'nullable',
+            'url' => 'nullable',
+            'detail' => 'required',
+            'startTime' => 'nullable',
+            'endTime' => 'nullable',
+            'open' => 'nullable'
         ];
         $messages = [
+            'rank' => '排名為必填項目',
+            'type' => '類別為必填項目',
+            'author_id' => '創建者為必填項目',
             'title.required' => '標題為必填項目',
             'summary.required' => '概要為必填項目',
-//            'category_id.required' => '商品分類為必填項目',
-//            'hashtag_name.required' => '標籤為必填項目',
+            'image' => '圖片為必填項目',
+            'file_id' => '檔案為必填項目',
+            'url' => '連結為必填項目',
+            'detail' => '內文為必填項目',
+            'startTime' => '開始時間為必填項目',
+            'endTime' => '結束時間為必填項目',
+            'open' => '開關為必填項目'
         ];
         return $request->validate($rules, $messages);
     }
 
     public function admin()
     {
-        return $this->belongsTo(
-            'App\Admin',
-            'author_id',
-            'id'
-        );
+        return $this->belongsTo('App\Admin','author_id','id');
     }
 }

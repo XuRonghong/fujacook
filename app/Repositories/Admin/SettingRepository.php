@@ -24,7 +24,7 @@ class SettingRepository extends Repository
         try{
             $attributes = array_merge($attributes, [
                 'author_id' => auth()->guard('admin')->user()->id,
-                'open' => 1,
+                'open' => config('app.open_default', 1),
             ]);
             if (isset($attributes['content'])) {
                 $attributes['content'] = json_encode($attributes['content'], JSON_UNESCAPED_UNICODE);

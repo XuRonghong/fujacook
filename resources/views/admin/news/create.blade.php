@@ -39,13 +39,13 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="com3" class="col-sm-3 text-right control-label col-form-label">標頭</label>
+                                    <label for="com3" class="col-sm-3 text-right control-label col-form-label">標頭<span style="color:red">*</span></label>
                                     <div class="col-sm-9">
                                         <input type="text" name="title" value="{{data_get($data['arr'], 'title')}}" class="form-control title" id="com3" placeholder="">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="com4" class="col-sm-3 text-right control-label col-form-label">概要</label>
+                                    <label for="com4" class="col-sm-3 text-right control-label col-form-label">概要<span style="color:red">*</span></label>
                                     <div class="col-sm-9">
                                         <input type="text" name="summary" value="{{data_get($data['arr'], 'summary')}}" class="form-control summary" id="com4" placeholder="">
                                     </div>
@@ -56,14 +56,15 @@
                                         {{--<input type="text" class="form-control summary" id="com4" placeholder="" value="{{data_get($news, 'summary')}}">--}}
                                     {{--</div>--}}
                                 {{--</div>--}}
-                                {{--<div class="form-group row">--}}
-                                {{--<label for="com5" class="col-sm-3 text-right control-label col-form-label">Detail</label>--}}
-                                {{--<div class="col-sm-9">--}}
-                                {{--<input type="text" class="form-control vDetail" id="com5" placeholder="" value="{{ $info->vDetail or ''}}">--}}
-                                {{--</div>--}}
-                                {{--</div>--}}
                                 <div class="form-group row">
-                                    <label for="img1" class="col-sm-3 text-right control-label col-form-label">圖片<span style="color:red">*</span></label>
+                                    <label for="com5" class="col-sm-3 text-right control-label col-form-label">Detail<span style="color:red">*</span></label>
+                                    <div class="col-sm-9">
+                                        <input type="text" name="detail" value="{{data_get($data['arr'], 'detail')}}"
+                                               class="form-control detail" id="com5" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="img1" class="col-sm-3 text-right control-label col-form-label">圖片</label>
                                     <div class="col-sm-9">
                                         <a class="btn-image-modal" data-modal="image-form" data-id="">
                                             @forelse(data_get( $data['arr'], 'image', []) as $key => $var)
@@ -122,7 +123,7 @@
                 $('form .image-del').css("visibility","hidden");    //刪除區塊隱藏
                 $('form #Image').css("display","none");     //加載圖片關閉
                 //唯讀
-                $('form .btn-image-modal , span').hide()
+                $('form .btn-image-modal ,form span').hide()
             } else { $('#img1').hide() }
 
 

@@ -31,11 +31,9 @@ class NewsController extends Controller
     public function index()
     {
         //meta data
-        $data = $this->presenter->getParameters('index');
-        //to ajax url
-        $data['route_url'] = $this->route_url;
+        $data = $this->presenter->getParameters('index', ['route_url'=> $this->route_url]);
 
-        return view('admin.'.$this->presenter->getViewName().'.index', compact('data'));
+        return $this->presenter->responseJson($data, 'index');
     }
 
     /* ajax datatable */
@@ -48,9 +46,9 @@ class NewsController extends Controller
 
             $data = $this->presenter->eachOne_aaData($data);     //每一項目要做甚麼事,有需要在使用
 
-            return response()->json($data,200);
+            return $this->presenter->responseJson($data, 'ajax', 200);
         }
-        return response()->json('no ajax data', 204);
+        return $this->presenter->responseJson(['messages'=>'no ajax data'], 'noajax', 204);
     }
 
     /**
@@ -61,13 +59,11 @@ class NewsController extends Controller
     public function create()
     {
         //
-        $data = $this->presenter->getParameters('create');
-        //
-        $data['arr'] = [];
-        //to ajax url
-        $data['route_url'] = $this->route_url;
+        $data = $this->presenter->getParameters('create', ['route_url'=> $this->route_url]);
+        //get option for select
+        $data['arr']['options'] = $this->presenter->getSelectOption('news');
 
-        return view('admin.'.$this->presenter->getViewName().'.create', compact('data'));
+        return $this->presenter->responseJson($data, 'create');
     }
 
     /**
@@ -83,7 +79,7 @@ class NewsController extends Controller
         //
         $data = $this->repository->create($request->all());
 
-        return $this->presenter->responseJson($data['errors'], 'store');
+        return $this->presenter->responseJson($data, 'store');
     }
 
     /**
@@ -95,15 +91,13 @@ class NewsController extends Controller
     public function show($id)
     {
         //
-        $data = $this->presenter->getParameters('show');
+        $data = $this->presenter->getParameters('show', ['route_url' => $this->route_url]);
         //若資料庫沒有該id 則404畫面
         $data['arr'] = $this->repository->findOrFail($id) or abort(404);
         //轉換顯示數據
         $data['arr'] = $this->presenter->tranOne($data['arr']);
-        //to ajax url
-        $data['route_url'] = $this->route_url;
 
-        return view('admin.'.$this->presenter->getViewName().'.create', compact('data'));
+        return $this->presenter->responseJson($data, 'show');
     }
 
     /**
@@ -115,15 +109,13 @@ class NewsController extends Controller
     public function edit($id)
     {
         //
-        $data = $this->presenter->getParameters('edit');
+        $data = $this->presenter->getParameters('edit', ['route_url' => $this->route_url]);
         //若資料庫沒有該id 則404畫面
         $data['arr'] = $this->repository->findOrFail($id) or abort(404);
         //轉換顯示數據
         $data['arr'] = $this->presenter->tranOne($data['arr']);
-        //to ajax url
-        $data['route_url'] = $this->route_url;
 
-        return view('admin.'.$this->presenter->getViewName().'.create', compact('data'));
+        return $this->presenter->responseJson($data, 'edit');
     }
 
     /**
@@ -136,7 +128,7 @@ class NewsController extends Controller
     public function update(Request $request, $id)
     {
         // 除特殊情況不驗證
-        if ($request->get('doValidate', 1)) $this->repository->validate($request);
+        if ($request->get('doValidate', 1)) $this->repository->validate($request, 1);
 
         $data = $this->repository->update($request->all(), $id);
 
