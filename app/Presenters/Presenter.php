@@ -168,24 +168,39 @@ abstract class Presenter
                 $data = array_merge($data, [
                     'Title' => $this->title,
                     'Summary' => '',
+                    'breadcrumb' => $this->presentBreadcrumb([
+                        $this->title => $data['route_url']['index']
+                    ]),
                 ]);
                 break;
             case 'create':
                 $data = array_merge($data, [
                     'Title' => $this->title.' create',
                     'Summary' => '',
+                    'breadcrumb' => $this->presentBreadcrumb([
+                        $this->title => $data['route_url']['index'],
+                        'create' => $data['route_url']['create'],
+                    ]),
                 ]);
                 break;
             case 'edit':
                 $data = array_merge($data, [
                     'Title' => $this->title.' edit',
                     'Summary' => '',
+                    'breadcrumb' => $this->presentBreadcrumb([
+                        $this->title => $data['route_url']['index'],
+                        'edit' => $data['route_url']['edit'],
+                    ]),
                 ]);
                 break;
             case 'show':
                 $data = array_merge($data, [
                     'Title' => $this->title.' show',
                     'Summary' => '',
+                    'breadcrumb' => $this->presentBreadcrumb([
+                        $this->title => $data['route_url']['index'],
+                        'show' => $data['route_url']['show'],
+                    ]),
                     'Disable'   => true
                 ]);
                 break;
@@ -287,6 +302,21 @@ abstract class Presenter
 
             }
         }
+    }
+
+    //breadcrumb HTML
+    public function presentBreadcrumb($elements=[])
+    {
+        $html = '<nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="'. url('admin') .'">Home</a></li>';
+            foreach ($elements as $key => $element){
+                $html .= '<li class="breadcrumb-item"><a href="'. $element .'">'.$key.'</a></li>';
+            }
+        $html .=       '<li class="breadcrumb-item active" aria-current="page"></li>
+                    </ol>
+                </nav>';
+        return $html;
     }
 
     //

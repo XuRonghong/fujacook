@@ -62,7 +62,7 @@
         }
         /* breadcrumb */
         .page-breadcrumb .row {
-            height: 25px;
+            height: 30px;
         }
     </style>
 
