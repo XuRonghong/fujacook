@@ -27,7 +27,16 @@ class IndexController extends Controller
      */
     public function index()
     {
-        $data = $this->presenter->getParameters('index', ['route_url' => $this->route_url]);
+        $data = $this->presenter->getParameters('index');
+
+        $keyword = request()->get('k', 0);
+        if ($keyword){
+            foreach (config('parameter.global_keyword') as $key => $searchs) {
+                if (strpos($searchs, $keyword)!==false) {
+                    return redirect( route('admin.'.$key) );
+                }
+            }
+        }
 
         return view('admin.index', compact('data'));
     }

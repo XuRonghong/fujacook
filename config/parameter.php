@@ -155,4 +155,11 @@ return [
             'Y',
             'Z'
         ],
+    'global_keyword' => [
+        'admins.create' => 'create admin,admin create,新使用者,創建管理者,',
+        'admins.index' => 'admin,使用者,管理,',
+        'scenes.slider.index' => 'scenes,前台,場景,背景',
+        'scenes.slider.create' => 'create scenes,scenes create,scenes,前台,場景,背景',
+        'news.index' => 'news,管理,新聞',
+    ],
 ];

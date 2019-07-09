@@ -169,7 +169,7 @@ abstract class Presenter
                     'Title' => $this->title,
                     'Summary' => '',
                     'breadcrumb' => $this->presentBreadcrumb([
-                        $this->title => $data['route_url']['index']
+                        $this->title => data_get($data,'route_url')?$data['route_url']['index']:'',
                     ]),
                 ]);
                 break;
@@ -178,8 +178,8 @@ abstract class Presenter
                     'Title' => $this->title.' create',
                     'Summary' => '',
                     'breadcrumb' => $this->presentBreadcrumb([
-                        $this->title => $data['route_url']['index'],
-                        'create' => $data['route_url']['create'],
+                        $this->title => data_get($data,'route_url')?$data['route_url']['index']:'',
+                        'create' => data_get($data,'route_url')?$data['route_url']['create']:'',
                     ]),
                 ]);
                 break;
@@ -188,8 +188,8 @@ abstract class Presenter
                     'Title' => $this->title.' edit',
                     'Summary' => '',
                     'breadcrumb' => $this->presentBreadcrumb([
-                        $this->title => $data['route_url']['index'],
-                        'edit' => $data['route_url']['edit'],
+                        $this->title => data_get($data,'route_url')?$data['route_url']['index']:'',
+                        'edit' => data_get($data,'route_url')?$data['route_url']['edit']:'',
                     ]),
                 ]);
                 break;
@@ -198,8 +198,8 @@ abstract class Presenter
                     'Title' => $this->title.' show',
                     'Summary' => '',
                     'breadcrumb' => $this->presentBreadcrumb([
-                        $this->title => $data['route_url']['index'],
-                        'show' => $data['route_url']['show'],
+                        $this->title => data_get($data,'route_url')?$data['route_url']['index']:'',
+                        'show' => data_get($data,'route_url')?$data['route_url']['show']:'',
                     ]),
                     'Disable'   => true
                 ]);
