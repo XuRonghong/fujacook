@@ -20,7 +20,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title modalTitle"></h4>
-                            <h6 class="card-subtitle">{!! data_get($data,'Summary') !!}</h6>
+                            <h6 class="card-subtitle">{!! (data_get($data,'Summary')) !!}</h6>
                             <div class="table-responsive waitme">
                                 <table id="data_table" class="table table-table-striped table-bordered">
                                 </table>
@@ -36,11 +36,10 @@
 @section('inline-js')
     <script>
         $(document).ready(function () {
-
             // loading .....
             run_waitMe($('.waitme'));
             let data_table = $('#data_table');
-            table = data_table.dataTable({
+            let table = data_table.dataTable({
                 "serverSide": true,
                 "stateSave": true,
                 // "scrollX": true,
@@ -52,17 +51,7 @@
                     {
                         "sTitle": "ID",
                         "mData": "id",
-                        "sName": "admin_menu.id",
-                        // "width": "40px",
-                        "bSearchable": false,
-                        "mRender": function (data, type, row) {
-                            return data;
-                        }
-                    },
-                    {
-                        "sTitle": "admin type",
-                        "mData": "type",
-                        "sName": "admins.type",
+                        "sName": "id",
                         // "width": "40px",
                         "bSortable": true,
                         "bSearchable": false,
@@ -70,11 +59,33 @@
                             return data;
                         }
                     },
+                    // {
+                    //     "sTitle": "rank",
+                    //     "mData": "rank",
+                    //     "sName": "rank",
+                    //     // "width": "100px",
+                    //     "bSortable": true,
+                    //     "bSearchable": false,
+                    //     "mRender": function (data, type, row) {
+                    //         return data;
+                    //     }
+                    // },
                     {
-                        "sTitle": "admin_name",
+                        "sTitle": "name",
                         "mData": "name",
+                        "sName": "name",
                         // "width": "100px",
-                        "sName": "admins.name",
+                        "bSortable": false,
+                        "bSearchable": false,
+                        "mRender": function (data, type, row) {
+                            return data;
+                        }
+                    },
+                    {
+                        "sTitle": "value",
+                        "mData": "value",
+                        "sName": "value",
+                        "width": "30%",
                         "bSortable": false,
                         "bSearchable": true,
                         "mRender": function (data, type, row) {
@@ -82,31 +93,21 @@
                         }
                     },
                     {
-                        "sTitle": "menu_name",
-                        // "mData": "menu_id",
+                        "sTitle": "type",
+                        "mData": "type",
+                        "sName": "type",
                         // "width": "100px",
-                        "sName": "menus.name",
                         "bSortable": false,
-                        "bSearchable": true,
+                        "bSearchable": false,
                         "mRender": function (data, type, row) {
-                            return row.menu_name;}
+                            return data;
+                        }
                     },
                     {
-                        "sTitle": "created_at",
+                        "sTitle": "created",
                         "mData": "created_at",
+                        "sName": "created_at",
                         // "width": "100px",
-                        "sName": "admin_menu.created_at",
-                        "bSortable": true,
-                        "bSearchable": true,
-                        "mRender": function (data, type, row) {
-                            return data;
-                        }
-                    },
-                    {
-                        "sTitle": "updated_at",
-                        "mData": "updated_at",
-                        // "width": "100px",
-                        "sName": "admin_menu.updated_at",
                         "bSortable": true,
                         "bSearchable": true,
                         "mRender": function (data, type, row) {
@@ -149,17 +150,17 @@
 
 
 
-            document.getElementById('create_record').addEventListener('click', function () {
-                location.href = '{{$data['route_url']['create']}}'
-            })
+            $('#create_record').parent().hide()     //沒有新建按鈕
 
             //
-            data_table.on('click', '.btn-open', function () {
-                let id = $(this).closest('tr').attr('id')
-                url = '{{data_get($data['route_url'], "update")}}'.replace('-10', id)
-                ajaxOpen(url, {open: 'change', doValidate: 0}, 'POST', table)
-            })
+            data_table.on('click', '.btn-del', function () {
+                var id = $(this).closest('tr').attr('id');
+                let url = '{{$data['route_url']['destroy']}}'.replace('-10', id)  //-10代替字元為id
+                let data = {
+                    "_token": "{{ csrf_token() }}"
+                };
+                doDelete(url, data, table)          // from layout.master
+            });
         });
     </script>
 @endsection
-<!-- ================== /inline-js ================== -->

@@ -20,7 +20,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title modalTitle"></h4>
-                            <h6 class="card-subtitle">{{data_get($data,'Summary')}}</h6>
+                            <h6 class="card-subtitle">{!! data_get($data,'Summary') !!}</h6>
 {{--                            <button type="button" name="create_record" id="create_record" class="btn btn-success btn-sm">Create</button>--}}
                             <div class="table-responsive waitme">
                                 <table id="data_table" class="table table-table-striped table-bordered">

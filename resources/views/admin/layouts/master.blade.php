@@ -21,7 +21,7 @@
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
+    <![endif]-->
 
     <link rel="stylesheet" href="{{asset('css/toastr.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/sweetalert.css')}}">
@@ -38,9 +38,27 @@
             margin-top: -25px;
         }
         /* 上方列 */
-        #main-wrapper[data-layout=vertical] .topbar .navbar-collapse[data-navbarbg=skin1], #main-wrapper[data-layout=vertical] .topbar[data-navbarbg=skin1], #main-wrapper[data-layout=horizontal] .topbar .navbar-collapse[data-navbarbg=skin1], #main-wrapper[data-layout=horizontal] .topbar[data-navbarbg=skin1] {
-            /*background-color: black;*/
+        #main-wrapper[data-layout=vertical] .topbar .navbar-collapse[data-navbarbg=skin1],
+        #main-wrapper[data-layout=vertical] .topbar[data-navbarbg=skin1],
+        #main-wrapper[data-layout=horizontal] .topbar .navbar-collapse[data-navbarbg=skin1],
+        #main-wrapper[data-layout=horizontal] .topbar[data-navbarbg=skin1]
+        {
             background-color: #82191d;
+            height: 40px;
+        }
+        .topbar .top-navbar {
+            min-height: 44px;
+            padding: 0;
+        }
+        .topbar .top-navbar .navbar-nav>.nav-item>.nav-link {
+            padding: 0 15px;
+            font-size: .875rem;
+            line-height: 44px;
+            height: 44px;
+        }
+        /* breadcrumb 位置 */
+        .page-breadcrumb {
+            padding: 0px 20px 0;
         }
         /* 報表按鈕 */
         .btn {

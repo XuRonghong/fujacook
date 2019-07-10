@@ -36,9 +36,9 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="com4" class="col-sm-3 text-right control-label col-form-label">word<span style="color:red">*</span></label>
+                                    <label for="com4" class="col-sm-3 text-right control-label col-form-label">value<span style="color:red">*</span></label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="value" value="{{data_get($data['arr'], 'value')}}" class="form-control value" id="com4" placeholder="">
+                                        <input type="text" name="value" value="{{data_get($data['arr'], 'value', '0')}}" class="form-control value" id="com4" placeholder="">
                                     </div>
                                 </div>
                             </div>
@@ -66,6 +66,9 @@
 @endsection
 
 @section('inline-js')
+    <!-- Public SummerNote -->
+    @include('admin.js.summernote2019')
+    <!-- end -->
     <script type="text/javascript">
         $(document).ready(function () {
 
@@ -74,10 +77,15 @@
             if (disable){
                 $('input[type=text]').attr('disabled','disabled')
                 $('form select').attr('disabled','disabled')
+                $('form #detail').summernote('disable');        //編輯器關閉
             }
 
             var modal = $('#manage-modal')
             current_modal = modal.find('.messageInfo-modal')
+
+            //文字編輯器
+            do_textarea_summernote_fun( $('#content'))
+            // do_textarea_summernote_fun( $('#detail'))
 
             //返回上一頁
             $(".btn-cancel").click(function (e) {
@@ -92,7 +100,7 @@
                 //寫入資料庫
                 let url = '{{data_get($data['route_url'], "store")}}'
                 let self = document.querySelector('#sample_form')
-                let data = prop_fromData_fun(self, {'content': null})
+                let data = prop_fromData_fun(self)
 
                 ajax(url, data, 'POST')
             })
@@ -105,7 +113,7 @@
                 let id = $(this).data('id')
                 let url = '{{data_get($data['route_url'], "update")}}'.replace('-10', id)  //-10代替字元為id
                 let self = document.querySelector('#sample_form')
-                let data = prop_fromData_fun(self, {'content': null})
+                let data = prop_fromData_fun(self)
 
                 ajax(url, data, 'POST')
             })

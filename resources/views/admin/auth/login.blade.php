@@ -84,6 +84,7 @@
 
                             <div class="col-md-6">
                                 <input type="hidden" name="active" value="1">
+                                <input type="hidden" name="nextUrl" value="{{session('nextUrl')}}">
                             </div>
                         </div>
                     </form>

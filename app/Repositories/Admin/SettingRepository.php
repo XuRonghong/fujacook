@@ -3,6 +3,7 @@
 namespace App\Repositories\Admin;
 
 use App\Repositories\Repository;
+use App\Search;
 use App\Setting;
 
 class SettingRepository extends Repository
@@ -12,6 +13,11 @@ class SettingRepository extends Repository
     public function __construct(Setting $model)
     {
         $this->model = $model;
+    }
+
+    public function setModel_Search($attributes='')
+    {
+        $this->model = new Search();
     }
 
     public function all($attributes='')

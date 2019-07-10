@@ -6,8 +6,11 @@ use App\Admin;
 use App\File;
 use App\LogAction;
 use App\LogLogin;
+use App\Search;
+use App\Setting;
 use Illuminate\Support\Facades\Request;
 use Auth;
+
 
 class FuncController
 {
@@ -287,5 +290,32 @@ class FuncController
         } else {
             return 'computer';
         }
+    }
+
+
+    /*
+     * Backend global Search keyword
+     */
+    public function globalSearch($keyword)
+    {
+        if ($keyword){
+            $global_keywords = Setting::query()->where('type', 'backend-global_keyword')->get();
+            foreach ($global_keywords as $key => $global_keyword) {
+                if (strpos($global_keyword['content'], $keyword)!==false) {
+                    return redirect( route('admin.'.$global_keyword['name']) );
+                }
+            }
+        } else {
+            return false;
+        }
+        //收集搜尋字串
+        if (Search::query()->where('value', $keyword)->count()==0) {
+            Search::create([
+                'type' => 'backend',
+                'name' => 'global search',
+                'value' => $keyword,
+            ]);
+        }
+        return null;
     }
 }

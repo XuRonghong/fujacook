@@ -16,7 +16,7 @@
                     <div class="card" id="manage-modal">
                         <div class="card-body">
                             <h4 class="card-title modalTitle"></h4>
-                            <h6 class="card-subtitle">{{data_get($data,'Summary')}}</h6>
+                            <h6 class="card-subtitle">{!! data_get($data,'Summary') !!}</h6>
                         </div>
                         <form id="sample_form" class="form-horizontal">
                             <div class="card-body messageInfo-modal">
@@ -53,6 +53,9 @@
                             </div>
                             <hr>
                             <div class="card-body">
+                                <div class="form-group m-b-0 text-left">
+                                    <a type="button" href="{{data_get($data['route_url'], 'global_keyword')}}" class="btn btn-success waves-effect waves-light" style="text-align: left">Search record</a>
+                                </div>
                                 <div class="form-group m-b-0 text-right">
                                     @if( !data_get($data, 'Disable'))
                                         @if(data_get($data['arr'], 'id'))

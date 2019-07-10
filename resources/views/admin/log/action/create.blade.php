@@ -25,7 +25,7 @@
                     <div class="card" id="manage-modal">
                         <div class="card-body">
                             <h4 class="card-title modalTitle"></h4>
-                            <h6 class="card-subtitle">{{data_get($data,'Summary')}}</h6>
+                            <h6 class="card-subtitle">{!! data_get($data,'Summary') !!}</h6>
                         </div>
                         <form id="sample_form" class="form-horizontal">
                             <div class="card-body messageInfo-modal">

@@ -26,10 +26,10 @@ class AdminInfo extends Model
         'user_address',
     ];
 
-    public function validate($request)
+    public function validate($request, $noUnique=0)
     {
         $rules = [
-//            'title' => 'required',
+//            'title' => 'required'. ($noUnique?'':'|unique:news'),
 //            'summary' => 'required',
 //            'hashtag_name' => 'required|array',
 //            'startTime' => 'nullable',
@@ -38,6 +38,7 @@ class AdminInfo extends Model
         ];
         $messages = [
 //            'title.required' => '標題為必填項目',
+//            'title.unique' => '標題不能重複',
 //            'summary.required' => '概要為必填項目',
 //            'category_id.required' => '商品分類為必填項目',
 //            'hashtag_name.required' => '標籤為必填項目',

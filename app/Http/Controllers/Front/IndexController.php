@@ -38,7 +38,12 @@ class IndexController extends Controller
             ->orderBy('rank', 'asc')
             ->get();
         //
-        $data['arr'] = $this->presenter->eachOne_aaData($data['arr']);
+        if ( $data['arr']['aaData']) {
+            foreach ($data['arr']['aaData'] as $key => $var) {
+                //找圖片檔案
+                $var->image = $this->presenter->transFileIdtoImage($var->file_id);
+            }
+        }
 
 
         $data['arr']['navbar'] = Scene::query()->where($map)
@@ -48,23 +53,41 @@ class IndexController extends Controller
 
         //
         $images = [];
-        $images['aaData'] = Scene::query()->where($map)
+        $data['arr']['image']['section1'] = Scene::query()->where($map)
             ->where('type','LIKE', 'image.home.60601')
             ->orderBy('rank', 'asc')
-            ->get();        //
-        $data['arr']['image']['section1'] = $this->presenter->eachOne_aaData($images)['aaData'];
+            ->get();
+        if ( $data['arr']['image']['section1']) {
+            foreach ($data['arr']['image']['section1'] as $key => $var) {
+                //找圖片檔案
+                $var->image = $this->presenter->transFileIdtoImage($var->file_id);
+            }
+        }
+
         //
-        $images['aaData'] = Scene::query()->where($map)
+        $data['arr']['image']['section2'] = Scene::query()->where($map)
             ->where('type','LIKE', 'image.home.60602')
             ->orderBy('rank', 'asc')
-            ->get();        //
-        $data['arr']['image']['section2'] = $this->presenter->eachOne_aaData($images)['aaData'];
+            ->get();
+        if ( $data['arr']['image']['section2']) {
+            foreach ($data['arr']['image']['section2'] as $key => $var) {
+                //找圖片檔案
+                $var->image = $this->presenter->transFileIdtoImage($var->file_id);
+            }
+        }
+
         //
-        $images['aaData'] = Scene::query()->where($map)
+        $data['arr']['image']['section3'] = Scene::query()->where($map)
             ->where('type','LIKE', 'image.home.60603')
             ->orderBy('rank', 'asc')
-            ->get();        //
-        $data['arr']['image']['section3'] = $this->presenter->eachOne_aaData($images)['aaData'];
+            ->get();
+        //
+        if ( $data['arr']['image']['section3']) {
+            foreach ($data['arr']['image']['section3'] as $key => $var) {
+                //找圖片檔案
+                $var->image = $this->presenter->transFileIdtoImage($var->file_id);
+            }
+        }
 
 
         return view('front.index', compact('data'));

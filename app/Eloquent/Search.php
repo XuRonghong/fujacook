@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Setting extends Model
+class Search extends Model
 {
     //
-    protected $table = 'settings';
+    protected $table = 'searches';
     protected $primaryKey = 'id';
     protected $fillable = [
         'author_id',
@@ -28,15 +28,15 @@ class Setting extends Model
     public function validate($request, $noUnique=0)
     {
         $rules = [
-            'name' => 'required'. ($noUnique?'':'|unique:settings'),
-            'content' => 'required',
-            'value' => 'required',
+//            'name' => 'required',
+//            'content' => 'required',
+            'value' => 'required'. ($noUnique?'':'|unique:searches'),
         ];
         $messages = [
-            'name.required' => '參數名稱為必填項目',
-            'name.unique' => '參數名稱不能重複',
-            'content.required' => '參數內容為必填項目',
-            'value.required' => '有必填項目',
+//            'name.required' => '參數名稱為必填項目',
+//            'content.required' => '參數內容為必填項目',
+            'value.required' => 'value必填項目',
+            'value.unique' => 'value有重複',
         ];
         return $request->validate($rules, $messages);
     }

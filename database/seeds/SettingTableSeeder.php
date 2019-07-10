@@ -85,75 +85,88 @@ class SettingTableSeeder extends Seeder
                 'content' => '',
             ]
         ];
+
+        $global_keyword = array();
+        foreach (config('parameter.global_keyword') as $key => $searchs) {
+            $global_keyword[] = [
+                'type' => 'backend-global_keyword',
+                'name' => $key,
+                'content' => json_encode($searchs, JSON_UNESCAPED_UNICODE),
+            ];
+        }
+        $parameters = array_merge($parameters, $global_keyword);
+
         foreach ($parameters as $parameter) {
             Setting::create($parameter);
         }
 
 
+        if (env('DB_REFRESH')) {
 //        Scene::truncate();
-        Scene::query()->where('type', 'navbar.home')->delete();
-        $data = ['type' => 'navbar.home', 'open'=> 1];
-        $scenes = [
-            [
-                'type' => $data['type'],
-                'title' => '首頁',
-                'url' => env('APP_URL').'/',
-                'open' => $data['open'],
-            ], [
-                'type' => $data['type'],
-                'title' => '關於FUJACOOK',
-                'url' => env('APP_URL').'/about',
-                'open' => $data['open'],
-            ], [
-                'type' => $data['type'],
-                'title' => '媒體報導',
-                'url' => env('APP_URL').'/reports',
-                'open' => $data['open'],
-            ], [
-                'type' => $data['type'],
-                'title' => '即食鍋',
-                'url' => env('APP_URL').'#',
-                'open' => $data['open'],
-            ], [
-                'type' => $data['type'],
-                'title' => '即時餐',
-                'url' => env('APP_URL').'#',
-                'open' => $data['open'],
-            ], [
-                'type' => $data['type'],
-                'title' => '最新消息',
-                'url' => env('APP_URL').'/news',
-                'open' => $data['open'],
-            ], [
-                'type' => $data['type'],
-                'title' => '聯繫我們',
-                'url' => env('APP_URL').'/contactus',
-                'open' => $data['open'],
-            ],
-        ];
-        foreach ($scenes as $scene) {
-            Scene::create($scene);
-        }
+            Scene::query()->where('type', 'navbar.home')->delete();
+            $data = ['type' => 'navbar.home', 'open' => 1];
+            $scenes = [
+                [
+                    'type' => $data['type'],
+                    'title' => '首頁',
+                    'url' => env('APP_URL') . '/',
+                    'open' => $data['open'],
+                ], [
+                    'type' => $data['type'],
+                    'title' => '關於FUJACOOK',
+                    'url' => env('APP_URL') . '/about',
+                    'open' => $data['open'],
+                ], [
+                    'type' => $data['type'],
+                    'title' => '媒體報導',
+                    'url' => env('APP_URL') . '/reports',
+                    'open' => $data['open'],
+                ], [
+                    'type' => $data['type'],
+                    'title' => '即食鍋',
+                    'url' => env('APP_URL') . '#',
+                    'open' => $data['open'],
+                ], [
+                    'type' => $data['type'],
+                    'title' => '即時餐',
+                    'url' => env('APP_URL') . '#',
+                    'open' => $data['open'],
+                ], [
+                    'type' => $data['type'],
+                    'title' => '最新消息',
+                    'url' => env('APP_URL') . '/news',
+                    'open' => $data['open'],
+                ], [
+                    'type' => $data['type'],
+                    'title' => '聯繫我們',
+                    'url' => env('APP_URL') . '/contactus',
+                    'open' => $data['open'],
+                ],
+            ];
+            foreach ($scenes as $scene) {
+                Scene::create($scene);
+            }
 
-        Scene::query()->where('type', 'slider.home')->delete();
-        $data = ['type' => 'slider.home', 'open'=> 1];
-        $scenes = [
-            [
-                'type' => $data['type'],
-                'title' => 'banner01',
-                'image' => env('APP_URL').'/web0617/img/slide01.jpg',
-                'url' => env('APP_URL').'/#',
-                'open' => $data['open'],
-            ], [
-                'type' => $data['type'],
-                'title' => 'banner02',
-                'image' => env('APP_URL').'/web0617/img/slide02.jpg',
-                'url' => env('APP_URL').'/#',
-                'open' => $data['open'],
-            ],
-        ];
-        foreach ($scenes as $scene) {
-            Scene::create($scene);
+            Scene::query()->where('type', 'slider.home')->delete();
+            $data = ['type' => 'slider.home', 'open' => 1];
+            $scenes = [
+                [
+                    'type' => $data['type'],
+                    'title' => 'banner01',
+                    'image' => env('APP_URL') . '/web0617/img/slide01.jpg',
+                    'url' => env('APP_URL') . '/#',
+                    'open' => $data['open'],
+                ], [
+                    'type' => $data['type'],
+                    'title' => 'banner02',
+                    'image' => env('APP_URL') . '/web0617/img/slide02.jpg',
+                    'url' => env('APP_URL') . '/#',
+                    'open' => $data['open'],
+                ],
+            ];
+            foreach ($scenes as $scene) {
+                Scene::create($scene);
+            }
         }
     }
 }

@@ -191,6 +191,10 @@ return [
             'parameters' =>
                 [
                     'title' => '系統參數設定',
+                    'global_keyword' =>
+                        [
+                            'title' => '後台全域搜索記錄',
+                        ]
                 ]
         ],
 

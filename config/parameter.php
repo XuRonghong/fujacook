@@ -156,6 +156,7 @@ return [
             'Z'
         ],
     'global_keyword' => [
+        'admin.logout' => '登出,logout,exit,',
         'admins.create' => 'create admin,admin create,新使用者,創建管理者,',
         'admins.index' => 'admin,使用者,管理,',
         'scenes.slider.index' => 'scenes,前台,場景,背景',

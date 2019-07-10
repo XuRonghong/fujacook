@@ -2,22 +2,25 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\FuncController;
 use App\Presenters\Admin\HomePresenter;
 use App\Http\Controllers\Controller;
 
 class IndexController extends Controller
 {
     protected $presenter;
+    protected $funcontroller;
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(HomePresenter $presenter)
+    public function __construct(HomePresenter $presenter, FuncController $func)
     {
 //        $this->middleware('auth');
         $this->presenter = $presenter;
+        $this->funcontroller = $func;
     }
 
     /**
@@ -28,17 +31,10 @@ class IndexController extends Controller
     public function index()
     {
         $data = $this->presenter->getParameters('index');
+        //全局搜尋
+        $goto = $this->funcontroller->globalSearch( request()->get('k', 0));
 
-        $keyword = request()->get('k', 0);
-        if ($keyword){
-            foreach (config('parameter.global_keyword') as $key => $searchs) {
-                if (strpos($searchs, $keyword)!==false) {
-                    return redirect( route('admin.'.$key) );
-                }
-            }
-        }
-
-        return view('admin.index', compact('data'));
+        return $goto?:view('admin.index', compact('data'));
     }
 }
 

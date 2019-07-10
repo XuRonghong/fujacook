@@ -15,15 +15,16 @@ class Permission extends Model
         'guard_name',
     ];
 
-    public function validate($request)
+    public function validate($request, $noUnique=0)
     {
         $rules = [
-            'name' => 'required',
+            'name' => 'required'. ($noUnique?'':'|unique:permissions'),
             'description' => 'required',
 //            'guard_name' => 'required|array',
         ];
         $messages = [
             'name.required' => 'name為必填項目',
+            'name.unique' => 'name不能重複',
             'description.required' => '描述為必填項目',
 //            'guard_name.required' => 'guard_name為必填項目',
         ];

@@ -23,6 +23,10 @@ class SettingPresenter extends Presenter
                 'meta' => 'meta',
                 'search_keyword' => 'search_keyword',
             ],
+//            'global_keyword' => [
+//                'app' => 'app',
+//                'meta' => 'meta',
+//            ],
         ];
     }
 
@@ -47,7 +51,7 @@ class SettingPresenter extends Presenter
 
     public function transOne($data, $other=0)
     {
-        $data['content'] = json_decode($data['content']);
+        $data['content'] = json_decode($data['content'], true);
         if ($other){
             $data['options'] = $this->getSelectOption($other, $data['type']);
         }
@@ -70,6 +74,9 @@ class SettingPresenter extends Presenter
             case 'search_keyword':
                 return $this->presentStatus($status);
                 break;
+            case 'global_keyword':
+                $btn .= '<button class="btn btn-xs btn-del pull-right" title="刪除"><i class="fa fa-trash" aria-hidden="true"></i></button>';
+                break;
             default:
                 $btn .= '<button class="btn btn-xs btn-show" title="詳情"><i class="fa fa-book" aria-hidden="true"></i></button>';
                 $btn .= '<button class="btn btn-xs btn-edit" title="修改"><i class="fa fa-pencil-alt" aria-hidden="true"></i></button>';
@@ -77,5 +84,10 @@ class SettingPresenter extends Presenter
                 break;
         }
         return $btn;
+    }
+
+    public function setBreadcrumb($new=[])
+    {
+        return $this->breadcrumb = array_merge($this->breadcrumb, $new);
     }
 }

@@ -19,7 +19,7 @@ function MirrorFrame(place, options) {
     button.onclick = function(){self[action].call(self);};
   }
 
-  makeButton("Search", "search");
+  makeButton("Eloquent.Search", "search");
   makeButton("Replace", "replace");
   makeButton("Current line", "line");
   makeButton("Jump to line", "jump");

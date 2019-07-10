@@ -7,7 +7,7 @@ use App\Repositories\Admin\SettingRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class ParameterController extends Controller
+class GlobalKeywordController extends Controller
 {
     protected $repository;
     protected $presenter;
@@ -17,12 +17,22 @@ class ParameterController extends Controller
     {
         $this->repository = $repository;
         $this->presenter = $presenter;
-        //指定view的位置
-        $this->presenter->setTitle(trans('menu.setting.parameters.title'));
-        $this->presenter->setViewName('setting.parameters');
+        //紀錄之前一個來源路由
+        $this->presenter->setBreadcrumb([
+            trans('menu.setting.parameters.title') => route('admin.setting.parameters.index')
+        ]);
+        $this->presenter->propSummary(
+            '特殊情況做為後台管理者蒐集關鍵詞字典，一般用者使用不到。<br>'.
+            'Special circumstances as a background manager to collect keyword dictionary, generally not used by users.'
+        );
+        //
+        $this->repository->setModel_Search();   // 換一個model
+        $this->presenter->setTitle(trans('menu.setting.parameters.global_keyword.title'));
+        $this->presenter->setViewName('setting.global_keywords');
         //所有關於route::resource的位置
-        $this->route_url = $this->presenter->getRouteResource($this->presenter->setRouteName('admin.setting.parameters'));
-        $this->route_url['global_keyword'] = url('admin/setting/parameter/global_keyword');
+        $this->route_url = $this->presenter->getRouteResource(
+            $this->presenter->setRouteName('admin.setting.parameter.global_keyword')
+        );
     }
 
     /**
@@ -46,7 +56,7 @@ class ParameterController extends Controller
         {
             $data = $this->repository->getDataTable($request);
 
-            $data = $this->presenter->eachOne_aaData($data);     //每一項目要做甚麼事,有需要在使用
+            $data = $this->presenter->eachOne_aaData($data, 'global_keyword');     //每一項目要做甚麼事,有需要在使用
 
             return $this->presenter->responseJson($data, 'ajax', 200);
         }

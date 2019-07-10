@@ -307,6 +307,6 @@ CKFinder.lang['en'] =
 
 	Search :
 	{
-		searchPlaceholder : 'Search'
+		searchPlaceholder : 'Eloquent.Search'
 	}
 };

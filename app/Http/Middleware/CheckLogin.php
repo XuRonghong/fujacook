@@ -21,7 +21,6 @@ class CheckLogin
 
         auth()->shouldUse($guard);
 
-        // dd(auth()->user());
         return $next($request);
     }
 }

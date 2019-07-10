@@ -24,13 +24,13 @@ class News extends Model
         'open'
     ];
 
-    public function validate($request)
+    public function validate($request, $noUnique=0)
     {
         $rules = [
             'rank' => 'nullable',
             'type' => 'nullable',
             'author_id' => 'nullable',
-            'title' => 'required',
+            'title' => 'required'. ($noUnique?'':'|unique:news'),
             'summary' => 'required',
             'image' => 'nullable',
             'file_id' => 'nullable',
@@ -45,6 +45,7 @@ class News extends Model
             'type' => '類別為必填項目',
             'author_id' => '創建者為必填項目',
             'title.required' => '標題為必填項目',
+            'title.unique' => 'title不能重複',
             'summary.required' => '概要為必填項目',
             'image' => '圖片為必填項目',
             'file_id' => '檔案為必填項目',

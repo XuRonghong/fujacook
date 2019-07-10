@@ -20,13 +20,13 @@ class Menu extends Model
         'open',
     ];
 
-    public function validate($request)
+    public function validate($request, $noUnique=0)
     {
         $rules = [
 //            'parent_id' => 'required',
 //            'rank' => 'required',
 //            'type' => 'nullable',
-            'name' => 'required',
+            'name' => 'required'. ($noUnique?'':'|unique:permissions'),
             'link' => 'required',
 //            'sub_menu' => 'nullable',
 //            'access' => 'nullable',
@@ -37,6 +37,7 @@ class Menu extends Model
 //            'rank.required' => '為必填項目',
 //            'type.required' => '為必填項目',
             'name.required' => '名稱為必填項目',
+            'name.unique' => '名稱不能重複',
             'link.required' => 'link為必填項目',
 //            'sub_menu.required' => '為必填項目',
 //            'access.required' => '為必填項目',

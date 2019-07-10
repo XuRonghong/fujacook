@@ -17,7 +17,7 @@ class AssignGuard
     public function handle($request, Closure $next, $guard = null, $redirectTo = '/login')
     {
         if (!Auth::guard($guard)->check()) {
-            return redirect($redirectTo);
+            return redirect($redirectTo)->with('nextUrl', $request->url()/*'admin'*/);
         }
         Auth::shouldUse($guard);
 

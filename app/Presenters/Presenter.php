@@ -11,10 +11,22 @@ use DB;
 
 abstract class Presenter
 {
+    protected $summary = '';
+    protected $breadcrumb = [];
+
+    public function propSummary($text=0)
+    {
+        return $this->summary = $text ? $text : $this->summary;
+    }
 
     public function setTitle($title)
     {
         return $this->title = $title;
+    }
+
+    public function getTitle()
+    {
+        return $this->title;
     }
 
     public function setViewName($name)
@@ -167,7 +179,7 @@ abstract class Presenter
             case 'index':
                 $data = array_merge($data, [
                     'Title' => $this->title,
-                    'Summary' => '',
+                    'Summary' => $this->summary,
                     'breadcrumb' => $this->presentBreadcrumb([
                         $this->title => data_get($data,'route_url')?$data['route_url']['index']:'',
                     ]),
@@ -176,7 +188,7 @@ abstract class Presenter
             case 'create':
                 $data = array_merge($data, [
                     'Title' => $this->title.' create',
-                    'Summary' => '',
+                    'Summary' => $this->summary,
                     'breadcrumb' => $this->presentBreadcrumb([
                         $this->title => data_get($data,'route_url')?$data['route_url']['index']:'',
                         'create' => data_get($data,'route_url')?$data['route_url']['create']:'',
@@ -186,7 +198,7 @@ abstract class Presenter
             case 'edit':
                 $data = array_merge($data, [
                     'Title' => $this->title.' edit',
-                    'Summary' => '',
+                    'Summary' => $this->summary,
                     'breadcrumb' => $this->presentBreadcrumb([
                         $this->title => data_get($data,'route_url')?$data['route_url']['index']:'',
                         'edit' => data_get($data,'route_url')?$data['route_url']['edit']:'',
@@ -196,7 +208,7 @@ abstract class Presenter
             case 'show':
                 $data = array_merge($data, [
                     'Title' => $this->title.' show',
-                    'Summary' => '',
+                    'Summary' => $this->summary,
                     'breadcrumb' => $this->presentBreadcrumb([
                         $this->title => data_get($data,'route_url')?$data['route_url']['index']:'',
                         'show' => data_get($data,'route_url')?$data['route_url']['show']:'',
@@ -310,6 +322,9 @@ abstract class Presenter
         $html = '<nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="'. url('admin') .'">Home</a></li>';
+            foreach ($this->breadcrumb as $key => $element){
+                $html .= '<li class="breadcrumb-item"><a href="'. $element .'">'.$key.'</a></li>';
+            }
             foreach ($elements as $key => $element){
                 $html .= '<li class="breadcrumb-item"><a href="'. $element .'">'.$key.'</a></li>';
             }
