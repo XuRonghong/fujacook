@@ -41,12 +41,12 @@
             let data_table = $('#data_table');
             let table = data_table.dataTable({
                 "serverSide": true,
-                "stateSave": true,
+               // "stateSave": true,
                 // "scrollX": true,
                 // "scrollY": '60vh',
                 // 'bProcessing': true,
                 // 'sServerMethod': 'GET',
-                "order": [[ 0, "asc" ]],
+                "order": [[ 1, "asc" ]],
                 "aoColumns": [
                     {
                         "sTitle": "ID",

@@ -41,7 +41,7 @@
             let data_table = $('#data_table');
             let table = data_table.dataTable({
                 "serverSide": true,
-                "stateSave": true,
+               // "stateSave": true,
                 // "scrollX": true,
                 // "scrollY": '60vh',
                 // 'bProcessing': true,

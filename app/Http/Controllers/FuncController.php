@@ -302,7 +302,10 @@ class FuncController
             $global_keywords = Setting::query()->where('type', 'backend-global_keyword')->get();
             foreach ($global_keywords as $key => $global_keyword) {
                 if (strpos($global_keyword['content'], $keyword)!==false) {
-                    return redirect( route('admin.'.$global_keyword['name']) );
+                    $name = explode(':',$global_keyword['name']);
+                    return redirect( route('admin.'. $name[0],(isset($name[1]))? [
+                        str_replace('no', auth()->guard('admin')->user()->no, $name[1])
+                    ]: [] ));
                 }
             }
         } else {
