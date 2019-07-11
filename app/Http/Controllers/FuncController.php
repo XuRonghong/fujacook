@@ -156,6 +156,16 @@ class FuncController
     /*
      *
      */
+    static function _get_http_url ()
+    {
+        $https = !empty ( $_SERVER ['HTTPS'] ) && strcasecmp( $_SERVER ['HTTPS'], 'on' ) === 0 || !empty ( $_SERVER ['HTTP_X_FORWARDED_PROTO'] ) && strcasecmp( $_SERVER ['HTTP_X_FORWARDED_PROTO'], 'https' ) === 0;
+
+        return ( $https ? 'https' : 'http' );
+    }
+
+    /*
+     *
+     */
     static function _get_full_url ()
     {
         $https =

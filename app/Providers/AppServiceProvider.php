@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\URL;
+use App\Http\Controllers\FuncController;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
     {
         //redirect http to https
         if(env('APP_ENV')=='production') {
-            Url::forceScheme('https');
+            Url::forceScheme(FuncController::_get_http_url());
         }
     }
 }
