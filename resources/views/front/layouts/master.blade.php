@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 <head>
-    <title>{{data_get($data['arr']['parameters'],'meta_title', data_get($data,'Title', config('app.title')))}}</title>
+    <title>{{data_get($data,'parameters.meta_title', trans('front.home.title'))}}</title>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="">
-    <meta name="keywords" content="{{data_get($data['arr']['parameters'], 'meta_keyword')}}" />
-    <meta name="description" content="{{data_get($data['arr']['parameters'], 'meta_description')}}" />
+    <meta name="author" content="{{data_get($data, 'parameters.meta_author')}}">
+    <meta name="keywords" content="{{data_get($data, 'parameters.meta_keyword')}}" />
+    <meta name="description" content="{{data_get($data, 'parameters.meta_description')}}" />
 
-    <link rel=”alternate” href=”https://www.fujacook.com” hreflang=”zh-TW” />
-    <link rel=”canonical” href=”https://www.fujacook.com”>
+    <link rel="canonical" href="https://www.fujacook.com.tw/">
+    <link rel="alternate" href="https://www.fujacook.com" hreflang="zh-TW" />
 
-    @foreach(data_get($data['arr']['parameters'], 'master_style', []) as $var)
-        <link rel="{{ $var->name }}" href="{{ json_decode( $var->content) }}" hreflang="{{ $var->value }}" />
+    @foreach(data_get($data, 'parameters.master_style', []) as $var)
+        <link rel="{{ data_get($var, 'name') }}" href="{{ json_decode( data_get($var, 'content')) }}" hreflang="{{ data_get($var, 'value') }}" />
     @endforeach
 
 {{--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js')}}"></script>--}}
@@ -28,7 +28,7 @@
 {{--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js')}}" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>--}}
 
 
-    <!--icon css-->
+<!--icon css-->
     <link rel="stylesheet" href="{{asset('web0617/css/font-awesome.min.css')}}">
     <!--bootstrap css-->
     <link rel="stylesheet" href="{{asset('web0617/css/bootstrap.css')}}"/>
@@ -38,6 +38,7 @@
     <link rel="stylesheet" href="{{asset('css/toastr.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/sweetalert.css')}}">
     <link rel="stylesheet" href="{{asset('css/waitMe.css')}}" type="text/css">
+
 
     <!-- Master styles -->
     <style type="text/css">
@@ -57,12 +58,12 @@
 <!-- ============================================================== -->
 <!-- All Javascript And Jquery -->
 <!-- ============================================================== -->
+
     <!--/wrap-->
     <script src="{{asset('web0617/js/jquery-3.4.1.min.js')}}"></script>
     <script src="{{asset('web0617/js/bootstrap.min.js')}}"></script>
     <!--custom js-->
     <script src="{{asset('web0617/js/script.js')}}"> </script>
-
 
     <script src="{{asset('js/toastr.min.js')}}"></script>
 {{--    <script src="{{asset('js/sweetalert.min.js')}}"></script>--}}

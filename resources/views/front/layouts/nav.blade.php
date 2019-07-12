@@ -1,5 +1,4 @@
 
-
 <!--上方menu bar-->
 <div class="fuja-nav">
     <div class="container">
@@ -12,9 +11,9 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    @forelse(data_get($data['arr'], 'navbar', []) as $key => $var)
+                    @forelse(data_get($data, 'navbar', []) as $key => $var)
                         <li class="nav-item @if($key==1) active @endif">
-                            <a class="nav-link {{$var->style or ''}}" href="{{$var->url or ''}}">{{$var->title or ''}}</a>
+                            <a class="nav-link {{data_get($var, 'style')}}" href="{{data_get($var, 'url')}}">{{data_get($var, 'summary')}}</a>
                         </li>
                     @empty
                         <li class="nav-item active">
@@ -23,21 +22,21 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#">關於FUJACOOK</a>
                         </li>
-{{--                        <li class="nav-item">--}}
-{{--                            <a class="nav-link" href="#">媒體報導</a>--}}
-{{--                        </li>--}}
-{{--                        <li class="nav-item">--}}
-{{--                            <a class="nav-link" href="#">即食鍋</a>--}}
-{{--                        </li>--}}
-{{--                        <li class="nav-item">--}}
-{{--                            <a class="nav-link" href="#">即時餐</a>--}}
-{{--                        </li>--}}
-{{--                        <li class="nav-item">--}}
-{{--                            <a class="nav-link" href="#">最新消息</a>--}}
-{{--                        </li>--}}
-{{--                        <li class="nav-item">--}}
-{{--                            <a class="nav-link" href="#">聯繫我們</a>--}}
-{{--                        </li>--}}
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">媒體報導</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">即食鍋</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">即時餐</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">最新消息</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">聯繫我們</a>
+                        </li>
                     @endforelse
                 </ul>
 

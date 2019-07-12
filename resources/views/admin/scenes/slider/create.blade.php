@@ -121,6 +121,12 @@
 {{--                                        </textarea>--}}
 {{--                                    </div>--}}
 {{--                                </div>--}}
+                                <div class="form-group row">
+                                    <label for="com6" class="col-sm-3 text-right control-label col-form-label">Create at</label>
+                                    <div class="col-sm-9" style="margin-top: 10px">
+                                        {{data_get($data['arr'], 'created_at', date('Y-m-d H:i:s'))}}
+                                    </div>
+                                </div>
                             </div>
                             <hr>
                             <div class="card-body">
@@ -146,7 +152,7 @@
 
 @section('inline-js')
     <!-- Public Crop_Image -->
-    @include('admin.js.crop_image_single_1280x750')
+    @include('admin.js.crop_image_single_custom')
     <!-- Public SummerNote -->
     @include('admin.js.summernote2019')
     <!-- end -->

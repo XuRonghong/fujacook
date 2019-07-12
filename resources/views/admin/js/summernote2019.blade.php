@@ -30,7 +30,7 @@
         model.summernote({
             placeholder: 'Hello stand alone ui',
             tabsize: 5,
-            height: 300,                 // set editor height
+            // height: 300,                 // set editor height
             minHeight: null,             // set minimum height of editor
             maxHeight: null,             // set maximum height of editor
             focus: false,                  // set focus to editable area after initializing summernote

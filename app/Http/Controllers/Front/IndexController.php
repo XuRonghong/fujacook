@@ -3,13 +3,10 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
-use App\Presenters\Admin\ScenesPresenter;
-use App\Repositories\Admin\ScenesRepository;
-use App\Repositories\Repository;
-use App\Scene;
+use App\Presenters\Front\ScenesPresenter;
+use App\Repositories\Front\ScenesRepository;
 use App\Setting;
 use Illuminate\Http\Request;
-
 
 class IndexController extends Controller
 {
@@ -22,77 +19,30 @@ class IndexController extends Controller
         $this->presenter = $presenter;
     }
 
-
-    /*
-     *
-     */
     function index ()
     {
-        $data = []; //config('app.title')
-        $data['arr']['parameters'] = $this->getParameters();
-
+        $data = [];
+        $data['parameters'] = $this->getParameters();
         //
-        $map['open'] = 1;
-        $data['arr']['aaData'] = Scene::query()->where($map)
-            ->where('type','LIKE', 'slider.home')
-            ->orderBy('rank', 'asc')
-            ->get();
+        $data['navbar'] = $this->repository->getOrmByType('navbar.home');
         //
-        if ( $data['arr']['aaData']) {
-            foreach ($data['arr']['aaData'] as $key => $var) {
-                //找圖片檔案
-                $var->image = $this->presenter->transFileIdtoImage($var->file_id);
-            }
-        }
-
-
-        $data['arr']['navbar'] = Scene::query()->where($map)
-            ->where('type','LIKE', 'navbar.home')
-            ->orderBy('rank', 'asc')
-            ->get();
-
+        $data['slider'] = $this->repository->getOrmByType('slider.home');
+        $data['slider'] = $this->presenter->eachOne_aaData($data['slider']);
         //
-        $images = [];
-        $data['arr']['image']['section1'] = Scene::query()->where($map)
-            ->where('type','LIKE', 'image.home.60601')
-            ->orderBy('rank', 'asc')
-            ->get();
-        if ( $data['arr']['image']['section1']) {
-            foreach ($data['arr']['image']['section1'] as $key => $var) {
-                //找圖片檔案
-                $var->image = $this->presenter->transFileIdtoImage($var->file_id);
-            }
-        }
-
+        $data['introduce']['t01'] = $this->repository->getOrmByType('introduce.home.t01');
+        $data['introduce']['t01'] = $this->presenter->eachOne_aaData($data['introduce']['t01']);
         //
-        $data['arr']['image']['section2'] = Scene::query()->where($map)
-            ->where('type','LIKE', 'image.home.60602')
-            ->orderBy('rank', 'asc')
-            ->get();
-        if ( $data['arr']['image']['section2']) {
-            foreach ($data['arr']['image']['section2'] as $key => $var) {
-                //找圖片檔案
-                $var->image = $this->presenter->transFileIdtoImage($var->file_id);
-            }
-        }
-
+        $data['image']['section1'] = $this->repository->getOrmByType('image.home.section1');
+        $data['image']['section1'] = $this->presenter->eachOne_aaData($data['image']['section1']);
         //
-        $data['arr']['image']['section3'] = Scene::query()->where($map)
-            ->where('type','LIKE', 'image.home.60603')
-            ->orderBy('rank', 'asc')
-            ->get();
+        $data['image']['section3'] = $this->repository->getOrmByType('image.home.section3');
+        $data['image']['section3'] = $this->presenter->eachOne_aaData($data['image']['section3']);
         //
-        if ( $data['arr']['image']['section3']) {
-            foreach ($data['arr']['image']['section3'] as $key => $var) {
-                //找圖片檔案
-                $var->image = $this->presenter->transFileIdtoImage($var->file_id);
-            }
-        }
-
+        $data['footer'] = $this->repository->getOrmByType('footer.home');
+        $data['footer'] = $this->presenter->eachOne_aaData($data['footer']);
 
         return view('front.index', compact('data'));
     }
-
 
     public function getParameters()
     {
@@ -102,6 +52,7 @@ class IndexController extends Controller
             'meta_description' => json_decode( Setting::query()->where('name', 'meta_description')->first()->content ),
         ];
     }
+
 
 
 

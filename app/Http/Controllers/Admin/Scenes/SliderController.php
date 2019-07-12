@@ -45,7 +45,7 @@ class SliderController extends Controller
         //
         if(request()->ajax())
         {
-            $data = $this->repository->getDataTable($request, "type='slider.home'");
+            $data = $this->repository->getDataTable($request, "type LIKE 'slider%'");
 
             $data = $this->presenter->eachOne_aaData($data);     //每一項目要做甚麼事,有需要在使用
 

@@ -2,6 +2,8 @@
 
 namespace App\Presenters\Admin;
 
+use App\Presenters\Presenter;
+
 class SettingPresenter extends Presenter
 {
     protected $gotoUrl;         //ajax finish to url

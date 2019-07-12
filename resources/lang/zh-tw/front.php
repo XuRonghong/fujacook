@@ -1,5 +1,11 @@
 <?php
 return [
+    'home' => [
+        'title' => 'FUJACOOK即食鍋',
+    ],
+    'about' => [
+        'title' => 'FUJACOOK | 關於富甲',
+    ],
     'noipt' => '未填',
     'exchange_rate' =>
         [

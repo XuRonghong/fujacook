@@ -46,7 +46,7 @@
                 // "scrollY": '60vh',
                 // 'bProcessing': true,
                 // 'sServerMethod': 'GET',
-                "order": [[ 0, "asc" ]],
+                "order": [[ 0, "desc" ]],
                 "aoColumns": [
                     {
                         "sTitle": "ID",
@@ -59,7 +59,7 @@
                         }
                     },
                     {
-                        "sTitle": "rank(點擊即可修改)",
+                        "sTitle": "rank(點可修改)",
                         "mData": "rank",
                         // "width": "100px",
                         "sName": "rank",
@@ -107,6 +107,14 @@
                         "mData": "url",
                         // "width": "100px",
                         "sName": "url"
+                    },
+                    {
+                        "sTitle": "updated_at",
+                        "mData": "updated_at",
+                        // "width": "100px",
+                        "sName": "updated_at",
+                        "bSortable": true,
+                        "bSearchable": false,
                     },
                     {
                         "sTitle": "",

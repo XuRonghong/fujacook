@@ -2,6 +2,7 @@
 
 namespace App\Presenters\Admin;
 
+use App\Presenters\Presenter;
 
 class NewsPresenter extends Presenter
 {
@@ -51,7 +52,7 @@ class NewsPresenter extends Presenter
                 //翻譯每個type
 //                $var->type = $this->tranTypeInSelectOption($var->type, $this->selectOptions);
                 //找圖片檔案
-                $images = $this->transFileIdtoImage($var->file_id);
+                $images = $var->image ? array($var->image) : $this->transFileIdtoImage($var->file_id); //有圖檔就不用去file找
                 $var->image = $this->presentImages($images);    //轉換輸出HTML
                 //
                 $var->status = $this->presentStatus($var->open);

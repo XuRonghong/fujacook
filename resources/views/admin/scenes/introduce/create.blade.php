@@ -64,6 +64,31 @@
                                         </textarea>
                                     </div>
                                 </div>
+                                <div class="form-group row">
+                                    <label for="img1" class="col-sm-3 text-right control-label col-form-label">圖片</label>
+                                    <div class="col-sm-9">
+                                        <a class="btn-image-modal" data-modal="image-form" data-id="">
+                                            @forelse(data_get( $data['arr'], 'image', []) as $key => $var)
+                                                <img id="{{$key}}" src="{{$var or ''}}" style="height:140px" alt="" >
+                                            @empty
+                                                <img src="{{url('images/empty.jpg')}}" style="height:140px" alt="">
+                                            @endforelse
+                                        </a>
+                                        <br>
+                                        <span style="color:red">如要更換圖片，點擊上方</span>
+                                        @forelse(data_get( $data['arr'], 'image', []) as $key => $var)
+                                            <img id="img1" src="{{$var or ''}}" style="height:140px" alt="">
+                                        @empty
+                                            <img id="img1" src="{{url('images/empty.jpg')}}" style="height:140px" alt="">
+                                        @endforelse
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="com6" class="col-sm-3 text-right control-label col-form-label">Create at</label>
+                                    <div class="col-sm-9" style="margin-top: 10px">
+                                        {{data_get($data['arr'], 'created_at', date('Y-m-d H:i:s'))}}
+                                    </div>
+                                </div>
                             </div>
                             <hr>
                             <div class="card-body">
@@ -89,7 +114,7 @@
 
 @section('inline-js')
     <!-- Public Crop_Image -->
-    @include('admin.js.crop_image_single_1280x750')
+    @include('admin.js.crop_image_single_custom')
     <!-- Public SummerNote -->
     @include('admin.js.summernote2019')
     <!-- end -->
@@ -106,7 +131,7 @@
             $('form #Image').css("display","none");     //加載圖片關閉
             //唯讀
             $('form .btn-image-modal ,form span').hide()
-        } else { $('#img1').hide() }
+        } else { $('#img1').hide(); }
 
         //
         var modal = $('#manage-modal')

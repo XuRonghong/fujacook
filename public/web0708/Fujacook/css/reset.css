@@ -1,0 +1,239 @@
+@charset "UTF-8";
+/* CSS Document */
+/*
+html5doctor.com Reset Stylesheet
+v1.6.1
+Last Updated: 2010-09-17
+Author: Richard Clark - http://richclarkdesign.com
+Twitter: @rich_clark
+*/
+* {
+  margin: 0;
+  padding: 0; }
+
+/* IE */
+main {
+  display: block; }
+
+html {
+  height: 100%;
+  -webkit-text-size-adjust: 100%; }
+
+/*要素のフォントサイズやマージン・パディングをリセットしています*/
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, p, q, samp,
+small, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th,
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+  vertical-align: baseline;
+  margin-top: 0;
+}
+
+body {
+  font-family: 'Consolas';
+  font-size: 88%;
+  line-height: 1.5;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+ }
+
+main {
+  display: block;
+  overflow: hidden; }
+
+p {
+	margin-bottom: 0;
+	font-size: 150%;
+  margin-left: 60px;
+  line-height: 200%;
+  letter-spacing: 3px;
+}
+
+p img {
+  padding: 0;
+  margin: 0; }
+
+img {
+	width: 100%;
+	height: auto;
+}
+
+li {
+  list-style: none; }
+
+a.noneOutline {
+  outline: none; }
+
+/*新規追加要素のデフォルトはすべてインライン要素になっているので、section要素などをブロック要素へ変更しています*/
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, nav {
+  display: block; }
+
+/*nav要素内ulのマーカー（行頭記号）を表示しないようにしています*/
+ul {
+  list-style: none; }
+
+/*引用符の表示が出ないようにしています*/
+blockquote, q {
+  quotes: none; }
+
+a {
+  text-decoration: none;
+  color: #fc726e; }
+
+a.outline:focus {
+  outline: 1px dotted; }
+
+a:focus {
+  outline: none; }
+
+a img {
+  border: none; }
+
+/*隣接するセルのボーダーを重ねて表示し、間隔を0に指定しています*/
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+#fujacook {
+	position: absolute;
+	margin-top: 32%;
+	margin-left: 10%;
+	border-bottom: solid;
+  color: white;
+  font-size: 24px
+}
+#brand {
+	position: absolute;
+	margin-top: 34%;
+	margin-left: 10%;
+	font-size: 58px;
+	color: white;
+}
+#content {
+	position: absolute;
+	margin-top: 38%;
+	margin-left: 10%;
+	color: white;
+	font-size: 24px;
+}
+#content2 {
+	position: absolute;
+	margin-top: 40%;
+	margin-left: 10%;
+	color: white;
+	font-size: 24px;
+}
+
+/*水平罫線のデフォルトである立体的な罫線を見えなくしています*/
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #cccccc;
+  margin: 1em 0;
+  padding: 0; }
+
+/*縦方向の揃え位置を中央揃えに指定しています*/
+input, select {
+  vertical-align: middle; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal; }
+
+/*画像を縦に並べたときに余白が出てしまわないように*/
+img {
+	vertical-align: bottom;
+}
+
+.clearfix:after {
+  content: ".";
+  /* 新しい要素を作る */
+  display: block;
+  /* ブロックレベル要素に */
+  clear: both;
+  height: 0;
+  visibility: hidden; }
+
+.clearfix {
+  /*min-height: 1px;*/ }
+
+* html .clearfix {
+  height: 1px;
+  /*¥*/
+  /*/
+  height: auto;
+  overflow: hidden;
+  /**/ }
+
+/*box-sizingを全ブラウザに対応*/
+*, *:before, *:after {
+  -o-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box; }
+
+.oswald {
+  font-family: '華康粗明體(P)', 'Consolas';
+  font-weight: 400;
+  letter-spacing: 0.1em; }
+
+/* font-select */
+/*@font-face {
+  font-family: "heading_bold";
+  src: url("../../../assets/font/heading_bold/heading_bold.eot") format("embedded-opentype");
+  src: url("../../../assets/font/heading_bold/heading_bold.ttf") format("ttf");
+  src: url("../../../assets/font/heading_bold/heading_bold.woff") format("woff"); }
+*/
+/*.heading_bold {
+  font-family: "heading_bold";
+  font-weight: normal;
+  letter-spacing: 0.1em; }*/
+
+/* font-select */
+/*@font-face {
+  font-family: "heading_book";
+  src: url("../../../assets/font/heading_book/heading_book.eot") format("embedded-opentype");
+  src: url("../../../assets/font/heading_book/heading_book.ttf") format("ttf");
+  src: url("../../../assets/font/heading_book/heading_book.woff") format("woff"); }
+*/
+/*.heading_book {
+  font-family: "heading_book";
+  font-weight: normal;
+  letter-spacing: 0.1em; }*/
+
+/* font-select */
+/*@font-face {
+  font-family: "authenia";
+  src: url("../../../assets/font/authenia/authenia.eot") format("embedded-opentype");
+  src: url("../../../assets/font/authenia/authenia.otf") format("otf");
+  src: url("../../../assets/font/authenia/authenia.woff") format("woff"); }*/
+
+/*.authenia {
+	font-family: "authenia";
+	font-weight: normal;
+}*/
+
+/*.tsukushi-regular {
+  font-family: 'fot-tsukuardgothic-std','Tsukushi A Round Gothic','Noto Sans Japanese', sans-serif;
+  font-weight: 400;
+  font-style: normal; }
+
+.tsukushi-bold {
+  font-family: 'fot-tsukuardgothic-std','Tsukushi A Round Gothic','Noto Sans Japanese', sans-serif;
+  font-weight: 700;
+  font-style: normal; }*/
+
+/*# sourceMappingURL=../../cssmap/lib/reset.css.map */
+
+/*# sourceMappingURL=../../cssmap/lib/reset.css.map */

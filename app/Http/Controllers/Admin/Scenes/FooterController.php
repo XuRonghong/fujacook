@@ -45,7 +45,7 @@ class FooterController extends Controller
         //
         if(request()->ajax())
         {
-            $data = $this->repository->getDataTable($request, "type = 'footer.home'");
+            $data = $this->repository->getDataTable($request, "type LIKE 'footer%'");
 
             $data = $this->presenter->eachOne_aaData($data);     //每一項目要做甚麼事,有需要在使用
 

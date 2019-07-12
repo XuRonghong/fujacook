@@ -39,19 +39,19 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="com3" class="col-sm-3 text-right control-label col-form-label">標頭<span style="color:red">*</span></label>
+                                    <label for="com3" class="col-sm-3 text-right control-label col-form-label">name<span style="color:red">*</span></label>
                                     <div class="col-sm-9">
                                         <input type="text" name="title" value="{{data_get($data['arr'], 'title')}}" id="com3" class="form-control title" placeholder="">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="com4" class="col-sm-3 text-right control-label col-form-label">概要</label>
+                                    <label for="com4" class="col-sm-3 text-right control-label col-form-label">value</label>
                                     <div class="col-sm-9">
                                         <input type="text" name="summary" value="{{data_get($data['arr'], 'summary')}}" id="com4" class="form-control summary" placeholder="">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="com5" class="col-sm-3 text-right control-label col-form-label">url<span style="color:red">*</span></label>
+                                    <label for="com5" class="col-sm-3 text-right control-label col-form-label">url</label>
                                     <div class="col-sm-9">
                                         <input type="text" name="url" value="{{data_get($data['arr'], 'url')}}" class="form-control url" id="com5" placeholder="">
                                     </div>
@@ -60,6 +60,12 @@
                                     <label for="com6" class="col-sm-3 text-right control-label col-form-label">樣式</label>
                                     <div class="col-sm-9">
                                         <input type="text" name="style" value="{{data_get($data['arr'], 'style')}}" class="form-control style" id="com6" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="com6" class="col-sm-3 text-right control-label col-form-label">Create at</label>
+                                    <div class="col-sm-9" style="margin-top: 10px">
+                                        {{data_get($data['arr'], 'created_at', date('Y-m-d H:i:s'))}}
                                     </div>
                                 </div>
                             </div>

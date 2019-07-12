@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Presenters\Admin;
+namespace App\Presenters;
 
 use App\Admin;
 use App\Http\Controllers\FuncController;
@@ -71,7 +71,7 @@ abstract class Presenter
     public function transOne($data, $other=0)
     {
         //從資料串裡依據file_id找到image
-        $data->image = $this->transFileIdtoImage($data->file_id);
+        $data->image = $data->image ? array($data->image) : $this->transFileIdtoImage($data->file_id);
         if ($other){
 
         }

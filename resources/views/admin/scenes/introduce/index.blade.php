@@ -46,7 +46,7 @@
                 // "scrollY": '60vh',
                 // 'bProcessing': true,
                 // 'sServerMethod': 'GET',
-                "order": [[ 0, "asc" ]],
+                "order": [[ 0, "desc" ]],
                 "aoColumns": [
                     {
                         "sTitle": "ID",
@@ -59,7 +59,7 @@
                         }
                     },
                     {
-                        "sTitle": "rank(點擊即可修改)",
+                        "sTitle": "rank(點可修改)",
                         "mData": "rank",
                         // "width": "100px",
                         "sName": "rank",
@@ -88,7 +88,7 @@
                     {
                         "sTitle": "title",
                         "mData": "title",
-                        // "width": "100px",
+                        "width": "20%",
                         "sName": "title"
                     },
                     {
@@ -97,28 +97,20 @@
                         // "width": "100px",
                         "sName": "summary"
                     },
-                    // {
-                    //     "sTitle": "image",
-                    //     "mData": "image",
-                    //     "width": "180px",
-                    //     "sName": "image",
-                    //     "bSortable": false,
-                    //     "bSearchable": false,
-                    //     "mRender": function (data, type, row) {
-                    //         var html_str = "";
-                    //         for (var key in data) {
-                    //             html_str += "<img width='75px' src=" + data[key] + " style='margin:5px;'>";
-                    //         }
-                    //         return html_str;
-                    //         // return "<img width='100%' src=" + data + ">";
-                    //     }
-                    // },
-                    // {
-                    //     "sTitle": "url",
-                    //     "mData": "url",
-                    //     // "width": "100px",
-                    //     "sName": "url"
-                    // },
+                    {
+                        "sTitle": "image",
+                        "mData": "image",
+                        // "width": "100px",
+                        "sName": "image"
+                    },
+                    {
+                        "sTitle": "updated_at",
+                        "mData": "updated_at",
+                        // "width": "100px",
+                        "sName": "updated_at",
+                        "bSortable": true,
+                        "bSearchable": false,
+                    },
                     {
                         "sTitle": "",
                         "bSortable": false,

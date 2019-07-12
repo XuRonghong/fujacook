@@ -2,6 +2,7 @@
 
 namespace App\Presenters\Admin;
 
+use App\Presenters\Presenter;
 
 class ScenesPresenter extends Presenter
 {
@@ -17,27 +18,27 @@ class ScenesPresenter extends Presenter
         $this->selectOptions = [
             'navbar' => [
                 'navbar.home' => '首頁選單欄位',
-                'navbar.intr' => '介紹頁選單',
+                'navbar.about' => '關於FUJACOOK 中間選項',
             ],
             'slider' => [
                 'slider.home' => '首頁滑動圖',
-                'slider.intr' => '介紹頁滑動圖',
-                'slider.product' => '商品頁滑動圖',
+                'slider.about' => '關於FUJACOOK',
             ],
             'introduce' => [
-                'introduce.home' => '首頁文字',
-                'introduce.intr' => '介紹頁文字',
+                'introduce.home.t01' => '首頁文字',
+                'introduce.about.t01' => '關於FUJACOOK t1',
+                'introduce.about.t03' => '關於FUJACOOK t3',
+                'introduce.about.t05' => '關於FUJACOOK t5',
             ],
             'image' => [
-                'image.home' => '首頁圖片',
-                'image.home.60601' => '首頁圖片1',
-                'image.home.60602' => '首頁圖片2',
-                'image.home.60603' => '首頁圖片3',
-                'image.intr' => '介紹頁圖片',
+                'image.home.section1' => '首頁 圖片1',
+//                'image.home.section2' => '首頁 圖片2',
+                'image.home.section3' => '首頁 產品圖片',
+//                'image.about.section1' => '關於FUJACOOK 圖片1',
             ],
             'footer' => [
                 'footer.home' => '首頁',
-                'footer.intr' => '介紹頁',
+                'footer.about' => '關於FUJACOOK',
             ],
         ];
     }
@@ -52,7 +53,7 @@ class ScenesPresenter extends Presenter
                 //翻譯每個type
                 $var->type = $this->tranTypeInSelectOption($var->type, $this->selectOptions);
                 //找圖片檔案
-                $images = $this->transFileIdtoImage($var->file_id);
+                $images = $var->image ? array($var->image) : $this->transFileIdtoImage($var->file_id); //有圖檔就不用去file找
                 $var->image = $this->presentImages($images);
                 //
                 $var->status = $this->presentStatus($var->open);

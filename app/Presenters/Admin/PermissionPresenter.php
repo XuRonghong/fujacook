@@ -2,6 +2,7 @@
 
 namespace App\Presenters\Admin;
 
+use App\Presenters\Presenter;
 
 class PermissionPresenter extends Presenter
 {
