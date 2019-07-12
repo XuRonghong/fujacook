@@ -111,37 +111,37 @@ class SettingTableSeeder extends Seeder
                 [
                     'type' => $data['type'],
                     'summary' => '首頁',
-                    'url' => env('APP_URL') . '/',
+                    'url' => '/',
                     'open' => $data['open'],
                 ], [
                     'type' => $data['type'],
                     'summary' => '關於FUJACOOK',
-                    'url' => env('APP_URL') . '/about',
+                    'url' => '/about',
                     'open' => $data['open'],
                 ], [
                     'type' => $data['type'],
                     'summary' => '媒體報導',
-                    'url' => env('APP_URL') . '/reports',
+                    'url' => '/reports',
                     'open' => $data['open'],
                 ], [
                     'type' => $data['type'],
                     'summary' => '即食鍋',
-                    'url' => env('APP_URL') . '#',
+                    'url' => '#',
                     'open' => $data['open'],
                 ], [
                     'type' => $data['type'],
                     'summary' => '即時餐',
-                    'url' => env('APP_URL') . '#',
+                    'url' => '#',
                     'open' => $data['open'],
                 ], [
                     'type' => $data['type'],
                     'summary' => '最新消息',
-                    'url' => env('APP_URL') . '/news',
+                    'url' => '/news',
                     'open' => $data['open'],
                 ], [
                     'type' => $data['type'],
                     'summary' => '聯繫我們',
-                    'url' => env('APP_URL') . '/contactus',
+                    'url' => '/contactus',
                     'open' => $data['open'],
                 ],
             ];
@@ -154,27 +154,27 @@ class SettingTableSeeder extends Seeder
                 [
                     'type' => $data['type'],
                     'summary' => '創辦人介紹',
-                    'url' => env('APP_URL') . '/',
+                    'url' => '/',
                     'open' => $data['open'],
                 ], [
                     'type' => $data['type'],
                     'summary' => '專利獎項',
-                    'url' => env('APP_URL') . '/about',
+                    'url' => '/about',
                     'open' => $data['open'],
                 ], [
                     'type' => $data['type'],
                     'summary' => '研發理念',
-                    'url' => env('APP_URL') . '/reports',
+                    'url' => '/reports',
                     'open' => $data['open'],
                 ], [
                     'type' => $data['type'],
                     'summary' => '品牌沿革',
-                    'url' => env('APP_URL') . '#',
+                    'url' => '#',
                     'open' => $data['open'],
                 ], [
                     'type' => $data['type'],
                     'summary' => '核心價值',
-                    'url' => env('APP_URL') . '#',
+                    'url' => '#',
                     'open' => $data['open'],
                 ],
             ];
