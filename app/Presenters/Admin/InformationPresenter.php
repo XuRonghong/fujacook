@@ -4,11 +4,11 @@ namespace App\Presenters\Admin;
 
 use App\Presenters\Presenter;
 
-class NewsPresenter extends Presenter
+class InformationPresenter extends Presenter
 {
     protected $gotoUrl;         //ajax finish to url
     protected $title = 'News';          //output for view
-    protected $view_group_name = 'news';       //document of view group
+    protected $view_group_name = 'information.news';       //document of view group
     protected $route_name;      //Route->name()
     protected $selectOptions;   //HTML元素
 

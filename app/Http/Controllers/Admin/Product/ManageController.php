@@ -1,26 +1,30 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Product;
 
-use App\Presenters\Admin\NewsPresenter;
-use App\Repositories\Admin\NewsRepository;
+use App\Presenters\Admin\ProductPresenter;
+use App\Repositories\Admin\ProductRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 
-class NewsController extends Controller
+class ManageController extends Controller
 {
     protected $repository;
     protected $presenter;
     protected $route_url;
 
-    public function __construct(NewsRepository $repository, NewsPresenter $presenter)
+    public function __construct(ProductRepository $repository, ProductPresenter $presenter)
     {
         $this->repository = $repository;
         $this->presenter = $presenter;
 
+        $this->presenter->setViewName('product.manage');
+        $this->presenter->setTitle('Product Manage');
+        $this->presenter->setSelectOpt( $this->repository->getORM(['id', 'name', 'value']) );
+
         //所有關於route::resource的位置
-        $this->route_url = $this->presenter->getRouteResource($this->presenter->setRouteName('admin.news'));
+        $this->route_url = $this->presenter->getRouteResource($this->presenter->setRouteName('admin.product.manage'));
     }
 
     /**
@@ -31,7 +35,7 @@ class NewsController extends Controller
     public function index()
     {
         //meta data
-        $data = $this->presenter->getParameters('index', ['route_url'=> $this->route_url]);
+        $data = $this->presenter->getParameters('index', array('route_url' => $this->route_url));
 
         return $this->presenter->responseJson($data, 'index');
     }
@@ -59,9 +63,9 @@ class NewsController extends Controller
     public function create()
     {
         //
-        $data = $this->presenter->getParameters('create', ['route_url'=> $this->route_url]);
+        $data = $this->presenter->getParameters('create', array('route_url' => $this->route_url));
         //get option for select
-        $data['arr']['options'] = $this->presenter->getSelectOption('news');
+        $data['arr']['options'] = $this->presenter->getSelectOption('product_cate');
 
         return $this->presenter->responseJson($data, 'create');
     }
@@ -91,13 +95,13 @@ class NewsController extends Controller
     public function show($id)
     {
         //
-        $data = $this->presenter->getParameters('show', ['route_url' => $this->route_url]);
+        $data = $this->presenter->getParameters('show', array('route_url' => $this->route_url));
         //若資料庫沒有該id 則404畫面
         $data['arr'] = $this->repository->findOrFail($id) or abort(404);
-        //轉換顯示數據
-        $data['arr'] = $this->presenter->tranOne($data['arr']);
+        //轉換出顯示數據
+        $data['arr'] = $this->presenter->transOne($data['arr'], 'product_cate');
 
-        return $this->presenter->responseJson($data, 'show');
+        return $this->presenter->responseJson($data, 'create');
     }
 
     /**
@@ -109,13 +113,13 @@ class NewsController extends Controller
     public function edit($id)
     {
         //
-        $data = $this->presenter->getParameters('edit', ['route_url' => $this->route_url]);
+        $data = $this->presenter->getParameters('edit', array('route_url' => $this->route_url));
         //若資料庫沒有該id 則404畫面
         $data['arr'] = $this->repository->findOrFail($id) or abort(404);
-        //轉換顯示數據
-        $data['arr'] = $this->presenter->tranOne($data['arr']);
+        //轉換出顯示數據
+        $data['arr'] = $this->presenter->transOne($data['arr'], 'product_cate');
 
-        return $this->presenter->responseJson($data, 'edit');
+        return $this->presenter->responseJson($data, 'create');
     }
 
     /**
@@ -132,7 +136,7 @@ class NewsController extends Controller
 
         $data = $this->repository->update($request->all(), $id);
 
-        return $this->presenter->responseJson($data['errors'], 'update');
+        return $this->presenter->responseJson($data, 'update');
     }
 
     /**
@@ -144,8 +148,8 @@ class NewsController extends Controller
     public function destroy($id)
     {
         //
-        $this->repository->delete($id);
+        $data = $this->repository->delete($id);
 
-        return $this->presenter->responseJson( 0, 'destroy');
+        return $this->presenter->responseJson($data, 'destroy');
     }
 }

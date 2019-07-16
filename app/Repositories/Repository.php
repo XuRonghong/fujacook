@@ -2,12 +2,8 @@
 
 namespace App\Repositories;
 
-use App\AdminInfo;
 use App\Http\Controllers\FuncController;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
 use DB;
 
 abstract class Repository
@@ -25,27 +21,6 @@ abstract class Repository
     }
 
     /**
-     * Create record.
-     *
-     * @param array $attributes
-     *
-     * @return \Illuminate\Database\Eloquent\Model
-     */
-    public function create($attributes)
-    {
-        $model = $this->model->create($attributes);
-
-        FuncController::addActionLog(
-            'create',
-            auth()->guard('admin')->user()->id,
-            json_encode( $model ),
-            $model->id,
-            $model->getTable()
-        );
-        return $model;
-    }
-
-    /**
      * Find a model by its primary key.
      *
      * @param  mixed $id
@@ -57,10 +32,28 @@ abstract class Repository
     {
         return $this->model->find($id);
     }
-    
+
     public function findOrFail($id)
     {
         return $this->model->findOrFail($id);
+    }
+
+    /**
+     * Create record.
+     *
+     * @param array $attributes
+     *
+     * @return \Illuminate\Database\Eloquent\Model
+     */
+    public function create($attributes)
+    {
+        $model = $this->model->create($attributes);
+
+        $author_id = auth()->guard('admin')->user()->id;
+        $value = json_encode( $model, JSON_UNESCAPED_UNICODE);
+        FuncController::addActionLog('create', $author_id, $value, $model->id, $model->getTable() );
+
+        return $model;
     }
     
     /**
@@ -77,13 +70,10 @@ abstract class Repository
         if (filled($model)) {
             $model->update($attributes);
 
-            FuncController::addActionLog(
-                'update',
-                auth()->guard('admin')->user()->id,
-                json_encode( $model ),
-                $model->id,
-                $model->getTable()
-            );
+            $author_id = auth()->guard('admin')->user()->id;
+            $value = json_encode( $model, JSON_UNESCAPED_UNICODE);
+            FuncController::addActionLog('update', $author_id, $value, $model->id, $model->getTable() );
+
             return $model;
         }
         return null;
@@ -101,13 +91,10 @@ abstract class Repository
     {
         $model = $this->findOrFail($id)->delete();
 
-        FuncController::addActionLog(
-            'delete',
-            auth()->guard('admin')->user()->id,
-            json_encode( $model ),
-            $id,
-            $this->model->getTable()
-        );
+        $author_id = auth()->guard('admin')->user()->id;
+        $value = json_encode( $model, JSON_UNESCAPED_UNICODE);
+        FuncController::addActionLog('delete', $author_id, $value, $id, $this->model->getTable() );
+
         return $model;
     }
 
@@ -232,21 +219,18 @@ abstract class Repository
     }
 
 
-    /*
-     *
-     */
+    /*************************
+     * Me add content function
+     *************************/
     //
     public function DBinsertGetId($table, $attributes)
     {
         $model = DB::table($table)->insertGetId($attributes);
 
-        FuncController::addActionLog(
-            'DB::insert',
-            auth()->guard('admin')->user()->id,
-            json_encode( 'DB::table()->insertGetId()' ),
-            $model,
-            $table
-        );
+        $user_id = auth()->guard('admin')->user()->id;
+        $value = json_encode( 'DB::table()->insertGetId()', JSON_UNESCAPED_UNICODE);
+        FuncController::addActionLog('DB::insert', $user_id, $value, $model, $table );
+
         return $model;
     }
 
@@ -255,22 +239,20 @@ abstract class Repository
     {
         $model = DB::table($table)->where($colume, $id)->update($attributes);
 
-        FuncController::addActionLog(
-            'DB::update',
-            auth()->guard('admin')->user()->id,
-            json_encode( $model ),
-            $id,
-            $table
-        );
+        $user_id = auth()->guard('admin')->user()->id;
+        $value = json_encode( $model, JSON_UNESCAPED_UNICODE);
+        FuncController::addActionLog('DB::update', $user_id, $value, $id, $table );
+
         return $model;
     }
 
+    //
     public function validate($request, $noUnique=0, $except='')
     {
         return $this->model->validate($request, $noUnique, $except);
     }
 
-
+    //
     public function searchQuery($search_arr=[], $search_word='' )
     {
         return $this->model->where(function( $query ) use ( $search_arr, $search_word ) {
@@ -280,6 +262,62 @@ abstract class Repository
         });
     }
 
+    //
+    public function getDataTable($request, $whereQuery='1 = 1')
+    {
+        //
+        try {
+            $sort_arr = [];
+            $search_arr = [];   //要搜尋的目標欄位名稱
+            $search_word = $request->input('sSearch', '');
+            $iDisplayLength = $request->input('iDisplayLength', 10);
+            $iDisplayStart = $request->input('iDisplayStart', 0);
+            $sEcho = $request->input('sEcho', '');
+            $column_arr = explode(',', $request->input('sColumns', ''));
+            foreach ($column_arr as $key => $item) {
+                if ($item == "") {
+                    unset($column_arr[$key]);
+                    continue;
+                }
+                if ($request->input('bSearchable_' . $key) == "true") {
+                    $search_arr[$key] = $item;
+                }
+                if ($request->input('bSortable_' . $key) == "true") {
+                    $sort_arr[$key] = $item;
+                }
+            }
+            $sort_name = $sort_arr[$request->input('iSortCol_0')];
+            $sort_dir = $request->input('sSortDir_0');
+
+            $total_count = $this->searchQuery($search_arr, $search_word)->whereRaw($whereQuery)->count();
+
+            $data_arr = $this->searchQuery($search_arr, $search_word)
+                ->whereRaw($whereQuery)
+                ->orderBy($sort_name, $sort_dir)
+                ->offset($iDisplayStart)->limit($iDisplayLength)
+                ->get();
+            if ($data_arr) {
+                foreach ($data_arr as $key => $data) {
+                    $data->DT_RowId = $data->id;
+                }
+            } else {
+                return array('errors' => ['Oops! 沒有資料!']);
+            };
+        } catch (\Exception $e) {
+            return array('errors' => $e->getMessage());
+        }
+
+        return [
+            'status'=> 1,
+            'message'=> sprintf("已得到 %s", $total_count."筆資料"),
+            'sEcho'=> $sEcho,
+            'iTotalDisplayRecords'=>$total_count,
+            'iTotalRecords'=>$total_count,
+            'aaData'=> $total_count ? $data_arr : []
+        ];
+    }
+
+    //
     public function getDataTable2($request = null)
     {
         return datatables()->of($this->model::latest()->get())
@@ -296,64 +334,7 @@ abstract class Repository
             ->make(true);
     }
 
-    public function getDataTable($request, $whereQuery='1 = 1')
-    {
-        //
-        $sort_arr = [];
-        $search_arr = [];   //要搜尋的目標欄位名稱
-        $search_word = $request->input('sSearch', '');
-        $iDisplayLength = $request->input('iDisplayLength', 10);
-        $iDisplayStart = $request->input('iDisplayStart', 0);
-        $sEcho = $request->input('sEcho', '');
-        $column_arr = explode(',', $request->input('sColumns', ''));
-        foreach ($column_arr as $key => $item)
-        {
-            if ($item == "") {
-                unset( $column_arr[$key] );
-                continue;
-            }
-            if ($request->input( 'bSearchable_' . $key ) == "true") {
-                $search_arr[$key] = $item;
-            }
-            if ($request->input( 'bSortable_' . $key ) == "true") {
-                $sort_arr[$key] = $item;
-            }
-        }
-        $sort_name = $sort_arr[ $request->input( 'iSortCol_0' ) ];
-        $sort_dir = $request->input( 'sSortDir_0' );
-
-        $total_count = $this->searchQuery($search_arr, $search_word )->whereRaw($whereQuery)->count();
-
-        $data_arr = $this->searchQuery($search_arr, $search_word )
-            ->whereRaw($whereQuery)
-            ->orderBy( $sort_name, $sort_dir )
-            ->offset($iDisplayStart)->limit($iDisplayLength)
-            ->get();
-        if ( !$data_arr) {
-            return response()->json([
-                'status'=> 0,
-                'message'=> ['Oops! 沒有資料!']
-            ],204);
-        } else {
-            foreach ($data_arr as $key => $data) {
-                $data->DT_RowId = $data->id;
-            }
-        };
-
-        return [
-            'status'=> 1,
-            'message'=> sprintf("已得到 %s", $total_count."筆資料"),
-            'sEcho'=> $sEcho,
-            'iTotalDisplayRecords'=>$total_count,
-            'iTotalRecords'=>$total_count,
-            'aaData'=> $total_count ? $data_arr : []
-        ];
-    }
-
-
-    /*
-     * data object or array forEach to do.
-     */
+    // data object or array forEach to do.
     public function eachOne_aaData($arr)
     {
         if ( $arr['aaData']) {
@@ -362,5 +343,19 @@ abstract class Repository
             }
         }
         return $arr;
+    }
+
+    //
+    public function all($attributes='')
+    {
+        return $this->model::all();
+    }
+
+    /* Input: SQL select array ==> Output ORM.
+     * with open=1 and rank=asc
+     */
+    public function getORM($columns = ['*'])
+    {
+        return $this->model->where('open', 1)->orderBy('rank', 'asc')->get($columns);
     }
 }

@@ -6,6 +6,21 @@ return [
     'about' => [
         'title' => 'FUJACOOK | 關於富甲',
     ],
+    'report' => [
+        'title' => 'FUJACOOK | 媒體報導',
+    ],
+    'pan' => [
+        'title' => 'FUJACOOK | 即食鍋',
+    ],
+    'meal' => [
+        'title' => 'FUJACOOK | 即食餐',
+    ],
+    'news' => [
+        'title' => 'FUJACOOK | 最新消息',
+    ],
+    'contactus' => [
+        'title' => 'FUJACOOK | 連繫我們',
+    ],
     'noipt' => '未填',
     'exchange_rate' =>
         [

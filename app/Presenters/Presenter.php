@@ -24,11 +24,6 @@ abstract class Presenter
         return $this->title = $title;
     }
 
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
     public function setViewName($name)
     {
         return $this->view_group_name = $name;
@@ -41,6 +36,11 @@ abstract class Presenter
         return $name;
     }
 
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
     public function getViewName()
     {
         return $this->view_group_name;
@@ -50,7 +50,6 @@ abstract class Presenter
     {
         return $this->route_name;
     }
-
 
     /*
      * data object or array forEach to do.
@@ -108,7 +107,7 @@ abstract class Presenter
     }
 
     // 轉換 type 為輸出顯示選項內容之一
-    public function tranTypeInSelectOption($type, $arr=[])
+    public function tranTypeInSelectOption($type=0, $arr=[])
     {
         if ( !$type) return null;
         foreach ($arr as $select) {
@@ -118,7 +117,7 @@ abstract class Presenter
         }
     }
 
-    /* Output: array()
+    /* Input: (int)file id ==> Output: (array)file path
      * table - input file_id to find image on filetable.
      */
     public function transFileIdtoImage($file_id)
@@ -157,6 +156,7 @@ abstract class Presenter
     public function getParameters($index=null, $mergeArr=[])
     {
         $data = [
+            'arr' => [],    // parameter of view
             'indexUrl' => url('admin'),
             'logoutUrl' => route('admin.logout'),
             'dark_logo' => asset('images/logo_icon.png'),
@@ -201,7 +201,7 @@ abstract class Presenter
                     'Summary' => $this->summary,
                     'breadcrumb' => $this->presentBreadcrumb([
                         $this->title => data_get($data,'route_url')?$data['route_url']['index']:'',
-                        'edit' => data_get($data,'route_url')?$data['route_url']['edit']:'',
+                        'edit' => request()->url(), //data_get($data,'route_url')?$data['route_url']['edit']:'',
                     ]),
                 ]);
                 break;
@@ -211,7 +211,7 @@ abstract class Presenter
                     'Summary' => $this->summary,
                     'breadcrumb' => $this->presentBreadcrumb([
                         $this->title => data_get($data,'route_url')?$data['route_url']['index']:'',
-                        'show' => data_get($data,'route_url')?$data['route_url']['show']:'',
+                        'show' => request()->url(), // data_get($data,'route_url')?$data['route_url']['show']:'',
                     ]),
                     'Disable'   => true
                 ]);
@@ -225,7 +225,7 @@ abstract class Presenter
         return $data;
     }
 
-    //
+    // to view response
     public function responseJson($data=[], $method=0, $status=200)
     {
         if ( !data_get($data,'errors')) {
@@ -301,7 +301,7 @@ abstract class Presenter
         return $sys_menu;
     }
 
-    //
+    // no finish...
     public function getMenu()
     {
         $index = '';
@@ -334,7 +334,7 @@ abstract class Presenter
         return $html;
     }
 
-    //
+    //click it can edit HTML
     public function presentIsEdit($index, $data)
     {
         switch ($index){
@@ -373,10 +373,12 @@ abstract class Presenter
                 if ($data=='') $data = '-';
                 return '<input class="isEdit '.$index.'" data-id="'.$index.'" size="10" style="width: 100%; display: none;" type="text" value="'. $cache .'" />'.'<div class="aaa">'.$data.'</div>';
                 break;
+            default:
+                return '<div class="'.$index.'">'.$data.'</div>';
         }
     }
 
-    //
+    // panel HTML
     public function presentStatus($status)
     {
         switch ($status) {
@@ -393,7 +395,7 @@ abstract class Presenter
         return $btn;
     }
 
-    // 製造 HTML
+    // 製造 img HTML
     public function presentImages($images)
     {
         $html_str = "";

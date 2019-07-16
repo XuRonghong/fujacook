@@ -32,7 +32,7 @@ class KeywordController extends Controller
     public function index()
     {
         //meta data
-        $data = $this->presenter->getParameters('index', ['route_url' => $this->route_url]);
+        $data = $this->presenter->getParameters('index', array('route_url' => $this->route_url));
 
         return $this->presenter->responseJson($data, 'index');
     }
@@ -60,7 +60,7 @@ class KeywordController extends Controller
     public function create()
     {
         //
-        $data = $this->presenter->getParameters('create', ['route_url' => $this->route_url]);
+        $data = $this->presenter->getParameters('create', array('route_url' => $this->route_url));
         //get option for select
         $data['arr']['options'] = $this->presenter->getSelectOption('search_keyword');
 
@@ -80,7 +80,7 @@ class KeywordController extends Controller
         //
         $data = $this->repository->create($request->all());
 
-        return $this->presenter->responseJson($data['errors'], 'store');
+        return $this->presenter->responseJson($data, 'store');
     }
 
     /**
@@ -92,7 +92,7 @@ class KeywordController extends Controller
     public function show($id)
     {
         //
-        $data = $this->presenter->getParameters('show', ['route_url' => $this->route_url]);
+        $data = $this->presenter->getParameters('show', array('route_url' => $this->route_url));
         //若資料庫沒有該id 則404畫面
         $data['arr'] = $this->repository->findOrFail($id) or abort(404);
         //轉換出顯示數據
@@ -110,7 +110,7 @@ class KeywordController extends Controller
     public function edit($id)
     {
         //
-        $data = $this->presenter->getParameters('edit', ['route_url' => $this->route_url]);
+        $data = $this->presenter->getParameters('edit', array('route_url' => $this->route_url));
         //若資料庫沒有該id 則404畫面
         $data['arr'] = $this->repository->findOrFail($id) or abort(404);
         //轉換出顯示數據
@@ -133,7 +133,7 @@ class KeywordController extends Controller
 
         $data = $this->repository->update($request->all(), $id);
 
-        return $this->presenter->responseJson($data['errors'], 'update');
+        return $this->presenter->responseJson($data, 'update');
     }
 
     /**
@@ -145,8 +145,8 @@ class KeywordController extends Controller
     public function destroy($id)
     {
         //
-        $this->repository->delete($id);
+        $data = $this->repository->delete($id);
 
-        return $this->presenter->responseJson( 0, 'destroy');
+        return $this->presenter->responseJson($data, 'destroy');
     }
 }

@@ -6,7 +6,7 @@ use App\News;
 use App\Repositories\Repository;
 
 
-class NewsRepository extends Repository
+class InformationRepository extends Repository
 {
     protected $model;
 
@@ -52,7 +52,11 @@ class NewsRepository extends Repository
 
     public function delete($id)
     {
-        return parent::delete($id);
+        try{
+            return parent::delete($id);
+        } catch (\Exception $e){
+            return ['errors'=> $e->getMessage()];
+        }
     }
 
     public function findOrFail($id)

@@ -73,7 +73,7 @@ Route::get('news/list', 'NewsController@list')->name('news.list');
 Route::resource('news', 'NewsController');
 
 
-Route::resource('product', 'ProductController');
+Route::resource('product', 'ManageController');
 
 
 Route::get('group', 'GroupController@index')->name('group.index');
@@ -101,7 +101,7 @@ Route::get('/export_excel', 'ExportController@index');
 Route::get('/export_excel/excel', 'ExportController@excel')->name('export_excel.excel');
 Route::post('/import_excel/import', 'ExportController@import')->name('import_excel.import');
 
-Route::get('/dynamic_pdf/pdf', 'ProductController@pdf');
+Route::get('/dynamic_pdf/pdf', 'ManageController@pdf');
 
 
 

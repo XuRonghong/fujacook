@@ -300,6 +300,7 @@ return [
                 ],
 
 
+
             'login' =>
                 [
                     'title' => '登入畫面',
@@ -359,7 +360,7 @@ return [
         ],
     'product' =>
         [
-            'title' => '購物商品管理',
+            'title' => '商品管理',
             'category' => [
                 'title' => '商品類別管理',
                 'sub' => [
@@ -425,236 +426,6 @@ return [
                 ],
                 'museum_a02' => [
                     'title' => 'A02',
-                    'add' =>
-                        [
-                            'title' => '新增商品'
-                        ],
-                    'edit' =>
-                        [
-                            'title' => '編輯商品'
-                        ],
-                    'attributes' =>
-                        [
-                            'title' => '商品說明'
-                        ],
-                    'specification' =>
-                        [
-                            'title' => '商品規格種類',
-                            'add' =>
-                                [
-                                    'title' => '新增商品規格'
-                                ],
-                        ],
-                ],
-                'museum_a03' => [
-                    'title' => 'A03',
-                    'add' =>
-                        [
-                            'title' => '新增商品'
-                        ],
-                    'edit' =>
-                        [
-                            'title' => '編輯商品'
-                        ],
-                    'attributes' =>
-                        [
-                            'title' => '商品說明'
-                        ],
-                    'specification' =>
-                        [
-                            'title' => '商品規格種類',
-                            'add' =>
-                                [
-                                    'title' => '新增商品規格'
-                                ],
-                        ],
-                ],
-                'museum_a04' => [
-                    'title' => 'A04',
-                    'add' =>
-                        [
-                            'title' => '新增商品'
-                        ],
-                    'edit' =>
-                        [
-                            'title' => '編輯商品'
-                        ],
-                    'attributes' =>
-                        [
-                            'title' => '商品說明'
-                        ],
-                    'specification' =>
-                        [
-                            'title' => '商品規格種類',
-                            'add' =>
-                                [
-                                    'title' => '新增商品規格'
-                                ],
-                        ],
-                ],
-                'museum_a05' => [
-                    'title' => 'A05',
-                    'add' =>
-                        [
-                            'title' => '新增商品'
-                        ],
-                    'edit' =>
-                        [
-                            'title' => '編輯商品'
-                        ],
-                    'attributes' =>
-                        [
-                            'title' => '商品說明'
-                        ],
-                    'specification' =>
-                        [
-                            'title' => '商品規格種類',
-                            'add' =>
-                                [
-                                    'title' => '新增商品規格'
-                                ],
-                        ],
-                ],
-                'museum_a06' => [
-                    'title' => 'A06',
-                    'add' =>
-                        [
-                            'title' => '新增商品'
-                        ],
-                    'edit' =>
-                        [
-                            'title' => '編輯商品'
-                        ],
-                    'attributes' =>
-                        [
-                            'title' => '商品說明'
-                        ],
-                    'specification' =>
-                        [
-                            'title' => '商品規格種類',
-                            'add' =>
-                                [
-                                    'title' => '新增商品規格'
-                                ],
-                        ],
-                ],
-                'museum_a07' => [
-                    'title' => 'A07',
-                    'add' =>
-                        [
-                            'title' => '新增商品'
-                        ],
-                    'edit' =>
-                        [
-                            'title' => '編輯商品'
-                        ],
-                    'attributes' =>
-                        [
-                            'title' => '商品說明'
-                        ],
-                    'specification' =>
-                        [
-                            'title' => '商品規格種類',
-                            'add' =>
-                                [
-                                    'title' => '新增商品規格'
-                                ],
-                        ],
-                ],
-                'museum_a08' => [
-                    'title' => 'A08',
-                    'add' =>
-                        [
-                            'title' => '新增商品'
-                        ],
-                    'edit' =>
-                        [
-                            'title' => '編輯商品'
-                        ],
-                    'attributes' =>
-                        [
-                            'title' => '商品說明'
-                        ],
-                    'specification' =>
-                        [
-                            'title' => '商品規格種類',
-                            'add' =>
-                                [
-                                    'title' => '新增商品規格'
-                                ],
-                        ],
-                ],
-                'museum_a09' => [
-                    'title' => 'A09',
-                    'add' =>
-                        [
-                            'title' => '新增商品'
-                        ],
-                    'edit' =>
-                        [
-                            'title' => '編輯商品'
-                        ],
-                    'attributes' =>
-                        [
-                            'title' => '商品說明'
-                        ],
-                    'specification' =>
-                        [
-                            'title' => '商品規格種類',
-                            'add' =>
-                                [
-                                    'title' => '新增商品規格'
-                                ],
-                        ],
-                ],
-                'museum_a10' => [
-                    'title' => 'A10',
-                    'add' =>
-                        [
-                            'title' => '新增商品'
-                        ],
-                    'edit' =>
-                        [
-                            'title' => '編輯商品'
-                        ],
-                    'attributes' =>
-                        [
-                            'title' => '商品說明'
-                        ],
-                    'specification' =>
-                        [
-                            'title' => '商品規格種類',
-                            'add' =>
-                                [
-                                    'title' => '新增商品規格'
-                                ],
-                        ],
-                ],
-                'museum_a11' => [
-                    'title' => 'A11',
-                    'add' =>
-                        [
-                            'title' => '新增商品'
-                        ],
-                    'edit' =>
-                        [
-                            'title' => '編輯商品'
-                        ],
-                    'attributes' =>
-                        [
-                            'title' => '商品說明'
-                        ],
-                    'specification' =>
-                        [
-                            'title' => '商品規格種類',
-                            'add' =>
-                                [
-                                    'title' => '新增商品規格'
-                                ],
-                        ],
-                ],
-                'museum_a12' => [
-                    'title' => 'A12',
                     'add' =>
                         [
                             'title' => '新增商品'
@@ -867,6 +638,14 @@ return [
                             'title' => '資訊專區',
                         ],
                 ],
+            'reports' =>
+                [
+                    'title' => '媒體報導',
+                    'index' =>
+                        [
+                            'title' => '資訊專區',
+                        ],
+                ],
         ],
     'service' =>
         [
@@ -874,6 +653,14 @@ return [
             'message' =>
                 [
                     'title' => '留言專區'
+                ],
+            'contactus' =>
+                [
+                    'title' => '連繫我們',
+                    'index' =>
+                        [
+                            'title' => '資訊專區',
+                        ],
                 ],
         ],
 ];

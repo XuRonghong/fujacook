@@ -227,36 +227,124 @@ return [
         ],
     ],
     [
-        //系統設置
-        "id" => 9,
+        //信息管理
+        "id" => 2,
         "parent_id" => 0,
-        "name" => "setting",
+        "name" => "information",
         "link" => "",
-        "sub_menu" => 1,
-        "access" => "1,2",
+        "access" => "1,2,11,12",
         "open" => 1,
+        "sub_menu" => 1,
         "child" => [
             [
-                //關鍵字
-                "id" => 901,
-                "parent_id" => 9,
-                "name" => "setting.search_keywords",
-                "link" => 'admin/setting/search_keywords',
-                "access" => "1,2",
+                //公告
+                "id" => 201,
+                "parent_id" => 2,
+                "name" => "information.announceme",
+                "link" => "admin/information/announceme",
+                "access" => "1,2,11,12",
+                "open" => 0,
+                "sub_menu" => 0,
+            ],
+            [
+                //最新消息
+                "id" => 202,
+                "parent_id" => 2,
+                "name" => "information.news",
+                "link" => "admin/information/news",
+                "access" => "1,2,11,12",
                 "open" => 1,
                 "sub_menu" => 0,
             ],
             [
-                //系統參數 meta
-                "id" => 902,
-                "parent_id" => 9,
-                "name" => "setting.parameters",
-                "link" => 'admin/setting/parameters',
-                "access" => "1,2",
+                //訊息
+                "id" => 203,
+                "parent_id" => 2,
+                "name" => "information.messages",
+                "link" => "admin/information/messages",
+                "access" => "1,2,11,12",
+                "open" => 0,
+                "sub_menu" => 0,
+            ],
+            [
+                //媒體報導
+                "id" => 204,
+                "parent_id" => 2,
+                "name" => "information.reports",
+                "link" => "admin/information/reports",
+                "access" => "1,2,11,12",
                 "open" => 1,
                 "sub_menu" => 0,
             ],
         ]
+    ],
+    // product
+    [
+        //商品管理
+        "id" => 3,
+        "parent_id" => 0,
+        "name" => "product",
+        "link" => "",
+        "sub_menu" => 1,
+        "access" => "1,2,11,12",
+        "open" => 1,
+        "child" => [
+            [
+                //商品類別設置
+                "id" => 301,
+                "parent_id" => 3,
+                "name" => "product.category",
+                "link" => "admin/product/category",
+                "sub_menu" => 0,
+                "access" => "1,2,11,12",
+                "open" => 1,
+                "rank" => 1
+            ],
+            [
+                //商品管理
+                "id" => 302,
+                "parent_id" => 3,
+                "name" => "product.manage",
+                "link" => "admin/product/manage",
+                "sub_menu" => 0,
+                "access" => "1,2,11,12",
+                "open" => 1,
+                "rank" => 2,
+            ],
+            [
+                //運費管理
+                "id" => 303,
+                "parent_id" => 3,
+                "name" => "product.shipping",
+                "link" => "admin/product/shipping",
+                "sub_menu" => 0,
+                "access" => "1,2,11,12",
+                "open" => 0,
+                "rank" => 3
+            ],
+            [
+                //付款方式
+                "id" => 304,
+                "parent_id" => 3,
+                "name" => "product.pay",
+                "link" => "admin/product/pay",
+                "sub_menu" => 0,
+                "access" => "1,2,11,12",
+                "open" => 0,
+                "rank" => 4
+            ],
+            [
+                //商品修改記錄
+                "id" => 309,
+                "parent_id" => 3,
+                "name" => "product.log",
+                "link" => "admin/product/log",
+                "sub_menu" => 0,
+                "access" => "1,2",
+                "open" => 0,
+                "rank" => 9
+            ],
+        ],
     ],
     [
         //廣告管理
@@ -446,114 +534,59 @@ return [
         ]
     ],
     [
-        //信息管理
-        "id" => 4001,
+        //客服專區
+        "id" => 8,
         "parent_id" => 0,
-        "name" => "information",
+        "name" => "service",
         "link" => "",
+        "sub_menu" => 1,
         "access" => "1,2,11,12",
         "open" => 1,
+        "child" =>
+            [
+                [
+                    //連繫我們
+                    "id" => 801,
+                    "parent_id" => 8,
+                    "name" => "service.contactus",
+                    "link" => "admin/service/contactus",
+                    "sub_menu" => 0,
+                    "access" => "1,2,11,12",
+                    "open" => 1,
+                ],
+            ]
+    ],
+    [
+        //系統設置
+        "id" => 9,
+        "parent_id" => 0,
+        "name" => "setting",
+        "link" => "",
         "sub_menu" => 1,
+        "access" => "1,2",
+        "open" => 1,
         "child" => [
             [
-                //公告
-                "id" => 40011,
-                "parent_id" => 4001,
-                "name" => "information.announceme",
-                "link" => "admin/announceme",
-                "access" => "1,2,11,12",
-                "open" => 0,
-                "sub_menu" => 0,
-            ],
-            [
-                //最新消息
-                "id" => 40012,
-                "parent_id" => 4001,
-                "name" => "information.news",
-                "link" => "admin/news",
-                "access" => "1,2,11,12",
+                //關鍵字
+                "id" => 901,
+                "parent_id" => 9,
+                "name" => "setting.search_keywords",
+                "link" => 'admin/setting/search_keywords',
+                "access" => "1,2",
                 "open" => 1,
                 "sub_menu" => 0,
             ],
             [
-                //訊息
-                "id" => 40013,
-                "parent_id" => 4001,
-                "name" => "information.messages",
-                "link" => "admin/messages",
-                "access" => "1,2,11,12",
-                "open" => 0,
+                //系統參數 meta
+                "id" => 902,
+                "parent_id" => 9,
+                "name" => "setting.parameters",
+                "link" => 'admin/setting/parameters',
+                "access" => "1,2",
+                "open" => 1,
                 "sub_menu" => 0,
             ],
         ]
-    ],
-    // product
-    [
-        //商品管理
-        "parent_id" => 0,
-        "id" => 1001,
-        "name" => "product",
-        "link" => "",
-        "sub_menu" => 1,
-        "access" => "1,2,11,12",
-        "open" => 0,
-        "child" => [
-            [
-                //商品類別設置
-                "id" => 10011,
-                "name" => "product.category",
-                "link" => "admin.product.category",
-                "sub_menu" => 0,
-                "parent_id" => 1001,
-                "access" => "1,2,11,12",
-                "open" => 1,
-                "rank" => 1
-            ],
-            [
-                //商品管理
-                "id" => 10012,
-                "parent_id" => 1001,
-                "name" => "product.manage",
-                "link" => "admin.product.manage",
-                "sub_menu" => 0,
-                "access" => "1,2,11,12",
-                "open" => 1,
-                "rank" => 2,
-            ],
-            [
-                //運費管理
-                "id" => 10013,
-                "parent_id" => 1001,
-                "name" => "product.shipping",
-                "link" => "admin.product.shipping",
-                "sub_menu" => 0,
-                "access" => "1,2,11,12",
-                "open" => 1,
-                "rank" => 3
-            ],
-            [
-                //付款方式
-                "id" => 10014,
-                "parent_id" => 1001,
-                "name" => "product.pay",
-                "link" => "admin.product.pay",
-                "sub_menu" => 0,
-                "access" => "1,2,11,12",
-                "open" => 1,
-                "rank" => 4
-            ],
-            [
-                //商品修改記錄
-                "id" => 10019,
-                "parent_id" => 1001,
-                "name" => "product.log",
-                "link" => "admin.product.log",
-                "sub_menu" => 0,
-                "access" => "1,2",
-                "open" => 1,
-                "rank" => 9
-            ],
-        ],
     ],
 ];
 
@@ -756,31 +789,6 @@ $storage = [
 //                                ]
                 ],
             ],
-    ],
-    [
-        //客服專區
-        "id" => 5001,
-        "name" => "service",
-        "link" => "",
-        "vCss" => "fa-list",
-        "sub_menu" => 1,
-        "parent_id" => 0,
-        "access" => "1,2,11,12",
-        "open" => 0,
-        "child" =>
-            [
-                [
-                    //公告訊息
-                    "id" => 50011,
-                    "name" => "service.message",
-                    "link" => "web/service/message",
-                    "vCss" => "",
-                    "sub_menu" => 0,
-                    "parent_id" => 5001,
-                    "access" => "1,2,11,12",
-                    "open" => 0,
-                ],
-            ]
     ],
     [
         //商家管理

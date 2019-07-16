@@ -46,7 +46,11 @@ class LogRepository extends Repository
 
     public function delete($id)
     {
-        return parent::delete($id);
+        try{
+            return parent::delete($id);
+        } catch (\Exception $e){
+            return ['errors'=> $e->getMessage()];
+        }
     }
 
     public function findOrFail($id)

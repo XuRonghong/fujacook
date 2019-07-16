@@ -232,18 +232,98 @@ Route::group([
 
 
 
-
     /**********************************************************
      *
      * 信息管理
      *
      *********************************************************/
-        // 最新消息
-        $index = array('url'=>'news', 'C'=>'NewsController', 'name'=>'news');
-        Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
-        Route::resource($index['url'], $index['C']);
-        Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
-        Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
+        Route::group([
+            'name' => 'information.',
+            'prefix' => 'information',
+            'namespace' => 'Information',
+        ], function() {
+
+            // 最新消息
+            $index = array('url'=>'news', 'C'=>'NewsController', 'name'=>'information.news');
+            Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
+            Route::resource($index['url'], $index['C'], ['as'=> 'information', 'name'=> $index['name'] ]);
+            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
+            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
+
+            // 媒體報導
+            $index = array('url'=>'reports', 'C'=>'ReportController', 'name'=>'information.reports');
+            Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
+            Route::resource($index['url'], $index['C'], ['as'=> 'information', 'name'=> $index['name'] ]);
+            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
+            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
+        });
+
+
+
+
+    /**********************************************************
+     *
+     * 產品管理
+     *
+     *********************************************************/
+        Route::group([
+            'name' => 'product.',
+            'prefix' => 'product',
+            'namespace' => 'Product',
+        ], function() {
+                // 商品類別設置
+            $index = array('url'=>'category', 'C'=>'CategoryController', 'name'=>'product.category');
+            Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
+            Route::resource($index['url'], $index['C'], ['as'=> 'product', 'name'=> $index['name'] ]);
+            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
+            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
+            // 商品管理
+            $index = array('url'=>'manage', 'C'=>'ManageController', 'name'=>'product.manage');
+            Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
+            Route::resource($index['url'], $index['C'], ['as'=> 'product', 'name'=> $index['name'] ]);
+            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
+            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
+            // 運費管理
+            $index = array('url'=>'shipping', 'C'=>'ShippingController', 'name'=>'product.shipping');
+            Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
+            Route::resource($index['url'], $index['C'], ['as'=> 'product', 'name'=> $index['name'] ]);
+            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
+            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
+            //付款方式
+            $index = array('url'=>'pay', 'C'=>'PayController', 'name'=>'product.pay');
+            Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
+            Route::resource($index['url'], $index['C'], ['as'=> 'product', 'name'=> $index['name'] ]);
+            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
+            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
+            //商品修改記錄
+            $index = array('url'=>'log', 'C'=>'LogController', 'name'=>'product.log');
+            Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
+            Route::resource($index['url'], $index['C'], ['as'=> 'product', 'name'=> $index['name'] ]);
+            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
+            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
+        });
+
+
+
+    /**********************************************************
+     *
+     * 客服專區
+     *
+     *********************************************************/
+        // 連繫我們
+        Route::group([
+            'name' => 'service.',
+            'prefix' => 'service',
+            'namespace' => 'Service',
+        ], function() {
+            //
+            $index = array('url'=>'contactus', 'C'=>'ContactusController', 'name'=>'service.contactus');
+            Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
+            Route::resource($index['url'], $index['C'], ['as'=> 'service', 'name'=> $index['name'] ]);
+            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
+            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
+        });
+
 
 
 
@@ -308,7 +388,7 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
 
 
-Route::resource('product', 'ProductController');
+Route::resource('product', 'ManageController');
 
 
 Route::get('group', 'GroupController@index')->name('group.index');
@@ -336,7 +416,7 @@ Route::get('/export_excel', 'ExportController@index');
 Route::get('/export_excel/excel', 'ExportController@excel')->name('export_excel.excel');
 Route::post('/import_excel/import', 'ExportController@import')->name('import_excel.import');
 
-Route::get('/dynamic_pdf/pdf', 'ProductController@pdf');
+Route::get('/dynamic_pdf/pdf', 'ManageController@pdf');
 
 
 
