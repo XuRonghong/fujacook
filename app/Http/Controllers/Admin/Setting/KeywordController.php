@@ -43,7 +43,7 @@ class KeywordController extends Controller
         //
         if(request()->ajax())
         {
-            $data = $this->repository->getDataTable($request, 'type = "search_keyword"');
+            $data = $this->repository->getDataTable($request, "type LIKE 'search_keyword'");
 
             $data = $this->presenter->eachOne_aaData($data, 'search_keyword');     //每一項目要做甚麼事,有需要在使用
 
