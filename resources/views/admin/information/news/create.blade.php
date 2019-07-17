@@ -39,48 +39,28 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="com3" class="col-sm-3 text-right control-label col-form-label">標頭<span style="color:red">*</span></label>
+                                    <label for="com3" class="col-sm-3 text-right control-label col-form-label">Title<span style="color:red">*</span></label>
                                     <div class="col-sm-9">
                                         <input type="text" name="title" value="{{data_get($data['arr'], 'title')}}" class="form-control title" id="com3" placeholder="">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="com4" class="col-sm-3 text-right control-label col-form-label">概要<span style="color:red">*</span></label>
+                                    <label for="com4" class="col-sm-3 text-right control-label col-form-label">概要</label>
                                     <div class="col-sm-9">
                                         <input type="text" name="summary" value="{{data_get($data['arr'], 'summary')}}" class="form-control summary" id="com4" placeholder="">
                                     </div>
                                 </div>
-                                {{--<div class="form-group row">--}}
-                                    {{--<label for="com4" class="col-sm-3 text-right control-label col-form-label">概要</label>--}}
-                                    {{--<div class="col-sm-9">--}}
-                                        {{--<input type="text" class="form-control summary" id="com4" placeholder="" value="{{data_get($news, 'summary')}}">--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                                <div class="form-group row">
-                                    <label for="com5" class="col-sm-3 text-right control-label col-form-label">Detail<span style="color:red">*</span></label>
-                                    <div class="col-sm-9">
-                                        <input type="text" name="detail" value="{{data_get($data['arr'], 'detail')}}"
-                                               class="form-control detail" id="com5" placeholder="">
-                                    </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="com6" class="col-sm-3 text-right control-label col-form-label">Create at</label>
+                                <div class="col-sm-9" style="margin-top: 10px">
+                                    {{data_get($data['arr'], 'created_at', date('Y-m-d H:i:s'))}}
                                 </div>
-                                <div class="form-group row">
-                                    <label for="img1" class="col-sm-3 text-right control-label col-form-label">圖片</label>
-                                    <div class="col-sm-9">
-                                        <a class="btn-image-modal" data-modal="image-form" data-id="">
-                                            @forelse(data_get( $data['arr'], 'image', []) as $key => $var)
-                                                <img id="{{$key}}" src="{{$var or ''}}" style="height:140px" alt="" >
-                                            @empty
-                                                <img src="{{url('images/empty.jpg')}}" style="height:140px" alt="">
-                                            @endforelse
-                                        </a>
-                                        <br>
-                                        <span style="color:red">如要更換圖片，點擊上方</span>
-                                        @forelse(data_get( $data['arr'], 'image', []) as $key => $var)
-                                            <img id="img1" src="{{$var or ''}}" style="height:140px" alt="">
-                                        @empty
-                                            <img id="img1" src="{{url('images/empty.jpg')}}" style="height:140px" alt="">
-                                        @endforelse
-                                    </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="com6" class="col-sm-3 text-right control-label col-form-label">Update at</label>
+                                <div class="col-sm-9" style="margin-top: 10px">
+                                    {{data_get($data['arr'], 'updated_at')}}
                                 </div>
                             </div>
                             <hr>
@@ -107,7 +87,7 @@
 
 @section('inline-js')
     <!-- Public Crop_Image -->
-    @include('admin.js.crop_image_single')
+{{--    @include('admin.js.crop_image_single')--}}
     <!-- Public SummerNote -->
     @include('admin.js.summernote2019')
     <!-- end -->

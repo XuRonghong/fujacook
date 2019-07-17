@@ -346,7 +346,7 @@ abstract class Presenter
             case 'rank':
                 $cache = $data;
                 if ($data=='') $data = '-';
-                return '<input class="isEdit '.$index.'" data-id="'.$index.'" size="10" style="width: 100%; display: none;" type="text" value="'. $cache .'" />'.'<div class="aaa">'.$data.'</div>';
+                return '<input class="isEdit '.$index.'" data-id="'.$index.'" style="width: 50%; display: none;" type="number" max="9999" min="-9999" value="'. $cache .'" />'.'<div class="aaa">'.$data.'</div>';
                 break;
             case 'name':
                 $cache = $data;
@@ -396,11 +396,13 @@ abstract class Presenter
     }
 
     // 製造 img HTML
-    public function presentImages($images)
+    public function presentImages($images, $breakline=2)
     {
         $html_str = "";
+        $i = 0;
         foreach($images as $image) {
-            $html_str .= "<img width='75px' src=" . $image . " style='margin:5px;'>";
+            if ($i++ == $breakline) $html_str .= '<br>';
+            $html_str .= "<img width='".($breakline>=2?'50px':'75px')."' src=" . $image . " style='margin-right:5px;margin-bottom:5px;'>";
         }
         return $html_str;
     }

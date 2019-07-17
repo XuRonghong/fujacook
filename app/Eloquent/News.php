@@ -24,18 +24,20 @@ class News extends Model
         'open'
     ];
 
-    public function validate($request, $noUnique=0)
+    public function validate($request, $noUnique=0, $except='')
     {
         $rules = [
             'rank' => 'nullable',
             'type' => 'nullable',
             'author_id' => 'nullable',
-            'title' => 'required'. ($noUnique?'':'|unique:news'),
-            'summary' => 'required',
+            'title' => 'required'. ($noUnique?'':'|unique:'.$this->table),
+            'summary' => 'nullable',
             'image' => 'nullable',
             'file_id' => 'nullable',
             'url' => 'nullable',
-            'detail' => 'required',
+            'detail' => ($except=='detail'?'nullable':'required'),
+            'click' => 'nullable',
+            'status' => 'nullable',
             'startTime' => 'nullable',
             'endTime' => 'nullable',
             'open' => 'nullable'
@@ -51,6 +53,8 @@ class News extends Model
             'file_id' => '檔案為必填項目',
             'url' => '連結為必填項目',
             'detail' => '內文為必填項目',
+            'click' => 'click為必填項目',
+            'status' => 'status為必填項目',
             'startTime' => '開始時間為必填項目',
             'endTime' => '結束時間為必填項目',
             'open' => '開關為必填項目'

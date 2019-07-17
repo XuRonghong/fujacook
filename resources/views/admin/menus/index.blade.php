@@ -164,6 +164,10 @@
                 $(this).parent().find('input.isEdit').show();
                 $(this).hide();
             });
+            data_table.mouseleave(function () {
+                $('.isEdit').hide();
+                $('.isEdit').parent().find('.aaa').show();
+            })
             // 編輯完成退回瀏覽模式
             data_table.on('change', '.isEdit', function (e) {
                 //

@@ -45,42 +45,72 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="com4" class="col-sm-3 text-right control-label col-form-label">概要<span style="color:red">*</span></label>
+                                    <label for="com4" class="col-sm-3 text-right control-label col-form-label">摘要</label>
                                     <div class="col-sm-9">
                                         <input type="text" name="summary" value="{{data_get($data['arr'], 'summary')}}" class="form-control summary" id="com4" placeholder="">
                                     </div>
                                 </div>
-                                {{--<div class="form-group row">--}}
-                                    {{--<label for="com4" class="col-sm-3 text-right control-label col-form-label">概要</label>--}}
-                                    {{--<div class="col-sm-9">--}}
-                                        {{--<input type="text" class="form-control summary" id="com4" placeholder="" value="{{data_get($news, 'summary')}}">--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
+{{--                                <div class="form-group row">--}}
+{{--                                    <label for="img1" class="col-sm-3 text-right control-label col-form-label">圖片</label>--}}
+{{--                                    <div class="col-sm-9">--}}
+{{--                                        <a class="btn-image-modal" data-modal="image-form" data-id="">--}}
+{{--                                            @forelse(data_get( $data['arr'], 'image', []) as $key => $var)--}}
+{{--                                                <img id="{{$key}}" src="{{$var or ''}}" style="height:140px" alt="" >--}}
+{{--                                            @empty--}}
+{{--                                                <img src="{{url('images/empty.jpg')}}" style="height:140px" alt="">--}}
+{{--                                            @endforelse--}}
+{{--                                        </a>--}}
+{{--                                        <br>--}}
+{{--                                        <span style="color:red">如要更換圖片，點擊上方</span>--}}
+{{--                                        @forelse(data_get( $data['arr'], 'image', []) as $key => $var)--}}
+{{--                                            <img id="img1" src="{{$var or ''}}" style="height:140px" alt="">--}}
+{{--                                        @empty--}}
+{{--                                            <img id="img1" src="{{url('images/empty.jpg')}}" style="height:140px" alt="">--}}
+{{--                                        @endforelse--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
                                 <div class="form-group row">
-                                    <label for="com5" class="col-sm-3 text-right control-label col-form-label">Detail<span style="color:red">*</span></label>
-                                    <div class="col-sm-9">
-                                        <input type="text" name="detail" value="{{data_get($data['arr'], 'detail')}}"
-                                               class="form-control detail" id="com5" placeholder="">
+                                    <label for="img2" class="col-sm-3 text-right control-label col-form-label">圖片s</label>
+                                    <div class="col-sm-9 cropper_image">
+                                    @if(isset($data['arr']['image']))
+                                        @foreach(data_get( $data['arr'], 'image', []) as $key => $var)
+                                            <div class="image-box">
+                                                <img id="{{$key}}" src="{{$var or ''}}">
+                                                <a class="image-del">X</a>
+                                            </div>
+                                        @endforeach
+                                        <a class="btn-image-modal" data-modal="image-form" data-id="">
+                                            @if(count(data_get( $data['arr'], 'image', [])) < 5)
+                                                <img id="Image" data-data="" src="{{url('images/addimg.jpg')}}" style="height:140px">
+                                            @endif
+                                        </a>
+                                    @else
+                                        <a class="btn-image-modal" data-modal="image-form" data-id="">
+                                            <img id="Image" data-data="" src="{{url('images/empty.jpg')}}" style="height:140px">
+                                        </a>
+                                    @endif
                                     </div>
                                 </div>
+
                                 <div class="form-group row">
-                                    <label for="img1" class="col-sm-3 text-right control-label col-form-label">圖片</label>
-                                    <div class="col-sm-9">
-                                        <a class="btn-image-modal" data-modal="image-form" data-id="">
-                                            @forelse(data_get( $data['arr'], 'image', []) as $key => $var)
-                                                <img id="{{$key}}" src="{{$var or ''}}" style="height:140px" alt="" >
-                                            @empty
-                                                <img src="{{url('images/empty.jpg')}}" style="height:140px" alt="">
-                                            @endforelse
-                                        </a>
-                                        <br>
-                                        <span style="color:red">如要更換圖片，點擊上方</span>
-                                        @forelse(data_get( $data['arr'], 'image', []) as $key => $var)
-                                            <img id="img1" src="{{$var or ''}}" style="height:140px" alt="">
-                                        @empty
-                                            <img id="img1" src="{{url('images/empty.jpg')}}" style="height:140px" alt="">
-                                        @endforelse
+                                    <label for="detail" class="col-sm-3 text-right control-label col-form-label">內文<span style="color:red">*</span></label>
+                                    <div class="col-sm-9 note-editable">
+                                        <textarea id="detail" name="detail">
+                                            {!! data_get($data['arr'], 'detail') !!}
+                                        </textarea>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="com6" class="col-sm-3 text-right control-label col-form-label">Create at</label>
+                                <div class="col-sm-9" style="margin-top: 10px">
+                                    {{data_get($data['arr'], 'created_at', date('Y-m-d H:i:s'))}}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="com6" class="col-sm-3 text-right control-label col-form-label">Update at</label>
+                                <div class="col-sm-9" style="margin-top: 10px">
+                                    {{data_get($data['arr'], 'updated_at')}}
                                 </div>
                             </div>
                             <hr>
@@ -107,7 +137,7 @@
 
 @section('inline-js')
     <!-- Public Crop_Image -->
-    @include('admin.js.crop_image_single')
+    @include('admin.js.crop_image')
     <!-- Public SummerNote -->
     @include('admin.js.summernote2019')
     <!-- end -->
@@ -148,7 +178,7 @@
                 //寫入資料庫
                 let url = '{{data_get($data['route_url'], "store")}}'
                 let self = document.querySelector('#sample_form')
-                let data = prop_fromData_fun(self)
+                let data = prop_fromData_multpleFile(self)
 
                 ajax(url, data, 'POST')
             })
@@ -161,7 +191,7 @@
                 let id = $(this).data('id')
                 let url = '{{data_get($data['route_url'], "update")}}'.replace('-10', id)  //-10代替字元為id
                 let self = document.querySelector('#sample_form')
-                let data = prop_fromData_fun(self)
+                let data = prop_fromData_multpleFile(self)
 
                 ajax(url, data, 'POST')
             })

@@ -16,29 +16,13 @@ class InformationPresenter extends Presenter
     {
         $this->selectOptions = [
             'news' => [
-//                'navbar.home' => '首頁選單欄位',
-//                'navbar.intr' => '介紹頁選單',
+                'news.new' => '最新消息',
+                'news.important' => '重要消息',
             ],
-//            'slider' => [
-//                'slider.home' => '首頁滑動圖',
-//                'slider.intr' => '介紹頁滑動圖',
-//                'slider.product' => '商品頁滑動圖',
-//            ],
-//            'introduce' => [
-//                'introduce.home' => '首頁文字',
-//                'introduce.intr' => '介紹頁文字',
-//            ],
-//            'image' => [
-//                'image.home' => '首頁圖片',
-//                'image.home.60601' => '首頁圖片1',
-//                'image.home.60602' => '首頁圖片2',
-//                'image.home.60603' => '首頁圖片3',
-//                'image.intr' => '介紹頁圖片',
-//            ],
-//            'footer' => [
-//                'footer.home' => '首頁',
-//                'footer.intr' => '介紹頁',
-//            ],
+            'report' => [
+                'report.new' => '最新報導',
+                'report.hot' => '熱門報導',
+            ],
         ];
     }
 
@@ -50,10 +34,10 @@ class InformationPresenter extends Presenter
                 //
                 $var->rank = $this->presentIsEdit('rank', $var->rank);
                 //翻譯每個type
-//                $var->type = $this->tranTypeInSelectOption($var->type, $this->selectOptions);
+                $var->type = $this->tranTypeInSelectOption($var->type, $this->selectOptions);
                 //找圖片檔案
                 $images = $var->image ? array($var->image) : $this->transFileIdtoImage($var->file_id); //有圖檔就不用去file找
-                $var->image = $this->presentImages($images);    //轉換輸出HTML
+                $var->image = $this->presentImages($images, 4);    //轉換輸出HTML
                 //
                 $var->status = $this->presentStatus($var->open);
             }
@@ -62,7 +46,7 @@ class InformationPresenter extends Presenter
     }
 
     // trans each one data for output view from news.
-    function tranOne($data, $other=0)
+    function tranOne($data, $other='')
     {
         $data = parent::transOne($data);
         //

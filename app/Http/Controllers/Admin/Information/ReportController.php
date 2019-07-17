@@ -17,10 +17,10 @@ class ReportController extends Controller
     public function __construct(InformationRepository $repository, InformationPresenter $presenter)
     {
         $this->repository = $repository;
+        $this->repository->setModel_News();
         $this->presenter = $presenter;
-
-        $this->presenter->setViewName('product.manage');
-        $this->presenter->setTitle('Product Manage');
+        $this->presenter->setViewName('information.reports');
+        $this->presenter->setTitle('媒體報導');
 
         //所有關於route::resource的位置
         $this->route_url = $this->presenter->getRouteResource($this->presenter->setRouteName('admin.information.reports'));
@@ -45,7 +45,7 @@ class ReportController extends Controller
         //
         if(request()->ajax())
         {
-            $data = $this->repository->getDataTable($request);
+            $data = $this->repository->getDataTable($request, "type LIKE 'report%'");
 
             $data = $this->presenter->eachOne_aaData($data);     //每一項目要做甚麼事,有需要在使用
 
@@ -64,7 +64,7 @@ class ReportController extends Controller
         //
         $data = $this->presenter->getParameters('create', array('route_url' => $this->route_url));
         //get option for select
-        $data['arr']['options'] = $this->presenter->getSelectOption('news');
+        $data['arr']['options'] = $this->presenter->getSelectOption('report');
 
         return $this->presenter->responseJson($data, 'create');
     }
@@ -98,7 +98,7 @@ class ReportController extends Controller
         //若資料庫沒有該id 則404畫面
         $data['arr'] = $this->repository->findOrFail($id) or abort(404);
         //轉換顯示數據
-        $data['arr'] = $this->presenter->tranOne($data['arr']);
+        $data['arr'] = $this->presenter->tranOne($data['arr'], 'report');
 
         return $this->presenter->responseJson($data, 'show');
     }
@@ -116,7 +116,7 @@ class ReportController extends Controller
         //若資料庫沒有該id 則404畫面
         $data['arr'] = $this->repository->findOrFail($id) or abort(404);
         //轉換顯示數據
-        $data['arr'] = $this->presenter->tranOne($data['arr']);
+        $data['arr'] = $this->presenter->tranOne($data['arr'], 'report');
 
         return $this->presenter->responseJson($data, 'edit');
     }

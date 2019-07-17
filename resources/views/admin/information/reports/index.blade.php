@@ -46,7 +46,7 @@
                 // "scrollY": '60vh',
                 // 'bProcessing': true,
                 // 'sServerMethod': 'GET',
-                "order": [[ 0, "asc" ]],
+                "order": [[ 4, "desc" ]],
                 "aoColumns": [
                     {
                         "sTitle": "ID",
@@ -59,25 +59,43 @@
                         }
                     },
                     {
-                        "sTitle": "rank(點擊即可修改)",
+                        "sTitle": "serial(#)",
                         "mData": "rank",
-                        // "width": "100px",
+                        "width": "50px",
                         "sName": "rank",
+                        "bSearchable": false,
                         "mRender": function (data, type, row) {
                             return data;
                         }
                     },
                     {
-                        "sTitle": "標頭",
+                        "sTitle": "title",
                         "mData": "title",
-                        // "width": "100px",
-                        "sName": "title"
+                        "width": "25%",
+                        "sName": "title",
+                        "bSearchable": false,
                     },
                     {
-                        "sTitle": "content",
-                        "mData": "summary",
+                        "sTitle": "image",
+                        "mData": "image",
+                        // "width": "180px",
+                        "sName": "image",
+                        "bSearchable": false,
+                        "bSortable": false,
+                    },
+                    {
+                        "sTitle": "click",
+                        "mData": "click",
+                        // "width": "180px",
+                        "sName": "click",
+                        "bSearchable": false,
+                        "bSortable": true,
+                    },
+                    {
+                        "sTitle": "updated_at",
+                        "mData": "updated_at",
                         // "width": "100px",
-                        "sName": "summary"
+                        "sName": "updated_at"
                     },
                     {
                         "sTitle": "",
@@ -153,6 +171,10 @@
                 $(this).parent().find('input.isEdit').show();
                 $(this).hide();
             });
+            data_table.mouseleave(function () {
+                $('.isEdit').hide();
+                $('.isEdit').parent().find('.aaa').show();
+            })
             // 編輯完成退回瀏覽模式
             data_table.on('change', '.isEdit', function (e) {
                 $(this).hide();

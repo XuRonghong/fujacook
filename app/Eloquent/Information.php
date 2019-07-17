@@ -10,15 +10,23 @@ class Information extends Model
     protected $table = 'informations';
     protected $primaryKey = 'id';
     protected $fillable = [
+        'rank',
+        'type',
+        'author_id',
         'name',
-        'description',
-        'guard_name',
+        'value',
+        'number',
+        'content',
+        'image',
+        'file_id',
+        'url',
+        'open',
     ];
 
     public function validate($request, $noUnique=0)
     {
         $rules = [
-            'name' => 'required'. ($noUnique?'':'|unique:permissions'),
+            'name' => 'required'. ($noUnique?'':'|unique:'.$this->table),
             'description' => 'required',
 //            'guard_name' => 'required|array',
         ];

@@ -17,7 +17,10 @@ class NewsController extends Controller
     public function __construct(InformationRepository $repository, InformationPresenter $presenter)
     {
         $this->repository = $repository;
+        $this->repository->setModel_News();
         $this->presenter = $presenter;
+        $this->presenter->setViewName('information.news');
+        $this->presenter->setTitle('最新消息');
 
         //所有關於route::resource的位置
         $this->route_url = $this->presenter->getRouteResource($this->presenter->setRouteName('admin.information.news'));
@@ -42,7 +45,7 @@ class NewsController extends Controller
         //
         if(request()->ajax())
         {
-            $data = $this->repository->getDataTable($request);
+            $data = $this->repository->getDataTable($request, "type LIKE 'news%'");
 
             $data = $this->presenter->eachOne_aaData($data);     //每一項目要做甚麼事,有需要在使用
 
@@ -75,7 +78,7 @@ class NewsController extends Controller
     public function store(Request $request)
     {
         //
-        $this->repository->validate($request);
+        $this->repository->validate($request, 0, 'detail');
         //
         $data = $this->repository->create($request->all());
 
@@ -95,7 +98,7 @@ class NewsController extends Controller
         //若資料庫沒有該id 則404畫面
         $data['arr'] = $this->repository->findOrFail($id) or abort(404);
         //轉換顯示數據
-        $data['arr'] = $this->presenter->tranOne($data['arr']);
+        $data['arr'] = $this->presenter->tranOne($data['arr'], 'news');
 
         return $this->presenter->responseJson($data, 'show');
     }
@@ -113,7 +116,7 @@ class NewsController extends Controller
         //若資料庫沒有該id 則404畫面
         $data['arr'] = $this->repository->findOrFail($id) or abort(404);
         //轉換顯示數據
-        $data['arr'] = $this->presenter->tranOne($data['arr']);
+        $data['arr'] = $this->presenter->tranOne($data['arr'], 'news');
 
         return $this->presenter->responseJson($data, 'edit');
     }
@@ -128,7 +131,7 @@ class NewsController extends Controller
     public function update(Request $request, $id)
     {
         // 除特殊情況不驗證
-        if ($request->get('doValidate', 1)) $this->repository->validate($request, 1);
+        if ($request->get('doValidate', 1)) $this->repository->validate($request, 1, 'detail');
 
         $data = $this->repository->update($request->all(), $id);
 

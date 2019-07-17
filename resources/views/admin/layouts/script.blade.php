@@ -258,24 +258,24 @@
         /*** 上傳檔案資料庫，需要再呼叫，回傳file id ***/
         // let file_id = do_upload_file_fun();
 
-        if (current_modal.find("img").attr('id')!=='') {
+        if (typeof(current_modal.find("img").attr('id')) != "undefined") {
             form_data.append('file_id', current_modal.find("img").attr('id'))
         }
-        if (current_modal.find("img").attr('src')!=='') {
+        if (typeof(current_modal.find("img").attr('src')) != "undefined") {
             form_data.append('image', current_modal.find("img").attr('src'))
         }
 
         //撈取html content
-        if (document.getElementById("content")) {
+        if (JSON.stringify(document.getElementById("content")) === '{}') {
             form_data.append('content', $('#content').summernote('code'))
         }
         //撈取html content
-        if (document.getElementById("detail")) {
+        if (JSON.stringify(document.getElementById("detail")) === '{}') {
             form_data.append('detail', $('#detail').summernote('code'))
         }
 
         //撈取html 滑動開關切換按鈕
-        if (document.getElementById("switch_demo")) {
+        if (JSON.stringify(document.getElementById("switch_demo")) === '{}') {
             form_data.append('open', document.getElementById("switch_demo").value)
         }
 
@@ -305,10 +305,21 @@
         // form_data.append('file_id', file_id)
         // form_data.append('file_id', current_modal.find("img").attr('id'))
         // form_data.append('image', current_modal.find("img").attr('src'))
-        form_data.append('file_id', images)
+        if (images!=="") {
+            form_data.append('file_id', images)
+        }
+
+
 
         //撈取html content
-        // let detail = $('#detail').summernote('code')
+        if (JSON.stringify(document.getElementById("detail")) === '{}') {
+            form_data.append('detail', $('#detail').summernote('code'))
+        }
+
+        //撈取html 滑動開關切換按鈕
+        if (JSON.stringify(document.getElementById("switch_demo")) === '{}') {
+            form_data.append('open', document.getElementById("switch_demo").value)
+        }
 
         //假如還有資料就填充上去
         for (let key in datas) {

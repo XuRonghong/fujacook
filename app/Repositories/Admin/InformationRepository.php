@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Admin;
 
+use App\Information;
 use App\News;
 use App\Repositories\Repository;
 
@@ -10,9 +11,14 @@ class InformationRepository extends Repository
 {
     protected $model;
 
-    public function __construct(News $model)
+    public function __construct(Information $model)
     {
         $this->model = $model;
+    }
+
+    public function setModel_News()
+    {
+        $this->model = new News;
     }
 
     public function all($attributes='')
