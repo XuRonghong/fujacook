@@ -18,6 +18,9 @@ class HomeController extends Controller
     {
 //        $this->middleware('auth');
         $this->presenter = $presenter;
+
+        //所有關於route::resource的位置
+//        $this->route_url = $this->presenter->getRouteResource($this->presenter->setRouteName('admin.home'));
     }
 
     /**
@@ -27,6 +30,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        //
         $data = $this->presenter->getParameters('index');
 
         return view('admin.home', compact('data'));

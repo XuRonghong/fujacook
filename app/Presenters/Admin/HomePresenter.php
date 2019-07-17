@@ -6,12 +6,9 @@ use App\Presenters\Presenter;
 
 class HomePresenter extends Presenter
 {
-    protected $gotoUrl;
-    protected $title;
-
-    public function __construct()
-    {
-        $this->gotoUrl = url('admin');
-        $this->title = 'Shoppin2 admin';
-    }
+    protected $gotoUrl;         //ajax finish to url
+    protected $title = 'Fujacook backend';          //output for view
+    protected $view_group_name = 'admins';       //document of view group
+    protected $route_name;      //Route->name()
+    protected $selectOptions;   //HTML元素
 }
