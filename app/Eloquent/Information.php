@@ -27,13 +27,13 @@ class Information extends Model
     {
         $rules = [
             'name' => 'required'. ($noUnique?'':'|unique:'.$this->table),
-            'description' => 'required',
+            'content' => 'required',
 //            'guard_name' => 'required|array',
         ];
         $messages = [
             'name.required' => 'name為必填項目',
             'name.unique' => 'name不能重複',
-            'description.required' => '描述為必填項目',
+            'content.required' => 'content為必填項目',
 //            'guard_name.required' => 'guard_name為必填項目',
         ];
         return $request->validate($rules, $messages);

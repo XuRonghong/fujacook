@@ -100,7 +100,20 @@
                         "bSearchable": false,
                     },
                     {
-                        "sTitle": "",
+                        "sTitle": '<button type="button" name="bulk_delete" id="bulk_delete" class="btn btn-danger btn-xs">' +
+                                    '刪除<i class="glyphicon glyphicon-remove"></i>' +
+                                    '</button>',
+                        "mData": "checkbox",
+                        "width": "30px",
+                        "sName": "checkbox",
+                        "bSortable": false,
+                        "bSearchable": false,
+                        "mRender": function (data, type, row) {
+                            return data;
+                        }
+                    },
+                    {
+                        "sTitle": '',
                         "bSortable": false,
                         "bSearchable": false,
                         // "width": '100px',
@@ -165,6 +178,8 @@
                 }
                 doDelete(url, data, table)          // from layout.master
             })
+            // 勾選刪除多筆資料
+            doMessDelete(table)
 
 
             // 按一下進入編輯模式

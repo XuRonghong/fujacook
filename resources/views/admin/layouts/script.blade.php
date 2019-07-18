@@ -239,6 +239,52 @@
     }
 
 
+    //
+    function doMessDelete(table)
+    {
+        $(document).on('click', '#bulk_delete', function(){
+            let id = [];
+            if(confirm("Are you sure you want to Delete this data?"))
+            {
+                $('.group_checkbox:checked').each(function(){
+                    id.push($(this).val());
+                });
+                if(id.length > 0)
+                {
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': '{{csrf_token()}}'
+                        },
+                        {{--url:"{{ route('group.mass_destroy')}}",--}}
+                        url:'{{data_get($data,'route_url.mass_destroy')}}',
+                        method:"delete",
+                        data:{id:id},
+                        success:function(rtndata)
+                        {
+                            if (rtndata.status) {
+                                toastr.success(rtndata.message, "{{trans('web_alert.notice')}}")
+                                setTimeout(function () {
+                                    table.api().ajax.reload(null, false)
+                                }, 100)
+                            } else {
+                                swal("{{trans('web_alert.notice')}}", rtndata.message, "error")
+                            }
+                        },
+                        error: function (err) {
+                            console.log(err.responseJSON)
+                            toastr.error(JSON.stringify(err.responseJSON), "{{trans('web_alert.notice')}}")
+                        }
+                    });
+                }
+                else
+                {
+                    alert("Please select atleast one checkbox");
+                }
+            }
+        });
+    }
+
+
     function do_upload_file_fun()
     {
         //上傳檔案資料庫，回傳file id
@@ -266,11 +312,11 @@
         }
 
         //撈取html content
-        if (JSON.stringify(document.getElementById("content")) === '{}') {
+        if (document.getElementById("content")) {
             form_data.append('content', $('#content').summernote('code'))
         }
-        //撈取html content
-        if (JSON.stringify(document.getElementById("detail")) === '{}') {
+        //撈取html detail
+        if (document.getElementById("detail")) {
             form_data.append('detail', $('#detail').summernote('code'))
         }
 
@@ -309,21 +355,18 @@
             form_data.append('file_id', images)
         }
 
-
-
         //撈取html content
-        if (JSON.stringify(document.getElementById("detail")) === '{}') {
+        if (document.getElementById("content")) {
+            form_data.append('content', $('#content').summernote('code'))
+        }
+        //撈取html detail
+        if (document.getElementById("detail")) {
             form_data.append('detail', $('#detail').summernote('code'))
         }
 
         //撈取html 滑動開關切換按鈕
         if (JSON.stringify(document.getElementById("switch_demo")) === '{}') {
             form_data.append('open', document.getElementById("switch_demo").value)
-        }
-
-        //假如還有資料就填充上去
-        for (let key in datas) {
-            form_data.append(key, datas[key])
         }
 
         return form_data

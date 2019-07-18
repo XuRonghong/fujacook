@@ -98,6 +98,21 @@ abstract class Repository
         return $model;
     }
 
+    // delete multiple ...
+    public function mess_delete($id=[])
+    {
+        $model = $this->model->whereIn('id', $id)->delete();
+        if ($model) {
+            $author_id = auth()->guard('admin')->user()->id;
+            $value = json_encode($model, JSON_UNESCAPED_UNICODE);
+            $id = implode($id, ',');    // array convert to string.
+            FuncController::addActionLog('mess_delete', $author_id, $value, $id, $this->model->getTable());
+        } else {
+            $model = ['errors' => 'mess deleted error : '.$model];
+        }
+        return $model;
+    }
+
     /**
      * If record exist update this record else create it.
      *

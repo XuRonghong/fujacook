@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Product;
 
 use App\Presenters\Admin\ProductPresenter;
+use App\ProductCategory;
 use App\Repositories\Admin\ProductRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -21,7 +22,7 @@ class ManageController extends Controller
 
         $this->presenter->setViewName('product.manage');
         $this->presenter->setTitle('Product Manage');
-        $this->presenter->setSelectOpt( $this->repository->getORM(['id', 'name', 'value']) );
+        $this->presenter->setSelectOpt( $this->repository->getORM_ProductCategory( ['id', 'name', 'value']) );
 
         //所有關於route::resource的位置
         $this->route_url = $this->presenter->getRouteResource($this->presenter->setRouteName('admin.product.manage'));

@@ -38,6 +38,7 @@ class ProductPresenter extends Presenter
     {
         if ( $arr['aaData']) {
             foreach ($arr['aaData'] as $key => $var) {
+                $var->checkbox = $this->presentCheckBox($var->id);
                 //
                 $var->rank = $this->presentIsEdit('rank', $var->rank);
                 //翻譯每個type

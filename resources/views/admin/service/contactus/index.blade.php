@@ -63,51 +63,36 @@
                         "mData": "rank",
                         // "width": "100px",
                         "sName": "rank",
-                        "mRender": function (data, type, row) {
-                            return data;
-                        }
-                    },
-                    // {
-                    //     "sTitle": "author_id",
-                    //     "mData": "author_id",
-                    //     // "width": "100px",
-                    //     "sName": "author_id"
-                    // },
-                    // {
-                    //     "sTitle": "category",
-                    //     "mData": "category",
-                    //     // "width": "100px",
-                    //     "sName": "category"
-                    // },
-                    {
-                        "sTitle": "type",
-                        "mData": "type",
-                        // "width": "100px",
-                        "sName": "type"
-                    },
-                    {
-                        "sTitle": "title",
-                        "mData": "title",
-                        // "width": "100px",
-                        "sName": "title"
-                    },
-                    {
-                        "sTitle": "image",
-                        "mData": "image",
-                        "width": "180px",
-                        "sName": "image",
-                        "bSortable": false,
                         "bSearchable": false,
                         "mRender": function (data, type, row) {
                             return data;
                         }
                     },
                     {
-                        "sTitle": "url",
-                        "mData": "url",
+                        "sTitle": "name",
+                        "mData": "name",
                         // "width": "100px",
-                        "sName": "url"
+                        "sName": "name",
+                        "bSortable": false,
                     },
+                    {
+                        "sTitle": "value",
+                        "mData": "value",
+                        // "width": "100px",
+                        "sName": "value",
+                        "bSortable": false,
+                    },
+                    // {
+                    //     "sTitle": "image",
+                    //     "mData": "image",
+                    //     "width": "180px",
+                    //     "sName": "image",
+                    //     "bSortable": false,
+                    //     "bSearchable": false,
+                    //     "mRender": function (data, type, row) {
+                    //         return data;
+                    //     }
+                    // },
                     {
                         "sTitle": "updated_at",
                         "mData": "updated_at",

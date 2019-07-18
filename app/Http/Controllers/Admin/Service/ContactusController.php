@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin\Service;
 
-use App\Presenters\Admin\ScenesPresenter;
-use App\Repositories\Admin\ScenesRepository;
+use App\Repositories\Admin\InformationRepository;
+use App\Presenters\Admin\InformationPresenter;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -14,13 +14,13 @@ class ContactusController extends Controller
     protected $presenter;
     protected $route_url;
 
-    public function __construct(ScenesRepository $repository, ScenesPresenter $presenter)
+    public function __construct(InformationRepository $repository, InformationPresenter $presenter)
     {
         $this->repository = $repository;
         $this->presenter = $presenter;
 
         $this->presenter->setViewName('service.contactus');
-        $this->presenter->setTitle('Service contactus');
+        $this->presenter->setTitle('連繫我們');
 
         //所有關於route::resource的位置
         $this->route_url = $this->presenter->getRouteResource($this->presenter->setRouteName('admin.service.contactus'));
@@ -45,7 +45,7 @@ class ContactusController extends Controller
         //
         if(request()->ajax())
         {
-            $data = $this->repository->getDataTable($request, "type LIKE 'slider%'");
+            $data = $this->repository->getDataTable($request, "type LIKE 'contactus%'");
 
             $data = $this->presenter->eachOne_aaData($data);     //每一項目要做甚麼事,有需要在使用
 
@@ -64,7 +64,7 @@ class ContactusController extends Controller
         //
         $data = $this->presenter->getParameters('create', array('route_url' => $this->route_url));
         //get option for select
-        $data['arr']['options'] = $this->presenter->getSelectOption('slider');
+        $data['arr']['options'] = $this->presenter->getSelectOption('contactus');
 
         return $this->presenter->responseJson($data, 'create');
     }
@@ -98,7 +98,7 @@ class ContactusController extends Controller
         //若資料庫沒有該id 則404畫面
         $data['arr'] = $this->repository->findOrFail($id) or abort(404);
         //轉換出顯示數據
-        $data['arr'] = $this->presenter->transOne($data['arr'], 'slider');
+        $data['arr'] = $this->presenter->transOne($data['arr'], 'contactus');
 
         return $this->presenter->responseJson($data, 'create');
     }
@@ -116,7 +116,7 @@ class ContactusController extends Controller
         //若資料庫沒有該id 則404畫面
         $data['arr'] = $this->repository->findOrFail($id) or abort(404);
         //轉換出顯示數據
-        $data['arr'] = $this->presenter->transOne($data['arr'], 'slider');
+        $data['arr'] = $this->presenter->transOne($data['arr'], 'contactus');
 
         return $this->presenter->responseJson($data, 'create');
     }

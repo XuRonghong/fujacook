@@ -27,10 +27,9 @@ class ProductRepository extends Repository
         $this->model = new Product();
     }
 
-    public function getORM($columns = ['*'], $model=null, $whereQuery='1 = 1')
+    public function getORM_ProductCategory($columns = ['*'], $whereQuery='1 = 1')
     {
-        if ( !$model) $model = new ProductCategory();
-        return $model->where('open', 1)->whereRaw($whereQuery)->orderBy('rank', 'asc')->get($columns);
+        return ProductCategory::query()->where('open', 1)->whereRaw($whereQuery)->orderBy('rank', 'asc')->get($columns);
     }
 
     public function create($attributes)

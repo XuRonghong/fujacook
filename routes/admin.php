@@ -60,6 +60,18 @@ Route::group([
 //    Route::get( 'import_excel', 'ExcelController@index')->name('excel_index');
 //    Route::post('import_excel', 'ExcelController@import')->name('import');
 
+    /**********************************************************
+     * Export Excel 2019
+     *********************************************************/
+    Route::get('/export_excel', 'ExportController@index');
+    Route::get('/export_excel/excel', 'ExportController@excel')->name('export_excel.excel');
+    Route::post('/import_excel/import', 'ExportController@import')->name('import_excel.import');
+
+    /**********************************************************
+     * PDF function
+     *********************************************************/
+    Route::get('/dynamic_pdf/pdf', 'ExportController@pdf');
+
 
     Route::group([
         'middleware' => ['admin.checkPermission']       //權限通過
@@ -279,6 +291,7 @@ Route::group([
             Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
             // 商品管理
             $index = array('url'=>'manage', 'C'=>'ManageController', 'name'=>'product.manage');
+            Route::delete(  $index['url'].'/mass_destroy',$index['C'].'@massDestroy')->name($index['name'].'.mass_destroy');
             Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
             Route::resource($index['url'], $index['C'], ['as'=> 'product', 'name'=> $index['name'] ]);
             Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');

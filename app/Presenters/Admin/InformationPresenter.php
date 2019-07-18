@@ -7,8 +7,8 @@ use App\Presenters\Presenter;
 class InformationPresenter extends Presenter
 {
     protected $gotoUrl;         //ajax finish to url
-    protected $title = 'News';          //output for view
-    protected $view_group_name = 'information.news';       //document of view group
+    protected $title = 'Information';          //output for view
+    protected $view_group_name = 'information';       //document of view group
     protected $route_name;      //Route->name()
     protected $selectOptions;   //HTML元素
 
@@ -22,6 +22,10 @@ class InformationPresenter extends Presenter
             'report' => [
                 'report.new' => '最新報導',
                 'report.hot' => '熱門報導',
+            ],
+            'contactus' => [
+                'contactus.home' => '',
+                'contactus.about' => '',
             ],
         ];
     }

@@ -149,6 +149,8 @@ abstract class Presenter
             'update' => route($route_name.'.update', [-10]),    //-10暫定代替字元
             'destroy' => route($route_name.'.destroy', [-10]),
             'show' => route($route_name.'.index'),
+            //多加功能
+            'mass_destroy' => route($route_name.'.mass_destroy'),
         ];
     }
 
@@ -258,6 +260,12 @@ abstract class Presenter
                         'message' => sprintf("已刪除 %s", "一筆資料"),
                         'redirectUrl' => $this->gotoUrl
                     ], $status);
+                case 'mass_destroy':
+                    return response()->json([
+                        'status' => 1,
+                        'message' => sprintf("已刪除 %s", "多筆資料"),
+                        'redirectUrl' => $this->gotoUrl
+                    ], $status);
                 default:
 //                    return redirect(route('admin.news.index', $request->query()))->with('success', sprintf("已新增 %s", "一筆資料"));
                     return response()->json([ ], 404);
@@ -332,6 +340,19 @@ abstract class Presenter
                     </ol>
                 </nav>';
         return $html;
+    }
+
+    //CheckBox HTML
+    public function presentCheckBox($data)
+    {
+        return '<div class="form-group row">
+                    <div class="offset-sm-3 col-sm-9">
+                        <div class="custom-control custom-checkbox mr-sm-2">
+                            <input type="checkbox" name="group_checkbox[]" id="checkbox'.$data.'" value="'.$data.'" class="custom-control-input group_checkbox">
+                            <label class="custom-control-label" for="checkbox'.$data.'"></label>
+                        </div>
+                    </div>
+                </div>';
     }
 
     //click it can edit HTML
