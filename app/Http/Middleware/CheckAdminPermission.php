@@ -9,6 +9,8 @@ use App\Repositories\Admin\PermissionRepository;
 
 class CheckAdminPermission
 {
+    private $permissionRepository;
+
     public function __construct(PermissionRepository $permissionRepository) 
     {
         $this->permissionRepository = $permissionRepository;
@@ -54,6 +56,5 @@ class CheckAdminPermission
                 return redirect('/admin/home')->withErrors(['permission' => '權限不足']);
             }
         }
-
     }
 }

@@ -30,6 +30,9 @@ class CreateMembersTable extends Migration
             $table->rememberToken()->nullable();
             $table->string('api_token', 64)->nullable()->unique();
             $table->string('avatar')->nullable()->comment('會員大頭貼');
+            $table->string('gender', 10)->nullable();
+            $table->string('designation')->nullable()->comment('稱號');
+            $table->integer('age')->nullable();
             $table->string('file_id')->nullable()->comment('檔案');
             $table->string('phone')->nullable()->comment('電話');
             $table->string('nation')->nullable()->comment('國家');

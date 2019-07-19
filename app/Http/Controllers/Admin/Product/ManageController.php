@@ -37,6 +37,12 @@ class ManageController extends Controller
     {
         //meta data
         $data = $this->presenter->getParameters('index', array('route_url' => $this->route_url));
+        //add route_url for mass_destroy.
+        $this->presenter->addParameters(
+            $data,
+            'route_url.mass_destroy',
+            route($this->presenter->getRouteName().'.mass_destroy')
+        );
 
         return $this->presenter->responseJson($data, 'index');
     }

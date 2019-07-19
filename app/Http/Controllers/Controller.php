@@ -16,7 +16,7 @@ class Controller extends BaseController
     public function massDestroy(Request $request)
     {
         //
-        $data = $this->repository->mess_delete( $request->input('id'));
+        $data = $this->repository->mass_delete( $request->input('id'));
 
         return $this->presenter->responseJson($data, 'mass_destroy');
     }

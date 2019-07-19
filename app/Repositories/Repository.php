@@ -99,16 +99,16 @@ abstract class Repository
     }
 
     // delete multiple ...
-    public function mess_delete($id=[])
+    public function mass_delete($id=[])
     {
         $model = $this->model->whereIn('id', $id)->delete();
         if ($model) {
             $author_id = auth()->guard('admin')->user()->id;
             $value = json_encode($model, JSON_UNESCAPED_UNICODE);
             $id = implode($id, ',');    // array convert to string.
-            FuncController::addActionLog('mess_delete', $author_id, $value, $id, $this->model->getTable());
+            FuncController::addActionLog('mass_delete', $author_id, $value, $id, $this->model->getTable());
         } else {
-            $model = ['errors' => 'mess deleted error : '.$model];
+            $model = ['errors' => 'massdeleted error : '.$model];
         }
         return $model;
     }

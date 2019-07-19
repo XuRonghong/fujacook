@@ -149,9 +149,13 @@ abstract class Presenter
             'update' => route($route_name.'.update', [-10]),    //-10暫定代替字元
             'destroy' => route($route_name.'.destroy', [-10]),
             'show' => route($route_name.'.index'),
-            //多加功能
-            'mass_destroy' => route($route_name.'.mass_destroy'),
         ];
+    }
+
+    //
+    public function addParameters(&$data, $key=null, $value=null)
+    {
+        $data = array_add($data, $key, $value);
     }
 
     // 例行公事，顯示板塊參數

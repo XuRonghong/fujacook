@@ -11,7 +11,7 @@ class UploadfileController extends Controller
     //
     function index()
     {
-        return view('uploadfile');
+        return view('front.uploadfile');
     }
 
     //
@@ -25,7 +25,7 @@ class UploadfileController extends Controller
 
         $new_name = rand() . '.' . $image->getClientOriginalExtension();
 
-        $image->move(public_path('images'), $new_name);
+        $image->move(public_path('storage/test'), $new_name);
         return back()->with('success', 'Image Uploaded Successfully')->with('path', $new_name);
     }
 
@@ -41,10 +41,10 @@ class UploadfileController extends Controller
         {
             $image = $request->file('select_file');
             $new_name = rand() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('images'), $new_name);
+            $image->move(public_path('storage/test'), $new_name);
             return response()->json([
                 'message'   => 'Image Upload Successfully',
-                'uploaded_image' => '<img src="/images/'.$new_name.'" class="img-thumbnail" width="300" />',
+                'uploaded_image' => '<img src="/storage/test/'.$new_name.'" class="img-thumbnail" width="300" />',
                 'class_name'  => 'alert-success'
             ]);
         }

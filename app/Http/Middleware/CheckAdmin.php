@@ -36,7 +36,6 @@ class CheckAdmin
             }
         }
 
-
         /*
         if ( !in_array( session()->get( 'member.iAcType' ), config( '_config.admin_access' ) )) {
             return abort( 503 );

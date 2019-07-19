@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Front;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -17,17 +17,31 @@ class StoreController extends Controller
      */
     public function index()
     {
+        $data = [];
         $route_url = [
-            'index' => route('admin.store.index'),
-            'list' => route('admin.store.list'),
+            'index' => route('store.index'),
+//            'list' => route('store.list'),
             'create' => '',
-            'store' => route('admin.store.store'),
+            'store' => route('store.store'),
             'edit'  => '',
-            'update' => route('admin.store.update'),
-            'destroy' => url('admin.store.index'),
-            'show' => route('admin.store.index').'/',
+            'update' => route('store.update'),
+            'destroy' => url('store.index'),
+            'show' => route('store.index').'/',
         ];
-        return view('admin.store.index', compact('route_url'));
+        //
+        if(request()->ajax())
+        {
+            return datatables()->of(Store::latest()->get())
+                ->addColumn('action', function($data){
+                    $button = '<button type="button" name="edit" id="'.$data->id.'" class="edit btn btn-primary btn-sm">Edit</button>';
+                    $button .= '&nbsp;&nbsp;';
+                    $button .= '<button type="button" name="delete" id="'.$data->id.'" class="delete btn btn-danger btn-sm">Delete</button>';
+                    return $button;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+        return view('front.store.index', compact('route_url', 'data'));
     }
 
 

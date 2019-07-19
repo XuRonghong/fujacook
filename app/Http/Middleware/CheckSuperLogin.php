@@ -6,17 +6,10 @@ use Closure;
 
 class CheckSuperLogin
 {
-	public function __construct()
-    {
-	}
-
 	public function handle($request, Closure $next)
     {
-		if (! session ()->has ( 'member' )) {
-			return redirect ()->guest ( 'web/login' );
-		}
-        if (session ()->get ( 'member.iAcType' )!=1) {
-            return redirect ()->guest ( 'web/login' );
+        if (session()->get('member.type', 0) != 1) {
+            return redirect()->guest('admin/login');
         }
 		return $next ( $request );
 	}
