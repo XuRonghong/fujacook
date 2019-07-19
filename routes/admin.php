@@ -273,15 +273,8 @@ Route::group([
             Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
             Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
 
-            // articles
-            $index = array('url'=>'articles', 'C'=>'ArticleController', 'name'=>'information.articles');
-            Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
-            Route::resource($index['url'], $index['C'], ['as'=> 'information', 'name'=> $index['name'] ]);
-            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
-            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
-
-            // advertise
-            $index = array('url'=>'advertise', 'C'=>'AdvertiseController', 'name'=>'information.advertise');
+            // notifications
+            $index = array('url'=>'notifications', 'C'=>'NotificationController', 'name'=>'information.notifications');
             Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
             Route::resource($index['url'], $index['C'], ['as'=> 'information', 'name'=> $index['name'] ]);
             Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
@@ -330,6 +323,46 @@ Route::group([
             $index = array('url'=>'log', 'C'=>'LogController', 'name'=>'product.log');
             Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
             Route::resource($index['url'], $index['C'], ['as'=> 'product', 'name'=> $index['name'] ]);
+            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
+            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
+        });
+
+
+
+
+        /**********************************************************
+         *
+         * Order 管理
+         *
+         *********************************************************/
+        Route::group([
+            'name' => 'order.',
+            'prefix' => 'order',
+            'namespace' => 'Order',
+        ], function() {
+            // 商品類別設置
+            $index = array('url'=>'category', 'C'=>'CategoryController', 'name'=>'order.category');
+            Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
+            Route::resource($index['url'], $index['C'], ['as'=> 'order', 'name'=> $index['name'] ]);
+            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
+            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
+            // order管理
+            $index = array('url'=>'manage', 'C'=>'ManageController', 'name'=>'order.manage');
+            Route::delete(  $index['url'].'/mass_destroy',$index['C'].'@massDestroy')->name($index['name'].'.mass_destroy');
+            Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
+            Route::resource($index['url'], $index['C'], ['as'=> 'order', 'name'=> $index['name'] ]);
+            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
+            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
+            //付款方式
+            $index = array('url'=>'pay', 'C'=>'PayController', 'name'=>'order.pay');
+            Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
+            Route::resource($index['url'], $index['C'], ['as'=> 'order', 'name'=> $index['name'] ]);
+            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
+            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
+            //商品修改記錄
+            $index = array('url'=>'log', 'C'=>'LogController', 'name'=>'order.log');
+            Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
+            Route::resource($index['url'], $index['C'], ['as'=> 'order', 'name'=> $index['name'] ]);
             Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
             Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
         });
@@ -404,6 +437,20 @@ Route::group([
         Route::resource($index['url'], $index['C']);
         Route::post($index['url'].'/update/{id}', $index['C'].'@update')->name($index['name'].'.update');
         Route::post($index['url'].'/destroy/{id}', $index['C'].'@destroy')->name($index['name'].'.destroy');
+
+        /******* Articles管理 ********/
+        $index = array('url'=>'articles', 'C'=>'ArticleController', 'name'=>'articles');
+        Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
+        Route::resource($index['url'], $index['C']);
+        Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
+        Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
+
+        /******* Advertise管理 ********/
+        $index = array('url'=>'advertise', 'C'=>'AdvertiseController', 'name'=>'advertise');
+        Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
+        Route::resource($index['url'], $index['C']);
+        Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
+        Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
     });
 
 });
