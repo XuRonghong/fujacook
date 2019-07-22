@@ -1,3 +1,4 @@
+/* 載入lodash，掛到全域 */
 window._ = require('lodash');
 
 /**
@@ -8,9 +9,25 @@ window._ = require('lodash');
 
 try {
     window.Popper = require('popper.js').default;
+    /* 載入jquery，掛到全域 */
     window.$ = window.jQuery = require('jquery');
+    /* 載入bootstrap 的 jQuery plugin */
+    require('bootstrap-sass');
 
     require('bootstrap');
+
+    /* 載入Vue跟vue-resource */
+    window.Vue = require('vue');
+    require('vue-resource');/**
+     
+    * Laravel透過CSRF TOKEN驗證，記得設定
+    * 讓每個透過vue-resources送出的請求順利送達
+    */
+   Vue.http.interceptors.push((request, next) => {
+       request.headers.set('X-CSRF-TOKEN', Laravel.csrfToken);
+   
+       next();
+   });
 } catch (e) {}
 
 /**

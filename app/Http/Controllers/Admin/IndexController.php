@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\FuncController;
 use App\Presenters\Admin\HomePresenter;
 use App\Http\Controllers\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class IndexController extends Controller
 {
@@ -35,6 +36,16 @@ class IndexController extends Controller
         $goto = $this->funcontroller->globalSearch( request()->get('k', 0));
 
         return $goto?:view('admin.index', compact('data'));
+    }
+
+    //
+    public function setLang(Request $request)
+    {
+        session()->put([
+            'locale' => $request->get('lang' , 'zh-TW'),
+            'lstyle' => $request->get('style', 'flag-icon-tw')
+        ]);
+        return redirect()->back();
     }
 }
 

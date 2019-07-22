@@ -46,10 +46,12 @@ Route::group([
             'CheckAdmin:admin',
 //            'admin/login',
 //            'LoginThrottle:5,10',
+            'CheckLang',
         ]
     ],function(){
 
     Route::get('/', 'IndexController@index');
+    Route::get('/setlang', 'IndexController@setLang')->name('setlang');
 
     /**********************************************************
      * Upload Images
