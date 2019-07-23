@@ -22,9 +22,9 @@ class PermissionTableSeeder extends Seeder
 //        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         $permissions = [];
+
+
         $index[0] = 'admin';
-
-
         /*
          * 帳號管理
          */
@@ -37,12 +37,60 @@ class PermissionTableSeeder extends Seeder
         $permissions[] = Permission::create(['name' => implode('.',$index).'.create','description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.create')]);
         $permissions[] = Permission::create(['name' => implode('.',$index).'.edit',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.edit')]);
         $permissions[] = Permission::create(['name' => implode('.',$index).'.destroy','description'=> trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.destroy')]);
+        // 前台帳號管理
+        $index[1] = 'members';
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.index', 'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.index')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.show',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.show')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.create','description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.create')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.edit',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.edit')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.destroy','description'=> trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.destroy')]);
 
 
-        /*
-         * 權限與Menu
-         */
-        $index[1] = 'permissions';
+        // 群組管理
+        $index[1] = 'group'; $index[2] = 'member';
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.index', 'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.index')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.show',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.show')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.create','description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.create')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.edit',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.edit')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.destroy','description'=> trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.destroy')]);
+//        $index[1] = 'group'; $index[2] = 'store';
+//        $permissions[] = Permission::create(['name' => implode('.',$index).'.index', 'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.index')]);
+//        $permissions[] = Permission::create(['name' => implode('.',$index).'.show',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.show')]);
+//        $permissions[] = Permission::create(['name' => implode('.',$index).'.create','description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.create')]);
+//        $permissions[] = Permission::create(['name' => implode('.',$index).'.edit',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.edit')]);
+//        $permissions[] = Permission::create(['name' => implode('.',$index).'.destroy','description'=> trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.destroy')]);
+//        $index[1] = 'group'; $index[2] = 'supplier';
+//        $permissions[] = Permission::create(['name' => implode('.',$index).'.index', 'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.index')]);
+//        $permissions[] = Permission::create(['name' => implode('.',$index).'.show',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.show')]);
+//        $permissions[] = Permission::create(['name' => implode('.',$index).'.create','description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.create')]);
+//        $permissions[] = Permission::create(['name' => implode('.',$index).'.edit',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.edit')]);
+//        $permissions[] = Permission::create(['name' => implode('.',$index).'.destroy','description'=> trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.destroy')]);
+        $index[1] = 'group'; $index[2] = 'admin';
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.index', 'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.index')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.show',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.show')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.create','description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.create')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.edit',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.edit')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.destroy','description'=> trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.destroy')]);
+
+        // 系統類別設置
+        $index[1] = 'category'; array_forget($index,2);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.index', 'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.index')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.show',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.show')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.create','description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.create')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.edit',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.edit')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.destroy','description'=> trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.destroy')]);
+
+        // log管理
+        $index[1] = 'log'; $index[2] = 'login';
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.index', 'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.index')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.show',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.show')]);
+        $index[1] = 'log'; $index[2] = 'action';
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.index', 'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.index')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.show',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.show')]);
+
+
+        // 權限
+        $index[1] = 'permissions'; array_forget($index,2);
         $permissions[] = Permission::create(['name' => implode('.',$index).'.index', 'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.index')]);
         $permissions[] = Permission::create(['name' => implode('.',$index).'.show',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.show')]);
         $permissions[] = Permission::create(['name' => implode('.',$index).'.create','description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.create')]);
@@ -55,7 +103,8 @@ class PermissionTableSeeder extends Seeder
         $permissions[] = Permission::create(['name' => implode('.',$index).'.edit',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.edit')]);
         $permissions[] = Permission::create(['name' => implode('.',$index).'.destroy','description'=> trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.destroy')]);
 
-        $index[1] = 'menus';
+        // Menu
+        $index[1] = 'menus'; array_forget($index,2);
         $permissions[] = Permission::create(['name' => implode('.',$index).'.index', 'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.index')]);
         $permissions[] = Permission::create(['name' => implode('.',$index).'.show',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.show')]);
         $permissions[] = Permission::create(['name' => implode('.',$index).'.create','description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.create')]);
@@ -68,14 +117,17 @@ class PermissionTableSeeder extends Seeder
         $permissions[] = Permission::create(['name' => implode('.',$index).'.edit',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.edit')]);
         $permissions[] = Permission::create(['name' => implode('.',$index).'.destroy','description'=> trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.destroy')]);
 
-        // log管理
-        $index[1] = 'log'; $index[2] = 'login';
+
+
+        // 商店店家
+        $index[1] = 'store';
         $permissions[] = Permission::create(['name' => implode('.',$index).'.index', 'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.index')]);
         $permissions[] = Permission::create(['name' => implode('.',$index).'.show',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.show')]);
         $permissions[] = Permission::create(['name' => implode('.',$index).'.create','description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.create')]);
         $permissions[] = Permission::create(['name' => implode('.',$index).'.edit',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.edit')]);
         $permissions[] = Permission::create(['name' => implode('.',$index).'.destroy','description'=> trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.destroy')]);
-        $index[1] = 'log'; $index[2] = 'action';
+        // 供應商會員管理
+        $index[1] = 'supplier';
         $permissions[] = Permission::create(['name' => implode('.',$index).'.index', 'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.index')]);
         $permissions[] = Permission::create(['name' => implode('.',$index).'.show',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.show')]);
         $permissions[] = Permission::create(['name' => implode('.',$index).'.create','description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.create')]);
@@ -84,69 +136,39 @@ class PermissionTableSeeder extends Seeder
 
 
         /*
-         * 前台-場面介面管理
+         * article
          */
-        $index[1] = 'scenes'; $index[2] = 'navbar'; $index[3] = 'home';
+        $index[1] = 'article'; array_forget($index,2); array_forget($index,3);
         $permissions[] = Permission::create(['name' => implode('.',$index).'.index', 'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.index')]);
         $permissions[] = Permission::create(['name' => implode('.',$index).'.show',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.show')]);
         $permissions[] = Permission::create(['name' => implode('.',$index).'.create','description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.create')]);
         $permissions[] = Permission::create(['name' => implode('.',$index).'.edit',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.edit')]);
         $permissions[] = Permission::create(['name' => implode('.',$index).'.destroy','description'=> trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.destroy')]);
-        $index[1] = 'scenes'; $index[2] = 'slider'; $index[3] = 'home';
-        $permissions[] = Permission::create(['name' => implode('.',$index).'.index', 'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.index')]);
-        $permissions[] = Permission::create(['name' => implode('.',$index).'.show',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.show')]);
-        $permissions[] = Permission::create(['name' => implode('.',$index).'.create','description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.create')]);
-        $permissions[] = Permission::create(['name' => implode('.',$index).'.edit',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.edit')]);
-        $permissions[] = Permission::create(['name' => implode('.',$index).'.destroy','description'=> trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.destroy')]);
-        $index[1] = 'scenes'; $index[2] = 'header'; $index[3] = 'home';
-        $permissions[] = Permission::create(['name' => implode('.',$index).'.index', 'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.index')]);
-        $permissions[] = Permission::create(['name' => implode('.',$index).'.show',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.show')]);
-        $permissions[] = Permission::create(['name' => implode('.',$index).'.create','description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.create')]);
-        $permissions[] = Permission::create(['name' => implode('.',$index).'.edit',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.edit')]);
-        $permissions[] = Permission::create(['name' => implode('.',$index).'.destroy','description'=> trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.destroy')]);
-        $index[1] = 'scenes'; $index[2] = 'introduce'; $index[3] = 'home';
-        $permissions[] = Permission::create(['name' => implode('.',$index).'.index', 'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.index')]);
-        $permissions[] = Permission::create(['name' => implode('.',$index).'.show',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.show')]);
-        $permissions[] = Permission::create(['name' => implode('.',$index).'.create','description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.create')]);
-        $permissions[] = Permission::create(['name' => implode('.',$index).'.edit',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.edit')]);
-        $permissions[] = Permission::create(['name' => implode('.',$index).'.destroy','description'=> trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.destroy')]);
-        $index[1] = 'scenes'; $index[2] = 'image'; $index[3] = 'home';
-        $permissions[] = Permission::create(['name' => implode('.',$index).'.index', 'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.index')]);
-        $permissions[] = Permission::create(['name' => implode('.',$index).'.show',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.show')]);
-        $permissions[] = Permission::create(['name' => implode('.',$index).'.create','description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.create')]);
-        $permissions[] = Permission::create(['name' => implode('.',$index).'.edit',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.edit')]);
-        $permissions[] = Permission::create(['name' => implode('.',$index).'.destroy','description'=> trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.destroy')]);
-        $index[1] = 'scenes'; $index[2] = 'footer'; $index[3] = 'home';
-        $permissions[] = Permission::create(['name' => implode('.',$index).'.index', 'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.index')]);
-        $permissions[] = Permission::create(['name' => implode('.',$index).'.show',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.show')]);
-        $permissions[] = Permission::create(['name' => implode('.',$index).'.create','description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.create')]);
-        $permissions[] = Permission::create(['name' => implode('.',$index).'.edit',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.edit')]);
-        $permissions[] = Permission::create(['name' => implode('.',$index).'.destroy','description'=> trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.destroy')]);
+
 
 
         /*
-         * 前台網站設定
+         * 公告
          */
-        $index[1] = 'setting'; $index[2] = 'search_keywords';  array_forget($index,3);
+        $index[1] = 'information'; $index[2] = 'announce'; array_forget($index,3);
         $permissions[] = Permission::create(['name' => implode('.',$index).'.index', 'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.index')]);
         $permissions[] = Permission::create(['name' => implode('.',$index).'.show',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.show')]);
         $permissions[] = Permission::create(['name' => implode('.',$index).'.create','description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.create')]);
         $permissions[] = Permission::create(['name' => implode('.',$index).'.edit',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.edit')]);
         $permissions[] = Permission::create(['name' => implode('.',$index).'.destroy','description'=> trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.destroy')]);
-
-        $index[1] = 'setting'; $index[2] = 'parameters';  array_forget($index,3);
-        $permissions[] = Permission::create(['name' => implode('.',$index).'.index', 'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.index')]);
-        $permissions[] = Permission::create(['name' => implode('.',$index).'.show',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.show')]);
-        $permissions[] = Permission::create(['name' => implode('.',$index).'.create','description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.create')]);
-        $permissions[] = Permission::create(['name' => implode('.',$index).'.edit',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.edit')]);
-        $permissions[] = Permission::create(['name' => implode('.',$index).'.destroy','description'=> trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.destroy')]);
-
-
-
         /*
          * 最新消息
          */
-        $index[1] = 'information'; $index[1] = 'news'; array_forget($index,3);
+        $index[1] = 'information'; $index[2] = 'news'; array_forget($index,3);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.index', 'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.index')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.show',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.show')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.create','description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.create')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.edit',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.edit')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.destroy','description'=> trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.destroy')]);
+        /*
+         * 訊息
+         */
+        $index[1] = 'information'; $index[2] = 'messages'; array_forget($index,3);
         $permissions[] = Permission::create(['name' => implode('.',$index).'.index', 'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.index')]);
         $permissions[] = Permission::create(['name' => implode('.',$index).'.show',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.show')]);
         $permissions[] = Permission::create(['name' => implode('.',$index).'.create','description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.create')]);
@@ -155,7 +177,87 @@ class PermissionTableSeeder extends Seeder
         /*
          * 媒體報導
          */
-        $index[1] = 'information'; $index[1] = 'reports'; array_forget($index,3);
+        $index[1] = 'information'; $index[2] = 'reports'; array_forget($index,3);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.index', 'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.index')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.show',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.show')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.create','description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.create')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.edit',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.edit')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.destroy','description'=> trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.destroy')]);
+        /*
+         * Notifications全站通知管理
+         */
+        $index[1] = 'information'; $index[2] = 'notifications'; array_forget($index,3);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.index', 'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.index')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.show',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.show')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.create','description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.create')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.edit',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.edit')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.destroy','description'=> trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.destroy')]);
+
+
+        /*
+         * Product管理
+         */
+        // 商品類別
+        $index[1] = 'product'; $index[2] = 'category'; array_forget($index,3);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.index', 'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.index')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.show',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.show')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.create','description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.create')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.edit',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.edit')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.destroy','description'=> trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.destroy')]);
+        // 商品
+        $index[1] = 'product'; $index[2] = 'manage'; array_forget($index,3);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.index', 'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.index')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.show',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.show')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.create','description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.create')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.edit',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.edit')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.destroy','description'=> trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.destroy')]);
+        // 運費管理
+        $index[1] = 'product'; $index[2] = 'shipping'; array_forget($index,3);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.index', 'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.index')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.show',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.show')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.create','description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.create')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.edit',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.edit')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.destroy','description'=> trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.destroy')]);
+        // 付款方式
+        $index[1] = 'product'; $index[2] = 'pay'; array_forget($index,3);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.index', 'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.index')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.show',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.show')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.create','description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.create')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.edit',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.edit')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.destroy','description'=> trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.destroy')]);
+        // 商品管理記錄
+        $index[1] = 'product'; $index[2] = 'log'; array_forget($index,3);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.index', 'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.index')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.show',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.show')]);
+
+
+
+        /*
+         * 廣告管理
+         */
+        // 廣告類別設置
+        $index[1] = 'advertising'; $index[2] = 'category'; array_forget($index,3);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.index', 'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.index')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.show',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.show')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.create','description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.create')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.edit',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.edit')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.destroy','description'=> trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.destroy')]);
+        // 廣告管理
+        $index[1] = 'advertising'; $index[2] = 'manage'; array_forget($index,3);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.index', 'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.index')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.show',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.show')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.create','description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.create')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.edit',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.edit')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.destroy','description'=> trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.destroy')]);
+        // 平台推薦商品管理
+        $index[1] = 'advertising'; $index[2] = 'recommend'; array_forget($index,3);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.index', 'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.index')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.show',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.show')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.create','description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.create')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.edit',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.edit')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.destroy','description'=> trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.destroy')]);
+        // 促銷活動
+        $index[1] = 'advertising'; $index[2] = 'promotions'; array_forget($index,3);
         $permissions[] = Permission::create(['name' => implode('.',$index).'.index', 'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.index')]);
         $permissions[] = Permission::create(['name' => implode('.',$index).'.show',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.show')]);
         $permissions[] = Permission::create(['name' => implode('.',$index).'.create','description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.create')]);
@@ -165,16 +267,92 @@ class PermissionTableSeeder extends Seeder
 
 
         /*
-         * 產品設定
+         * 前台-場面介面管理
          */
-        $index[1] = 'products'; $index[2] = 'category';  array_forget($index,3);
+        $index[1] = 'scenes'; $index[2] = 'navbar'; array_forget($index,3);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.index', 'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.index')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.show',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.show')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.create','description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.create')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.edit',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.edit')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.destroy','description'=> trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.destroy')]);
+        $index[1] = 'scenes'; $index[2] = 'slider'; array_forget($index,3);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.index', 'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.index')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.show',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.show')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.create','description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.create')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.edit',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.edit')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.destroy','description'=> trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.destroy')]);
+        $index[1] = 'scenes'; $index[2] = 'introduce'; array_forget($index,3);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.index', 'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.index')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.show',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.show')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.create','description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.create')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.edit',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.edit')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.destroy','description'=> trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.destroy')]);
+        $index[1] = 'scenes'; $index[2] = 'image'; array_forget($index,3);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.index', 'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.index')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.show',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.show')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.create','description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.create')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.edit',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.edit')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.destroy','description'=> trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.destroy')]);
+        $index[1] = 'scenes'; $index[2] = 'footer'; array_forget($index,3);
         $permissions[] = Permission::create(['name' => implode('.',$index).'.index', 'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.index')]);
         $permissions[] = Permission::create(['name' => implode('.',$index).'.show',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.show')]);
         $permissions[] = Permission::create(['name' => implode('.',$index).'.create','description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.create')]);
         $permissions[] = Permission::create(['name' => implode('.',$index).'.edit',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.edit')]);
         $permissions[] = Permission::create(['name' => implode('.',$index).'.destroy','description'=> trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.destroy')]);
 
-        $index[1] = 'products'; $index[2] = 'manage';  array_forget($index,3);
+
+        /*
+         * 活動管理
+         */
+        //優惠券
+        $index[1] = 'activity'; $index[2] = 'coupon'; array_forget($index,3);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.index', 'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.index')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.show',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.show')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.create','description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.create')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.edit',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.edit')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.destroy','description'=> trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.destroy')]);
+        //點數
+        $index[1] = 'activity'; $index[2] = 'coin'; array_forget($index,3);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.index', 'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.index')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.show',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.show')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.create','description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.create')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.edit',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.edit')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.destroy','description'=> trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.destroy')]);
+        //活動訊息
+        $index[1] = 'activity'; $index[2] = 'news'; array_forget($index,3);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.index', 'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.index')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.show',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.show')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.create','description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.create')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.edit',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.edit')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.destroy','description'=> trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.destroy')]);
+        //活動報名
+        $index[1] = 'activity'; $index[2] = 'sign_up'; array_forget($index,3);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.index', 'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.index')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.show',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.show')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.create','description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.create')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.edit',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.edit')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.destroy','description'=> trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.destroy')]);
+        //活動檔期
+        $index[1] = 'activity'; $index[2] = 'schedule'; array_forget($index,3);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.index', 'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.index')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.show',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.show')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.create','description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.create')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.edit',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.edit')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.destroy','description'=> trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.destroy')]);
+
+
+        /*
+         * 客服專區
+         */
+        //連繫我們
+        $index[1] = 'service'; $index[2] = 'contactus'; array_forget($index,3);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.index', 'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.index')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.show',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.show')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.create','description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.create')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.edit',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.edit')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.destroy','description'=> trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.destroy')]);
+        //留言專區
+        $index[1] = 'service'; $index[2] = 'message'; array_forget($index,3);
         $permissions[] = Permission::create(['name' => implode('.',$index).'.index', 'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.index')]);
         $permissions[] = Permission::create(['name' => implode('.',$index).'.show',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.show')]);
         $permissions[] = Permission::create(['name' => implode('.',$index).'.create','description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.create')]);
@@ -183,26 +361,33 @@ class PermissionTableSeeder extends Seeder
 
 
 
-        // 會員管理
-        $permissions[] = Permission::create(['name' => 'admin.members.index', 'description' => '帳號管理-會員管理 總覽']);
-        $permissions[] = Permission::create(['name' => 'admin.members.show', 'description' => '帳號管理-會員管理 檢視']);
-        $permissions[] = Permission::create(['name' => 'admin.members.update', 'description' => '帳號管理-會員管理 編輯']);
+        /*
+         * 網站設定
+         */
+        //關鍵字設置
+        $index[1] = 'setting'; $index[2] = 'search_keywords';  array_forget($index,3);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.index', 'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.index')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.show',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.show')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.create','description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.create')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.edit',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.edit')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.destroy','description'=> trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.destroy')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.log','description'=> trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.destroy')]);
+        //系統參數設定
+        $index[1] = 'setting'; $index[2] = 'parameters';  array_forget($index,3);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.index', 'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.index')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.show',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.show')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.create','description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.create')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.edit',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.edit')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.destroy','description'=> trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.destroy')]);
+        //匯率管理
+        $index[1] = 'setting'; $index[2] = 'exchange_rate';  array_forget($index,3);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.index', 'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.index')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.show',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.show')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.create','description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.create')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.edit',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.edit')]);
+        $permissions[] = Permission::create(['name' => implode('.',$index).'.destroy','description'=> trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.destroy')]);
 
-        //全站通知管理
-        $permissions[] = Permission::create(['name' => 'admin.notifications.index', 'description' => '全站通知管理 總覽']);
-        $permissions[] = Permission::create(['name' => 'admin.notifications.show', 'description' => '全站通知管理 檢視']);
-        $permissions[] = Permission::create(['name' => 'admin.notifications.store', 'description' => '全站通知管理 新增']);
-        $permissions[] = Permission::create(['name' => 'admin.notifications.update', 'description' => '全站通知管理 更新']);
-        $permissions[] = Permission::create(['name' => 'admin.notifications.destroy', 'description' => '全站通知管理 刪除']);
 
-
-        //供應商
-        $index = ['store', '供應商'];
-        $permissions[] = Permission::create(['name' => 'admin.'.$index[0].'.index', 'description' => $index[1].' 總覽']);
-        $permissions[] = Permission::create(['name' => 'admin.'.$index[0].'.show', 'description' => $index[1].' 檢視']);
-        $permissions[] = Permission::create(['name' => 'admin.'.$index[0].'.create', 'description' => $index[1].' 新增']);
-        $permissions[] = Permission::create(['name' => 'admin.'.$index[0].'.edit', 'description' => $index[1].' 更新']);
-        $permissions[] = Permission::create(['name' => 'admin.'.$index[0].'.destroy', 'description' => $index[1].' 刪除']);
 
         //全站標籤管理
         $permissions[] = Permission::create(['name' => 'admin.hashtags.index', 'description' => '全站標籤管理 總覽']);
@@ -274,17 +459,6 @@ class PermissionTableSeeder extends Seeder
         $permissions[] = Permission::create(['name' => 'admin.coupons.update', 'description' => 'COUPONS管理 更新']);
         $permissions[] = Permission::create(['name' => 'admin.coupons.destroy', 'description' => 'COUPONS管理 刪除']);
 
-
-
-        /*
-         * 連繫我們
-         */
-        $index[1] = 'service'; $index[2] = 'contactus'; array_forget($index,3);
-        $permissions[] = Permission::create(['name' => implode('.',$index).'.index', 'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.index')]);
-        $permissions[] = Permission::create(['name' => implode('.',$index).'.show',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.show')]);
-        $permissions[] = Permission::create(['name' => implode('.',$index).'.create','description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.create')]);
-        $permissions[] = Permission::create(['name' => implode('.',$index).'.edit',  'description' => trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.edit')]);
-        $permissions[] = Permission::create(['name' => implode('.',$index).'.destroy','description'=> trans('permission.'.implode('.',$index).'.title').trans('permission.'.implode('.',$index).'.destroy')]);
 
 
         /******* Role **********/

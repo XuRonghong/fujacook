@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 
-class ManageController extends Controller
+class ProductController extends Controller
 {
     protected $repository;
     protected $presenter;

@@ -61,6 +61,34 @@ Route::group([
 //        Route::post($index['url'] . '/update/{id}', $index['C'] . '@update')->name($index['name'] . '.update');
 //        Route::post($index['url'] . '/destroy/{id}', $index['C'] . '@destroy')->name($index['name'] . '.destroy');
     });
+
+
+    /******* member管理 ********/
+    Route::group([
+//                'prefix' => 'members',
+//                'namespace' => 'Member',
+        'middleware' => 'CheckAuthLogin'
+    ], function() {
+        //
+        $index = array('url'=>'members', 'C'=>'MemberController', 'name'=>'members');
+        Route::get($index['url'].'/list', $index['C'].'@list')->name($index['name'].'.list');
+        Route::resource($index['url'], $index['C']);
+        Route::post($index['url'].'/update/{id}', $index['C'].'@update')->name($index['name'].'.update');
+        Route::post($index['url'].'/destroy/{id}', $index['C'].'@destroy')->name($index['name'].'.destroy');
+        Route::post('dosaveshow', $index['C'].'@doSaveShow' );
+        Route::post('dosavepassword', $index['C'].'@doSavePassword' );
+
+        Route::group([
+            'prefix' => $index['url'].'/info',
+        ], function() {
+            //
+            Route::get( '', 'InfoController@index' );
+            Route::any( 'getlist', 'InfoController@getList' );
+            Route::get( 'edit/{id}', 'InfoController@edit' );
+            Route::post( 'dosave', 'InfoController@doSave' );
+        });
+    });
+
 });
 
 

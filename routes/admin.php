@@ -90,12 +90,91 @@ Route::group([
      * 帳號管理
      *
      *********************************************************/
+        //管理員帳號
         $index = array('url'=>'admins', 'C'=>'AdminController', 'name'=>'admins');
         Route::get($index['url'].'/list', $index['C'].'@list')->name($index['name'].'.list');
         Route::resource($index['url'], $index['C']);
         Route::post($index['url'].'/update/{id}', $index['C'].'@update')->name($index['name'].'.update');
         Route::post($index['url'].'/destroy/{id}', $index['C'].'@destroy')->name($index['name'].'.destroy');
+        //一般會員管理
+        $index = array('url'=>'members', 'C'=>'MemberController', 'name'=>'members');
+        Route::get($index['url'].'/list', $index['C'].'@list')->name($index['name'].'.list');
+        Route::resource($index['url'], $index['C']);
+        Route::post($index['url'].'/update/{id}', $index['C'].'@update')->name($index['name'].'.update');
+        Route::post($index['url'].'/destroy/{id}', $index['C'].'@destroy')->name($index['name'].'.destroy');
 
+
+    /**********************************************************
+     *
+     * 群組管理 (not completed..)
+     *
+     *********************************************************/
+        Route::group(
+            [
+                'name' => 'group.', 'prefix' => 'group', 'namespace' => 'Group'
+            ],
+            function() {
+            //一般會員管理
+            $index = array('url'=>'member', 'C'=>'gMemberController', 'name'=>'group.member');
+            Route::get($index['url'].'/list', $index['C'].'@list')->name($index['name'].'.list');
+            Route::resource($index['url'], $index['C'], ['as'=> 'group', 'name'=> $index['name'] ]);
+            Route::post($index['url'].'/update/{id}', $index['C'].'@update')->name($index['name'].'.update');
+            Route::post($index['url'].'/destroy/{id}', $index['C'].'@destroy')->name($index['name'].'.destroy');
+            //店家會員管理
+            $index = array('url'=>'store', 'C'=>'gStoreController', 'name'=>'group.store');
+            Route::get($index['url'].'/list', $index['C'].'@list')->name($index['name'].'.list');
+            Route::resource($index['url'], $index['C'], ['as'=> 'group', 'name'=> $index['name'] ]);
+            Route::post($index['url'].'/update/{id}', $index['C'].'@update')->name($index['name'].'.update');
+            Route::post($index['url'].'/destroy/{id}', $index['C'].'@destroy')->name($index['name'].'.destroy');
+            //供應商會員管理
+            $index = array('url'=>'supplier', 'C'=>'gSupplierController', 'name'=>'group.supplier');
+            Route::get($index['url'].'/list', $index['C'].'@list')->name($index['name'].'.list');
+            Route::resource($index['url'], $index['C'], ['as'=> 'group', 'name'=> $index['name'] ]);
+            Route::post($index['url'].'/update/{id}', $index['C'].'@update')->name($index['name'].'.update');
+            Route::post($index['url'].'/destroy/{id}', $index['C'].'@destroy')->name($index['name'].'.destroy');
+            //管理員帳號
+            $index = array('url'=>'admin', 'C'=>'gAdminController', 'name'=>'group.admin');
+            Route::get($index['url'].'/list', $index['C'].'@list')->name($index['name'].'.list');
+            Route::resource($index['url'], $index['C'], ['as'=> 'group', 'name'=> $index['name'] ]);
+            Route::post($index['url'].'/update/{id}', $index['C'].'@update')->name($index['name'].'.update');
+            Route::post($index['url'].'/destroy/{id}', $index['C'].'@destroy')->name($index['name'].'.destroy');
+        });
+
+
+    /**********************************************************
+     *
+     * 系統類別設置 (not completed..)
+     *
+     *********************************************************/
+        Route::group(['prefix' => 'category', 'namespace' => 'Category'], function() {
+            //
+            $index = array('url'=>'', 'C'=>'CategoryController', 'name'=>'category');
+            Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
+            Route::resource($index['url'], $index['C'], ['as'=> 'Category', 'name'=> $index['name'] ]);
+            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
+            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
+        });
+
+
+    /**********************************************************
+     *
+     * log 管理
+     *
+     *********************************************************/
+        Route::group(['prefix' => 'log', 'namespace' => 'Log'], function() {
+            //
+            $index = array('url'=>'login', 'C'=>'LogLoginController', 'name'=>'log.login');
+            Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
+            Route::resource($index['url'], $index['C'], ['as'=> 'Log', 'name'=> $index['name'] ]);
+            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
+            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
+            //
+            $index = array('url'=>'action', 'C'=>'LogActionController', 'name'=>'log.action');
+            Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
+            Route::resource($index['url'], $index['C'], ['as'=> 'Log', 'name'=> $index['name'] ]);
+            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
+            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
+        });
 
 
     /**********************************************************
@@ -118,7 +197,6 @@ Route::group([
         Route::get( $index['url'].'/{id}'.'/edit', $index['C'].'@edit'   )->name($index['name'].'.edit');
         Route::post($index['url'].'/update/{id}',  $index['C'].'@update' )->name($index['name'].'.update');
         Route::post($index['url'].'/destroy/{id}', $index['C'].'@destroy')->name($index['name'].'.destroy');
-
 
 
     /**********************************************************
@@ -146,24 +224,232 @@ Route::group([
 
     /**********************************************************
      *
-     * log 管理
+     * 商店店家
      *
      *********************************************************/
-        Route::group(['prefix' => 'log', 'namespace' => 'log'], function() {
-            //
-            $index = array('url'=>'login', 'C'=>'LogLoginController', 'name'=>'log.login');
-            Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
-            Route::resource($index['url'], $index['C'], ['as'=> 'log', 'name'=> $index['name'] ]);
-            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
-            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
+        Route::group(
+            [
+                'name' => 'store.', 'prefix' => 'store', 'namespace' => 'Store'
+            ],
+            function() {
+            //一般會員管理
+            $index = array('url'=>'member', 'C'=>'StoreController', 'name'=>'store.member');
+            Route::get($index['url'].'/list', $index['C'].'@list')->name($index['name'].'.list');
+            Route::resource($index['url'], $index['C'], ['as'=> 'group', 'name'=> $index['name'] ]);
+            Route::post($index['url'].'/update/{id}', $index['C'].'@update')->name($index['name'].'.update');
+            Route::post($index['url'].'/destroy/{id}', $index['C'].'@destroy')->name($index['name'].'.destroy');
+            //店家會員管理
+            $index = array('url'=>'store', 'C'=>'gStoreController', 'name'=>'group.store');
+            Route::get($index['url'].'/list', $index['C'].'@list')->name($index['name'].'.list');
+            Route::resource($index['url'], $index['C'], ['as'=> 'group', 'name'=> $index['name'] ]);
+            Route::post($index['url'].'/update/{id}', $index['C'].'@update')->name($index['name'].'.update');
+            Route::post($index['url'].'/destroy/{id}', $index['C'].'@destroy')->name($index['name'].'.destroy');
+            //供應商會員管理
+            $index = array('url'=>'supplier', 'C'=>'gSupplierController', 'name'=>'group.supplier');
+            Route::get($index['url'].'/list', $index['C'].'@list')->name($index['name'].'.list');
+            Route::resource($index['url'], $index['C'], ['as'=> 'group', 'name'=> $index['name'] ]);
+            Route::post($index['url'].'/update/{id}', $index['C'].'@update')->name($index['name'].'.update');
+            Route::post($index['url'].'/destroy/{id}', $index['C'].'@destroy')->name($index['name'].'.destroy');
+            //管理員帳號
+            $index = array('url'=>'admin', 'C'=>'gAdminController', 'name'=>'group.admin');
+            Route::get($index['url'].'/list', $index['C'].'@list')->name($index['name'].'.list');
+            Route::resource($index['url'], $index['C'], ['as'=> 'group', 'name'=> $index['name'] ]);
+            Route::post($index['url'].'/update/{id}', $index['C'].'@update')->name($index['name'].'.update');
+            Route::post($index['url'].'/destroy/{id}', $index['C'].'@destroy')->name($index['name'].'.destroy');
+        });
 
+
+    /**********************************************************
+     *
+     * 供應商會員管理
+     *
+     *********************************************************/
+        Route::group(
+            [
+                'name' => 'supplier.', 'prefix' => 'supplier', 'namespace' => 'Supplier'
+            ],
+            function() {
+                //
+        });
+
+
+
+    /**********************************************************
+     *
+     * Articles管理
+     *
+     *********************************************************/
+        Route::group(
+            [
+                'name' => 'articles.', 'prefix' => 'articles', 'namespace' => 'Articles'
+            ],
+            function() {
             //
-            $index = array('url'=>'action', 'C'=>'LogActionController', 'name'=>'log.action');
+            $index = array('url'=>'post', 'C'=>'ArticleController', 'name'=>'post');
             Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
-            Route::resource($index['url'], $index['C'], ['as'=> 'log', 'name'=> $index['name'] ]);
+            Route::resource($index['url'], $index['C']);
             Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
             Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
         });
+
+
+
+    /**********************************************************
+     *
+     * 信息管理
+     *
+     *********************************************************/
+        Route::group(
+            [
+                'name' => 'information.',
+                'prefix' => 'information',
+                'namespace' => 'Information',
+            ], function() {
+
+            // 公告
+            $index = array('url'=>'announce', 'C'=>'AnnounceController', 'name'=>'information.announce');
+            Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
+            Route::resource($index['url'], $index['C'], ['as'=> 'information', 'name'=> $index['name'] ]);
+            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
+            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
+
+            // 最新消息
+            $index = array('url'=>'news', 'C'=>'NewsController', 'name'=>'information.news');
+            Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
+            Route::resource($index['url'], $index['C'], ['as'=> 'information', 'name'=> $index['name'] ]);
+            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
+            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
+
+            // 訊息
+            $index = array('url'=>'messages', 'C'=>'MessageController', 'name'=>'information.messages');
+            Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
+            Route::resource($index['url'], $index['C'], ['as'=> 'information', 'name'=> $index['name'] ]);
+            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
+            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
+
+            // 媒體報導
+            $index = array('url'=>'reports', 'C'=>'ReportController', 'name'=>'information.reports');
+            Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
+            Route::resource($index['url'], $index['C'], ['as'=> 'information', 'name'=> $index['name'] ]);
+            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
+            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
+
+            // notifications (not completed..)
+            $index = array('url'=>'notifications', 'C'=>'NotificationController', 'name'=>'information.notifications');
+            Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
+            Route::resource($index['url'], $index['C'], ['as'=> 'information', 'name'=> $index['name'] ]);
+            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
+            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
+        });
+
+
+
+    /**********************************************************
+     *
+     * 產品管理
+     *
+     *********************************************************/
+        Route::group(
+            [
+                'name' => 'product.',
+                'prefix' => 'product',
+                'namespace' => 'Product',
+            ], function() {
+            // 商品類別設置
+            $index = array('url'=>'category', 'C'=>'pCategoryController', 'name'=>'product.category');
+            Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
+            Route::resource($index['url'], $index['C'], ['as'=> 'product', 'name'=> $index['name'] ]);
+            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
+            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
+            // 商品管理
+            $index = array('url'=>'manage', 'C'=>'ProductController', 'name'=>'product.manage');
+            Route::delete(  $index['url'].'/mass_destroy',$index['C'].'@massDestroy')->name($index['name'].'.mass_destroy');
+            Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
+            Route::resource($index['url'], $index['C'], ['as'=> 'product', 'name'=> $index['name'] ]);
+            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
+            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
+            // 運費管理
+            $index = array('url'=>'shipping', 'C'=>'ShippingController', 'name'=>'product.shipping');
+            Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
+            Route::resource($index['url'], $index['C'], ['as'=> 'product', 'name'=> $index['name'] ]);
+            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
+            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
+            //付款方式
+            $index = array('url'=>'pay', 'C'=>'PayController', 'name'=>'product.pay');
+            Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
+            Route::resource($index['url'], $index['C'], ['as'=> 'product', 'name'=> $index['name'] ]);
+            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
+            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
+            //商品修改記錄
+            $index = array('url'=>'log', 'C'=>'LogController', 'name'=>'product.log');
+            Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
+            Route::resource($index['url'], $index['C'], ['as'=> 'product', 'name'=> $index['name'] ]);
+            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
+            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
+        });
+
+
+
+    /**********************************************************
+     *
+     * 訂單管理
+     *
+     *********************************************************/
+        Route::group(
+            [
+                'name' => 'order.',
+                'prefix' => 'order',
+                'namespace' => 'Order',
+            ], function() {
+            // 商品訂單
+            $index = array('url'=>'product', 'C'=>'OrderController', 'name'=>'order.product');
+            Route::delete(  $index['url'].'/mass_destroy',$index['C'].'@massDestroy')->name($index['name'].'.mass_destroy');
+            Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
+            Route::resource($index['url'], $index['C'], ['as'=> 'order', 'name'=> $index['name'] ]);
+            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
+            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
+        });
+
+
+
+    /**********************************************************
+     *
+     * 廣告管理
+     *
+     *********************************************************/
+        Route::group(
+            [
+                'name' => 'advertising.',
+                'prefix' => 'advertising',
+                'namespace' => 'Advertising',
+            ], function() {
+            // 平台推薦商品管理
+            $index = array('url'=>'recommend', 'C'=>'RecommendController', 'name'=>'advertising.recommend');
+            Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
+            Route::resource($index['url'], $index['C'], ['as'=> 'advertising', 'name'=> $index['name'] ]);
+            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
+            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
+            // 促銷活動
+            $index = array('url'=>'promotions', 'C'=>'PromotionsController', 'name'=>'advertising.promotions');
+            Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
+            Route::resource($index['url'], $index['C'], ['as'=> 'advertising', 'name'=> $index['name'] ]);
+            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
+            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
+            // 廣告類別設置
+            $index = array('url'=>'category', 'C'=>'adCategoryController', 'name'=>'advertising.category');
+            Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
+            Route::resource($index['url'], $index['C'], ['as'=> 'advertising', 'name'=> $index['name'] ]);
+            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
+            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
+            // 廣告管理
+            $index = array('url'=>'manage', 'C'=>'AdController', 'name'=>'advertising.manage');
+            Route::delete(  $index['url'].'/mass_destroy',$index['C'].'@massDestroy')->name($index['name'].'.mass_destroy');
+            Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
+            Route::resource($index['url'], $index['C'], ['as'=> 'advertising', 'name'=> $index['name'] ]);
+            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
+            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
+        });
+
 
 
     /**********************************************************
@@ -171,11 +457,12 @@ Route::group([
      * 前台-場面介面管理
      *
      *********************************************************/
-        Route::group([
-            'name' => 'scenes.',
-            'prefix' => 'scenes',
-            'namespace' => 'Scenes',
-        ], function() {
+        Route::group(
+            [
+                'name' => 'scenes.',
+                'prefix' => 'scenes',
+                'namespace' => 'Scenes',
+            ], function() {
             //
             $index = array('url'=>'navbar', 'C'=>'NavbarController', 'name'=>'scenes.navbar');
             Route::get( $index['url'].'/list',   $index['C'].'@list'  )->name($index['name'].'.list');
@@ -216,20 +503,101 @@ Route::group([
 
     /**********************************************************
      *
+     * 活動管理
+     *
+     *********************************************************/
+        Route::group(
+            [
+                'name' => 'activity.',
+                'prefix' => 'activity',
+                'namespace' => 'Activity',
+            ], function() {
+
+            // 優惠券
+            $index = array('url'=>'coupon', 'C'=>'CouponController', 'name'=>'activity.coupon');
+            Route::get( $index['url'].'/list',   $index['C'].'@list'  )->name($index['name'].'.list');
+            Route::resource($index['url'], $index['C'], ['as'=> 'activity', 'name'=> $index['name'] ]);
+            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
+            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
+
+            // 點數
+            $index = array('url'=>'coin', 'C'=>'CoinController', 'name'=>'activity.coin');
+            Route::get( $index['url'].'/list',   $index['C'].'@list'  )->name($index['name'].'.list');
+            Route::resource($index['url'], $index['C'], ['as'=> 'activity', 'name'=> $index['name'] ]);
+            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
+            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
+
+            // 活動訊息
+            $index = array('url'=>'news', 'C'=>'aNewsController', 'name'=>'activity.news');
+            Route::get( $index['url'].'/list',   $index['C'].'@list'  )->name($index['name'].'.list');
+            Route::resource($index['url'], $index['C'], ['as'=> 'activity', 'name'=> $index['name'] ]);
+            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
+            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
+
+            // 活動報名
+            $index = array('url'=>'sign_up', 'C'=>'SignupController', 'name'=>'activity.sign_up');
+            Route::get( $index['url'].'/list',   $index['C'].'@list'  )->name($index['name'].'.list');
+            Route::resource($index['url'], $index['C'], ['as'=> 'activity', 'name'=> $index['name'] ]);
+            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
+            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
+
+            // 活動檔期
+            $index = array('url'=>'schedule', 'C'=>'ScheduleController', 'name'=>'activity.schedule');
+            Route::get( $index['url'].'/list',   $index['C'].'@list'  )->name($index['name'].'.list');
+            Route::resource($index['url'], $index['C'], ['as'=> 'activity', 'name'=> $index['name'] ]);
+            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
+            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
+        });
+
+
+
+    /**********************************************************
+     *
+     * 客服專區
+     *
+     *********************************************************/
+        Route::group(
+            [
+                'name' => 'service.',
+                'prefix' => 'service',
+                'namespace' => 'Service',
+            ], function() {
+            // 連繫我們
+            $index = array('url'=>'contactus', 'C'=>'ContactusController', 'name'=>'service.contactus');
+            Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
+            Route::resource($index['url'], $index['C'], ['as'=> 'service', 'name'=> $index['name'] ]);
+            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
+            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
+            // 留言專區
+            $index = array('url'=>'message', 'C'=>'sMessageController', 'name'=>'service.message');
+            Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
+            Route::resource($index['url'], $index['C'], ['as'=> 'service', 'name'=> $index['name'] ]);
+            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
+            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
+        });
+
+
+
+    /**********************************************************
+     *
      * 系統設置
      *
      *********************************************************/
-        Route::group([
-            'name' => 'setting.',
-            'prefix' => 'setting',
-            'namespace' => 'Setting',
-        ], function() {
-            //搜尋關鍵字
+        Route::group(
+            [
+                'name' => 'setting.',
+                'prefix' => 'setting',
+                'namespace' => 'Setting',
+            ], function() {
+            //關鍵字管理
             $index = array('url'=>'search_keywords', 'C'=>'KeywordController', 'name'=>'setting.search_keywords');
             Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
             Route::resource($index['url'], $index['C'], ['as'=> 'setting', 'name'=> $index['name'] ]);
             Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
             Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
+                //關鍵字記錄
+                Route::get( $index['url'].'/log',   $index['C'].'@log'  )->name($index['name'].'.log');
+
             //系統參數 meta
             $index = array('url'=>'parameters', 'C'=>'ParameterController', 'name'=>'setting.parameters');
             Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
@@ -246,215 +614,31 @@ Route::group([
                 Route::get( $index['url'].'/{id}'.'/edit', $index['C'].'@edit'   )->name($index['name'].'.edit');
                 Route::post($index['url'].'/update/{id}',  $index['C'].'@update' )->name($index['name'].'.update');
                 Route::post($index['url'].'/destroy/{id}', $index['C'].'@destroy')->name($index['name'].'.destroy');
+
+            //匯率管理 (not completed..)
+            Route::group(
+                [
+                    'name' => 'exchange_rate.', 'prefix' => 'exchange_rate'
+                ],
+                function() {
+                    //匯率設定
+                    $index = array('url'=>'set', 'C'=>'ExchangeRateController', 'name'=>'setting.exchange_rate.set');
+                    Route::get( $index['url'].'/list',   $index['C'].'@list'  )->name($index['name'].'.list');
+                    Route::get( $index['url'],           $index['C'].'@index' )->name($index['name'].'.index');
+                    Route::get( $index['url'].'/create', $index['C'].'@create')->name($index['name'].'.create');
+                    Route::post($index['url'],           $index['C'].'@store' )->name($index['name'].'.store');
+                    Route::get( $index['url'].'/{id}',   $index['C'].'@show'  )->name($index['name'].'.show');
+                    Route::get( $index['url'].'/{id}'.'/edit', $index['C'].'@edit'   )->name($index['name'].'.edit');
+                    Route::post($index['url'].'/update/{id}',  $index['C'].'@update' )->name($index['name'].'.update');
+                    Route::post($index['url'].'/destroy/{id}', $index['C'].'@destroy')->name($index['name'].'.destroy');
+                    //歷史匯率
+                    $index = array('url'=>'log', 'C'=>'ExchangeRateController', 'name'=>'setting.exchange_rate.log');
+                    Route::get( $index['url'].'/log',   $index['C'].'@log'  )->name($index['name']);
+                });
         });
 
 
-
-    /**********************************************************
-     *
-     * 信息管理
-     *
-     *********************************************************/
-        Route::group([
-            'name' => 'information.',
-            'prefix' => 'information',
-            'namespace' => 'Information',
-        ], function() {
-
-            // 最新消息
-            $index = array('url'=>'news', 'C'=>'NewsController', 'name'=>'information.news');
-            Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
-            Route::resource($index['url'], $index['C'], ['as'=> 'information', 'name'=> $index['name'] ]);
-            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
-            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
-
-            // 媒體報導
-            $index = array('url'=>'reports', 'C'=>'ReportController', 'name'=>'information.reports');
-            Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
-            Route::resource($index['url'], $index['C'], ['as'=> 'information', 'name'=> $index['name'] ]);
-            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
-            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
-
-            // notifications
-            $index = array('url'=>'notifications', 'C'=>'NotificationController', 'name'=>'information.notifications');
-            Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
-            Route::resource($index['url'], $index['C'], ['as'=> 'information', 'name'=> $index['name'] ]);
-            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
-            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
-        });
-
-
-
-
-    /**********************************************************
-     *
-     * 產品管理
-     *
-     *********************************************************/
-        Route::group([
-            'name' => 'product.',
-            'prefix' => 'product',
-            'namespace' => 'Product',
-        ], function() {
-                // 商品類別設置
-            $index = array('url'=>'category', 'C'=>'CategoryController', 'name'=>'product.category');
-            Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
-            Route::resource($index['url'], $index['C'], ['as'=> 'product', 'name'=> $index['name'] ]);
-            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
-            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
-            // 商品管理
-            $index = array('url'=>'manage', 'C'=>'ManageController', 'name'=>'product.manage');
-            Route::delete(  $index['url'].'/mass_destroy',$index['C'].'@massDestroy')->name($index['name'].'.mass_destroy');
-            Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
-            Route::resource($index['url'], $index['C'], ['as'=> 'product', 'name'=> $index['name'] ]);
-            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
-            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
-            // 運費管理
-            $index = array('url'=>'shipping', 'C'=>'ShippingController', 'name'=>'product.shipping');
-            Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
-            Route::resource($index['url'], $index['C'], ['as'=> 'product', 'name'=> $index['name'] ]);
-            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
-            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
-            //付款方式
-            $index = array('url'=>'pay', 'C'=>'PayController', 'name'=>'product.pay');
-            Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
-            Route::resource($index['url'], $index['C'], ['as'=> 'product', 'name'=> $index['name'] ]);
-            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
-            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
-            //商品修改記錄
-            $index = array('url'=>'log', 'C'=>'LogController', 'name'=>'product.log');
-            Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
-            Route::resource($index['url'], $index['C'], ['as'=> 'product', 'name'=> $index['name'] ]);
-            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
-            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
-        });
-
-
-
-
-        /**********************************************************
-         *
-         * Order 管理
-         *
-         *********************************************************/
-        Route::group([
-            'name' => 'order.',
-            'prefix' => 'order',
-            'namespace' => 'Order',
-        ], function() {
-            // 商品類別設置
-            $index = array('url'=>'category', 'C'=>'CategoryController', 'name'=>'order.category');
-            Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
-            Route::resource($index['url'], $index['C'], ['as'=> 'order', 'name'=> $index['name'] ]);
-            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
-            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
-            // order管理
-            $index = array('url'=>'manage', 'C'=>'ManageController', 'name'=>'order.manage');
-            Route::delete(  $index['url'].'/mass_destroy',$index['C'].'@massDestroy')->name($index['name'].'.mass_destroy');
-            Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
-            Route::resource($index['url'], $index['C'], ['as'=> 'order', 'name'=> $index['name'] ]);
-            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
-            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
-            //付款方式
-            $index = array('url'=>'pay', 'C'=>'PayController', 'name'=>'order.pay');
-            Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
-            Route::resource($index['url'], $index['C'], ['as'=> 'order', 'name'=> $index['name'] ]);
-            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
-            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
-            //商品修改記錄
-            $index = array('url'=>'log', 'C'=>'LogController', 'name'=>'order.log');
-            Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
-            Route::resource($index['url'], $index['C'], ['as'=> 'order', 'name'=> $index['name'] ]);
-            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
-            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
-        });
-
-
-
-    /**********************************************************
-     *
-     * 客服專區
-     *
-     *********************************************************/
-        // 連繫我們
-        Route::group([
-            'name' => 'service.',
-            'prefix' => 'service',
-            'namespace' => 'Service',
-        ], function() {
-            //
-            $index = array('url'=>'contactus', 'C'=>'ContactusController', 'name'=>'service.contactus');
-            Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
-            Route::resource($index['url'], $index['C'], ['as'=> 'service', 'name'=> $index['name'] ]);
-            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
-            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
-        });
-
-
-
-
-        /******* member管理 ********/
-//        Route::group([
-////                'prefix' => 'members',
-////                'namespace' => 'Member',
-//                'middleware' => 'CheckAuthLogin'
-//            ], function() {
-//            //
-//            $index = array('url'=>'members', 'C'=>'MemberController', 'name'=>'members');
-//            Route::get($index['url'].'/list', $index['C'].'@list')->name($index['name'].'.list');
-//            Route::resource($index['url'], $index['C']);
-//            Route::post($index['url'].'/update/{id}', $index['C'].'@update')->name($index['name'].'.update');
-//            Route::post($index['url'].'/destroy/{id}', $index['C'].'@destroy')->name($index['name'].'.destroy');
-//            Route::post('dosaveshow', $index['C'].'@doSaveShow' );
-//            Route::post('dosavepassword', $index['C'].'@doSavePassword' );
-//
-//            Route::group([
-//                    'prefix' => $index['url'].'/info',
-//                ], function() {
-//                //
-//                Route::get( '', 'InfoController@index' );
-//                Route::any( 'getlist', 'InfoController@getList' );
-//                Route::get( 'edit/{id}', 'InfoController@edit' );
-//                Route::post( 'dosave', 'InfoController@doSave' );
-//            });
-//        });
-
-        /******* 商店店家 ********/
-        $index = array('url'=>'store', 'C'=>'StoreController', 'name'=>'store');
-        Route::get($index['url'].'/list', $index['C'].'@list')->name($index['name'].'.list');
-        Route::resource($index['url'], $index['C']);
-        Route::post($index['url'].'/update/{id}', $index['C'].'@update')->name($index['name'].'.update');
-        Route::post($index['url'].'/destroy/{id}', $index['C'].'@destroy')->name($index['name'].'.destroy');
-
-        /******* 群組管理 ********/
-        $index = array('url'=>'group', 'C'=>'GroupController', 'name'=>'group');
-        Route::get($index['url'].'/list', $index['C'].'@list')->name($index['name'].'.list');
-        Route::resource($index['url'], $index['C']);
-        Route::post($index['url'].'/update/{id}', $index['C'].'@update')->name($index['name'].'.update');
-        Route::post($index['url'].'/destroy/{id}', $index['C'].'@destroy')->name($index['name'].'.destroy');
-
-        /******* Coupon管理 ********/
-        $index = array('url'=>'coupons', 'C'=>'CouponController', 'name'=>'coupons');
-        Route::get($index['url'].'/list', $index['C'].'@list')->name($index['name'].'.list');
-        Route::resource($index['url'], $index['C']);
-        Route::post($index['url'].'/update/{id}', $index['C'].'@update')->name($index['name'].'.update');
-        Route::post($index['url'].'/destroy/{id}', $index['C'].'@destroy')->name($index['name'].'.destroy');
-
-        /******* Articles管理 ********/
-        $index = array('url'=>'articles', 'C'=>'ArticleController', 'name'=>'articles');
-        Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
-        Route::resource($index['url'], $index['C']);
-        Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
-        Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
-
-        /******* Advertise管理 ********/
-        $index = array('url'=>'advertise', 'C'=>'AdvertiseController', 'name'=>'advertise');
-        Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
-        Route::resource($index['url'], $index['C']);
-        Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
-        Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
     });
-
 });
 
 /*
@@ -470,7 +654,7 @@ Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
 
-Route::resource('product', 'ManageController');
+Route::resource('product', 'ProductController');
 
 Route::get('member', 'MemberController@index')->name('member.index');
 */

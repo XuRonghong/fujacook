@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\log;
+namespace App\Http\Controllers\Admin\Log;
 
 use App\Presenters\Admin\LogPresenter;
 use App\Repositories\Admin\LogRepository;
