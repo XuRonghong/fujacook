@@ -30,9 +30,9 @@ Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 //
 $controller = 'LoginController';
 //Route::get( 'forgotpassword' , $controller . '@forgotPasswordView' )->name('password.forgot');
-Route::post( 'doSendVerification' , $controller . '@doSendVerification' )->name('password.email');
-Route::get( 'resetpassword' , $controller . '@resetPasswordView' )->name('password.verification');
-Route::post( 'doResetPassword' , $controller . '@doResetPassword' )->name('password.reset');
+Route::post('doSendVerification', $controller.'@doSendVerification' )->name('password.email');
+Route::get( 'resetpassword'     , $controller.'@resetPasswordView' )->name('password.verification');
+Route::post('doResetPassword'   , $controller.'@doResetPassword' )->name('password.reset');
 //
 //Route::post('doRegister'        , 'RegisterController@doRegister' );//
 //Route::get( 'doActive/{usercode}', 'RegisterController@doActive' );//
@@ -40,7 +40,8 @@ Route::post( 'doResetPassword' , $controller . '@doResetPassword' )->name('passw
 
 Route::get('/home', 'HomeController@index')->name('home');
 //
-Route::group([
+Route::group(
+    [
         'middleware' => [
             'assign.guard:admin,admin/login',
             'CheckAdmin:admin',
@@ -48,7 +49,7 @@ Route::group([
 //            'LoginThrottle:5,10',
             'CheckLang',
         ]
-    ],function(){
+    ], function(){
 
     Route::get('/', 'IndexController@index');
     Route::get('/setlang', 'IndexController@setLang')->name('setlang');
@@ -57,16 +58,16 @@ Route::group([
     /**********************************************************
      * Upload Images
      *********************************************************/
-    Route::post( 'upload_image', 'UploadController@doUploadImage' );
-    Route::post( 'upload_image_base64', 'UploadController@doUploadImageBase64' );
-    Route::post( 'upload_file', 'UploadController@doUploadFile' );
+    Route::post('upload_file', 'UploadController@doUploadFile' );
+    Route::post('upload_image', 'UploadController@doUploadImage' );
+    Route::post('upload_image_base64', 'UploadController@doUploadImageBase64' );
 
 
     /**********************************************************
      * Excel 2019
      *********************************************************/
-    Route::get('/export_excel', 'ExportController@index');
-    Route::get('/export_excel/excel', 'ExportController@excel')->name('export_excel.excel');
+    Route::get( '/export_excel', 'ExportController@index');
+    Route::get( '/export_excel/excel', 'ExportController@excel')->name('export_excel.excel');
     Route::post('/import_excel/import', 'ExportController@import')->name('import_excel.import');
 
 
@@ -76,9 +77,12 @@ Route::group([
     Route::get('/dynamic_pdf/pdf', 'ExportController@pdf');
 
 
-    Route::group([
-        'middleware' => ['admin.checkPermission']       //權限通過
-    ],function(){
+    Route::group(
+        [
+            'middleware' => [
+                'admin.checkPermission',       //權限通過
+            ],
+        ], function(){
 
     /**********************************************************
      *

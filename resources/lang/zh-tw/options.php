@@ -5,7 +5,7 @@ return [
         'show' => '詳情',
         'edit' => '修改',
         'del' => '刪除',
-        'statue' => [
+        'status' => [
             'open' => '已啟用',
             'close' => '未啟用',
             'not' => '無功能',

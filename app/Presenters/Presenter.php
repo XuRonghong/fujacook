@@ -193,7 +193,7 @@ abstract class Presenter
                 break;
             case 'create':
                 $data = array_merge($data, [
-                    'Title' => $this->title.' create',
+                    'Title' => $this->title.' Create',
                     'Summary' => $this->summary,
                     'breadcrumb' => $this->presentBreadcrumb([
                         $this->title => data_get($data,'route_url')?$data['route_url']['index']:'',
@@ -203,7 +203,7 @@ abstract class Presenter
                 break;
             case 'edit':
                 $data = array_merge($data, [
-                    'Title' => $this->title.' edit',
+                    'Title' => $this->title.' Edit',
                     'Summary' => $this->summary,
                     'breadcrumb' => $this->presentBreadcrumb([
                         $this->title => data_get($data,'route_url')?$data['route_url']['index']:'',
@@ -213,7 +213,7 @@ abstract class Presenter
                 break;
             case 'show':
                 $data = array_merge($data, [
-                    'Title' => $this->title.' show',
+                    'Title' => $this->title.' Show',
                     'Summary' => $this->summary,
                     'breadcrumb' => $this->presentBreadcrumb([
                         $this->title => data_get($data,'route_url')?$data['route_url']['index']:'',
