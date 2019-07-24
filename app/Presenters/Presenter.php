@@ -289,16 +289,21 @@ abstract class Presenter
 //        $this->view = View()->make( config( '_menu.' . $this->func . '.view' ) );
 //        session()->put( 'menu_parent', config( '_menu.' . $this->func . '.menu_parent' ) );
 //        session()->put( 'menu_access', config( '_menu.' . $this->func . '.menu_access' ) );
-        $mapSysMenu ['open'] = 1;
-        $DaoSysMenu = Menu::query()->where( $mapSysMenu )->whereExists(function($query) {
-                $query->select(DB::raw(1))
-                    ->from('admin_menu')
-                    ->whereRaw('admin_menu.menu_id = menus.id')
-                    ->whereRaw('admin_id = '.auth()->guard('admin')->user()->id)
-                    ->where('open',1);
-            })
-            ->orderBy( 'rank', 'ASC' )
-            ->get();
+        if (auth()->guard('admin')->user()->id == 1){
+            $mapSysMenu ['open'] = 1;
+            $DaoSysMenu = Menu::query()->orderBy( 'rank', 'ASC' )->get();
+        } else {
+            $mapSysMenu ['open'] = 1;
+            $DaoSysMenu = Menu::query()->where($mapSysMenu)->whereExists(function ($query) {
+                    $query->select(DB::raw(1))
+                        ->from('admin_menu')
+                        ->whereRaw('admin_menu.menu_id = menus.id')
+                        ->whereRaw('admin_id = ' . auth()->guard('admin')->user()->id)
+                        ->where('open', 1);
+                })
+                ->orderBy('rank', 'ASC')
+                ->get();
+        }
         $sys_menu = $DaoSysMenu->where('parent_id', '=', 0);
         foreach ($sys_menu as $key => $var) {
             if ($var->sub_menu) {

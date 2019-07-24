@@ -50,7 +50,7 @@ class LoginController extends Controller
 
     public function redirectTo()
     {
-        return request()->get('nextUrl','admin/');
+        return 'admin';//request()->get('nextUrl','admin/');
     }
 
     public function username()

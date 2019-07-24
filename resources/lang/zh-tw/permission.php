@@ -146,13 +146,19 @@ return [
             //
             'store' => [
                 'title' => '商家管理',
-                'add' =>
+                'index'  => ' 總覽',
+                'show'   => ' 檢視',
+                'create' => ' 新增',
+                'edit'   => ' 更新',
+                'destroy'=> ' 刪除',
+                'attr' =>
                     [
-                        'title' => '新增店家',
-                    ],
-                'edit' =>
-                    [
-                        'title' => '編輯',
+                        'title' => '商店店家資料',
+                        'index'  => ' 總覽',
+                        'show'   => ' 檢視',
+                        'create' => ' 新增',
+                        'edit'   => ' 更新',
+                        'destroy'=> ' 刪除',
                     ],
                 'access' =>
                     [
@@ -166,13 +172,14 @@ return [
             //
             'supplier' => [
                 'title' => '供應商管理',
+                'index'  => ' 總覽',
+                'show'   => ' 檢視',
+                'create' => ' 新增',
+                'edit'   => ' 更新',
+                'destroy'=> ' 刪除',
                 'add' =>
                     [
                         'title' => '新增店家',
-                    ],
-                'edit' =>
-                    [
-                        'title' => '編輯',
                     ],
                 'access' =>
                     [
@@ -201,42 +208,47 @@ return [
                     'announce' =>
                         [
                             'title' => '公告',
-                            'index' =>
-                                [
-                                    'title' => '資訊專區',
-                                ],
+                            'index'  => ' 總覽',
+                            'show'   => ' 檢視',
+                            'create' => ' 新增',
+                            'edit'   => ' 更新',
+                            'destroy'=> ' 刪除',
                         ],
                     'news' =>
                         [
                             'title' => '最新消息',
-                            'index' =>
-                                [
-                                    'title' => '資訊專區',
-                                ],
+                            'index'  => ' 總覽',
+                            'show'   => ' 檢視',
+                            'create' => ' 新增',
+                            'edit'   => ' 更新',
+                            'destroy'=> ' 刪除',
                         ],
                     'messages' =>
                         [
                             'title' => '訊息',
-                            'index' =>
-                                [
-                                    'title' => '資訊專區',
-                                ],
+                            'index'  => ' 總覽',
+                            'show'   => ' 檢視',
+                            'create' => ' 新增',
+                            'edit'   => ' 更新',
+                            'destroy'=> ' 刪除',
                         ],
                     'reports' =>
                         [
                             'title' => '媒體報導',
-                            'index' =>
-                                [
-                                    'title' => '資訊專區',
-                                ],
+                            'index'  => ' 總覽',
+                            'show'   => ' 檢視',
+                            'create' => ' 新增',
+                            'edit'   => ' 更新',
+                            'destroy'=> ' 刪除',
                         ],
                     'notifications' =>
                         [
                             'title' => 'Notifications',
-                            'index' =>
-                                [
-                                    'title' => '資訊專區',
-                                ],
+                            'index'  => ' 總覽',
+                            'show'   => ' 檢視',
+                            'create' => ' 新增',
+                            'edit'   => ' 更新',
+                            'destroy'=> ' 刪除',
                         ],
                 ],
 
@@ -246,12 +258,22 @@ return [
                     'title' => '商品管理',
                     'category' => [
                         'title' => '商品類別管理',
+                        'index'  => ' 總覽',
+                        'show'   => ' 檢視',
+                        'create' => ' 新增',
+                        'edit'   => ' 更新',
+                        'destroy'=> ' 刪除',
                         'sub' => [
                             'title' => '子類別管理',
                         ],
                     ],
                     'manage' => [
                         'title' => '商品庫管理',
+                        'index'  => ' 總覽',
+                        'show'   => ' 檢視',
+                        'create' => ' 新增',
+                        'edit'   => ' 更新',
+                        'destroy'=> ' 刪除',
                         'museum_a01' => [
                             'title' => '一般商品',
                             'add' =>
@@ -333,28 +355,27 @@ return [
                     ],
                     'shipping' => [
                         'title' => '運費管理',
-                        'add' =>
-                            [
-                                'title' => '新增'
-                            ],
-                        'edit' =>
-                            [
-                                'title' => '編輯'
-                            ]
+                        'index'  => ' 總覽',
+                        'show'   => ' 檢視',
+                        'create' => ' 新增',
+                        'edit'   => ' 更新',
+                        'destroy'=> ' 刪除',
                     ],
                     'pay' => [
                         'title' => '付款方式',
-                        'add' =>
-                            [
-                                'title' => '新增'
-                            ],
-                        'edit' =>
-                            [
-                                'title' => '編輯'
-                            ]
+                        'index'  => ' 總覽',
+                        'show'   => ' 檢視',
+                        'create' => ' 新增',
+                        'edit'   => ' 更新',
+                        'destroy'=> ' 刪除',
                     ],
                     'log' => [
                         'title' => '商品管理記錄',
+                        'index'  => ' 總覽',
+                        'show'   => ' 檢視',
+                        'create' => ' 新增',
+                        'edit'   => ' 更新',
+                        'destroy'=> ' 刪除',
                     ],
                 ],
 
@@ -667,6 +688,11 @@ return [
                     'coupon' =>
                         [
                             'title' => '優惠管理',
+                            'index'  => ' 總覽',
+                            'show'   => ' 檢視',
+                            'create' => ' 新增',
+                            'edit'   => ' 更新',
+                            'destroy'=> ' 刪除',
                             'ticket' =>
                                 [
                                     'title' => '優惠券',
@@ -707,18 +733,23 @@ return [
                     'coin' =>
                         [
                             'title' => '飛幣管理',
-                            'index' =>
-                                [
-                                    'title' => '飛幣記錄',
-                                    'add' =>
-                                        [
-                                            'title' => '新增'
-                                        ],
-                                    'edit' =>
-                                        [
-                                            'title' => '編輯'
-                                        ]
-                                ],
+                            'index'  => ' 總覽',
+                            'show'   => ' 檢視',
+                            'create' => ' 新增',
+                            'edit'   => ' 更新',
+                            'destroy'=> ' 刪除',
+//                            'index' =>
+//                                [
+//                                    'title' => '飛幣記錄',
+//                                    'add' =>
+//                                        [
+//                                            'title' => '新增'
+//                                        ],
+//                                    'edit' =>
+//                                        [
+//                                            'title' => '編輯'
+//                                        ]
+//                                ],
                             'manage' =>
                                 [
                                     'title' => '活動管理',
@@ -735,55 +766,70 @@ return [
                     'news' =>
                         [
                             'title' => '活動訊息',
-                            'index' =>
-                                [
-                                    'title' => '活動公告',
-                                    'add' =>
-                                        [
-                                            'title' => '新增'
-                                        ],
-                                    'edit' =>
-                                        [
-                                            'title' => '編輯'
-                                        ]
-                                ],
+                            'index'  => ' 總覽',
+                            'show'   => ' 檢視',
+                            'create' => ' 新增',
+                            'edit'   => ' 更新',
+                            'destroy'=> ' 刪除',
+//                            'index' =>
+//                                [
+//                                    'title' => '活動公告',
+//                                    'add' =>
+//                                        [
+//                                            'title' => '新增'
+//                                        ],
+//                                    'edit' =>
+//                                        [
+//                                            'title' => '編輯'
+//                                        ]
+//                                ],
                         ],
                     'schedule' =>
                         [
                             'title' => '活動檔期',
-                            'add' =>
-                                [
-                                    'title' => '新增',
-                                ],
-                            'edit' =>
-                                [
-                                    'title' => '編輯',
-                                ],
-
-                            'recommend' =>
-                                [
-                                    'title' => '檔期商品',
-                                ],
-                            'people' =>
-                                [
-                                    'title' => '檔期人群',
-                                ]
+                            'index'  => ' 總覽',
+                            'show'   => ' 檢視',
+                            'create' => ' 新增',
+                            'edit'   => ' 更新',
+                            'destroy'=> ' 刪除',
+//                            'add' =>
+//                                [
+//                                    'title' => '新增',
+//                                ],
+//                            'edit' =>
+//                                [
+//                                    'title' => '編輯',
+//                                ],
+//
+//                            'recommend' =>
+//                                [
+//                                    'title' => '檔期商品',
+//                                ],
+//                            'people' =>
+//                                [
+//                                    'title' => '檔期人群',
+//                                ]
                         ],
                     'sign_up' =>
                         [
                             'title' => '報名管理',
-                            'index' =>
-                                [
-                                    'title' => '報名表管理',
-                                    'add' =>
-                                        [
-                                            'title' => '新增'
-                                        ],
-                                    'edit' =>
-                                        [
-                                            'title' => '編輯'
-                                        ]
-                                ]
+                            'index'  => ' 總覽',
+                            'show'   => ' 檢視',
+                            'create' => ' 新增',
+                            'edit'   => ' 更新',
+                            'destroy'=> ' 刪除',
+//                            'index' =>
+//                                [
+//                                    'title' => '報名表管理',
+//                                    'add' =>
+//                                        [
+//                                            'title' => '新增'
+//                                        ],
+//                                    'edit' =>
+//                                        [
+//                                            'title' => '編輯'
+//                                        ]
+//                                ]
                         ]
                 ],
 
@@ -794,14 +840,20 @@ return [
                     'contactus' =>
                         [
                             'title' => '連繫我們',
-                            'index' =>
-                                [
-                                    'title' => '資訊專區',
-                                ],
+                            'index'  => ' 總覽',
+                            'show'   => ' 檢視',
+                            'create' => ' 新增',
+                            'edit'   => ' 更新',
+                            'destroy'=> ' 刪除',
                         ],
                     'message' =>
                         [
-                            'title' => '留言專區'
+                            'title' => '留言專區',
+                            'index'  => ' 總覽',
+                            'show'   => ' 檢視',
+                            'create' => ' 新增',
+                            'edit'   => ' 更新',
+                            'destroy'=> ' 刪除',
                         ],
                 ],
 

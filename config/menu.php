@@ -31,7 +31,7 @@ return [
                         "open" => 0,
                         "sub_menu" => 0,    //無子類別
                     ],
-                    [
+//                    [
                         //店家會員管理
 //                        "id" => 113,
 //                        "parent_id" => 11,
@@ -40,8 +40,8 @@ return [
 //                        "access" => "1,2",
 //                        "open" => 0,
 //                        "sub_menu" => 0,
-                    ],
-                    [
+//                    ],
+//                    [
                         //供應商會員管理
 //                        "id" => 115,
 //                        "parent_id" => 11,
@@ -50,7 +50,7 @@ return [
 //                        "access" => "1,2",
 //                        "open" => 0,
 //                        "sub_menu" => 0,
-                    ],
+//                    ],
                     [
                         //管理員帳號
                         "id" => 119,
@@ -78,7 +78,7 @@ return [
                         "id" => 121,
                         "parent_id" => 12,
                         "name" => "admin.group.member",
-                        "link" => 'admin.group.member',
+                        "link" => 'admin/group/member',
                         "access" => "1,2",
                         "open" => 1,
                         "sub_menu" => 0,
@@ -96,7 +96,7 @@ return [
                     [
                         //供應商會員管理
                         "id" => 125,
-                        "parent_id" => 11,
+                        "parent_id" => 12,
                         "name" => "admin.group.supplier",
                         "link" => 'admin/group/supplier',
                         "access" => "1,2",
@@ -134,6 +134,7 @@ return [
                 "link" => "",
                 "access" => "1,2",
                 "open" => 1,
+                "rank" => 9,
                 "sub_menu" => 1,
                 "child" => [
                     [
@@ -233,72 +234,57 @@ return [
                 "open" => 0,
                 "sub_menu" => 1,
                 "child" => [
-                        [
-                            //商家資料
-                            "id" => 2101,
-                            "parent_id" => 21,
-                            "name" => "store.index",
-                            "link" => "admin/store/index",
-                            "sub_menu" => 0,
-                            "access" => "1,2,11,12,41",
-                            "open" => 1,
-                        ],
-                        [
-                            //商家資料
-                            "id" => 90012,
-                            "name" => "store.attr",
-                            "link" => "web/store/attr",
-                            "vCss" => "",
-                            "sub_menu" => 0,
-                            "parent_id" => 9001,
-                            "access" => "1,2,11,12,41",
-                            "open" => 1,
-                        ],
-                        [
-                            //商家資料
-                            "id" => 90013,
-                            "name" => "store.slider",
-                            "link" => "web/store/slider",
-                            "vCss" => "",
-                            "sub_menu" => 0,
-                            "parent_id" => 9001,
-                            "access" => "1,2,11,12,41",
-                            "open" => 1,
-                        ],
-                        [
-                            //智付通申請
-                            "id" => 90019,
-                            "name" => "store.pay_service",
-                            "link" => "web/store/pay_service",
-                            "vCss" => "",
-                            "sub_menu" => 0,
-                            "parent_id" => 9001,
-                            "access" => "1,2,11,12,41",
-                            "open" => 1,
-                        ],
-                        [
-                            //元大支付設定
-                            "id" => 900111,
-                            "name" => "store.ytbank",
-                            "link" => "web/store/ytbank",
-                            "vCss" => "",
-                            "sub_menu" => 0,
-                            "parent_id" => 9001,
-                            "access" => "1,2,11,12,41",
-                            "open" => 1,
-                        ],
-                        [
-                            //新光支付設定
-                            "id" => 900112,
-                            "name" => "store.skbank",
-                            "link" => "web/store/skbank",
-                            "vCss" => "",
-                            "sub_menu" => 0,
-                            "parent_id" => 9001,
-                            "access" => "1,2,11,12,41",
-                            "open" => 1,
-                        ],
-                    ]
+                    [
+                        //商家
+                        "id" => 2101,
+                        "parent_id" => 21,
+                        "name" => "store.index",
+                        "link" => "admin/store/home",
+                        "access" => "1,2,11,12,41",
+                        "open" => 1,
+                        "sub_menu" => 0,
+                    ],
+                    [
+                        //商家資料
+                        "id" => 2102,
+                        "parent_id" => 21,
+                        "name" => "store.attr",
+                        "link" => "admin/store/attr",
+                        "access" => "1,2,11,12,41",
+                        "open" => 1,
+                        "sub_menu" => 0,
+                    ],
+                    [
+                        //智付通申請
+                        "id" => 2111,
+                        "parent_id" => 21,
+                        "name" => "store.pay_service",
+                        "link" => "admin/store/pay_service",
+                        "access" => "1,2,11,12,41",
+                        "open" => 1,
+                        "sub_menu" => 0,
+                    ],
+                    [
+                        //元大支付設定
+                        "id" => 2112,
+                        "parent_id" => 21,
+                        "name" => "store.ytbank",
+                        "link" => "admin/store/ytbank",
+                        "access" => "1,2,11,12,41",
+                        "open" => 1,
+                        "sub_menu" => 0,
+                    ],
+                    [
+                        //新光支付設定
+                        "id" => 2113,
+                        "parent_id" => 21,
+                        "name" => "store.skbank",
+                        "link" => "admin/store/skbank",
+                        "access" => "1,2,11,12,41",
+                        "open" => 1,
+                        "sub_menu" => 0,
+                    ],
+                ]
             ],
             //supplier
             [
@@ -314,7 +300,7 @@ return [
                     [
                         //供應廠商資料
                         "id" => 2201,
-                        "parent_id" => 2,
+                        "parent_id" => 22,
                         "name" => "supplier.index",
                         "link" => "admin/supplier/index",
                         "sub_menu" => 0,
@@ -558,8 +544,8 @@ return [
                 "access" => "1,2",
                 "open" => 1,
                 "sub_menu" => 0,
-                "child" => [
-                    [
+//                "child" => [
+//                    [
                         //首頁
 //                        "id" => 60101,
 //                        "parent_id" => 601,
@@ -568,8 +554,8 @@ return [
 //                        "access" => "1,2",
 //                        "open" => 1,
 //                        "sub_menu" => 0,
-                    ],
-                ]
+//                    ],
+//                ]
             ],
             [
                 //滑動圖
@@ -580,8 +566,8 @@ return [
                 "access" => "1,2",
                 "open" => 1,
                 "sub_menu" => 0,
-                "child" => [
-                    [
+//                "child" => [
+//                    [
                         //首頁
 //                        "id" => 60201,
 //                        "parent_id" => 602,
@@ -590,8 +576,8 @@ return [
 //                        "access" => "1,2",
 //                        "open" => 1,
 //                        "sub_menu" => 0,
-                    ],
-                ]
+//                    ],
+//                ]
             ],
             [
                 //header畫面
@@ -698,9 +684,9 @@ return [
                         "open" => 1,
                         "sub_menu" => 0,
                     ],
-                ]
+                ],
             ],
-        ]
+        ],
     ],
     [
         //活動管理
@@ -852,7 +838,7 @@ return [
                     ],
                 ]
             ],
-        ]
+        ],
     ],
     [
         //客服專區

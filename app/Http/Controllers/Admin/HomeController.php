@@ -16,7 +16,7 @@ class HomeController extends Controller
      */
     public function __construct(HomePresenter $presenter)
     {
-//        $this->middleware('auth');
+        $this->middleware('assign.guard:admin,admin/login');
         $this->presenter = $presenter;
 
         //所有關於route::resource的位置

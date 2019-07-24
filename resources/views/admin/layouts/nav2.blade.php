@@ -5,7 +5,6 @@
         <!-- Sidebar navigation-->
         <nav class="sidebar-nav">
             <ul id="sidebarnav">
-                <br>
             @foreach ($data['menu'] as $key => $var)
                 <li class="sidebar-item">
                     <a href="@if($var->link!='') {{ url($var->link) }} @else javascript:void(0) @endif"

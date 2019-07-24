@@ -80,7 +80,7 @@ class MenuTableSeeder extends Seeder
         AdminMenu::truncate();
         $menus = Menu::query()->where('open', '<>', 0)->get();
         foreach ($menus as $menu){
-            AdminMenu::query()->create(['menu_id' => $menu['id'], 'admin_id'  => 1]);
+//            AdminMenu::query()->create(['menu_id' => $menu['id'], 'admin_id'  => 1]);
             AdminMenu::query()->create(['menu_id' => $menu['id'], 'admin_id'  => 2]);
             AdminMenu::query()->create(['menu_id' => $menu['id'], 'admin_id'  => 3]);
         }

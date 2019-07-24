@@ -275,6 +275,14 @@ return [
                 ],
             'store' => [
                 'title' => '商家管理',
+                'index' =>
+                    [
+                        'title' => '商家',
+                    ],
+                'attr' =>
+                    [
+                        'title' => '商家資料',
+                    ],
                 'add' =>
                     [
                         'title' => '新增店家',
@@ -294,6 +302,14 @@ return [
             ],
             'supplier' => [
                 'title' => '供應廠商管理',
+                'index' =>
+                    [
+                        'title' => '供應廠商',
+                    ],
+                'attr' =>
+                    [
+                        'title' => '供應廠商資料',
+                    ],
                 'add' =>
                     [
                         'title' => '新增供應廠商',
