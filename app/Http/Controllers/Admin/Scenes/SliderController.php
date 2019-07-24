@@ -19,9 +19,8 @@ class SliderController extends Controller
         $this->repository = $repository;
         $this->presenter = $presenter;
 
+        $this->presenter->setTitle(trans('menu.scenes.slider.title'));
         $this->presenter->setViewName('scenes.slider');
-        $this->presenter->setTitle('Scenes slider');
-
         //所有關於route::resource的位置
         $this->route_url = $this->presenter->getRouteResource($this->presenter->setRouteName('admin.scenes.slider'));
     }

@@ -13,6 +13,12 @@ return [
     |
     */
 
+    'account' => [
+        'error' => 'Account error.',
+        'noactive' => 'Account not activated.',
+        'err_or_active' => 'Account error or account not activated',
+    ],
+
     'failed' => 'These credentials do not match our records.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
 

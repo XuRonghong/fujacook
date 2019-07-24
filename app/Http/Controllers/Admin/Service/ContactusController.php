@@ -19,9 +19,8 @@ class ContactusController extends Controller
         $this->repository = $repository;
         $this->presenter = $presenter;
 
+        $this->presenter->setTitle(trans('menu.service.contactus.title'));
         $this->presenter->setViewName('service.contactus');
-        $this->presenter->setTitle('連繫我們');
-
         //所有關於route::resource的位置
         $this->route_url = $this->presenter->getRouteResource($this->presenter->setRouteName('admin.service.contactus'));
     }

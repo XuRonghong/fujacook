@@ -1,5 +1,7 @@
 <?php
 return [
+    "unknow_error" => "發生不知名錯誤: ",
+    "runaways" => "超出可以判斷的範圍",
     "add" =>
         [
             "success" => "修改成功",
@@ -60,6 +62,7 @@ return [
             "fail" => "系統錯誤",
             'error' => '驗證碼錯誤',
             'no_user' => '找不到使用者',
+            'no_received' => '沒收到信',
         ],
     "logistics" =>
         [

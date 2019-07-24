@@ -19,7 +19,7 @@ class AdminMenuController extends Controller
         $this->repository->setModel_AdminMenu();    //設定指定model
 
         $this->presenter = $presenter;
-        $this->presenter->setTitle('Admin_menu');
+        $this->presenter->setTitle(trans('menu.admin.menu.admin_menu.title'));
         $this->presenter->setViewName('menus.admin_menu');      //指定view的位置
         //所有關於route::resource的位置
         $this->route_url = $this->presenter->getRouteResource($this->presenter->setRouteName('admin.admin_menu'));

@@ -17,7 +17,6 @@
 
                     @endforeach
 
-
                     You are logged in! <a href="#" onclick="history.back()">Back</a>
                 </div>
             </div>

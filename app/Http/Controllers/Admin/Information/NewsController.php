@@ -18,10 +18,10 @@ class NewsController extends Controller
     {
         $this->repository = $repository;
         $this->repository->setModel_News();
+
         $this->presenter = $presenter;
         $this->presenter->setViewName('information.news');
-        $this->presenter->setTitle('最新消息');
-
+        $this->presenter->setTitle(trans('menu.information.news.title'));
         //所有關於route::resource的位置
         $this->route_url = $this->presenter->getRouteResource($this->presenter->setRouteName('admin.information.news'));
     }

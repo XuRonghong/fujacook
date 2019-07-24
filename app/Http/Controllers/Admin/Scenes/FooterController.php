@@ -19,9 +19,8 @@ class FooterController extends Controller
         $this->repository = $repository;
         $this->presenter = $presenter;
 
+        $this->presenter->setTitle(trans('menu.scenes.footer.title'));
         $this->presenter->setViewName('scenes.footer');
-        $this->presenter->setTitle('Scenes footer');
-
         //所有關於route::resource的位置
         $this->route_url = $this->presenter->getRouteResource($this->presenter->setRouteName('admin.scenes.footer'));
     }

@@ -9,7 +9,6 @@ use App\Http\Controllers\FuncController;
 use App\UserVerification;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Mail;
 
 class LoginController extends Controller
 {
@@ -24,11 +23,6 @@ class LoginController extends Controller
 
     public function index ()
     {
-        //滑動廣告
-        $mapBanner['iMenuId'] = 60101;
-        $mapBanner['bDel'] = 0;
-        $DaoBanner = ModBanner::query()->where( $mapBanner )->get() or [];
-
         // set_meta_og
         $og = [
             "url"           => url('login'),
@@ -38,7 +32,7 @@ class LoginController extends Controller
             "images"        => 'portal_assets/dist/img/logo.png',
         ];
 
-        return view('admin.login', compact('DaoBanner'));
+        return view('admin.login', compact('og'));
     }
 
     public function doLogin ()
@@ -88,10 +82,10 @@ class LoginController extends Controller
 
 
         // Session save User
-        session()->put('user', json_decode( json_encode($User), true));
+        session()->put('user', json_decode( json_encode($User, JSON_UNESCAPED_UNICODE), true));
         // Session save UserInfo
         $UserInfo = AdminInfo::query()->where('user_id', $User->id )->first();
-        session()->put('user.info', json_decode( json_encode($UserInfo), true));
+        session()->put('user.info', json_decode( json_encode($UserInfo,JSON_UNESCAPED_UNICODE), true));
 
         // User Group for fun2016
         //$this->sessionMemberGroup_fun2016()
@@ -228,10 +222,10 @@ class LoginController extends Controller
         }
 
         // Member
-        session()->put( 'shop_member', json_decode( json_encode( $DaoMember ), true ) );
+        session()->put( 'shop_member', json_decode( json_encode($DaoMember, JSON_UNESCAPED_UNICODE), true ) );
         // MemberInfo
         $DaoMemberInfo = SysMemberInfo::query()->find( $DaoMember->iId );
-        session()->put( 'shop_member.info', json_decode( json_encode( $DaoMemberInfo ), true ) );
+        session()->put( 'shop_member.info', json_decode( json_encode($DaoMemberInfo, JSON_UNESCAPED_UNICODE), true ) );
 
         // MemberGroup join ModActivitySchedule
         $iGroupId = SysGroupMember::query()->where('iMemberId', '=', $DaoMember->iId)->first()->iGroupId;
@@ -270,7 +264,10 @@ class LoginController extends Controller
         return view()->make('admin.forgotpassword');
     }
 
-    public function doSendVerification ()
+    /*
+     * 寄送更改密碼驗證信
+     */
+    public function doSendVerification()
     {
         $email = Input::get('email', '');
         $Dao = Admin::query()->where('email', '=', $email)->first();
@@ -308,18 +305,21 @@ class LoginController extends Controller
             $DaoVerification->save();
             //畫面
             $mail_tmp = 'email.forgot_password';
+
             //信件內容
             $mail_arr = [
                 "verification" => $verification,
                 'url' => route('admin.password.verification'),
                 'app_name' => config('app.name'),
             ];
+
             //Laravel sending..
 //            Mail::send( $mail_tmp, $mail_arr, function( $message ) use ( $verification, $email ) {
 //                $message->from( config( 'mail.from.address' ), config( 'mail.from.name' ) );
 //                $message->subject( trans( 'web_message.verification.forgot_password' ) );
 //                $message->to( $email );
 //            } );
+
             //Fujacook sending..
             $finish = PHPsendMail_fuja(
                 $email,
@@ -330,8 +330,8 @@ class LoginController extends Controller
 
             session()->put('verification.userid', $user_id);
         } catch (\Exception $e) {
-            return redirect()->back()->withErrors([
-                'email'=> htmlspecialchars_decode('發生不知名錯誤: '. $e->getMessage())
+            return redirect()->back()->withErrors([ //發生不知名錯誤
+                'email'=> htmlspecialchars_decode(trans('web_message.unknow_error'). $e->getMessage())
             ])->withInput();
         }
         return redirect( route('admin.password.verification'))->with('verification.email', $email);
@@ -354,7 +354,9 @@ class LoginController extends Controller
             ->orWhere('id', session('verification.memberid'))
             ->first();
         if ( !$User) {
-            return redirect()->back()->withErrors(['email'=>trans( 'web_message.verification.no_user' )])->withInput();
+            return redirect()->back()->withErrors([
+                'email'=>trans( 'web_message.verification.no_user' )
+            ])->withInput();
         }
 
         //比對有沒有此驗證資訊
@@ -365,7 +367,9 @@ class LoginController extends Controller
         ];
         $Verification = UserVerification::query()->where($map)->first();
         if ( !$Verification) {
-            return redirect()->back()->withErrors(['verification'=>trans( 'web_message.verification.error' )])->withInput();
+            return redirect()->back()->withErrors([
+                'verification'=>trans( 'web_message.verification.error' )
+            ])->withInput();
         }
 
 //        $User->password = hash( 'sha256', $User->vAgentCode . $vPassword . $User->vUserCode );
@@ -381,7 +385,9 @@ class LoginController extends Controller
             session()->flush();
         } catch (\Exception $e) {
             return redirect()->back()->withErrors([
-                'verification'=> htmlspecialchars_decode(trans( 'web_message.verification.fail' ).': '. $e->getMessage())
+                'verification'=> htmlspecialchars_decode(
+                    trans('web_message.verification.fail' ).': '.$e->getMessage()
+                )
             ])->withInput();
         }
 

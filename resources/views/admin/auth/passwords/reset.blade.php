@@ -46,7 +46,9 @@
                                     </span>
                                 @endif
                             </div>
-                            <a href="{{route('admin.password.request')}}" style="font-size:10px;padding-top: 15px;">沒收到信</a>
+                            <a href="{{route('admin.password.request')}}" style="font-size:10px;padding-top: 15px;">
+                                {{trans('web_message.verification.no_received')}}
+                            </a>
                         </div>
 
                         <div class="form-group row">

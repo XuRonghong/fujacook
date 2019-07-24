@@ -18,7 +18,8 @@ class LogLoginController extends Controller
     {
         $this->repository = $repository;
         $this->presenter = $presenter;
-        $this->presenter->setTitle('Log Login');
+
+        $this->presenter->setTitle(trans('menu.admin.log.login.title'));
         $this->presenter->setViewName('log.login');
         //所有關於route::resource的位置
         $this->route_url = $this->presenter->getRouteResource($this->presenter->setRouteName('admin.log.login'));

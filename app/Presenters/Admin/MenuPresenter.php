@@ -52,9 +52,9 @@ class MenuPresenter extends Presenter
     {
         // current_data[row.id] = row;
         $btn = '';
-//        $btn .= '<button class="btn btn-xs btn-show" title="詳情"><i class="fa fa-book" aria-hidden="true"></i></button>';
-//        $btn .= '<button class="btn btn-xs btn-edit" title="修改"><i class="fa fa-pencil-alt" aria-hidden="true"></i></button>';
-        $btn .= '<button class="btn btn-xs btn-del pull-right" title="刪除"><i class="fa fa-trash" aria-hidden="true"></i></button>';
+//        $btn .= '<button class="btn btn-xs btn-show" title="'.trans('options.panel.show').'"><i class="fa fa-book" aria-hidden="true"></i></button>';
+//        $btn .= '<button class="btn btn-xs btn-edit" title="'.trans('options.panel.edit').'"><i class="fa fa-pencil-alt" aria-hidden="true"></i></button>';
+        $btn .= '<button class="btn btn-xs btn-del pull-right" title="'.trans('options.panel.del').'"><i class="fa fa-trash" aria-hidden="true"></i></button>';
 
         return $btn;
     }
@@ -63,15 +63,12 @@ class MenuPresenter extends Presenter
     public function presentStatus_adminMenu($status=0)
     {
         switch ($status) {
-            case 1: $btn = '<button class="btn btn-xs btn-success btn-open">已啟用</button>'; break;
-            case 0: $btn = '<button class="btn btn-xs btn-primary btn-open">未啟用</button>'; break;
-            case '1': $btn = '<button class="btn btn-xs btn-success btn-open">已啟用</button>'; break;
-            case '0': $btn = '<button class="btn btn-xs btn-primary btn-open">未啟用</button>'; break;
-            default: $btn = "無功能";
+            case 1: $btn = '<button class="btn btn-xs btn-success btn-open">'.trans('options.panel.status.open').'</button>'; break;
+            case 0: $btn = '<button class="btn btn-xs btn-primary btn-open">'.trans('options.panel.status.close').'</button>'; break;
+            case '1': $btn = '<button class="btn btn-xs btn-success btn-open">'.trans('options.panel.status.open').'</button>'; break;
+            case '0': $btn = '<button class="btn btn-xs btn-primary btn-open">'.trans('options.panel.status.close').'</button>'; break;
+            default: $btn = trans('options.panel.status.not'); //"無功能";
         }
-//        $btn .= '<button class="btn btn-xs btn-show" title="詳情"><i class="fa fa-book" aria-hidden="true"></i></button>';
-//        $btn .= '<button class="btn btn-xs btn-edit" title="修改"><i class="fa fa-pencil-alt" aria-hidden="true"></i></button>';
-        //$btn .= '<button class="btn btn-xs btn-del pull-right" title="刪除"><i class="fa fa-trash" aria-hidden="true"></i></button>';
         return $btn;
     }
 }

@@ -19,9 +19,8 @@ class ImageController extends Controller
         $this->repository = $repository;
         $this->presenter = $presenter;
 
+        $this->presenter->setTitle(trans('menu.scenes.image.title'));
         $this->presenter->setViewName('scenes.image');
-        $this->presenter->setTitle('Scenes Image');
-
         //所有關於route::resource的位置
         $this->route_url = $this->presenter->getRouteResource($this->presenter->setRouteName('admin.scenes.image'));
     }

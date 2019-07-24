@@ -16,16 +16,16 @@ class InformationPresenter extends Presenter
     {
         $this->selectOptions = [
             'news' => [
-                'news.new' => '最新消息',
-                'news.important' => '重要消息',
+                'news.new' => trans('options.information.news.new'), //'最新消息',
+                'news.important' => trans('options.information.news.important'), //'重要消息',
             ],
             'report' => [
-                'report.new' => '最新報導',
-                'report.hot' => '熱門報導',
+                'report.new' => trans('options.information.report.new'), //'最新報導',
+                'report.hot' => trans('options.information.report.hot'), //'熱門報導',
             ],
             'contactus' => [
-                'contactus.home' => '',
-                'contactus.about' => '',
+                'contactus.home' => trans('options.information.contactus.home'), //'',
+                'contactus.about' => trans('options.information.contactus.about'), //'',
             ],
         ];
     }

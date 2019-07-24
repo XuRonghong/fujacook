@@ -20,7 +20,7 @@ class LogActionController extends Controller
         $this->repository->setModel_LogAction();
         //
         $this->presenter = $presenter;
-        $this->presenter->setTitle('Log Action');
+        $this->presenter->setTitle(trans('menu.admin.log.action.title'));
         $this->presenter->setViewName('log.action');
         //所有關於route::resource的位置
         $this->route_url = $this->presenter->getRouteResource($this->presenter->setRouteName('admin.log.action'));

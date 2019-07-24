@@ -18,10 +18,10 @@ class ReportController extends Controller
     {
         $this->repository = $repository;
         $this->repository->setModel_News();
+
         $this->presenter = $presenter;
         $this->presenter->setViewName('information.reports');
-        $this->presenter->setTitle('媒體報導');
-
+        $this->presenter->setTitle(trans('menu.information.reports.title'));
         //所有關於route::resource的位置
         $this->route_url = $this->presenter->getRouteResource($this->presenter->setRouteName('admin.information.reports'));
     }

@@ -53,6 +53,7 @@ Route::group([
     Route::get('/', 'IndexController@index');
     Route::get('/setlang', 'IndexController@setLang')->name('setlang');
 
+
     /**********************************************************
      * Upload Images
      *********************************************************/
@@ -61,11 +62,6 @@ Route::group([
     Route::post( 'upload_file', 'UploadController@doUploadFile' );
 
 
-    /**********************************************************
-     * Excel
-     *********************************************************/
-//    Route::get( 'import_excel', 'ExcelController@index')->name('excel_index');
-//    Route::post('import_excel', 'ExcelController@import')->name('import');
     /**********************************************************
      * Excel 2019
      *********************************************************/
@@ -78,7 +74,6 @@ Route::group([
      * PDF function
      *********************************************************/
     Route::get('/dynamic_pdf/pdf', 'ExportController@pdf');
-
 
 
     Route::group([
@@ -165,13 +160,13 @@ Route::group([
             //
             $index = array('url'=>'login', 'C'=>'LogLoginController', 'name'=>'log.login');
             Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
-            Route::resource($index['url'], $index['C'], ['as'=> 'Log', 'name'=> $index['name'] ]);
+            Route::resource($index['url'], $index['C'], ['as'=> 'log', 'name'=> $index['name'] ]);
             Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
             Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
             //
             $index = array('url'=>'action', 'C'=>'LogActionController', 'name'=>'log.action');
             Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
-            Route::resource($index['url'], $index['C'], ['as'=> 'Log', 'name'=> $index['name'] ]);
+            Route::resource($index['url'], $index['C'], ['as'=> 'log', 'name'=> $index['name'] ]);
             Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
             Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
         });

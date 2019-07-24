@@ -47,7 +47,8 @@ class LogPresenter extends Presenter
     //　複寫父方法
     public function presentStatus($status)
     {
-        $btn = '<button class="btn btn-xs btn-show" title="詳情"><i class="fa fa-book" aria-hidden="true"></i></button>';
+        $btn = '<button class="btn btn-xs btn-show" title="'.trans('options.panel.show').'"><i class="fa fa-book" aria-hidden="true"></i></button>';
+
         return $btn;
     }
 }

@@ -19,7 +19,7 @@ class AdminPermissionController extends Controller
         $this->repository->setModel_AdminPermission();      //設定指定model
 
         $this->presenter = $presenter;
-        $this->presenter->setTitle('Admin_permission');
+        $this->presenter->setTitle(trans('menu.admin.permission.admin_permission.title'));
         $this->presenter->setViewName('permissions.admin_permission');      //指定view的位置
         //所有關於route::resource的位置
         $this->route_url = $this->presenter->getRouteResource($this->presenter->setRouteName('admin.admin_permission'));

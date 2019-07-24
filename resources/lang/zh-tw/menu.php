@@ -682,14 +682,14 @@ return [
         ],
     'scenes' =>
         [
-            'title' => '前台介面設置',
+            'title' => '介面設置',
             'navbar' =>
                 [
-                    'title' => '選單欄編輯',
+                    'title' => '前台選單欄編輯',
                 ],
             'header' =>
                 [
-                    'title' => 'header',
+                    'title' => '前台header',
                     'url' =>
                         [
                             'title' => '連結編輯',
@@ -697,23 +697,23 @@ return [
                 ],
             'slider' =>
                 [
-                    'title' => '滑動圖編輯',
+                    'title' => '前台滑動圖編輯',
                 ],
             'banner' =>
                 [
-                    'title' => 'banner編輯',
+                    'title' => '前台banner編輯',
                 ],
             'introduce' =>
                 [
-                    'title' => '內容編輯',
+                    'title' => '前台內容編輯',
                 ],
             'image' =>
                 [
-                    'title' => '圖片管理',
+                    'title' => '前台圖片管理',
                 ],
             'footer' =>
                 [
-                    'title' => 'footer編輯',
+                    'title' => '前台footer編輯',
                     'url' =>
                         [
                             'title' => '連結編輯',
@@ -721,7 +721,7 @@ return [
                 ],
             'login' =>
                 [
-                    'title' => '登入畫面',
+                    'title' => '前台登入畫面',
                     'background' =>
                         [
                             'title' => '背景圖編輯',

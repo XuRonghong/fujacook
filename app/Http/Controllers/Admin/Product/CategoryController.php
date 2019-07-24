@@ -21,7 +21,7 @@ class CategoryController extends Controller
 
         $this->presenter = $presenter;
         $this->presenter->setViewName('product.category');
-        $this->presenter->setTitle('Product category');
+        $this->presenter->setTitle(trans('menu.product.category.title'));
         //所有關於route::resource的位置
         $this->route_url = $this->presenter->getRouteResource($this->presenter->setRouteName('admin.product.category'));
     }

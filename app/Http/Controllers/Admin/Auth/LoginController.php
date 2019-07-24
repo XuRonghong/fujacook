@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers\Admin\Auth;
 
-use App\Admin;
-use App\Http\Controllers\FuncController;
-use App\LogLogin;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Auth;
 use Illuminate\Validation\ValidationException;
+use App\Http\Controllers\FuncController;
+use App\Http\Controllers\Controller;
+use Auth;
 use Cookie;
 
 class LoginController extends Controller
@@ -46,6 +44,7 @@ class LoginController extends Controller
     public function __construct()
     {
 //        $this->middleware('guest:admin,admin')->except('logout');
+        $this->middleware('CheckLang')->except('logout');
     }
 
     public function redirectTo()
@@ -94,7 +93,7 @@ class LoginController extends Controller
     protected function sendFailedLoginResponse(Request $request)
     {
         throw ValidationException::withMessages([
-            $this->username() => [trans('auth.account.error') .' or 帳號未啟用'],
+            $this->username() => [trans('auth.account.err_or_active')], //帳號錯誤or帳號未啟用
             'password' => ['or password error.'],
         ]);
     }
