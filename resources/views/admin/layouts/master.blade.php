@@ -36,6 +36,7 @@
             float: right;
             /*clear: both;*/
             margin-top: -25px;
+            height: 30px;
         }
         /* 上方列 */
         #main-wrapper[data-layout=vertical] .topbar .navbar-collapse[data-navbarbg=skin1],

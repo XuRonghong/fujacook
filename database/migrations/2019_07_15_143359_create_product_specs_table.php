@@ -14,24 +14,24 @@ class CreateProductSpecsTable extends Migration
     public function up()
     {
         if (env('DB_REFRESH')) {
+            //規格
+            Schema::create( 'product_specs', function( Blueprint $table ) {
+                $table->increments( 'id' );
+                $table->unsignedInteger('product_id')->comment('對應products.id');
+                $table->string( 'spec_num')->nullable();
+                $table->string('name')->comment('商品規格名稱');
+                $table->string( 'spec_unit' )->nullable()->comment('單位: 件 組 個');
+                $table->integer( 'spec_price' )->default( 0 );
+                $table->integer( 'spec_stock' )->default( 0 );
+                $table->integer( 'spec_safe_stock' )->default( 0 );
+                $table->string('image')->nullable();
+                $table->string('file_id')->nullable()->comment('檔案');
+                $table->tinyInteger('status')->default(0)->comment('狀態');
+                $table->tinyInteger('open')->default(0)->comment('上架狀態');
+                $table->timestamps();
+            } );
 
         }
-        //規格
-        Schema::create( 'product_specs', function( Blueprint $table ) {
-            $table->increments( 'id' );
-            $table->unsignedInteger('product_id')->comment('對應products.id');
-            $table->string( 'spec_num')->nullable();
-            $table->string('name')->comment('商品規格名稱');
-            $table->string( 'spec_unit' )->nullable()->comment('單位: 件 組 個');
-            $table->integer( 'spec_price' )->default( 0 );
-            $table->integer( 'spec_stock' )->default( 0 );
-            $table->integer( 'spec_safe_stock' )->default( 0 );
-            $table->string('image')->nullable();
-            $table->string('file_id')->nullable()->comment('檔案');
-            $table->tinyInteger('status')->default(0)->comment('狀態');
-            $table->tinyInteger('open')->default(0)->comment('上架狀態');
-            $table->timestamps();
-        } );
         //商品規格
 //        Schema::create('product_specs', function (Blueprint $table) {
 //            $table->increments('id');
@@ -50,9 +50,9 @@ class CreateProductSpecsTable extends Migration
     public function down()
     {
         if (env('DB_REFRESH')) {
+            Schema::dropIfExists('product_specs');
 
         }
-        Schema::dropIfExists('product_specs');
 //        Schema::dropIfExists('specifications');
     }
 }

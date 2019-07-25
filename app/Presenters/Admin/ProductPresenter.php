@@ -18,36 +18,52 @@ class ProductPresenter extends Presenter
             'product_cate' => [
                 /* 從資料庫得到 from database. */
             ],
+            'product' => [
+                /* 從資料庫得到 from database. */
+            ],
         ];
     }
 
     //
-    public function setSelectOpt($ORM=null)
+    public function setSelectOpt($ORM=null, $selectOpts='product_cate')
     {
         if($ORM){
             $options = array();
             foreach ($ORM as $key => $val){
                 $options[ $val['id'] ] = $val['name'];
             }
-            if($options) $this->selectOptions['product_cate'] = $options;
+            if($options) $this->selectOptions[$selectOpts] = $options;
         } else return null;
     }
 
     // data object or array forEach to do from scenes.
-    public function eachOne_aaData($arr)
+    public function eachOne_aaData($arr, $from='')
     {
         if ( $arr['aaData']) {
-            foreach ($arr['aaData'] as $key => $var) {
-                $var->checkbox = $this->presentCheckBox($var->id);
-                //
-                $var->rank = $this->presentIsEdit('rank', $var->rank);
-                //翻譯每個type
-                $var->type = $this->tranTypeInSelectOption($var->type, $this->selectOptions);
-                //找圖片檔案
-                $images = $var->image ? array($var->image) : $this->transFileIdtoImage($var->file_id); //有圖檔就不用去file找
-                $var->image = $this->presentImages($images);
-                //
-                $var->status = $this->presentStatus($var->open);
+            if ($from=='product_spec') {
+                foreach ($arr['aaData'] as $key => $var) {
+                    //翻譯每個type
+                    $var->product_id = $this->tranTypeInSelectOption($var->product_id, $this->selectOptions);
+                    //找圖片檔案
+                    $images = $var->image ? array($var->image) : $this->transFileIdtoImage($var->file_id); //有圖檔就不用去file找
+                    $var->image = $this->presentImages($images);
+                    //
+                    $var->status = $this->presentStatus($var->open);
+                }
+            } else {
+                foreach ($arr['aaData'] as $key => $var) {
+                    //mass_destroy
+                    $var->checkbox = $this->presentCheckBox($var->id);
+                    //
+                    $var->rank = $this->presentIsEdit('rank', $var->rank);
+                    //翻譯每個type
+                    $var->type = $this->tranTypeInSelectOption($var->type, $this->selectOptions);
+                    //找圖片檔案
+                    $images = $var->image ? array($var->image) : $this->transFileIdtoImage($var->file_id); //有圖檔就不用去file找
+                    $var->image = $this->presentImages($images);
+                    //
+                    $var->status = $this->presentStatus($var->open);
+                }
             }
         }
         return $arr;

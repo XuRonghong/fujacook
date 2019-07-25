@@ -3,13 +3,12 @@
 namespace App\Http\Controllers\Admin\Product;
 
 use App\Presenters\Admin\ProductPresenter;
-use App\ProductCategory;
 use App\Repositories\Admin\ProductRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 
-class ProductController extends Controller
+class CombinationController extends Controller
 {
     protected $repository;
     protected $presenter;
@@ -18,14 +17,15 @@ class ProductController extends Controller
     public function __construct(ProductRepository $repository, ProductPresenter $presenter)
     {
         $this->repository = $repository;
-        $this->presenter = $presenter;
+        $this->repository->setModel_ProductSpec();
 
-        $this->presenter->setViewName('product.manage');
-        $this->presenter->setTitle(trans('menu.product.manage.title'));
-        $this->presenter->setSelectOpt( $this->repository->getORM_ProductCategory( ['id', 'name', 'value']) );
+        $this->presenter = $presenter;
+        $this->presenter->setViewName('product.spec');
+        $this->presenter->setTitle(trans('menu.product.manage.spec.title'));
+        $this->presenter->setSelectOpt( $this->repository->getORM_Product(['id', 'no', 'name']), 'product');
 
         //所有關於route::resource的位置
-        $this->route_url = $this->presenter->getRouteResource($this->presenter->setRouteName('admin.product.manage'));
+        $this->route_url = $this->presenter->getRouteResource($this->presenter->setRouteName('admin.product.spec'));
     }
 
     /**
@@ -37,12 +37,6 @@ class ProductController extends Controller
     {
         //meta data
         $data = $this->presenter->getParameters('index', array('route_url' => $this->route_url));
-        //add route_url for mass_destroy.
-        $this->presenter->addParameters(
-            $data,
-            'route_url.mass_destroy',
-            route($this->presenter->getRouteName().'.mass_destroy')
-        );
 
         return $this->presenter->responseJson($data, 'index');
     }
@@ -55,7 +49,7 @@ class ProductController extends Controller
         {
             $data = $this->repository->getDataTable($request);
 
-            $data = $this->presenter->eachOne_aaData($data);     //每一項目要做甚麼事,有需要在使用
+            $data = $this->presenter->eachOne_aaData($data, 'product_spec');     //每一項目要做甚麼事,有需要在使用
 
             return $this->presenter->responseJson($data, 'ajax', 200);
         }
@@ -72,7 +66,7 @@ class ProductController extends Controller
         //
         $data = $this->presenter->getParameters('create', array('route_url' => $this->route_url));
         //get option for select
-        $data['arr']['options'] = $this->presenter->getSelectOption('product_cate');
+        $data['arr']['options'] = $this->presenter->getSelectOption('product');
 
         return $this->presenter->responseJson($data, 'create');
     }
@@ -106,7 +100,7 @@ class ProductController extends Controller
         //若資料庫沒有該id 則404畫面
         $data['arr'] = $this->repository->findOrFail($id) or abort(404);
         //轉換出顯示數據
-        $data['arr'] = $this->presenter->transOne($data['arr'], 'product_cate');
+        $data['arr'] = $this->presenter->transOne($data['arr'], 'product');
 
         return $this->presenter->responseJson($data, 'create');
     }
@@ -124,7 +118,7 @@ class ProductController extends Controller
         //若資料庫沒有該id 則404畫面
         $data['arr'] = $this->repository->findOrFail($id) or abort(404);
         //轉換出顯示數據
-        $data['arr'] = $this->presenter->transOne($data['arr'], 'product_cate');
+        $data['arr'] = $this->presenter->transOne($data['arr'], 'product');
 
         return $this->presenter->responseJson($data, 'create');
     }
@@ -155,7 +149,7 @@ class ProductController extends Controller
     public function destroy($id)
     {
         //
-        $data = $this->repository->delete($id, 'cascade', 'product_spec');
+        $data = $this->repository->delete($id);
 
         return $this->presenter->responseJson($data, 'destroy');
     }

@@ -32,7 +32,7 @@ class Product extends Model
     public function validate($request, $noUnique=0, $except='')
     {
         $rules = [
-            'name' => 'required'. ($noUnique?'':'|unique:products'),
+            'name' => ($except=='name'?'nullable':'required'). ($noUnique?'':'|unique:'.$this->table),
 //            'description' => 'required',
 //            'guard_name' => 'required|array',
         ];
@@ -47,6 +47,16 @@ class Product extends Model
 
     public function admin()
     {
-        return $this->belongsToMany('App\Admin'/*,'admin_permission','permission_id','id'*/);
+        return $this->belongsTo('App\Admin','id','author_id');
+    }
+
+    public function category()
+    {
+        return $this->belongsTo('App\ProductCategory','id','type');
+    }
+
+    public function spec()
+    {
+        return $this->hasMany('App\ProductSpec','product_id','id');
     }
 }

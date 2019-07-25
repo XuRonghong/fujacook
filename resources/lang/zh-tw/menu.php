@@ -525,6 +525,20 @@ return [
                                 ],
                         ],
                 ],
+                'spec' => [
+                    'title' => '商品規格',
+                    'add' =>
+                        [
+                            'title' => '新增商品規格'
+                        ],
+                ],
+            ],
+            'combinations' => [
+                'title' => '組合商品',
+                'add' =>
+                    [
+                        'title' => '新增商品組合'
+                    ],
             ],
             'shipping' => [
                 'title' => '運費管理',

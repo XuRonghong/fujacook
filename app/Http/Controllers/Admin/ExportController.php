@@ -132,7 +132,7 @@ class ExportController extends Controller
 
 
     /*
-     * Scene 2016 function
+     * Since 2016 function
      */
     public function import2016 (Request $request)
     {

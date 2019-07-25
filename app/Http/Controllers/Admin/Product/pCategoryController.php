@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 
-class CategoryController extends Controller
+class pCategoryController extends Controller
 {
     protected $repository;
     protected $presenter;

@@ -410,33 +410,66 @@ return [
                 "id" => 302,
                 "parent_id" => 3,
                 "name" => "product.manage",
-                "link" => "admin/product/manage",
-                "sub_menu" => 0,
+                "link" => "",
                 "access" => "1,2,11,12",
                 "open" => 1,
                 "rank" => 2,
+                "sub_menu" => 1,
+                "child" => [
+                    [
+                        //商品
+                        "id" => 3021,
+                        "parent_id" => 302,
+                        "name" => "product.manage.museum_a01",
+                        "link" => "admin/product/manage",
+                        "access" => "1,2,11,12",
+                        "open" => 1,
+                        "sub_menu" => 0,
+                    ],
+                    [
+                        //商品規格
+                        "id" => 3022,
+                        "parent_id" => 302,
+                        "name" => "product.manage.spec",
+                        "link" => "admin/product/spec",
+                        "access" => "1,2,11,12",
+                        "open" => 1,
+                        "sub_menu" => 0,
+                    ],
+                ],
+            ],
+            [
+                //組合商品設置
+                "id" => 303,
+                "parent_id" => 3,
+                "name" => "product.combinations",
+                "link" => "admin/product/combinations",
+                "sub_menu" => 0,
+                "access" => "1,2,11,12",
+                "open" => 1,
+                "rank" => 3
             ],
             [
                 //運費管理
-                "id" => 303,
+                "id" => 305,
                 "parent_id" => 3,
                 "name" => "product.shipping",
                 "link" => "admin/product/shipping",
                 "sub_menu" => 0,
                 "access" => "1,2,11,12",
                 "open" => 0,
-                "rank" => 3
+                "rank" => 5
             ],
             [
                 //付款方式
-                "id" => 304,
+                "id" => 306,
                 "parent_id" => 3,
                 "name" => "product.pay",
                 "link" => "admin/product/pay",
                 "sub_menu" => 0,
                 "access" => "1,2,11,12",
                 "open" => 0,
-                "rank" => 4
+                "rank" => 6
             ],
             [
                 //商品修改記錄

@@ -353,6 +353,22 @@ return [
                                 ],
                         ],
                     ],
+                    'spec' => [
+                        'title' => '商品規格',
+                        'index'  => ' 總覽',
+                        'show'   => ' 檢視',
+                        'create' => ' 新增',
+                        'edit'   => ' 更新',
+                        'destroy'=> ' 刪除',
+                    ],
+                    'combinations' => [
+                        'title' => '商品規格',
+                        'index'  => ' 總覽',
+                        'show'   => ' 檢視',
+                        'create' => ' 新增',
+                        'edit'   => ' 更新',
+                        'destroy'=> ' 刪除',
+                    ],
                     'shipping' => [
                         'title' => '運費管理',
                         'index'  => ' 總覽',

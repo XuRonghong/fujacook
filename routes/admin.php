@@ -353,6 +353,19 @@ Route::group(
             Route::resource($index['url'], $index['C'], ['as'=> 'product', 'name'=> $index['name'] ]);
             Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
             Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
+            // 商品規格
+            $index = array('url'=>'spec', 'C'=>'SpecController', 'name'=>'product.spec');
+            Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
+            Route::resource($index['url'], $index['C'], ['as'=> 'product', 'name'=> $index['name'] ]);
+            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
+            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
+            // 組合商品
+            $index = array('url'=>'combinations', 'C'=>'CombinationController', 'name'=>'product.combinations');
+            Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
+            Route::resource($index['url'], $index['C'], ['as'=> 'product', 'name'=> $index['name'] ]);
+            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
+            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
+
             // 運費管理
             $index = array('url'=>'shipping', 'C'=>'ShippingController', 'name'=>'product.shipping');
             Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');

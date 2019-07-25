@@ -32,7 +32,7 @@ class Admin extends Authenticatable
     public function validate($request, $noUnique=0, $except='')
     {
         $rules = [
-            'account' => ($except=='account'?'nullable':'required'). ($noUnique?'':'|unique:admins'),
+            'account' => ($except=='account'?'nullable':'required'). ($noUnique?'':'|unique:'.$this->table),
             'password' => 'required',
             'name' => 'required'. ($noUnique?'':'|unique:admins'),
         ];

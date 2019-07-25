@@ -24,10 +24,10 @@ class ProductCategory extends Model
         'open',
     ];
 
-    public function validate($request, $noUnique=0)
+    public function validate($request, $noUnique=0, $except='')
     {
         $rules = [
-            'name' => 'required'. ($noUnique?'':'|unique:product_categories'),
+            'name' => ($except=='name'?'nullable':'required'). ($noUnique?'':'|unique:'.$this->table),
         ];
         $messages = [
             'name.required' => 'name為必填項目',
@@ -38,6 +38,11 @@ class ProductCategory extends Model
 
     public function admin()
     {
-        return $this->belongsToMany('App\Admin'/*,'admin_permission','permission_id','id'*/);
+        return $this->belongsTo('App\Admin','id','author_id');
+    }
+
+    public function product()
+    {
+        return $this->hasMany('App\Product','type','id');
     }
 }
