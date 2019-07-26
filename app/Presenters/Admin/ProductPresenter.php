@@ -21,6 +21,11 @@ class ProductPresenter extends Presenter
             'product' => [
                 /* 從資料庫得到 from database. */
             ],
+            'product_combination' => [
+                1 => '一般組合商品',
+                2 => '限時組合商品',
+                3 => '加購組合商品',
+            ],
         ];
     }
 
@@ -29,8 +34,16 @@ class ProductPresenter extends Presenter
     {
         if($ORM){
             $options = array();
-            foreach ($ORM as $key => $val){
-                $options[ $val['id'] ] = $val['name'];
+            if ($selectOpts=='product') {
+                foreach ($ORM as $key => $val){
+                    $options[ $val['id'] ] = $val['name'].' ('.
+                        trans('menu.product.category.alt').$val->category->name.' ,'.
+                        trans('menu.product.manage.price').$val['price'].' )';
+                }
+            } else {
+                foreach ($ORM as $key => $val){
+                    $options[ $val['id'] ] = $val['name'];
+                }
             }
             if($options) $this->selectOptions[$selectOpts] = $options;
         } else return null;
@@ -49,6 +62,10 @@ class ProductPresenter extends Presenter
                     $var->image = $this->presentImages($images);
                     //
                     $var->status = $this->presentStatus($var->open);
+                    // trans Unit
+                    $var->spec_price = '$'. $var->spec_price.' /'.($var->spec_unit?:trans('web.default_unit'));
+                    // trans Unit
+                    $var->spec_stock .= ' ('.($var->spec_unit?:trans('web.default_unit')).' )';
                 }
             } else {
                 foreach ($arr['aaData'] as $key => $var) {
@@ -70,7 +87,7 @@ class ProductPresenter extends Presenter
     }
 
     // trans each one data for output view from scenes.
-    public function transOne($data, $other=0)
+    public function transOne($data, $other=0, $other2=0)
     {
         $data = parent::transOne($data);
 
@@ -78,14 +95,23 @@ class ProductPresenter extends Presenter
         if ($other){
             $data['options'] = $this->getSelectOption($other, $data['type']);
         }
+        if ($other2){
+            $data['options_pdt'] = $this->getSelectOption($other2, $data['product_id']);
+        }
         return $data;
     }
 
     // 製造 HTML 元素 select option
     public function getSelectOption($type, $selected='', $opt = '')
     {
-        foreach ($this->selectOptions[$type] as $key => $val) {
-            $opt .= '<option value="'.$key.'" '. ($selected==$key?'selected':'') .'>'.$val.'</option>';
+        if (strpos($selected, ',')) {   //int,int,int
+            foreach ($this->selectOptions[$type] as $key => $val) {     // multiple selected
+                $opt .= '<option value="' . $key . '" ' . (strpos($selected, ''.$key)>-1 ? 'selected' : '') . '>' . $val . '</option>';
+            }
+        } else {        //int
+            foreach ($this->selectOptions[$type] as $key => $val) {     // single selected
+                $opt .= '<option value="' . $key . '" ' . ($selected == $key ? 'selected' : '') . '>' . $val . '</option>';
+            }
         }
         return $opt;
     }

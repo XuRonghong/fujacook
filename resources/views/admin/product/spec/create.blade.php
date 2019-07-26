@@ -57,13 +57,17 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="com4" class="col-sm-3 text-right control-label col-form-label">此規格庫存<span style="color:red">*</span></label>
-                                <div class="col-sm-9">
-                                    <input type="text" name="spec_stock" value="{{data_get($data['arr'], 'spec_stock', 0)}}" id="com6" class="form-control spec_stock" placeholder="">
+                                <label for="com6" class="col-sm-3 text-right control-label col-form-label">此規格庫存<span style="color:red">*</span></label>
+                                <div class="col-sm-2">
+                                    <input type="text" name="spec_stock" value="{{data_get($data['arr'], 'spec_stock', 0)}}" id="com6" class="form-control col-sm-12 spec_stock" placeholder="">
+                                </div>
+                                <label for="com61" class="col-sm-1 text-right control-label col-form-label">單位</label>
+                                <div class="col-sm-6">
+                                    <input type="text" name="spec_unit" value="{{data_get($data['arr'], 'spec_unit')}}" id="com61" class="form-control col-sm-3 spec_unit" placeholder="個">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="com4" class="col-sm-3 text-right control-label col-form-label">安全庫存<span style="color:red">*</span></label>
+                                <label for="com7" class="col-sm-3 text-right control-label col-form-label">安全庫存<span style="color:red">*</span></label>
                                 <div class="col-sm-9">
                                     <input type="text" name="spec_safe_stock" value="{{data_get($data['arr'], 'spec_safe_stock')}}" id="com7" class="form-control spec_safe_stock" placeholder="">
                                 </div>

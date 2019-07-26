@@ -38,7 +38,7 @@ class ProductCategory extends Model
 
     public function admin()
     {
-        return $this->belongsTo('App\Admin','id','author_id');
+        return $this->belongsTo('App\Admin','author_id','id');
     }
 
     public function product()

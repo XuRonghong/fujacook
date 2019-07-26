@@ -59,34 +59,31 @@
                         }
                     },
                     {
-                        "sTitle": "product",
-                        "mData": "product_id",
+                        "sTitle": "serial(#)",
+                        "mData": "rank",
                         // "width": "100px",
-                        "sName": "product_id"
+                        "sName": "rank",
+                        "mRender": function (data, type, row) {
+                            return data;
+                        }
+                    },
+                    {
+                        "sTitle": "type",
+                        "mData": "type",
+                        // "width": "100px",
+                        "sName": "type"
                     },
                     {
                         "sTitle": "name",
                         "mData": "name",
-                        // "width": "20%",
+                        "width": "20%",
                         "sName": "name"
                     },
                     {
-                        "sTitle": "spec_num",
-                        "mData": "spec_num",
-                        // "width": "100px",
-                        "sName": "spec_num"
-                    },
-                    {
-                        "sTitle": "spec_price",
-                        "mData": "spec_price",
-                        // "width": "100px",
-                        "sName": "spec_price"
-                    },
-                    {
-                        "sTitle": "spec_stock",
-                        "mData": "spec_stock",
-                        // "width": "100px",
-                        "sName": "spec_stock"
+                        "sTitle": "image",
+                        "mData": "image",
+                        // "width": "20%",
+                        "sName": "image"
                     },
                     {
                         "sTitle": "updated_at",
@@ -95,6 +92,19 @@
                         "sName": "updated_at",
                         "bSortable": true,
                         "bSearchable": false,
+                    },
+                    {
+                        "sTitle": '<button type="button" name="bulk_delete" id="bulk_delete" class="btn btn-danger btn-xs">' +
+                            '刪除<i class="glyphicon glyphicon-remove"></i>' +
+                            '</button>',
+                        "mData": "checkbox",
+                        "width": "30px",
+                        "sName": "checkbox",
+                        "bSortable": false,
+                        "bSearchable": false,
+                        "mRender": function (data, type, row) {
+                            return data;
+                        }
                     },
                     {
                         "sTitle": '',
@@ -163,7 +173,33 @@
                 doDelete(url, data, table)          // from layout.master
             })
             // 勾選刪除多筆資料
-            // doMessDelete(table)
+            doMessDelete(table)
+
+
+            // 按一下進入編輯模式
+            data_table.on('click', '.aaa', function () {
+                $('div.aaa').show();
+                $('input.isEdit').hide();
+                $(this).parent().find('input.isEdit').show();
+                $(this).hide();
+            });
+            data_table.mouseleave(function () {
+                $('.isEdit').hide();
+                $('.isEdit').parent().find('.aaa').show();
+            })
+            // 編輯完成退回瀏覽模式
+            data_table.on('change', '.isEdit', function (e) {
+                $(this).hide();
+                $(this).parent().find('.aaa').show();
+                //
+                let id = $(this).closest('tr').attr('id');
+                let url = '{{data_get($data['route_url'], "update")}}'.replace('-10', id)  //-10代替字元為id
+                let data = {}
+                data[$(this).data('id')] = $(this).val()
+                data['doValidate'] = 0
+                //
+                ajaxOpen(url, data, 'POST', table)
+            });
         })
     </script>
 @endsection

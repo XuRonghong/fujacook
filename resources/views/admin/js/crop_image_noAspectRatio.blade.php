@@ -94,7 +94,7 @@ $(document).ready(function() {
 
             file = files[0];
             if( file.size > 1*1024*1024*5 ){
-            	swal("{{trans('web_alert.notice')}}", "{{trans('web_alert.cropper_image_too_big')}}:5 MB", "error");
+            	Swal.fire("{{trans('web_alert.notice')}}", "{{trans('web_alert.cropper_image_too_big')}}:5 MB", "error");
             	return;
             }
             if (/^image\/\w+$/.test(file.type)) {
@@ -130,7 +130,7 @@ $(document).ready(function() {
     $("#setDrag").click(function() {
         $('#image-form').modal('hide');
         $image.cropper("setDragMode", "crop");
-        swal("{{trans('web_alert.notice')}}", "{{trans('web_alert.cropper_success')}}", "success");
+        Swal.fire("{{trans('web_alert.notice')}}", "{{trans('web_alert.cropper_success')}}", "success");
         var image = $image.cropper("getDataURL", "image/jpeg");
         sendImage(image);
         $('.cropper_image').find('.btn-image-modal'+img).before("<div id=\"div_"+imagedata.fileid+"\" class=\"image-box\"></div>");

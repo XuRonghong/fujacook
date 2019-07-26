@@ -29,7 +29,7 @@
     }
     /*客製化*/
     .col-mystyle {
-        padding-left: 30px;
+        /*padding-left: 30px;*/
     }
     .btn-group-mystyle {
         margin-left: 100px;
@@ -109,7 +109,7 @@ $(document).ready(function() {
 
             file = files[0];
             if( file.size > 1*1024*1024 ){
-            	swal("{{trans('web_alert.notice')}}", "{{trans('web_alert.cropper_image_too_big')}}:1 MB", "error");
+            	Swal.fire("{{trans('web_alert.notice')}}", "{{trans('web_alert.cropper_image_too_big')}}:1 MB", "error");
             	return;
             }
             if (/^image\/\w+$/.test(file.type)) {

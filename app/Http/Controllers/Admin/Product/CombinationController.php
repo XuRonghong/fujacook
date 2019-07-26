@@ -17,15 +17,15 @@ class CombinationController extends Controller
     public function __construct(ProductRepository $repository, ProductPresenter $presenter)
     {
         $this->repository = $repository;
-        $this->repository->setModel_ProductSpec();
+        $this->repository->setModel_ProductCombination();
 
         $this->presenter = $presenter;
-        $this->presenter->setViewName('product.spec');
-        $this->presenter->setTitle(trans('menu.product.manage.spec.title'));
-        $this->presenter->setSelectOpt( $this->repository->getORM_Product(['id', 'no', 'name']), 'product');
+        $this->presenter->setViewName('product.combination');
+        $this->presenter->setTitle(trans('menu.product.combinations.title'));
+        $this->presenter->setSelectOpt( $this->repository->getORM_Product(), 'product');
 
         //所有關於route::resource的位置
-        $this->route_url = $this->presenter->getRouteResource($this->presenter->setRouteName('admin.product.spec'));
+        $this->route_url = $this->presenter->getRouteResource($this->presenter->setRouteName('admin.product.combinations'));
     }
 
     /**
@@ -37,6 +37,12 @@ class CombinationController extends Controller
     {
         //meta data
         $data = $this->presenter->getParameters('index', array('route_url' => $this->route_url));
+        //add route_url for mass_destroy.
+        $this->presenter->addParameters(
+            $data,
+            'route_url.mass_destroy',
+            route($this->presenter->getRouteName().'.mass_destroy')
+        );
 
         return $this->presenter->responseJson($data, 'index');
     }
@@ -49,7 +55,7 @@ class CombinationController extends Controller
         {
             $data = $this->repository->getDataTable($request);
 
-            $data = $this->presenter->eachOne_aaData($data, 'product_spec');     //每一項目要做甚麼事,有需要在使用
+            $data = $this->presenter->eachOne_aaData($data);     //每一項目要做甚麼事,有需要在使用
 
             return $this->presenter->responseJson($data, 'ajax', 200);
         }
@@ -66,7 +72,8 @@ class CombinationController extends Controller
         //
         $data = $this->presenter->getParameters('create', array('route_url' => $this->route_url));
         //get option for select
-        $data['arr']['options'] = $this->presenter->getSelectOption('product');
+        $data['arr']['options'] = $this->presenter->getSelectOption('product_combination');
+        $data['arr']['options_pdt'] = $this->presenter->getSelectOption('product');
 
         return $this->presenter->responseJson($data, 'create');
     }
@@ -82,7 +89,7 @@ class CombinationController extends Controller
         //
         $this->repository->validate($request);
         //
-        $data = $this->repository->create($request->all());
+        $data = $this->repository->create($request->all(), 'product_combinations');
 
         return $this->presenter->responseJson($data, 'store');
     }
@@ -100,7 +107,7 @@ class CombinationController extends Controller
         //若資料庫沒有該id 則404畫面
         $data['arr'] = $this->repository->findOrFail($id) or abort(404);
         //轉換出顯示數據
-        $data['arr'] = $this->presenter->transOne($data['arr'], 'product');
+        $data['arr'] = $this->presenter->transOne($data['arr'], 'product_combination', 'product');
 
         return $this->presenter->responseJson($data, 'create');
     }
@@ -118,7 +125,7 @@ class CombinationController extends Controller
         //若資料庫沒有該id 則404畫面
         $data['arr'] = $this->repository->findOrFail($id) or abort(404);
         //轉換出顯示數據
-        $data['arr'] = $this->presenter->transOne($data['arr'], 'product');
+        $data['arr'] = $this->presenter->transOne($data['arr'], 'product_combination', 'product');
 
         return $this->presenter->responseJson($data, 'create');
     }

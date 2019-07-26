@@ -267,7 +267,7 @@
                                     table.api().ajax.reload(null, false)
                                 }, 100)
                             } else {
-                                swal("{{trans('web_alert.notice')}}", rtndata.message, "error")
+                                Swal.fire("{{trans('web_alert.notice')}}", rtndata.message, "error")
                             }
                         },
                         error: function (err) {
@@ -321,8 +321,13 @@
         }
 
         //撈取html 滑動開關切換按鈕
-        if (JSON.stringify(document.getElementById("switch_demo")) === '{}') {
+        if (document.getElementById("switch_demo") && JSON.stringify(document.getElementById("switch_demo")) != '{}') {
             form_data.append('open', document.getElementById("switch_demo").value)
+        }
+
+        //多選項
+        if (document.getElementById("multi1")) {
+            form_data.append('product_id', $('#multi1').val())
         }
 
         //假如還有資料就填充上去
@@ -365,8 +370,18 @@
         }
 
         //撈取html 滑動開關切換按鈕
-        if (JSON.stringify(document.getElementById("switch_demo")) === '{}') {
+        if (document.getElementById("switch_demo") && JSON.stringify(document.getElementById("switch_demo")) != '{}') {
             form_data.append('open', document.getElementById("switch_demo").value)
+        }
+
+        //多選項
+        if (document.getElementById("multi1")) {
+            form_data.append('product_id', $('#multi1').val())
+        }
+
+        //假如還有資料就填充上去
+        for (let key in datas) {
+            form_data.append(key, datas[key])
         }
 
         return form_data

@@ -22,7 +22,7 @@ class ProductController extends Controller
 
         $this->presenter->setViewName('product.manage');
         $this->presenter->setTitle(trans('menu.product.manage.title'));
-        $this->presenter->setSelectOpt( $this->repository->getORM_ProductCategory( ['id', 'name', 'value']) );
+        $this->presenter->setSelectOpt( $this->repository->getORM_ProductCategory(['id', 'name', 'value']) );
 
         //所有關於route::resource的位置
         $this->route_url = $this->presenter->getRouteResource($this->presenter->setRouteName('admin.product.manage'));

@@ -22,7 +22,7 @@ class SpecController extends Controller
         $this->presenter = $presenter;
         $this->presenter->setViewName('product.spec');
         $this->presenter->setTitle(trans('menu.product.manage.spec.title'));
-        $this->presenter->setSelectOpt( $this->repository->getORM_Product(['id', 'no', 'name']), 'product');
+        $this->presenter->setSelectOpt( $this->repository->getORM_Product(), 'product');
 
         //所有關於route::resource的位置
         $this->route_url = $this->presenter->getRouteResource($this->presenter->setRouteName('admin.product.spec'));

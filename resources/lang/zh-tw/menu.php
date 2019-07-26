@@ -441,12 +441,15 @@ return [
             'title' => '商品管理',
             'category' => [
                 'title' => '商品類別管理',
+                'alt' => ' 商品類別: ',
                 'sub' => [
                     'title' => '子類別管理',
                 ],
             ],
             'manage' => [
                 'title' => '商品庫管理',
+                'alt' => ' 商品: ',
+                'price' => ' 價格: ',
                 'museum_a01' => [
                     'title' => '一般商品',
                     'add' =>

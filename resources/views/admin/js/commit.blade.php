@@ -1,6 +1,6 @@
 <script>
     @if(Session::has('check_empty.message'))
-        swal("{{trans('web_alert.notice')}}", "{{Session::pull('check_empty.message')}}", "error");
+        Swal.fire("{{trans('web_alert.notice')}}", "{{Session::pull('check_empty.message')}}", "error");
     @if(Session::has('check_empty.url'))
         setTimeout(function () {
         location.href = "{{Session::pull('check_empty.url')}}";
@@ -19,7 +19,7 @@
                 if (rtndata.status) {
                     location.reload();
                 } else {
-                    swal("{{trans('web_alert.logout.success')}}", rtndata.message, "error");
+                    Swal.fire("{{trans('web_alert.logout.success')}}", rtndata.message, "error");
                 }
             }
         });
@@ -27,7 +27,7 @@
     })
     //
     $(".logout").click(function () {
-        swal({
+        Swal.fire({
             title: "{{trans('web_alert.logout.title')}}",
             text: "{{trans('web_alert.logout.note')}}",
             type: "warning",
@@ -44,12 +44,12 @@
                 async: false,
                 success: function (rtndata) {
                     if (rtndata.status) {
-                        swal("{{trans('web_alert.logout.success')}}", rtndata.message, "success");
+                        Swal.fire("{{trans('web_alert.logout.success')}}", rtndata.message, "success");
                         setTimeout(function () {
                             location.href = "{{ url('web/login')}}";
                         }, 1000);
                     } else {
-                        swal("{{trans('web_alert.logout.success')}}", rtndata.message, "error");
+                        Swal.fire("{{trans('web_alert.logout.success')}}", rtndata.message, "error");
                     }
                 }
             });
@@ -69,9 +69,9 @@
         try {
             var successful = document.execCommand('copy');
             var msg = successful ? 'successful' : 'unsuccessful';
-            swal("提示", "網址已複製", "success");
+            Swal.fire("提示", "網址已複製", "success");
         } catch (err) {
-            swal("提示", "複製失敗", "error");
+            Swal.fire("提示", "複製失敗", "error");
         }
         document.body.removeChild(textArea);
     }
@@ -197,16 +197,16 @@
      * Alert Type And Message example
      */
     $('.demo1').click(function () {
-        swal("{{trans('_web.notice')}}", rtndata.message);
+        Swal.fire("{{trans('_web.notice')}}", rtndata.message);
     });
 
     $('.demo2').click(function () {
-        swal("{{trans('_web.notice')}}", rtndata.message, "success");
-        swal("{{trans('_web.notice')}}", rtndata.message, "error");
+        Swal.fire("{{trans('_web.notice')}}", rtndata.message, "success");
+        Swal.fire("{{trans('_web.notice')}}", rtndata.message, "error");
     });
 
     $('.demo3').click(function () {
-        swal({
+        Swal.fire({
             title: "Are you sure?",
             text: "You will not be able to recover this imaginary file!",
             type: "warning",
@@ -215,12 +215,12 @@
             confirmButtonText: "Yes, delete it!",
             closeOnConfirm: false
         }, function () {
-            swal("Deleted!", "Your imaginary file has been deleted.", "success");
+            Swal.fire("Deleted!", "Your imaginary file has been deleted.", "success");
         });
     });
 
     $('.demo4').click(function () {
-        swal({
+        Swal.fire({
                 title: "Are you sure?",
                 text: "Your will not be able to recover this imaginary file!",
                 type: "warning",
@@ -233,9 +233,9 @@
             },
             function (isConfirm) {
                 if (isConfirm) {
-                    swal("Deleted!", "Your imaginary file has been deleted.", "success");
+                    Swal.fire("Deleted!", "Your imaginary file has been deleted.", "success");
                 } else {
-                    swal("Cancelled", "Your imaginary file is safe :)", "error");
+                    Swal.fire("Cancelled", "Your imaginary file is safe :)", "error");
                 }
             });
     });

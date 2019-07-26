@@ -47,12 +47,17 @@ class Product extends Model
 
     public function admin()
     {
-        return $this->belongsTo('App\Admin','id','author_id');
+        return $this->belongsTo('App\Admin','author_id','id');
     }
 
     public function category()
     {
-        return $this->belongsTo('App\ProductCategory','id','type');
+        return $this->belongsTo('App\ProductCategory','type','id');
+    }
+
+    public function store()
+    {
+        return $this->belongsTo('App\Store','store_id','id');
     }
 
     public function spec()

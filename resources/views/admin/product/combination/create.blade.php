@@ -31,75 +31,60 @@
                         <div class="card-body messageInfo-modal">
                             <h4 class="card-title"></h4>
                             <div class="form-group row">
-                                <label for="com2" class="col-sm-1 text-right control-label col-form-label">type</label>
-                                <div class="col-sm-11">
-                                    <select class="form-control type" id="com2" name="type">
+                                <label for="com1" class="col-sm-2 text-right control-label col-form-label">Type</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control type" id="com1" name="type">
                                         {!! data_get($data['arr'], 'options') !!}
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="img1" class="col-sm-3 text-right control-label col-form-label">圖片</label>
-                                <div class="col-sm-9">
-                                    <a class="btn-image-modal" data-modal="image-form" data-id="">
-                                        @forelse(data_get( $data['arr'], 'image', []) as $key => $var)
-                                            <img id="{{$key}}" src="{{$var or ''}}" style="height:140px" alt="" >
-                                        @empty
-                                            <img src="{{url('images/empty.jpg')}}" style="height:140px" alt="">
-                                        @endforelse
-                                    </a>
-                                    <br>
-                                    <span style="color:red">如要更換圖片，點擊上方</span>
-                                    @forelse(data_get( $data['arr'], 'image', []) as $key => $var)
-                                        <img id="img1" src="{{$var or ''}}" style="height:140px" alt="">
-                                    @empty
-                                        <img id="img1" src="{{url('images/empty.jpg')}}" style="height:140px" alt="">
-                                    @endforelse
+                                <label for="multi1" class="col-sm-2 text-right control-label col-form-label">商品<span style="color:red">*</span><br>( Ctrl + click )</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control product_id" id="multi1" multiple="multiple">
+                                        {!! data_get($data['arr'], 'options_pdt') !!}
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="com3" class="col-sm-1 text-right control-label col-form-label">Name<span style="color:red">*</span></label>
-                                <div class="col-sm-11">
+                                <label for="com3" class="col-sm-2 text-right control-label col-form-label">Name<span style="color:red">*</span></label>
+                                <div class="col-sm-10">
                                     <input type="text" name="name" value="{{data_get($data['arr'], 'name')}}" id="com3" class="form-control name" placeholder="">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="com4" class="col-sm-1 text-right control-label col-form-label">Price</label>
-                                <div class="col-sm-11">
-                                    <input type="text" name="price" value="{{data_get($data['arr'], 'price')}}" id="com4" class="form-control price" placeholder="default:100">
+                                <label for="img2" class="col-sm-2 text-right control-label col-form-label">圖片s</label>
+                                <div class="col-sm-10 cropper_image">
+                                    @if(isset($data['arr']['image']))
+                                        @foreach(data_get( $data['arr'], 'image', []) as $key => $var)
+                                            <div class="image-box">
+                                                <img id="{{$key}}" src="{{$var or ''}}">
+                                                <a class="image-del">X</a>
+                                            </div>
+                                        @endforeach
+                                        <a class="btn-image-modal" data-modal="image-form" data-id="">
+                                            @if(count(data_get( $data['arr'], 'image', [])) < 5)
+                                                <img id="Image" data-data="" src="{{url('images/addimg.jpg')}}" style="height:140px">
+                                            @endif
+                                        </a>
+                                    @else
+                                        <a class="btn-image-modal" data-modal="image-form" data-id="">
+                                            <img id="Image" data-data="" src="{{url('images/empty.jpg')}}" style="height:140px">
+                                        </a>
+                                    @endif
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="com5" class="col-sm-1 text-right control-label col-form-label">Number</label>
-                                <div class="col-sm-11">
-                                    <input type="text" name="num" value="{{data_get($data['arr'], 'num')}}" class="form-control num" id="com5" placeholder="數量">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="com4" class="col-sm-1 text-right control-label col-form-label">Code</label>
-                                <div class="col-sm-11">
-                                    <input type="text" name="code" value="{{data_get($data['arr'], 'code')}}" id="com4" class="form-control code" placeholder="">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="detail" class="col-sm-1 text-right control-label col-form-label">產品資訊</label>
-                                <div class="col-sm-11 note-editable">
+                                <label for="detail" class="col-sm-2 text-right control-label col-form-label">產品資訊</label>
+                                <div class="col-sm-10 note-editable">
                                     <textarea id="detail" name="product_description">
-                                        {!! data_get($data['arr'], 'product_description') !!}
+                                        {!! data_get($data['arr'], 'detail') !!}
                                     </textarea>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="service_description" class="col-sm-1 text-right control-label col-form-label">Service description</label>
-                                <div class="col-sm-11 note-editable">
-                                    <textarea id="service_description" name="service_description">
-                                        {!! data_get($data['arr'], 'service_description') !!}
-                                    </textarea>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="com6" class="col-sm-3 text-right control-label col-form-label">Create at</label>
-                                <div class="col-sm-9" style="margin-top: 10px">
+                                <label for="com9" class="col-sm-2 text-right control-label col-form-label">Create at</label>
+                                <div class="col-sm-10" style="margin-top: 10px" id="com9">
                                     {{data_get($data['arr'], 'created_at', date('Y-m-d H:i:s'))}}
                                 </div>
                             </div>
@@ -128,7 +113,7 @@
 
 @section('inline-js')
     <!-- Public Crop_Image -->
-    @include('admin.js.crop_image_single_custom')
+    @include('admin.js.crop_image')
     <!-- Public SummerNote -->
     @include('admin.js.summernote2019')
     <!-- end -->
@@ -168,10 +153,7 @@
             //寫入資料庫
             let url = '{{data_get($data['route_url'], "store")}}'
             let self = document.querySelector('#sample_form')
-            let data = prop_fromData_fun(self, {
-                'product_description': $('#detail').summernote('code'),
-                'service_description': $('#service_description').summernote('code'),
-            })
+            let data = prop_fromData_multpleFile(self)
 
             ajax(url, data, 'POST')
         })
@@ -184,7 +166,7 @@
             let id = $(this).data('id')
             let url = '{{data_get($data['route_url'], "update")}}'.replace('-10', id)  //-10代替字元為id
             let self = document.querySelector('#sample_form')
-            let data = prop_fromData_fun(self, {'product_description': $('#detail').summernote('code')})
+            let data = prop_fromData_multpleFile(self)
 
             ajax(url, data, 'POST')
         })

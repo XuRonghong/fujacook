@@ -361,6 +361,7 @@ Route::group(
             Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
             // 組合商品
             $index = array('url'=>'combinations', 'C'=>'CombinationController', 'name'=>'product.combinations');
+            Route::delete(  $index['url'].'/mass_destroy',$index['C'].'@massDestroy')->name($index['name'].'.mass_destroy');
             Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
             Route::resource($index['url'], $index['C'], ['as'=> 'product', 'name'=> $index['name'] ]);
             Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');

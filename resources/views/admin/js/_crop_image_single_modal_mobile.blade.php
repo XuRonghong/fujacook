@@ -60,7 +60,7 @@
 
                 file = files[0];
                 if (file.size > 1 * 1024 * 1024) {
-                    swal("{{trans('web_alert.notice')}}", "{{trans('web_alert.cropper_image_too_big')}}:1 MB", "error");
+                    Swal.fire("{{trans('web_alert.notice')}}", "{{trans('web_alert.cropper_image_too_big')}}:1 MB", "error");
                     return;
                 }
                 if (/^image\/\w+$/.test(file.type)) {

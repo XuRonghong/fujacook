@@ -45,6 +45,6 @@ class ProductSpec extends Model
 
     public function product()
     {
-        return $this->belongsTo('App\Product','id','product_id');
+        return $this->belongsTo('App\Product','product_id','id');
     }
 }

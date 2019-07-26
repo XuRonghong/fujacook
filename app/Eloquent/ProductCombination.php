@@ -10,29 +10,39 @@ class ProductCombination extends Model
     protected $table = 'product_combinations';
     protected $primaryKey = 'id';
     protected $fillable = [
+        'product_id',
+        'no',
+        'rank',
+        'type',
+        'author_id',
         'name',
-        'description',
-        'guard_name',
+        'image',
+        'file_id',
+        'detail',
+        'stars',
+        'review_count',
+        'purchased_count',
+        'price',
+        'market_price',
+        'open',
     ];
 
-    public function validate($request, $noUnique=0)
+    public function validate($request, $noUnique=0, $except='')
     {
         $rules = [
-            'name' => 'required'. ($noUnique?'':'|unique:permissions'),
-            'description' => 'required',
-//            'guard_name' => 'required|array',
+            'name' => ($except=='name'?'nullable':'required'). ($noUnique?'':'|unique:'.$this->table),
+            'product_id' => 'required',
         ];
         $messages = [
-            'name.required' => 'name為必填項目',
-            'name.unique' => 'name不能重複',
-            'description.required' => '描述為必填項目',
-//            'guard_name.required' => 'guard_name為必填項目',
+            'name.required' => '組合商品別名 為必填項目',
+            'name.unique' => '組合商品別名 不能重複',
+            'product_id.required' => '商品為必填項目',
         ];
         return $request->validate($rules, $messages);
     }
 
     public function admin()
     {
-        return $this->belongsToMany('App\Admin'/*,'admin_permission','permission_id','id'*/);
+        return $this->belongsTo('App\Admin','author_id','id');
     }
 }
