@@ -20,7 +20,7 @@ class CreateProductSpecsTable extends Migration
                 $table->unsignedInteger('product_id')->comment('對應products.id');
                 $table->string( 'spec_num')->nullable();
                 $table->string('name')->comment('商品規格名稱');
-                $table->string( 'spec_unit' )->nullable()->comment('單位: 件 組 個');
+                $table->string( 'spec_unit', 32)->nullable()->comment('單位: 件 組 個');
                 $table->integer( 'spec_price' )->default( 0 );
                 $table->integer( 'spec_stock' )->default( 0 );
                 $table->integer( 'spec_safe_stock' )->default( 0 );

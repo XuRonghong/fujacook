@@ -16,13 +16,13 @@ class CreateMenusTable extends Migration
         if (env('DB_REFRESH')) {
             Schema::create('menus', function (Blueprint $table) {
                 $table->increments('id');
-                $table->integer('parent_id')->comment('父類別')->default(0);
+                $table->unsignedInteger('parent_id')->comment('父類別')->default(0);
                 $table->integer('rank')->comment('序')->default(0);
-                $table->string('type')->comment('類')->nullable();
+                $table->string('type', 32)->comment('類')->nullable();
                 $table->string('name')->comment('title')->default('未命名標題');
                 $table->string('link')->comment('連結')->default('');
                 $table->tinyInteger('sub_menu')->comment('是否有子類別')->default(1);
-                $table->string('access')->comment('')->nullable();
+                $table->string('access', 32)->comment('')->nullable();
                 $table->tinyInteger('open')->comment('開放')->default(1);
                 $table->timestamps();
             });

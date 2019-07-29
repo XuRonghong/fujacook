@@ -19,9 +19,9 @@ class CreateMembersTable extends Migration
             $table->increments('id');
             $table->string('no', 13)->comment('會員編號:m+time()');
             $table->integer('rank')->comment('順序')->nullable()->default(0);
-            $table->integer('type')->comment('類')->nullable();
+            $table->string('type', 32)->comment('類')->nullable();
             $table->string('name')->comment('會員名稱');
-            $table->string('email')->unique()->nullable();
+            $table->string('email')->nullable();
             $table->string('account');
             $table->string('password');
             $table->string('createIP')->comment('註冊的網路位置');
@@ -34,10 +34,10 @@ class CreateMembersTable extends Migration
             $table->string('designation')->nullable()->comment('稱號');
             $table->integer('age')->nullable();
             $table->string('file_id')->nullable()->comment('檔案');
-            $table->string('phone')->nullable()->comment('電話');
-            $table->string('nation')->nullable()->comment('國家');
-            $table->string('county')->nullable()->comment('縣市');
-            $table->string('district')->nullable()->comment('區');
+            $table->string('phone', 32)->nullable()->comment('電話');
+            $table->string('nation', 64)->nullable()->comment('國家');
+            $table->string('county', 128)->nullable()->comment('縣市');
+            $table->string('district', 128)->nullable()->comment('區');
             $table->string('address')->nullable()->comment('地址');
             $table->integer('bonus')->default(0)->comment('購物金');
             $table->boolean('confirm_terms')->default(0)->comment('同意會員條款/隱私權政策');

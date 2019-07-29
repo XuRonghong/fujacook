@@ -18,12 +18,12 @@ class CreateProductCombinationsTable extends Migration
         //
         Schema::create('product_combinations', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('product_id')->comment('對應products.id');
+            $table->string('product_id', 32)->comment('對應products.id');
             $table->string('no', 14)->comment('PC + 上架日期(YYYYMMdd) + 本日商品序號(0000)');
             $table->integer('rank')->comment('順序')->nullable()->default(0);
-            $table->string('type')->comment('1: 一般組合商品 2: 限時組合商品 3: 加購組合商品')->default(1);
-            $table->integer('author_id')->comment('發布者')->default(1);
-            $table->string('name')->comment('組合商品別名');
+            $table->string('type', 32)->comment('1: 一般組合商品 2: 限時組合商品 3: 加購組合商品')->default(1);
+            $table->unsignedInteger('author_id')->comment('發布者')->default(1);
+            $table->string('name', 128)->comment('組合商品別名');
             $table->string('image', 255)->nullable();
             $table->string('file_id')->nullable()->comment('檔案');
             $table->text('detail')->nullable()->comment('產品資訊');
@@ -38,7 +38,7 @@ class CreateProductCombinationsTable extends Migration
         //
         Schema::create('product_items', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('product_id')->comment('對應products.id');
+            $table->string('product_id', 32)->comment('對應products.id');
             $table->integer('purchase_price')->default(0)->comment('進價');
             $table->integer('cost')->default(0)->comment('成本價');
             $table->integer('price')->default(0)->comment('特價');

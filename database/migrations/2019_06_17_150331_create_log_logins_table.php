@@ -18,7 +18,7 @@ class CreateLogLoginsTable extends Migration
             Schema::create('log_logins', function (Blueprint $table) {
                 $table->increments('id');
                 $table->integer('user_id')->comment('登入者id')->nullable();
-                $table->string('user_type')->comment('登入者類')->nullable();
+                $table->string('user_type', 32)->comment('登入者類')->nullable();
                 $table->string('action')->comment('操作紀錄')->nullable();
                 $table->string('ip')->comment('IP位置')->nullable();
                 $table->timestamps();
@@ -28,8 +28,8 @@ class CreateLogLoginsTable extends Migration
             Schema::create('log_actions', function (Blueprint $table) {
                 $table->increments('id');
                 $table->integer('user_id')->comment('登入者id')->nullable();
-                $table->string('user_type')->comment('登入者類')->nullable();
-                $table->string('table_id')->comment('表id')->nullable();
+                $table->string('user_type', 32)->comment('登入者類')->nullable();
+                $table->string('table_id', 32)->comment('表id')->nullable();
                 $table->string('table_name')->comment('表名稱')->nullable();
                 $table->string('action')->comment('操作紀錄')->nullable();
                 $table->longText('value')->comment('值')->nullable();

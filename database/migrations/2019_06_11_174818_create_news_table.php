@@ -17,13 +17,13 @@ class CreateNewsTable extends Migration
             Schema::create('news', function (Blueprint $table) {
                 $table->increments('id');
                 $table->integer('rank')->comment('順序')->nullable()->default(0);
-                $table->string('type')->comment('類')->nullable();
-                $table->integer('author_id')->comment('發布者')->default(1);
+                $table->string('type', 32)->comment('類')->nullable();
+                $table->unsignedInteger('author_id')->comment('發布者')->default(1);
                 $table->string('title', 127)->nullable();
-                $table->string('summary', 255)->nullable();
-                $table->string('image', 255)->nullable();
+                $table->string('summary')->nullable();
+                $table->string('image')->nullable();
                 $table->string('file_id')->nullable()->comment('檔案');
-                $table->string('url', 255)->comment('相關連結')->nullable();
+                $table->string('url')->comment('相關連結')->nullable();
                 $table->longText('detail')->nullable();
                 $table->integer('click')->comment('點擊')->default(0);
                 $table->string('status')->nullable();
