@@ -575,9 +575,13 @@ return [
             'product' =>
                 [
                     'title' => '訂單管理',
-                    'meta' =>
+                    'detail' =>
                         [
                             'title' => '訂單明細'
+                        ],
+                    'meta' =>
+                        [
+                            'title' => '訂單meta'
                         ]
                 ],
         ],

@@ -3,6 +3,8 @@
 namespace App\Repositories\Admin;
 
 use App\Http\Controllers\FuncController;
+use App\Order;
+use App\PaymentMethod;
 use App\Product;
 use App\Repositories\Repository;
 
@@ -11,9 +13,14 @@ class OrderRepository extends Repository
 {
     protected $model;
 
-    public function __construct(Product $model)
+    public function __construct(Order $model)
     {
         $this->model = $model;
+    }
+
+    public function getORM_PaymentMethods($columns = ['*'], $whereQuery='1 = 1')
+    {
+        return PaymentMethod::query()->where('status', 1)->whereRaw($whereQuery)->get($columns);
     }
 
     public function create($attributes, $from='product')

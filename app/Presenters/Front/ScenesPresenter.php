@@ -46,7 +46,7 @@ class ScenesPresenter extends Presenter
                 //翻譯每個type
                 $var->type = $this->tranTypeInSelectOption($var->type, $this->selectOptions);
                 //找圖片檔案
-                $var->images = $this->transFileIdtoImage($var->file_id);
+                $var->images = $var->image ? array($var->image) : $this->transFileIdtoImage($var->file_id); //有圖檔就不用去file找
             }
         }
         return $arr;

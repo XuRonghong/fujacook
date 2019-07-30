@@ -14,6 +14,7 @@ class CreateProductsTable extends Migration
     public function up()
     {
         if (env('DB_REFRESH')) {
+            //
             Schema::create('products', function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('no', 14)->comment('GP + 上架日期(YYYYMMdd) + 本日商品序號(0000)');
@@ -52,6 +53,13 @@ class CreateProductsTable extends Migration
                 $table->tinyInteger('open')->default(0)->comment('上架狀態');
                 $table->timestamps();
             });
+            //
+            Schema::create('payment_methods', function (Blueprint $table) {
+                $table->increments('id');
+                $table->string('name', 64)->comment('付款方式名稱');
+                $table->boolean('status')->default(1)->comment('啟用狀態');
+                $table->timestamps();
+            });
         }
     }
 
@@ -65,6 +73,7 @@ class CreateProductsTable extends Migration
         if (env('DB_REFRESH')) {
             Schema::dropIfExists('products');
             Schema::dropIfExists('product_categories');
+            Schema::dropIfExists('payment_methods');
         }
     }
 }

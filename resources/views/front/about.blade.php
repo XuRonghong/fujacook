@@ -837,14 +837,14 @@
                                 <span class="oswald number">.05</span>
                                 <h2>
                                     <span class="heading_bold">FUJACOOK</span>
-                                    <b class="heading_bold">{{data_get($data, 'navbar2.4.summary', [])}}</b>
+                                    <b class="heading_bold">{{data_get($data, 'navbar2.4.summary', '')}}</b>
                                 </h2>
                             </div>
                             <span class="authenia word-wrap">Core Values</span>
                         </div>
                         <div class="text-area-inner">
                             @forelse(data_get($data, 'introduce.t05', []) as $key => $var)
-                                <img src="{{data_get($var, 'image', array_first( data_get($var, 'images', []) ))}}" alt="創辦人介紹" style="width: 100%;">
+                                <img src="{{array_first( data_get($var, 'images', data_get($var, 'image', [])) )}}" alt="創辦人介紹" style="width: 100%;">
                             @empty
                                 <img src="{{asset('web0708/Fujacook/img/核心價值.jpg')}}" alt="核心價值" style="width: 100%;">
                             @endforelse

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Order;
+namespace App\Http\Controllers\Front\Order;
 
 use App\Presenters\Admin\OrderPresenter;
 use App\Repositories\Admin\OrderRepository;
@@ -23,7 +23,7 @@ class OrderController extends Controller
         $this->presenter->setSelectOpt( $this->repository->getORM_PaymentMethods() );
 
         //所有關於route::resource的位置
-        $this->route_url = $this->presenter->getRouteResource($this->presenter->setRouteName('admin.order.product'));
+        $this->route_url = $this->presenter->getRouteResource($this->presenter->setRouteName('front.order.product'));
     }
 
     /**
@@ -35,6 +35,12 @@ class OrderController extends Controller
     {
         //meta data
         $data = $this->presenter->getParameters('index', array('route_url' => $this->route_url));
+        //add route_url for mass_destroy.
+        $this->presenter->addParameters(
+            $data,
+            'route_url.mass_destroy',
+            route($this->presenter->getRouteName().'.mass_destroy')
+        );
 
         return $this->presenter->responseJson($data, 'index');
     }
@@ -62,6 +68,11 @@ class OrderController extends Controller
     public function create()
     {
         //
+        $data = $this->presenter->getParameters('create', array('route_url' => $this->route_url));
+        //get option for select
+        $data['arr']['options'] = $this->presenter->getSelectOption('product_cate');
+
+        return $this->presenter->responseJson($data, 'create');
     }
 
     /**
@@ -73,6 +84,11 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         //
+        $this->repository->validate($request);
+        //
+        $data = $this->repository->create($request->all());
+
+        return $this->presenter->responseJson($data, 'store');
     }
 
     /**
@@ -88,7 +104,7 @@ class OrderController extends Controller
         //若資料庫沒有該id 則404畫面
         $data['arr'] = $this->repository->findOrFail($id) or abort(404);
         //轉換出顯示數據
-        $data['arr'] = $this->presenter->transOne($data['arr'], 'payment_method_id');
+        $data['arr'] = $this->presenter->transOne($data['arr'], 'product_cate');
 
         return $this->presenter->responseJson($data, 'create');
     }
@@ -106,7 +122,7 @@ class OrderController extends Controller
         //若資料庫沒有該id 則404畫面
         $data['arr'] = $this->repository->findOrFail($id) or abort(404);
         //轉換出顯示數據
-        $data['arr'] = $this->presenter->transOne($data['arr'], 'payment_method_id');
+        $data['arr'] = $this->presenter->transOne($data['arr'], 'product_cate');
 
         return $this->presenter->responseJson($data, 'create');
     }
@@ -137,7 +153,7 @@ class OrderController extends Controller
     public function destroy($id)
     {
         //
-        $data = $this->repository->delete($id, 'cascade', 'order_details');
+        $data = $this->repository->delete($id, 'cascade', 'product_spec');
 
         return $this->presenter->responseJson($data, 'destroy');
     }
