@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 
-class OrderController extends Controller
+class OrderContactController extends Controller
 {
     protected $repository;
     protected $presenter;

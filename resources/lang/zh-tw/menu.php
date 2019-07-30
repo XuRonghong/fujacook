@@ -584,6 +584,14 @@ return [
                             'title' => '訂單meta'
                         ]
                 ],
+            'detail' =>
+                [
+                    'title' => '訂單明細'
+                ],
+            'contact' =>
+                [
+                    'title' => '訂單寄送地址'
+                ],
         ],
     'advertising' =>
         [

@@ -107,12 +107,18 @@ abstract class Presenter
     }
 
     // 轉換 type 為輸出顯示選項內容之一
-    public function tranTypeInSelectOption($type=0, $arr=[])
+    public function tranTypeInSelectOption($type=null, $arr=[], $key=null)
     {
-        if ( !$type) return null;
-        foreach ($arr as $select) {
-            foreach ($select as $value => $option){
-                if($type == $value) return $option;
+        if (is_null($type)) return null;
+        elseif ($key) {
+            foreach ($arr[$key] as $value => $option) {
+                if ($type == $value) return $option;
+            }
+        } else {
+            foreach ($arr as $select) {
+                foreach ($select as $value => $option) {
+                    if ($type == $value) return $option;
+                }
             }
         }
     }

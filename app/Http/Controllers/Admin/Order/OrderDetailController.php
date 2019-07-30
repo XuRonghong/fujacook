@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 
-class OrderController extends Controller
+class OrderDetailController extends Controller
 {
     protected $repository;
     protected $presenter;
@@ -17,13 +17,14 @@ class OrderController extends Controller
     public function __construct(OrderRepository $repository, OrderPresenter $presenter)
     {
         $this->repository = $repository;
+        $this->repository->setModel_OrderContact();
         $this->presenter = $presenter;
-
-        $this->presenter->setTitle(trans('menu.order.product.title'));
+        $this->presenter->setTitle(trans('menu.order.detail.title'));
+        $this->presenter->setViewName('order.detail');
         $this->presenter->setSelectOpt( $this->repository->getORM_PaymentMethods() );
 
         //所有關於route::resource的位置
-        $this->route_url = $this->presenter->getRouteResource($this->presenter->setRouteName('admin.order.product'));
+        $this->route_url = $this->presenter->getRouteResource($this->presenter->setRouteName('admin.order.detail'));
     }
 
     /**
@@ -62,11 +63,6 @@ class OrderController extends Controller
     public function create()
     {
         //
-        $data = $this->presenter->getParameters('create', array('route_url' => $this->route_url));
-        //get option for select
-        $data['arr'] = $this->presenter->transOne($data['arr'], 1);
-
-        return $this->presenter->responseJson($data, 'create');
     }
 
     /**
@@ -78,11 +74,6 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         //
-//        $this->repository->validate($request);
-        //
-        $data = $this->repository->create($request->all());
-
-        return $this->presenter->responseJson($data, 'store');
     }
 
     /**

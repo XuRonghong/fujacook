@@ -15,6 +15,9 @@ class OrderPresenter extends Presenter
     public function __construct()
     {
         $this->selectOptions = [
+            'type' => [
+                /* NULL */
+            ],
             'payment_method_id' => [
                 /* 從資料庫得到 from database. */
             ],
@@ -43,6 +46,12 @@ class OrderPresenter extends Presenter
                 3 => '補繳',
                 4 => '退費',
             ],
+            'status' => [
+                0 => '未處理',
+                1 => '已確認',
+                2 => '已取消',
+                3 => '已折讓',
+            ],
             'order_contacts' => [
                 1 => '訂購人資料',
                 2 => '收件人資料',
@@ -62,56 +71,42 @@ class OrderPresenter extends Presenter
         } else return null;
     }
 
-    // data object or array forEach to do from scenes.
+    // data object or array forEach to do from list.
     public function eachOne_aaData($arr, $from='')
     {
         if ( $arr['aaData']) {
-            if ($from=='product_spec') {
-                foreach ($arr['aaData'] as $key => $var) {
-                    //翻譯每個type
-                    $var->product_id = $this->tranTypeInSelectOption($var->product_id, $this->selectOptions);
-                    //找圖片檔案
-                    $images = $var->image ? array($var->image) : $this->transFileIdtoImage($var->file_id); //有圖檔就不用去file找
-                    $var->image = $this->presentImages($images);
-                    //
-                    $var->status = $this->presentStatus($var->open);
-                    // trans Unit
-                    $var->spec_price = '$'. $var->spec_price.' /'.($var->spec_unit?:trans('web.default_unit'));
-                    // trans Unit
-                    $var->spec_stock .= ' ('.($var->spec_unit?:trans('web.default_unit')).' )';
+            foreach ($arr['aaData'] as $key => $var) {
+                //翻譯每個type
+                foreach (array_keys($this->selectOptions) as $column){
+                    $var->$column = $this->getHTML_select($column, $var->$column);
                 }
-            } else {
-                foreach ($arr['aaData'] as $key => $var) {
-                    //mass_destroy
-                    $var->checkbox = $this->presentCheckBox($var->id);
-                    //
-                    $var->rank = $this->presentIsEdit('rank', $var->rank);
-                    //翻譯每個type
-                    $var->type = $this->tranTypeInSelectOption($var->type, $this->selectOptions);
-                    //找圖片檔案
-                    $images = $var->image ? array($var->image) : $this->transFileIdtoImage($var->file_id); //有圖檔就不用去file找
-                    $var->image = $this->presentImages($images);
-                    //
-                    $var->status = $this->presentStatus($var->open);
-                }
+                //
+                $var->status = $this->presentStatus($var->status);
             }
         }
         return $arr;
     }
 
-    // trans each one data for output view from scenes.
-    public function transOne($data, $other=0, $other2=0)
+    // trans each one data for output view from create.
+    public function transOne($data, $other=0)
     {
-        $data = parent::transOne($data);
+        if ($data) $data = parent::transOne($data);
 
-        //get option for select with scenes type
+        //get option for select with
         if ($other){
-            $data['options'] = $this->getSelectOption($other, $data['type']);
-        }
-        if ($other2){
-            $data['options_pdt'] = $this->getSelectOption($other2, $data['product_id']);
+            foreach (array_keys($this->selectOptions) as $column) {
+                $data[$column] = $this->getSelectOption($column, $data->$column);
+            }
         }
         return $data;
+    }
+
+    // 製造 HTML 元素 select
+    public function getHTML_select($column, $current=null, $number=1)
+    {
+        return '<select class="form-control dt-choose '.$column.'" id="chos'.$number++.'" data-name="'.$column.'">'.
+                    $this->getSelectOption($column, $current).
+                '</select>';
     }
 
     // 製造 HTML 元素 select option
@@ -127,5 +122,15 @@ class OrderPresenter extends Presenter
             }
         }
         return $opt;
+    }
+
+    // panel HTML
+    public function presentStatus($status)
+    {
+        $btn = '';
+        $btn .= '<button class="btn btn-xs btn-show" title="'.trans('options.panel.show').'"><i class="fa fa-book" aria-hidden="true"></i></button>';
+//        $btn .= '<button class="btn btn-xs btn-edit" title="'.trans('options.panel.edit').'"><i class="fa fa-pencil-alt" aria-hidden="true"></i></button>';
+
+        return $btn;
     }
 }

@@ -16,9 +16,9 @@ class DatabaseSeeder extends Seeder
             $this->call(AdminTableSeeder::class);
             $this->call(MemberTableSeeder::class);
             $this->call(SettingTableSeeder::class);
-            $this->call(MenuTableSeeder::class);
             $this->call(PermissionTableSeeder::class);
             $this->call(PaymentMethodsTableSeeder::class);
         }
+        $this->call(MenuTableSeeder::class);
     }
 }

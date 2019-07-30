@@ -504,6 +504,26 @@ return [
                 "open" => 1,
                 "sub_menu" => 0,
             ],
+            [
+                //商品訂單詳情
+                "id" => 4011,
+                "parent_id" => 4,
+                "name" => "order.detail",
+                "link" => "admin/order/detail",
+                "access" => "1,2,11,12",
+                "open" => 1,
+                "sub_menu" => 0,
+            ],
+            [
+                //商品訂單寄送地址
+                "id" => 4012,
+                "parent_id" => 4,
+                "name" => "order.contact",
+                "link" => "admin/order/contact",
+                "access" => "1,2,11,12",
+                "open" => 1,
+                "sub_menu" => 0,
+            ],
         ],
     ],
     [

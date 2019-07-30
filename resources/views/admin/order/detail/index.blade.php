@@ -48,60 +48,72 @@
                 // 'sServerMethod': 'GET',
                 "order": [[ 0, "desc" ]],
                 "aoColumns": [
+                    // {
+                    //     "sTitle": "ID",
+                    //     "mData": "id",
+                    //     "sName": "id",
+                    //     // "width": "40px",
+                    //     "bSearchable": false,
+                    //     "mRender": function (data, type, row) {
+                    //         return data;
+                    //     }
+                    // },
                     {
-                        "sTitle": "ID",
-                        "mData": "id",
-                        "sName": "id",
-                        // "width": "40px",
-                        "bSearchable": false,
+                        "sTitle": "order_id",
+                        "mData": "order_id",
+                        // "width": "100px",
+                        "sName": "order_id",
                         "mRender": function (data, type, row) {
                             return data;
                         }
                     },
                     {
-                        "sTitle": "訂單號",
-                        "mData": "no",
+                        "sTitle": "product_id",
+                        "mData": "product_id",
                         // "width": "100px",
-                        "sName": "no",
-                        "mRender": function (data, type, row) {
-                            return data;
-                        }
+                        "sName": "product_id"
                     },
                     {
-                        "sTitle": "訂購人",
-                        "mData": "member_id",
+                        "sTitle": "type",
+                        "mData": "order_details",
                         // "width": "100px",
-                        "sName": "member_id"
+                        "sName": "order_details"
                     },
                     {
-                        "sTitle": "總金額",
-                        "mData": "total_price",
+                        "sTitle": "quantity",
+                        "mData": "quantity",
                         // "width": "100px",
-                        "sName": "total_price"
+                        "sName": "quantity"
                     },
                     {
-                        "sTitle": "付款方式",
-                        "mData": "payment_method_id",
+                        "sTitle": "purchase_price",
+                        "mData": "purchase_price",
                         // "width": "100px",
-                        "sName": "payment_method_id"
+                        "sName": "purchase_price"
                     },
                     {
-                        "sTitle": "物流方式",
-                        "mData": "shipping_type",
+                        "sTitle": "cost_price",
+                        "mData": "cost_price",
                         // "width": "100px",
-                        "sName": "shipping_type"
+                        "sName": "cost_price"
                     },
                     {
-                        "sTitle": "出貨狀態",
-                        "mData": "shipping_status",
+                        "sTitle": "price",
+                        "mData": "price",
                         // "width": "100px",
-                        "sName": "shipping_status"
+                        "sName": "price"
                     },
                     {
-                        "sTitle": "訂單狀態",
-                        "mData": "pay_status",
+                        "sTitle": "market_price",
+                        "mData": "market_price",
                         // "width": "100px",
-                        "sName": "pay_status"
+                        "sName": "market_price"
+                    },
+                    {
+                        "sTitle": "status",
+                        "mData": "status",
+                        // "width": "100px",
+                        "sName": "status"
                     },
                     {
                         "sTitle": '',
@@ -143,12 +155,12 @@
                 location.href = '{{$data['route_url']['create']}}'
             })
 
-
             //
             data_table.on('change', '.dt-choose', function () {
                 let id = $(this).closest('tr').attr('id')
                 let data = { doValidate : 0 }
                 data[ $(this).data('name') ] = this.value
+                data.type = this.value
                 url = '{{data_get($data['route_url'], "update")}}'.replace('-10', id)
                 ajaxOpen(url, data, 'POST', table)
             })

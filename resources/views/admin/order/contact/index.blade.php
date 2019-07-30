@@ -143,15 +143,6 @@
                 location.href = '{{$data['route_url']['create']}}'
             })
 
-
-            //
-            data_table.on('change', '.dt-choose', function () {
-                let id = $(this).closest('tr').attr('id')
-                let data = { doValidate : 0 }
-                data[ $(this).data('name') ] = this.value
-                url = '{{data_get($data['route_url'], "update")}}'.replace('-10', id)
-                ajaxOpen(url, data, 'POST', table)
-            })
             //
             data_table.on('click', '.btn-open', function () {
                 let id = $(this).closest('tr').attr('id')

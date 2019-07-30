@@ -31,6 +31,25 @@
                         <div class="card-body messageInfo-modal">
                             <h4 class="card-title"></h4>
                             <div class="form-group row">
+                                <label for="img1" class="col-sm-3 text-right control-label col-form-label">圖片</label>
+                                <div class="col-sm-9">
+                                    <a class="btn-image-modal" data-modal="image-form" data-id="">
+                                        @forelse(data_get( $data['arr'], 'image', []) as $key => $var)
+                                            <img id="{{$key}}" src="{{$var or ''}}" style="height:140px" alt="" >
+                                        @empty
+                                            <img src="{{url('images/empty.jpg')}}" style="height:140px" alt="">
+                                        @endforelse
+                                    </a>
+                                    <br>
+                                    <span style="color:red">如要更換圖片，點擊上方</span>
+                                    @forelse(data_get( $data['arr'], 'image', []) as $key => $var)
+                                        <img id="img1" src="{{$var or ''}}" style="height:140px" alt="">
+                                    @empty
+                                        <img id="img1" src="{{url('images/empty.jpg')}}" style="height:140px" alt="">
+                                    @endforelse
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label for="com1" class="col-sm-3 text-right control-label col-form-label">No.</label>
                                 <div class="col-sm-9">
                                     <input type="text" name="no" value="{{data_get($data['arr'], 'no')}}" id="com1" class="form-control no" placeholder="訂單號">
@@ -158,15 +177,19 @@
                             </div>
                         </div>
                         <hr>
+                        <input type="text" name="product_id" value="1" class="form-control product_id" placeholder="">
+                        <input type="text" name="ownerKey" value="1" class="form-control ownerKey" placeholder="">
+                        <input type="text" name="related" value="product_specs" class="form-control related" placeholder="">
+                        <input type="text" name="ownerKey" value="1" class="form-control ownerKey" placeholder="">
                         <div class="card-body">
                             <div class="form-group m-b-0 text-right">
                                 @if( !data_get($data, 'Disable'))
                                     @if(data_get($data['arr'], 'id'))
+                                        <button type="button" class="btn btn-success waves-effect waves-light btn-dosave" data-id="{{data_get($data['arr'], 'id')}}">Save</button>
                                     @else
                                         <button type="button" class="btn btn-info waves-effect waves-light btn-doadd">Add</button>
                                     @endif
                                 @endif
-                                <button type="button" class="btn btn-success waves-effect waves-light btn-dosave" data-id="{{data_get($data['arr'], 'id')}}">Save</button>
                                 <button type="button" class="btn waves-effect waves-light btn-cancel">Cancel</button>
                             </div>
                         </div>
@@ -180,6 +203,8 @@
 @endsection
 
 @section('inline-js')
+    <!-- Public Crop_Image -->
+    @include('admin.js.crop_image_single_custom')
     <!-- Public SummerNote -->
     @include('admin.js.summernote2019')
     <!-- end -->
@@ -190,12 +215,12 @@
         let disable = '{{data_get($data, 'Disable')}}'
         if (disable){
             $('input[type=text]').attr('disabled','disabled')
-            // $('form select').attr('disabled','disabled')
+            $('form select').attr('disabled','disabled')
             $('form #detail').summernote('disable')        //編輯器關閉
             $('form #service_description').summernote('disable')        //編輯器關閉
             $('form #customerservice_note').summernote('disable')        //編輯器關閉
-            // $('form .image-del').css("visibility","hidden")    //刪除區塊隱藏
-            // $('form #Image').css("display","none")     //加載圖片關閉
+            $('form .image-del').css("visibility","hidden")    //刪除區塊隱藏
+            $('form #Image').css("display","none")     //加載圖片關閉
             $('form [type=date]').attr('disabled','disabled')    //加載圖片關閉
             //唯讀
             $('form .btn-image-modal ,form span').hide()
@@ -244,7 +269,6 @@
                 'product_description': $('#detail').summernote('code'),
                 'service_description': $('#service_description').summernote('code'),
                 'customerservice_note': $('#customerservice_note').summernote('code'),
-                'doValidate' : 0
             })
 
             ajax(url, data, 'POST')
