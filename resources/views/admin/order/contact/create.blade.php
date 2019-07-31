@@ -7,6 +7,10 @@
         .btn {
             margin-left: 10px;
         }
+        /* 新增按鈕 */
+        #create_record {
+            visibility: hidden;
+        }
     </style>
 @endsection
 
@@ -30,25 +34,6 @@
                     <form id="sample_form" class="form-horizontal">
                         <div class="card-body messageInfo-modal">
                             <h4 class="card-title"></h4>
-                            <div class="form-group row">
-                                <label for="img1" class="col-sm-3 text-right control-label col-form-label">圖片</label>
-                                <div class="col-sm-9">
-                                    <a class="btn-image-modal" data-modal="image-form" data-id="">
-                                        @forelse(data_get( $data['arr'], 'image', []) as $key => $var)
-                                            <img id="{{$key}}" src="{{$var or ''}}" style="height:140px" alt="" >
-                                        @empty
-                                            <img src="{{url('images/empty.jpg')}}" style="height:140px" alt="">
-                                        @endforelse
-                                    </a>
-                                    <br>
-                                    <span style="color:red">如要更換圖片，點擊上方</span>
-                                    @forelse(data_get( $data['arr'], 'image', []) as $key => $var)
-                                        <img id="img1" src="{{$var or ''}}" style="height:140px" alt="">
-                                    @empty
-                                        <img id="img1" src="{{url('images/empty.jpg')}}" style="height:140px" alt="">
-                                    @endforelse
-                                </div>
-                            </div>
                             <div class="form-group row">
                                 <label for="com1" class="col-sm-3 text-right control-label col-form-label">No.</label>
                                 <div class="col-sm-9">

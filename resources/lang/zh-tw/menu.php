@@ -571,10 +571,10 @@ return [
         ],
     'order' =>
         [
-            'title' => '訂單功能',
+            'title' => '訂單管理',
             'product' =>
                 [
-                    'title' => '訂單管理',
+                    'title' => '訂單',
                     'detail' =>
                         [
                             'title' => '訂單明細'

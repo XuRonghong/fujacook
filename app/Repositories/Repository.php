@@ -268,13 +268,19 @@ abstract class Repository
     }
 
     //
-    public function searchQuery($search_arr=[], $search_word='' )
+    public function setWhereQuery($column=null, $value=null)
+    {
+        return $this->whereRaw = $column && $value ? $column." = '".$value."'" : '1 = 1';
+    }
+
+    //
+    public function searchQuery($search_arr=[], $search_word='')
     {
         return $this->model->where(function( $query ) use ( $search_arr, $search_word ) {
             foreach ($search_arr as $item) {
                 $query->orWhere( $item, 'like', '%' . $search_word . '%' );
             }
-        });
+        })->whereRaw( isset($this->whereRaw)? $this->whereRaw : '1 = 1' );
     }
 
     //
@@ -369,8 +375,24 @@ abstract class Repository
     /* Input: SQL select array ==> Output ORM.
      * with open=1 and rank=asc
      */
-    public function getORM($columns = ['*'])
+//    public function getORM($columns = ['*'], $whereQuery='1 = 1', $with=null)
+//    {
+//        $query = $this->model->whereRaw($whereQuery);
+//
+//        if ($with) $query->with( $with);
+//
+//        return $query->get($columns);
+//    }
+
+    //
+    public function getORM_opra($columns = ['*'])
     {
         return $this->model->where('open', 1)->orderBy('rank', 'asc')->get($columns);
+    }
+
+    //
+    public function getModel()
+    {
+        return $this->model;
     }
 }

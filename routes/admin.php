@@ -402,22 +402,22 @@ Route::group(
             ], function() {
             // 商品訂單
             $index = array('url'=>'product', 'C'=>'OrderController', 'name'=>'order.product');
-            Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
-            Route::resource($index['url'], $index['C'], ['as'=> 'order', 'name'=> $index['name'] ]);
-            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
-            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
+            Route::get( $index['url'].'/list',   $index['C'].'@list'  )->name($index['name'].'.list');
+            Route::get( $index['url'],           $index['C'].'@index' )->name($index['name'].'.index');
+            Route::get( $index['url'].'/{id}',   $index['C'].'@show'  )->name($index['name'].'.show');
+            Route::post($index['url'].'/update/{id}',  $index['C'].'@update' )->name($index['name'].'.update');
             // 商品訂單詳情
             $index = array('url'=>'detail', 'C'=>'OrderDetailController', 'name'=>'order.detail');
-            Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
-            Route::resource($index['url'], $index['C'], ['as'=> 'order', 'name'=> $index['name'] ]);
-            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
-            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
+            Route::get( $index['url'].'/list',   $index['C'].'@list'  )->name($index['name'].'.list');
+            Route::get( $index['url'],           $index['C'].'@index' )->name($index['name'].'.index');
+            Route::get( $index['url'].'/{id}',   $index['C'].'@show'  )->name($index['name'].'.show');
+            Route::post($index['url'].'/update/{id}',  $index['C'].'@update' )->name($index['name'].'.update');
             // 商品訂單寄送地址
             $index = array('url'=>'contact', 'C'=>'OrderContactController', 'name'=>'order.contact');
-            Route::get(     $index['url'].'/list',        $index['C'].'@list'   )->name($index['name'].'.list');
-            Route::resource($index['url'], $index['C'], ['as'=> 'order', 'name'=> $index['name'] ]);
-            Route::post(    $index['url'].'/update/{id}', $index['C'].'@update' )->name($index['name'].'.update');
-            Route::post(    $index['url'].'/destroy/{id}',$index['C'].'@destroy')->name($index['name'].'.destroy');
+            Route::get( $index['url'].'/list',   $index['C'].'@list'  )->name($index['name'].'.list');
+            Route::get( $index['url'],           $index['C'].'@index' )->name($index['name'].'.index');
+            Route::get( $index['url'].'/{id}',   $index['C'].'@show'  )->name($index['name'].'.show');
+            Route::post($index['url'].'/update/{id}',  $index['C'].'@update' )->name($index['name'].'.update');
         });
 
 

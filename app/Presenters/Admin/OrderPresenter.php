@@ -2,7 +2,9 @@
 
 namespace App\Presenters\Admin;
 
+use App\Order;
 use App\Presenters\Presenter;
+use Illuminate\Support\Facades\DB;
 
 class OrderPresenter extends Presenter
 {
@@ -12,8 +14,10 @@ class OrderPresenter extends Presenter
     protected $route_name;      //Route->name()
     protected $selectOptions;   //HTML元素
 
-    public function __construct()
+    public function __construct(Order $model)
     {
+        $this->model = $model;
+        //
         $this->selectOptions = [
             'type' => [
                 /* NULL */
@@ -68,35 +72,89 @@ class OrderPresenter extends Presenter
                 $options[ $val['id'] ] = $val['name'];
             }
             if($options) $this->selectOptions[$selectOpts] = $options;
-        } else return null;
+        }
+        else return null;
     }
 
     // data object or array forEach to do from list.
-    public function eachOne_aaData($arr, $from='')
+    public function eachOne_aaData($arr, $from='order')
     {
         if ( $arr['aaData']) {
+            $type = 0;
             foreach ($arr['aaData'] as $key => $var) {
-                //翻譯每個type
-                foreach (array_keys($this->selectOptions) as $column){
-                    $var->$column = $this->getHTML_select($column, $var->$column);
+                //from controller.
+                if ($from == 'order') {
+                    //select : 轉換每個選擇物件
+                    foreach (array_keys($this->selectOptions) as $column) {
+                        $var->$column = $this->getHTML_select($column, $var->$column);
+                    }
+                    //
+                    $var->no = $this->presentAnchor($var->no, route('admin.order.detail.index', ['o_no'=> $var->no]));
                 }
-                //
-                $var->status = $this->presentStatus($var->status);
+                elseif ($from == 'order_details') {
+                    //
+                    $var->no = $this->model->find($var->order_id);
+                    // product : trans product_id
+                    switch ($var->related){
+//                        case 'product_specs': $map['product_id'] = $var->product_id; break;
+                        default: $map = [];
+                    }
+                    $Dao = DB::table($var->related)->where('id', $var->ownerKey)->where($map)->first();
+                    //找圖片檔案 from product
+                    $images = $Dao->image ? array($Dao->image) : $this->transFileIdtoImage($Dao->file_id); //有圖檔就不用去file找
+                    $var->image = $this->presentImages($images);
+
+                    //select : 轉換每個選擇物件
+                    $type = $var->type;
+                    foreach (array_keys($this->selectOptions) as $column){
+                        //If type of order_details want exception handle. 訂單明細特別處理。
+                        if ($column==$from) {
+                            $var->$column = $this->getHTML_select($column, $type);
+                            continue;
+                        }
+                        $var->$column = $this->getHTML_select($column, $var->$column);
+                    }
+                }
+                //共通做法
+                $var->operate = $this->presentStatus($var->status);
             }
         }
         return $arr;
     }
 
     // trans each one data for output view from create.
-    public function transOne($data, $other=0)
+    public function transOne($data, $model=null)
     {
-        if ($data) $data = parent::transOne($data);
-
         //get option for select with
-        if ($other){
-            foreach (array_keys($this->selectOptions) as $column) {
-                $data[$column] = $this->getSelectOption($column, $data->$column);
+        if ($model){
+            if ($model->getTable() == 'order_details') {
+                //
+                $data->no = Order::query()->find($data->order_id)->no;
+                // product : trans product_id
+                switch ($data->related){
+//                        case 'product_specs': $map['product_id'] = $var->product_id; break;
+                    default: $map = [];
+                }
+                $Dao = DB::table($data->related)->where('id', $data->ownerKey)->where($map)->first();
+                //找圖片檔案 from product
+                $data->image = $Dao->image ? array($Dao->image) : $this->transFileIdtoImage($Dao->file_id); //有圖檔就不用去file找
+
+                //select : 轉換每個選擇物件
+                $type = $data->type;
+                foreach (array_keys($this->selectOptions) as $column){
+                    //If type of order_details want exception handle. 訂單明細特別處理。
+                    if ($column == $model->getTable()) {
+                        $data[$column] = $this->getSelectOption($column, $type);
+                        continue;
+                    }
+                    $data[$column] = $this->getSelectOption($column, $data->$column);
+                }
+            } else {
+                foreach (array_keys($this->selectOptions) as $column) {
+                    $data[$column] = $this->getSelectOption($column, $data->$column);
+                }
             }
+            //共通做法
         }
         return $data;
     }
@@ -127,10 +185,6 @@ class OrderPresenter extends Presenter
     // panel HTML
     public function presentStatus($status)
     {
-        $btn = '';
-        $btn .= '<button class="btn btn-xs btn-show" title="'.trans('options.panel.show').'"><i class="fa fa-book" aria-hidden="true"></i></button>';
-//        $btn .= '<button class="btn btn-xs btn-edit" title="'.trans('options.panel.edit').'"><i class="fa fa-pencil-alt" aria-hidden="true"></i></button>';
-
-        return $btn;
+        return '<button class="btn btn-xs btn-show" title="'.trans('options.panel.show').'"><i class="fa fa-book" aria-hidden="true"></i></button>';
     }
 }

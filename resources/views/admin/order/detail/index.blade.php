@@ -3,6 +3,14 @@
 
 @section('style')
     <style>
+        /* 新增按鈕 */
+        #create_record {
+            visibility: hidden;
+        }
+        /* 返回Back */
+        .btn-back {
+            visibility: visible;
+        }
     </style>
 @endsection
 
@@ -68,8 +76,8 @@
                         }
                     },
                     {
-                        "sTitle": "product_id",
-                        "mData": "product_id",
+                        "sTitle": "product",
+                        "mData": "image",
                         // "width": "100px",
                         "sName": "product_id"
                     },
@@ -77,7 +85,7 @@
                         "sTitle": "type",
                         "mData": "order_details",
                         // "width": "100px",
-                        "sName": "order_details"
+                        "sName": "type"
                     },
                     {
                         "sTitle": "quantity",
@@ -122,7 +130,7 @@
                         // "width": '100px',
                         "sName": "operate",
                         "mRender": function (data, type, row) {
-                            let btn = row.status;
+                            let btn = row.operate;
                             $('.waitme').waitMe('hide');
                             return btn;
                         }
@@ -160,7 +168,6 @@
                 let id = $(this).closest('tr').attr('id')
                 let data = { doValidate : 0 }
                 data[ $(this).data('name') ] = this.value
-                data.type = this.value
                 url = '{{data_get($data['route_url'], "update")}}'.replace('-10', id)
                 ajaxOpen(url, data, 'POST', table)
             })

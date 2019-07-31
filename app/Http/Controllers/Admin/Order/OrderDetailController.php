@@ -17,14 +17,14 @@ class OrderDetailController extends Controller
     public function __construct(OrderRepository $repository, OrderPresenter $presenter)
     {
         $this->repository = $repository;
-        $this->repository->setModel_OrderContact();
+        $this->repository->setModel_OrderDetail();
         $this->presenter = $presenter;
         $this->presenter->setTitle(trans('menu.order.detail.title'));
         $this->presenter->setViewName('order.detail');
         $this->presenter->setSelectOpt( $this->repository->getORM_PaymentMethods() );
 
         //所有關於route::resource的位置
-        $this->route_url = $this->presenter->getRouteResource($this->presenter->setRouteName('admin.order.detail'));
+        $this->route_url = $this->presenter->getRouteResource($this->presenter->setRouteName('admin.order.detail'), 'csed');
     }
 
     /**
@@ -34,8 +34,25 @@ class OrderDetailController extends Controller
      */
     public function index()
     {
+        if (request()->get('o_no')) {
+
+            $Order = $this->repository->getORM_Order(['id'], "no = '".request()->get('o_no', '?')."'");
+
+            if ($Order) session()->put('order_id', array_first($Order)->id);
+        }
+        else session()->forget('order_id');
+
         //meta data
         $data = $this->presenter->getParameters('index', array('route_url' => $this->route_url));
+        //edit breadcrumb for mass_destroy.
+        $this->presenter->editParameters(
+            $data,
+            'breadcrumb',
+            $this->presenter->presentBreadcrumb([
+                trans('menu.order.product.title') => route('admin.order.product.index'),
+                trans('menu.order.detail.title') => request()->getUri(),
+            ])
+        );
 
         return $this->presenter->responseJson($data, 'index');
     }
@@ -43,12 +60,13 @@ class OrderDetailController extends Controller
     /* ajax datatable */
     public function list(Request $request)
     {
+        if (session()->get('order_id')) $this->repository->setWhereQuery('order_id', session()->get('order_id'));
         //
         if(request()->ajax())
         {
             $data = $this->repository->getDataTable($request);
 
-            $data = $this->presenter->eachOne_aaData($data);     //每一項目要做甚麼事,有需要在使用
+            $data = $this->presenter->eachOne_aaData($data, 'order_details');     //每一項目要做甚麼事,有需要在使用
 
             return $this->presenter->responseJson($data, 'ajax', 200);
         }
@@ -89,7 +107,7 @@ class OrderDetailController extends Controller
         //若資料庫沒有該id 則404畫面
         $data['arr'] = $this->repository->findOrFail($id) or abort(404);
         //轉換出顯示數據
-        $data['arr'] = $this->presenter->transOne($data['arr'], 1);
+        $data['arr'] = $this->presenter->transOne($data['arr'], $this->repository->getModel());
 
         return $this->presenter->responseJson($data, 'create');
     }
@@ -103,13 +121,6 @@ class OrderDetailController extends Controller
     public function edit($id)
     {
         //
-        $data = $this->presenter->getParameters('edit', array('route_url' => $this->route_url));
-        //若資料庫沒有該id 則404畫面
-        $data['arr'] = $this->repository->findOrFail($id) or abort(404);
-        //轉換出顯示數據
-        $data['arr'] = $this->presenter->transOne($data['arr'], 1);
-
-        return $this->presenter->responseJson($data, 'create');
     }
 
     /**
@@ -138,8 +149,5 @@ class OrderDetailController extends Controller
     public function destroy($id)
     {
         //
-        $data = $this->repository->delete($id, 'cascade', 'order_details');
-
-        return $this->presenter->responseJson($data, 'destroy');
     }
 }

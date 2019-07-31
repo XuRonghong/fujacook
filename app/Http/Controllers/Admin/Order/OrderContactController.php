@@ -23,7 +23,7 @@ class OrderContactController extends Controller
         $this->presenter->setSelectOpt( $this->repository->getORM_PaymentMethods() );
 
         //所有關於route::resource的位置
-        $this->route_url = $this->presenter->getRouteResource($this->presenter->setRouteName('admin.order.product'));
+        $this->route_url = $this->presenter->getRouteResource($this->presenter->setRouteName('admin.order.product'), 'csed');
     }
 
     /**

@@ -7,6 +7,10 @@
         .btn {
             margin-left: 10px;
         }
+        /* 新增按鈕 */
+        #create_record {
+            visibility: hidden;
+        }
     </style>
 @endsection
 

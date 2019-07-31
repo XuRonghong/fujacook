@@ -11,6 +11,7 @@ use DB;
 
 abstract class Presenter
 {
+    protected $model;
     protected $summary = '';
     protected $breadcrumb = [];
 
@@ -144,17 +145,18 @@ abstract class Presenter
     }
 
     // 例行公事，路由元素
-    public function getRouteResource($route_name = '')
+    public function getRouteResource($route_name = '', $except='')
     {
+        $except = '0'.$except;
         return [
-            'index' => route($route_name.'.index'),
-            'list' => route($route_name.'.list'),
-            'create' => route($route_name.'.create'),
-            'store' => route($route_name.'.store'),
-            'edit'  => route($route_name.'.index'),
-            'update' => route($route_name.'.update', [-10]),    //-10暫定代替字元
-            'destroy' => route($route_name.'.destroy', [-10]),
-            'show' => route($route_name.'.index'),
+            'index' => strpos($except,'i')?:route($route_name.'.index'),
+            'list' => strpos($except,'l')?:route($route_name.'.list'),
+            'create' => strpos($except,'c')?:route($route_name.'.create'),
+            'store' => strpos($except,'s')?:route($route_name.'.store'),
+            'edit'  => strpos($except,'e')?:route($route_name.'.index'),
+            'update' => strpos($except,'u')?:route($route_name.'.update', [-10]),    //-10暫定代替字元
+            'destroy' => strpos($except,'d')?:route($route_name.'.destroy', [-10]),
+            'show' => strpos($except,'s')?:route($route_name.'.index'),
         ];
     }
 
@@ -162,6 +164,12 @@ abstract class Presenter
     public function addParameters(&$data, $key=null, $value=null)
     {
         $data = array_add($data, $key, $value);
+    }
+
+    //
+    public function editParameters(&$data, $key=null, $value=null)
+    {
+        $data[$key] = $value;
     }
 
     // 例行公事，顯示板塊參數
@@ -213,7 +221,7 @@ abstract class Presenter
                     'Summary' => $this->summary,
                     'breadcrumb' => $this->presentBreadcrumb([
                         $this->title => data_get($data,'route_url')?$data['route_url']['index']:'',
-                        'edit' => request()->url(), //data_get($data,'route_url')?$data['route_url']['edit']:'',
+                        'edit' => request()->getUri(), //data_get($data,'route_url')?$data['route_url']['edit']:'',
                     ]),
                 ]);
                 break;
@@ -223,7 +231,7 @@ abstract class Presenter
                     'Summary' => $this->summary,
                     'breadcrumb' => $this->presentBreadcrumb([
                         $this->title => data_get($data,'route_url')?$data['route_url']['index']:'',
-                        'show' => request()->url(), // data_get($data,'route_url')?$data['route_url']['show']:'',
+                        'show' => request()->getUri(), // data_get($data,'route_url')?$data['route_url']['show']:'',
                     ]),
                     'Disable'   => true
                 ]);
@@ -441,6 +449,12 @@ abstract class Presenter
             $html_str .= "<img width='".($breakline>=2?'50px':'75px')."' src=" . $image . " style='margin-right:5px;margin-bottom:5px;'>";
         }
         return $html_str;
+    }
+
+    // 製造 a HTML
+    public function presentAnchor($text, $href='')
+    {
+        return '<a href="'.$href.'">'.$text.'</button>';
     }
 
 

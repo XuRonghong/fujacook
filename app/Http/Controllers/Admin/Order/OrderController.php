@@ -23,7 +23,7 @@ class OrderController extends Controller
         $this->presenter->setSelectOpt( $this->repository->getORM_PaymentMethods() );
 
         //所有關於route::resource的位置
-        $this->route_url = $this->presenter->getRouteResource($this->presenter->setRouteName('admin.order.product'));
+        $this->route_url = $this->presenter->getRouteResource($this->presenter->setRouteName('admin.order.product'), 'csed');
     }
 
     /**
@@ -64,7 +64,7 @@ class OrderController extends Controller
         //
         $data = $this->presenter->getParameters('create', array('route_url' => $this->route_url));
         //get option for select
-        $data['arr'] = $this->presenter->transOne($data['arr'], 1);
+        $data['arr'] = $this->presenter->transOne($data['arr'], $this->repository->getModel());
 
         return $this->presenter->responseJson($data, 'create');
     }
@@ -98,7 +98,7 @@ class OrderController extends Controller
         //若資料庫沒有該id 則404畫面
         $data['arr'] = $this->repository->findOrFail($id) or abort(404);
         //轉換出顯示數據
-        $data['arr'] = $this->presenter->transOne($data['arr'], 1);
+        $data['arr'] = $this->presenter->transOne($data['arr'], $this->repository->getModel());
 
         return $this->presenter->responseJson($data, 'create');
     }
@@ -116,7 +116,7 @@ class OrderController extends Controller
         //若資料庫沒有該id 則404畫面
         $data['arr'] = $this->repository->findOrFail($id) or abort(404);
         //轉換出顯示數據
-        $data['arr'] = $this->presenter->transOne($data['arr'], 1);
+        $data['arr'] = $this->presenter->transOne($data['arr'], $this->repository->getModel());
 
         return $this->presenter->responseJson($data, 'create');
     }

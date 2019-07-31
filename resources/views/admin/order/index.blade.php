@@ -3,6 +3,10 @@
 
 @section('style')
     <style>
+        /* 新增按鈕 */
+        #create_record {
+            visibility: hidden;
+        }
     </style>
 @endsection
 
@@ -110,7 +114,7 @@
                         // "width": '100px',
                         "sName": "operate",
                         "mRender": function (data, type, row) {
-                            let btn = row.status;
+                            let btn = row.operate;
                             $('.waitme').waitMe('hide');
                             return btn;
                         }

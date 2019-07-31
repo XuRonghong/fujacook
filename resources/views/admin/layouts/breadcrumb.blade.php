@@ -23,7 +23,11 @@
                         <span class="hide-menu m-l-5" title="Create New">Create</span>
                     </a>
                 </div>
-                <div class="m-r-10">
+                <div class="m-r-10 m-t-10">
+                    <a id="btn-back" class="btn create-btn text-white no-block d-flex align-items-center btn-back" onclick="history.back()">
+                        <i class="fa fa-reply"></i>
+                        <span class="hide-menu m-l-5" title="返回上一頁">Back</span>
+                    </a>
 {{--                    <div class="lastmonth"></div>--}}
                 </div>
                 <div class="">

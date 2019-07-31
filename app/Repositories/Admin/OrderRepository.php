@@ -14,15 +14,27 @@ use App\Repositories\Repository;
 class OrderRepository extends Repository
 {
     protected $model;
+    protected $whereRaw;
 
     public function __construct(Order $model)
     {
         $this->model = $model;
     }
 
+    public function setModel_OrderDetail()
+    {
+        $this->model = new OrderDetail();
+    }
+
     public function setModel_OrderContact()
     {
         $this->model = new OrderContact();
+    }
+
+    public function getORM_Order($columns = ['*'], $whereQuery='1 = 1', $paginate=null, $with=null)
+    {
+        $query = Order::query()->whereRaw($whereQuery);
+        return $query ? $this->getModelsByQuery($query, $columns, $paginate, $with) : null;
     }
 
     public function getORM_Product($columns = ['*'], $whereQuery='1 = 1')
@@ -84,6 +96,10 @@ class OrderRepository extends Repository
             if (isset($attributes['open']) && isset($attributes['doValidate'])) {
                 $Dao = $this->model->find($id);
                 $attributes['open'] = ($attributes['open'] == "change") ? !$Dao->status : $Dao->status;
+            }
+            //假如有的話..
+            if (isset($attributes['order_details'])) {
+                $attributes['type'] = $attributes['order_details'];
             }
 
             return parent::update($attributes, $id);
