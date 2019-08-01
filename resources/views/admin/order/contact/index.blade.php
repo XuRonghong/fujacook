@@ -56,16 +56,16 @@
                 // 'sServerMethod': 'GET',
                 "order": [[ 0, "desc" ]],
                 "aoColumns": [
-                    {
-                        "sTitle": "ID",
-                        "mData": "id",
-                        "sName": "id",
-                        // "width": "40px",
-                        "bSearchable": false,
-                        "mRender": function (data, type, row) {
-                            return data;
-                        }
-                    },
+                    // {
+                    //     "sTitle": "ID",
+                    //     "mData": "id",
+                    //     "sName": "id",
+                    //     // "width": "40px",
+                    //     "bSearchable": false,
+                    //     "mRender": function (data, type, row) {
+                    //         return data;
+                    //     }
+                    // },
                     {
                         "sTitle": "訂單號",
                         "mData": "no",
@@ -76,40 +76,39 @@
                         }
                     },
                     {
-                        "sTitle": "訂購人",
-                        "mData": "member_id",
+                        "sTitle": "訂單聯絡人類型",
+                        "mData": "type",
                         // "width": "100px",
-                        "sName": "member_id"
+                        "sName": "type",
+                        "bSearchable": false,
                     },
                     {
-                        "sTitle": "總金額",
-                        "mData": "total_price",
+                        "sTitle": "name",
+                        "mData": "name",
                         // "width": "100px",
-                        "sName": "total_price"
+                        "sName": "name",
+                        "bSortable": false,
                     },
                     {
-                        "sTitle": "付款方式",
-                        "mData": "payment_method_id",
+                        "sTitle": "email",
+                        "mData": "email",
                         // "width": "100px",
-                        "sName": "payment_method_id"
+                        "sName": "email",
+                        "bSortable": false,
                     },
                     {
-                        "sTitle": "物流方式",
-                        "mData": "shipping_type",
+                        "sTitle": "phone",
+                        "mData": "phone",
                         // "width": "100px",
-                        "sName": "shipping_type"
+                        "sName": "phone",
+                        "bSortable": false,
                     },
                     {
-                        "sTitle": "出貨狀態",
-                        "mData": "shipping_status",
+                        "sTitle": "address",
+                        "mData": "address",
                         // "width": "100px",
-                        "sName": "shipping_status"
-                    },
-                    {
-                        "sTitle": "訂單狀態",
-                        "mData": "pay_status",
-                        // "width": "100px",
-                        "sName": "pay_status"
+                        "sName": "address",
+                        "bSortable": false,
                     },
                     {
                         "sTitle": '',
@@ -118,7 +117,7 @@
                         // "width": '100px',
                         "sName": "operate",
                         "mRender": function (data, type, row) {
-                            let btn = row.status;
+                            let btn = row.operate;
                             $('.waitme').waitMe('hide');
                             return btn;
                         }

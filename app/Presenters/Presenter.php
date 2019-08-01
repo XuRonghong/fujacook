@@ -152,7 +152,7 @@ abstract class Presenter
             'index' => strpos($except,'i')?:route($route_name.'.index'),
             'list' => strpos($except,'l')?:route($route_name.'.list'),
             'create' => strpos($except,'c')?:route($route_name.'.create'),
-            'store' => strpos($except,'s')?:route($route_name.'.store'),
+            'store' => strpos($except,'p')?:route($route_name.'.store'),
             'edit'  => strpos($except,'e')?:route($route_name.'.index'),
             'update' => strpos($except,'u')?:route($route_name.'.update', [-10]),    //-10暫定代替字元
             'destroy' => strpos($except,'d')?:route($route_name.'.destroy', [-10]),
@@ -423,7 +423,7 @@ abstract class Presenter
     }
 
     // panel HTML
-    public function presentStatus($status)
+    public function presentStatus($status=null)
     {
         switch ($status) {
             case 1: $btn = '<button class="btn btn-xs btn-success btn-open">'.trans('options.panel.status.open').'</button>'; break;
@@ -455,6 +455,12 @@ abstract class Presenter
     public function presentAnchor($text, $href='')
     {
         return '<a href="'.$href.'">'.$text.'</button>';
+    }
+
+    // 製造 operate panel HTML
+    public function presentOperate($html='', $text='', $href='', $class='')
+    {
+        return $html.'<a href="'.$href.'"><button class="btn btn-xs" title="'.$text.'"><i class="'.$class.'" aria-hidden="true"></i></button></a>';
     }
 
 

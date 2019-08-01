@@ -18,13 +18,14 @@ class OrderDetailController extends Controller
     {
         $this->repository = $repository;
         $this->repository->setModel_OrderDetail();
+
         $this->presenter = $presenter;
         $this->presenter->setTitle(trans('menu.order.detail.title'));
         $this->presenter->setViewName('order.detail');
         $this->presenter->setSelectOpt( $this->repository->getORM_PaymentMethods() );
 
         //所有關於route::resource的位置
-        $this->route_url = $this->presenter->getRouteResource($this->presenter->setRouteName('admin.order.detail'), 'csed');
+        $this->route_url = $this->presenter->getRouteResource($this->presenter->setRouteName('admin.order.detail'), 'cped');
     }
 
     /**
@@ -34,6 +35,7 @@ class OrderDetailController extends Controller
      */
     public function index()
     {
+        //訂單內的詳情商品
         if (request()->get('o_no')) {
 
             $Order = $this->repository->getORM_Order(['id'], "no = '".request()->get('o_no', '?')."'");
@@ -53,6 +55,8 @@ class OrderDetailController extends Controller
                 trans('menu.order.detail.title') => request()->getUri(),
             ])
         );
+        // to btn-back.
+        $this->presenter->addParameters($data, 'backUrl', route('admin.order.product.index'));
 
         return $this->presenter->responseJson($data, 'index');
     }

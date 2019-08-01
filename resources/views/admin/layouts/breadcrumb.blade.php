@@ -17,18 +17,18 @@
         </div>
         <div class="col-7 align-self-center">
             <div class="d-flex no-block justify-content-end align-items-center">
+                <div class="m-r-10 m-t-10">
+                    <a id="btn-back" class="btn create-btn text-white no-block d-flex align-items-center btn-back" href="{{data_get($data, 'backUrl', '#')}}">
+                        <i class="fa fa-reply"></i>
+                        <span class="hide-menu m-l-5" title="返回上一頁">Back</span>
+                    </a>
+{{--                    <div class="lastmonth"></div>--}}
+                </div>
                 <div class="p-15 m-t-10">
                     <a id="create_record" class="btn btn-default create-btn text-white no-block d-flex align-items-center" href="{{$data['route_url']['create']}}">
                         <i class="fa fa-plus-square"></i>
                         <span class="hide-menu m-l-5" title="Create New">Create</span>
                     </a>
-                </div>
-                <div class="m-r-10 m-t-10">
-                    <a id="btn-back" class="btn create-btn text-white no-block d-flex align-items-center btn-back" onclick="history.back()">
-                        <i class="fa fa-reply"></i>
-                        <span class="hide-menu m-l-5" title="返回上一頁">Back</span>
-                    </a>
-{{--                    <div class="lastmonth"></div>--}}
                 </div>
                 <div class="">
 {{--                    <small>LAST MONTH</small>--}}

@@ -15,6 +15,7 @@ class OrderContact extends Model
      * @var array
      */
     protected $fillable = [
+        'no',
         'order_id',
         'type',
         'name',

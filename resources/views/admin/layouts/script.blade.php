@@ -2,6 +2,7 @@
     //// windows load ready ////
     (function () {
         toastr_options()
+
     })()
 
     // none, bounce, rotateplane, stretch, orbit,

@@ -9,6 +9,7 @@
         }
         /* 新增按鈕 */
         #create_record {
+            display: none;
             visibility: hidden;
         }
     </style>
@@ -118,10 +119,6 @@
                             </div>
                         </div>
                         <hr>
-                        <input type="text" name="product_id" value="1" class="form-control product_id" placeholder="">
-                        <input type="text" name="ownerKey" value="1" class="form-control ownerKey" placeholder="">
-                        <input type="text" name="related" value="product_specs" class="form-control related" placeholder="">
-                        <input type="text" name="ownerKey" value="1" class="form-control ownerKey" placeholder="">
                         <div class="card-body">
                             <div class="form-group m-b-0 text-right">
                                 @if( !data_get($data, 'Disable'))

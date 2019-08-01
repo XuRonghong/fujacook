@@ -5,6 +5,7 @@
     <style>
         /* 新增按鈕 */
         #create_record {
+            display: none;
             visibility: hidden;
         }
     </style>

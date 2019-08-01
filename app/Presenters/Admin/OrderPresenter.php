@@ -82,8 +82,18 @@ class OrderPresenter extends Presenter
         if ( $arr['aaData']) {
             $type = 0;
             foreach ($arr['aaData'] as $key => $var) {
+                //共通做法
+                $var->operate = $this->presentStatus();
                 //from controller.
-                if ($from == 'order') {
+                if ($from == 'order')
+                {
+                    //
+                    $var->operate = $this->presentOperate(
+                        $var->operate,
+                        trans('menu.order.contact.title'),
+                        route('admin.order.contact.index', ['o_no'=> $var->no]),
+                        'fa fa-plane'
+                    );
                     //select : 轉換每個選擇物件
                     foreach (array_keys($this->selectOptions) as $column) {
                         $var->$column = $this->getHTML_select($column, $var->$column);
@@ -91,9 +101,8 @@ class OrderPresenter extends Presenter
                     //
                     $var->no = $this->presentAnchor($var->no, route('admin.order.detail.index', ['o_no'=> $var->no]));
                 }
-                elseif ($from == 'order_details') {
-                    //
-                    $var->no = $this->model->find($var->order_id);
+                elseif ($from == 'order_details')
+                {
                     // product : trans product_id
                     switch ($var->related){
 //                        case 'product_specs': $map['product_id'] = $var->product_id; break;
@@ -115,8 +124,10 @@ class OrderPresenter extends Presenter
                         $var->$column = $this->getHTML_select($column, $var->$column);
                     }
                 }
-                //共通做法
-                $var->operate = $this->presentStatus($var->status);
+                elseif ($from == 'order_contacts')
+                {
+                    $var->type = $this->tranTypeInSelectOption($var->type, $this->selectOptions, 'order_contacts');
+                }
             }
         }
         return $arr;
@@ -128,8 +139,6 @@ class OrderPresenter extends Presenter
         //get option for select with
         if ($model){
             if ($model->getTable() == 'order_details') {
-                //
-                $data->no = Order::query()->find($data->order_id)->no;
                 // product : trans product_id
                 switch ($data->related){
 //                        case 'product_specs': $map['product_id'] = $var->product_id; break;
@@ -144,17 +153,29 @@ class OrderPresenter extends Presenter
                 foreach (array_keys($this->selectOptions) as $column){
                     //If type of order_details want exception handle. 訂單明細特別處理。
                     if ($column == $model->getTable()) {
-                        $data[$column] = $this->getSelectOption($column, $type);
+                        $data->$column = $this->getSelectOption($column, $type);
                         continue;
                     }
-                    $data[$column] = $this->getSelectOption($column, $data->$column);
+                    $data->$column = $this->getSelectOption($column, $data->$column);
                 }
-            } else {
+            }
+            elseif ($model->getTable() == 'order_contacts') {
+                //select : 轉換每個選擇物件
+                $type = $data->type;
+                foreach (array_keys($this->selectOptions) as $column){
+                    $data->$column = ($column == $model->getTable()) ? $this->getSelectOption($column, $type) : $this->getSelectOption($column, $data->$column);
+                }
+            }
+            else {
                 foreach (array_keys($this->selectOptions) as $column) {
-                    $data[$column] = $this->getSelectOption($column, $data->$column);
+                    $data->$column = $this->getSelectOption($column, $data->$column);
                 }
             }
             //共通做法
+        } else {
+            foreach (array_keys($this->selectOptions) as $column) {
+                $data[$column] = $this->getSelectOption($column);
+            }
         }
         return $data;
     }
@@ -183,7 +204,7 @@ class OrderPresenter extends Presenter
     }
 
     // panel HTML
-    public function presentStatus($status)
+    public function presentStatus($status=null, $hasContact=0)
     {
         return '<button class="btn btn-xs btn-show" title="'.trans('options.panel.show').'"><i class="fa fa-book" aria-hidden="true"></i></button>';
     }

@@ -23,7 +23,7 @@ class OrderController extends Controller
         $this->presenter->setSelectOpt( $this->repository->getORM_PaymentMethods() );
 
         //所有關於route::resource的位置
-        $this->route_url = $this->presenter->getRouteResource($this->presenter->setRouteName('admin.order.product'), 'csed');
+        $this->route_url = $this->presenter->getRouteResource($this->presenter->setRouteName('admin.order.product'), 'ed');
     }
 
     /**
@@ -64,7 +64,7 @@ class OrderController extends Controller
         //
         $data = $this->presenter->getParameters('create', array('route_url' => $this->route_url));
         //get option for select
-        $data['arr'] = $this->presenter->transOne($data['arr'], $this->repository->getModel());
+        $data['arr'] = $this->presenter->transOne($data['arr']);
 
         return $this->presenter->responseJson($data, 'create');
     }

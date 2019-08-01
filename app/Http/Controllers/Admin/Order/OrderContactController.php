@@ -17,13 +17,15 @@ class OrderContactController extends Controller
     public function __construct(OrderRepository $repository, OrderPresenter $presenter)
     {
         $this->repository = $repository;
-        $this->presenter = $presenter;
+        $this->repository->setModel_OrderContact();
 
-        $this->presenter->setTitle(trans('menu.order.product.title'));
+        $this->presenter = $presenter;
+        $this->presenter->setTitle(trans('menu.order.contact.title'));
+        $this->presenter->setViewName('order.contact');
         $this->presenter->setSelectOpt( $this->repository->getORM_PaymentMethods() );
 
         //所有關於route::resource的位置
-        $this->route_url = $this->presenter->getRouteResource($this->presenter->setRouteName('admin.order.product'), 'csed');
+        $this->route_url = $this->presenter->getRouteResource($this->presenter->setRouteName('admin.order.contact'), 'cped');
     }
 
     /**
@@ -33,8 +35,28 @@ class OrderContactController extends Controller
      */
     public function index()
     {
+        //訂單內的詳情地址
+        if (request()->get('o_no')) {
+
+            $Order = $this->repository->getORM_Order(['id'], "no = '".request()->get('o_no', '?')."'");
+
+            if ($Order) session()->put('order_id', array_first($Order)->id);
+        }
+        else session()->forget('order_id');
+
         //meta data
         $data = $this->presenter->getParameters('index', array('route_url' => $this->route_url));
+        //edit breadcrumb for mass_destroy.
+        $this->presenter->editParameters(
+            $data,
+            'breadcrumb',
+            $this->presenter->presentBreadcrumb([
+                trans('menu.order.product.title') => route('admin.order.product.index'),
+                trans('menu.order.contact.title') => request()->getUri(),
+            ])
+        );
+        // to btn-back.
+        $this->presenter->addParameters($data, 'backUrl', route('admin.order.product.index'));
 
         return $this->presenter->responseJson($data, 'index');
     }
@@ -42,12 +64,13 @@ class OrderContactController extends Controller
     /* ajax datatable */
     public function list(Request $request)
     {
+        if (session()->get('order_id')) $this->repository->setWhereQuery('order_id', session()->get('order_id'));
         //
         if(request()->ajax())
         {
             $data = $this->repository->getDataTable($request);
 
-            $data = $this->presenter->eachOne_aaData($data);     //每一項目要做甚麼事,有需要在使用
+            $data = $this->presenter->eachOne_aaData($data, 'order_contacts');     //每一項目要做甚麼事,有需要在使用
 
             return $this->presenter->responseJson($data, 'ajax', 200);
         }
@@ -62,11 +85,6 @@ class OrderContactController extends Controller
     public function create()
     {
         //
-        $data = $this->presenter->getParameters('create', array('route_url' => $this->route_url));
-        //get option for select
-        $data['arr'] = $this->presenter->transOne($data['arr'], 1);
-
-        return $this->presenter->responseJson($data, 'create');
     }
 
     /**
@@ -78,11 +96,6 @@ class OrderContactController extends Controller
     public function store(Request $request)
     {
         //
-//        $this->repository->validate($request);
-        //
-        $data = $this->repository->create($request->all());
-
-        return $this->presenter->responseJson($data, 'store');
     }
 
     /**
@@ -98,7 +111,7 @@ class OrderContactController extends Controller
         //若資料庫沒有該id 則404畫面
         $data['arr'] = $this->repository->findOrFail($id) or abort(404);
         //轉換出顯示數據
-        $data['arr'] = $this->presenter->transOne($data['arr'], 1);
+        $data['arr'] = $this->presenter->transOne($data['arr'],  $this->repository->getModel());
 
         return $this->presenter->responseJson($data, 'create');
     }
@@ -112,13 +125,6 @@ class OrderContactController extends Controller
     public function edit($id)
     {
         //
-        $data = $this->presenter->getParameters('edit', array('route_url' => $this->route_url));
-        //若資料庫沒有該id 則404畫面
-        $data['arr'] = $this->repository->findOrFail($id) or abort(404);
-        //轉換出顯示數據
-        $data['arr'] = $this->presenter->transOne($data['arr'], 1);
-
-        return $this->presenter->responseJson($data, 'create');
     }
 
     /**
@@ -147,8 +153,5 @@ class OrderContactController extends Controller
     public function destroy($id)
     {
         //
-        $data = $this->repository->delete($id, 'cascade', 'order_details');
-
-        return $this->presenter->responseJson($data, 'destroy');
     }
 }

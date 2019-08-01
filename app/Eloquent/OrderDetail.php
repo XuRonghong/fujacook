@@ -15,6 +15,7 @@ class OrderDetail extends Model
      * @var array
      */
     protected $fillable = [
+        'no',
         'order_id',
         'product_id',
         'ownerKey',

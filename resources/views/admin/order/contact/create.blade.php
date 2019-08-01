@@ -37,120 +37,87 @@
                             <div class="form-group row">
                                 <label for="com1" class="col-sm-3 text-right control-label col-form-label">No.</label>
                                 <div class="col-sm-9">
-                                    <input type="text" name="no" value="{{data_get($data['arr'], 'no')}}" id="com1" class="form-control no" placeholder="訂單號">
+                                    <input type="text" name="no" value="{{data_get($data['arr'], 'no')}}"
+                                           id="com1" class="form-control no" placeholder="訂單號">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="chos1" class="col-sm-3 text-right control-label col-form-label">type</label>
+                                <label for="chos1" class="col-sm-3 text-right control-label col-form-label">Type</label>
                                 <div class="col-sm-9">
-                                    <select class="form-control type" id="chos1" name="type">
-                                        {!! data_get($data['arr'], 'options') !!}
+                                    <select class="form-control type" id="chos1" name="type" title="訂單聯絡人類型">
+                                        {!! data_get($data['arr'], 'order_contacts') !!}
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="com3" class="col-sm-3 text-right control-label col-form-label">Store</label>
+                                <label for="com4" class="col-sm-3 text-right control-label col-form-label">Name</label>
                                 <div class="col-sm-9">
-                                    <input type="text" name="store_id" value="{{data_get($data['arr'], 'store_id')}}" id="com3" class="form-control store_id" placeholder="賣家">
+                                    <input type="text" name="name" value="{{data_get($data['arr'], 'name')}}"
+                                           id="com4" class="form-control name" placeholder="name">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="com4" class="col-sm-3 text-right control-label col-form-label">Member</label>
+                                <label for="com5" class="col-sm-3 text-right control-label col-form-label">Gender</label>
                                 <div class="col-sm-9">
-                                    <input type="text" name="member_id" value="{{data_get($data['arr'], 'member_id')}}" id="com4" class="form-control member_id" placeholder="買家">
+                                    <input type="text" name="gender" value="{{data_get($data['arr'], 'gender')}}"
+                                           id="com5" class="form-control gender" placeholder="gender">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="com5" class="col-sm-3 text-right control-label col-form-label">Total Price</label>
+                                <label for="com6" class="col-sm-3 text-right control-label col-form-label">Email</label>
                                 <div class="col-sm-9">
-                                    <input type="text" name="total_price" value="{{data_get($data['arr'], 'total_price')}}" class="form-control total_price" id="com5" placeholder="訂單總金額">
+                                    <input type="text" name="email" value="{{data_get($data['arr'], 'email')}}"
+                                           id="com6" class="form-control email" placeholder="電子信箱">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="com6" class="col-sm-3 text-right control-label col-form-label">Shipping Fee</label>
+                                <label for="com7" class="col-sm-3 text-right control-label col-form-label">Contact Phone</label>
                                 <div class="col-sm-9">
-                                    <input type="text" name="shipping_fee" value="{{data_get($data['arr'], 'shipping_fee')}}" id="com6" class="form-control shipping_fee" placeholder="運費">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="com7" class="col-sm-3 text-right control-label col-form-label">Promo Fee</label>
-                                <div class="col-sm-9">
-                                    <input type="text" name="promo_fee" value="{{data_get($data['arr'], 'promo_fee')}}" id="com7" class="form-control promo_fee" placeholder="折扣">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="com8" class="col-sm-3 text-right control-label col-form-label">Bonus</label>
-                                <div class="col-sm-9">
-                                    <input type="text" name="bonus" value="{{data_get($data['arr'], 'bonus')}}" id="com8" class="form-control bonus" placeholder="使用購物金數量">
+                                    <input type="text" name="phone" value="{{data_get($data['arr'], 'phone')}}"
+                                           id="com7" class="form-control phone" placeholder="連絡電話">
                                 </div>
                             </div>
                             <hr>
                             <div class="form-group row">
-                                <label for="chos2" class="col-sm-3 text-right control-label col-form-label">付款方式</label>
+                                <label for="com8" class="col-sm-3 text-right control-label col-form-label">Zip_code</label>
                                 <div class="col-sm-9">
-                                    <select class="form-control payment_method_id" id="chos2" name="payment_method_id">
-                                        {!! data_get($data['arr'], 'payment_method_id') !!}
-                                    </select>
+                                    <input type="text" name="zip_code" value="{{data_get($data['arr'], 'zip_code')}}"
+                                           id="com8" class="form-control zip_code" placeholder="郵政編碼">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="chos3" class="col-sm-3 text-right control-label col-form-label">物流方式</label>
+                                <label for="com9" class="col-sm-3 text-right control-label col-form-label">County</label>
                                 <div class="col-sm-9">
-                                    <select class="form-control shipping_type" id="chos3" name="shipping_type">
-                                        {!! data_get($data['arr'], 'shipping_type') !!}
-                                    </select>
+                                    <input type="text" name="county" value="{{data_get($data['arr'], 'county')}}"
+                                           id="com9" class="form-control county" placeholder="縣市">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="chos3" class="col-sm-3 text-right control-label col-form-label">出貨狀態</label>
+                                <label for="com10" class="col-sm-3 text-right control-label col-form-label">District</label>
                                 <div class="col-sm-9">
-                                    <select class="form-control shipping_status" id="chos3" name="shipping_status">
-                                        {!! data_get($data['arr'], 'shipping_status') !!}
-                                    </select>
+                                    <input type="text" name="district" value="{{data_get($data['arr'], 'district')}}"
+                                           id="com10" class="form-control district" placeholder="區">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="chos4" class="col-sm-3 text-right control-label col-form-label">付款方式</label>
+                                <label for="com11" class="col-sm-3 text-right control-label col-form-label">Address</label>
                                 <div class="col-sm-9">
-                                    <select class="form-control pay_status" id="chos4" name="pay_status">
-                                        {!! data_get($data['arr'], 'pay_status') !!}
-                                    </select>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="form-group row">
-                                <label for="tim1" class="col-sm-3 text-right control-label col-form-label">收款時間</label>
-                                <div class="col-sm-9">
-                                    <input type="date" name="paid_at" value="{{data_get($data['arr'], 'paid_at')}}" id="tim1" class="form-control paid_at" placeholder="">
+                                    <input type="text" name="address" value="{{data_get($data['arr'], 'address')}}"
+                                           id="com11" class="form-control address" placeholder="地址">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="com11" class="col-sm-3 text-right control-label col-form-label">匯款款帳號後五碼</label>
+                                <label for="com12" class="col-sm-3 text-right control-label col-form-label">Tax ID</label>
                                 <div class="col-sm-9">
-                                    <input type="text" name="bank_last_no" value="{{data_get($data['arr'], 'bank_last_no')}}" id="com11" class="form-control bank_last_no" placeholder="">
+                                    <input type="text" name="tax_ID" value="{{data_get($data['arr'], 'tax_ID')}}"
+                                           id="com12" class="form-control tax_ID" placeholder="統編">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="detail" class="col-sm-3 text-right control-label col-form-label">運送備註</label>
+                                <label for="remarks" class="col-sm-3 text-right control-label col-form-label">訂單備註</label>
                                 <div class="col-sm-9 note-editable">
-                                    <textarea id="detail" name="shipping_note">
-                                        {!! data_get($data['arr'], 'shipping_note') !!}
-                                    </textarea>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="service_description" class="col-sm-3 text-right control-label col-form-label">訂單備註</label>
-                                <div class="col-sm-9 note-editable">
-                                    <textarea id="service_description" name="pay_note">
-                                        {!! data_get($data['arr'], 'pay_note') !!}
-                                    </textarea>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="customerservice_note" class="col-sm-3 text-right control-label col-form-label">客服備註</label>
-                                <div class="col-sm-9 note-editable">
-                                    <textarea id="customerservice_note" name="customerservice_note">
-                                        {!! data_get($data['arr'], 'customerservice_note') !!}
+                                    <textarea id="remarks" name="remarks">
+                                        {!! data_get($data['arr'], 'remarks') !!}
                                     </textarea>
                                 </div>
                             </div>
@@ -162,10 +129,6 @@
                             </div>
                         </div>
                         <hr>
-                        <input type="text" name="product_id" value="1" class="form-control product_id" placeholder="">
-                        <input type="text" name="ownerKey" value="1" class="form-control ownerKey" placeholder="">
-                        <input type="text" name="related" value="product_specs" class="form-control related" placeholder="">
-                        <input type="text" name="ownerKey" value="1" class="form-control ownerKey" placeholder="">
                         <div class="card-body">
                             <div class="form-group m-b-0 text-right">
                                 @if( !data_get($data, 'Disable'))
@@ -201,11 +164,7 @@
         if (disable){
             $('input[type=text]').attr('disabled','disabled')
             $('form select').attr('disabled','disabled')
-            $('form #detail').summernote('disable')        //編輯器關閉
-            $('form #service_description').summernote('disable')        //編輯器關閉
-            $('form #customerservice_note').summernote('disable')        //編輯器關閉
-            $('form .image-del').css("visibility","hidden")    //刪除區塊隱藏
-            $('form #Image').css("display","none")     //加載圖片關閉
+            $('form #remarks').summernote('disable')        //編輯器關閉
             $('form [type=date]').attr('disabled','disabled')    //加載圖片關閉
             //唯讀
             $('form .btn-image-modal ,form span').hide()
@@ -216,9 +175,7 @@
         current_modal = modal.find('.messageInfo-modal')
 
         //文字編輯器
-        do_textarea_summernote_fun( $('#detail'))
-        do_textarea_summernote_fun( $('#service_description'))
-        do_textarea_summernote_fun( $('#customerservice_note'))
+        do_textarea_summernote_fun( $('#remarks'))
 
         //返回上一頁
         $(".btn-cancel").click(function (e) {
@@ -234,9 +191,7 @@
             let url = '{{data_get($data['route_url'], "store")}}'
             let self = document.querySelector('#sample_form')
             let data = prop_fromData_fun(self, {
-                'product_description': $('#detail').summernote('code'),
-                'service_description': $('#service_description').summernote('code'),
-                'customerservice_note': $('#customerservice_note').summernote('code'),
+                'remarks': $('#remarks').summernote('code'),
             })
 
             ajax(url, data, 'POST')
@@ -251,9 +206,7 @@
             let url = '{{data_get($data['route_url'], "update")}}'.replace('-10', id)  //-10代替字元為id
             let self = document.querySelector('#sample_form')
             let data = prop_fromData_fun(self, {
-                'product_description': $('#detail').summernote('code'),
-                'service_description': $('#service_description').summernote('code'),
-                'customerservice_note': $('#customerservice_note').summernote('code'),
+                'remarks': $('#remarks').summernote('code'),
             })
 
             ajax(url, data, 'POST')

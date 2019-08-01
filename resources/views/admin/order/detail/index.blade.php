@@ -5,10 +5,12 @@
     <style>
         /* 新增按鈕 */
         #create_record {
+            display: none;
             visibility: hidden;
         }
         /* 返回Back */
         .btn-back {
+            display: inline;
             visibility: visible;
         }
     </style>
@@ -67,10 +69,10 @@
                     //     }
                     // },
                     {
-                        "sTitle": "order_id",
-                        "mData": "order_id",
+                        "sTitle": "order",
+                        "mData": "no",
                         // "width": "100px",
-                        "sName": "order_id",
+                        "sName": "no",
                         "mRender": function (data, type, row) {
                             return data;
                         }
@@ -157,6 +159,12 @@
             setTimeout(function(){ $('.waitme').waitMe('hide') }, 1500);   //逾時1.5秒關閉讀取
             /* END BASIC */
 
+
+            //返回上一頁
+            $(".btn-back").click(function (e) {
+                e.preventDefault()
+                history.back()
+            })
 
 
             document.getElementById('create_record').addEventListener('click', function () {

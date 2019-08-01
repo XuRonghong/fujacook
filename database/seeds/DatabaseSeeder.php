@@ -13,12 +13,12 @@ class DatabaseSeeder extends Seeder
     {
         if (env('DB_REFRESH')) {
             // $this->call(UsersTableSeeder::class);
+            $this->call(MenuTableSeeder::class);
             $this->call(AdminTableSeeder::class);
             $this->call(MemberTableSeeder::class);
-            $this->call(SettingTableSeeder::class);
             $this->call(PermissionTableSeeder::class);
             $this->call(PaymentMethodsTableSeeder::class);
         }
-        $this->call(MenuTableSeeder::class);
+        $this->call(SettingTableSeeder::class);
     }
 }
