@@ -325,7 +325,7 @@ class FuncController
         if (Search::query()->where('value', $keyword)->count()==0) {
             Search::create([
                 'type' => 'backend',
-                'name' => 'global search',
+                'name' => $keyword.'.??',
                 'value' => $keyword,
             ]);
         }

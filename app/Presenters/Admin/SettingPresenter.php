@@ -24,6 +24,7 @@ class SettingPresenter extends Presenter
                 'app' => 'app',
                 'meta' => 'meta',
                 'search_keyword' => 'search_keyword',
+                'backend-global_keyword' => 'backend-global_keyword',
             ],
 //            'global_keyword' => [
 //                'app' => 'app',

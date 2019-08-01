@@ -102,7 +102,7 @@
             // 只顯示詳情不開啟編輯功能
             let disable = '{{data_get($data, 'Disable')}}'
             if (disable){
-                $('input[type=text]').attr('disabled','disabled')
+                $('form#sample_form input[type=text]').attr('disabled','disabled')
             }
 
             //返回上一頁

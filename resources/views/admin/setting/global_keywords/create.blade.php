@@ -75,7 +75,7 @@
             // 只顯示詳情不開啟編輯功能
             let disable = '{{data_get($data, 'Disable')}}'
             if (disable){
-                $('input[type=text]').attr('disabled','disabled')
+                $('form#sample_form input[type=text]').attr('disabled','disabled')
                 $('form select').attr('disabled','disabled')
                 $('form #detail').summernote('disable');        //編輯器關閉
             }

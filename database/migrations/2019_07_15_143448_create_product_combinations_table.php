@@ -37,6 +37,7 @@ class CreateProductCombinationsTable extends Migration
             //
             Schema::create('product_items', function (Blueprint $table) {
                 $table->increments('id');
+                $table->string('product_combinations', 32)->comment('product_combinations.id');
                 $table->string('product_id', 32)->comment('對應products.id');
                 $table->integer('purchase_price')->default(0)->comment('進價');
                 $table->integer('cost')->default(0)->comment('成本價');
@@ -59,8 +60,8 @@ class CreateProductCombinationsTable extends Migration
     public function down()
     {
         if (env('DB_REFRESH')) {
-            Schema::dropIfExists('product_combinations');
-            Schema::dropIfExists('product_items');
         }
+        Schema::dropIfExists('product_combinations');
+        Schema::dropIfExists('product_items');
     }
 }
