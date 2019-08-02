@@ -219,7 +219,16 @@ return [
         'order.detail.create' => '創建訂單詳情,新訂單詳情,新增訂單詳情,加入訂單詳情,加訂單詳情,create order details,order detail create,add order details,new order details',
         'order.contact.index' => '訂單寄送地址管理,訂單寄送地址列表管理,order contact list,order contacts',
         'order.contact.create' => '創建訂單寄送地址,新訂單寄送地址,新增訂單寄送地址,加入訂單寄送地址,加訂單寄送地址,create order contacts,order contact create,add order contacts,new order contacts',
-        
+
+        'advertising.recommend.index' => '平台推薦商品管理,平台推薦商品列表管理,recommend list,recommends',
+        'advertising.recommend.create' => '創建平台推薦商品,新平台推薦商品,新增平台推薦商品,加入平台推薦商品,加平台推薦商品,create recommends,recommend create,add recommends,new recommends',
+        'advertising.promotions.index' => '促銷活動管理,促銷活動列表管理,promotions list,promotions',
+        'advertising.promotions.create' => '創建促銷活動,新促銷活動,新增促銷活動,加入促銷活動,加促銷活動,create recommends,recommend create,add recommends,new recommends',
+        'advertising.manage.index' => '廣告類別管理,廣告列表管理,advertising list,advertisings',
+        'advertising.manage.create' => '創建廣告,新廣告,新增廣告,加入廣告,加廣告,create advertisings,advertising create,add advertisings,new advertisings',
+        'advertising.category.index' => '廣告類別管理,廣告類別列表管理,advertising category list,advertising categories',
+        'advertising.category.create' => '創建廣告類別,新廣告類別,新增廣告類別,加入廣告類別,加廣告類別,create advertising categories,advertising categories create,add advertising categories,new advertising categories',
+
         'scenes.navbar.index' => '前台選項欄位,前台選單欄位,場景選項欄位,背景選項欄位,scenes navbar list,navbars',
         'scenes.navbar.create' => '創建選項,新選項,新增選項,加入選項,加選項,create navbars,navbar create,add navbars,new navbars',
         'scenes.slider.index' => '前台滑動圖欄位,前台廣告圖欄位,場景滑動圖欄位,背景滑動圖欄位,scenes sliders list,banners list',
@@ -230,6 +239,17 @@ return [
         'scenes.image.create' => '創建圖片,新圖片,新增圖片,加入圖片,加圖片,create images,image create,add images,new images',
         'scenes.footer.index' => '前台腳板欄位,前台底塊欄位,場景腳板欄位,背景腳板欄位,scenes footers list',
         'scenes.footer.create' => '創建腳板,新腳板,新增腳板,加入腳板,加腳板,create footer,scenes footer create,add footer,new footer',
+
+        'activity.news.index' => '活動訊息管理,活動訊息列表管理,activity news list,activity news',
+        'activity.news.create' => '創建活動訊息,新活動訊息,新增活動訊息,加入活動訊息,加活動訊息,create activity news,activity news create,add activity news,new activity news',
+        'activity.coupon.index' => '優惠卷活動管理,優惠卷活動列表管理,activity coupon list,activity coupon',
+        'activity.coupon.create' => '創建優惠卷活動,新優惠卷活動,新增優惠卷活動,加入優惠卷活動,加優惠卷活動,create activity coupon,activity coupon create,add activity coupon,new activity coupon',
+        'activity.coin.index' => '點數活動管理,點數活動列表管理,activity coin list,activity coin',
+        'activity.coin.create' => '創建點數活動,新點數活動,新增點數活動,加入點數活動,加點數活動,create activity coin,activity coin create,add activity coin,new activity coin',
+        'activity.sign_up.index' => '活動報名管理,活動報名列表管理,activity sign_up list,activity sign_up',
+        'activity.sign_up.create' => '創建活動報名,新活動報名,新增活動報名,加入活動報名,加活動報名,create activity sign_up,activity sign_up create,add activity sign_up,new activity sign_up',
+        'activity.schedule.index' => '活動檔期管理,活動檔期列表管理,activity schedule list,activity schedule',
+        'activity.schedule.create' => '創建活動檔期,新活動檔期,新增活動檔期,加入活動檔期,加活動檔期,create activity schedule,activity schedule create,add activity schedule,new activity schedule',
 
         'setting.search_keywords.index' => '前台搜尋關鍵字欄位,前台搜尋關鍵詞欄位,場景搜尋關鍵字欄位,背景搜尋關鍵字欄位,search keywords list',
         'setting.search_keywords.create' => '創建搜尋關鍵字,新搜尋關鍵字,新增搜尋關鍵字,加入搜尋關鍵字,加搜尋關鍵字,create search keywords,search keyword create,add search keywords,new search keywords',
