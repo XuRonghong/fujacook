@@ -51,7 +51,6 @@ class CreateProductSpecsTable extends Migration
     {
         if (env('DB_REFRESH')) {
             Schema::dropIfExists('product_specs');
-
         }
 //        Schema::dropIfExists('specifications');
     }

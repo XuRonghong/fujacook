@@ -13,7 +13,6 @@ class SettingTableSeeder extends Seeder
      */
     public function run()
     {
-        if (env('DB_REFRESH')) {
             /*
              * 預設後台參數
              */
@@ -84,6 +83,9 @@ class SettingTableSeeder extends Seeder
             foreach ($scenes as $scene) {
                 Scene::create($scene);
             }
+
+        if (env('DB_REFRESH')) {
+            //
         }
     }
 }

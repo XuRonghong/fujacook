@@ -60,8 +60,9 @@ class CreateProductCombinationsTable extends Migration
     public function down()
     {
         if (env('DB_REFRESH')) {
+            //
+            Schema::dropIfExists('product_combinations');
+            Schema::dropIfExists('product_items');
         }
-        Schema::dropIfExists('product_combinations');
-        Schema::dropIfExists('product_items');
     }
 }
