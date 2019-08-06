@@ -87,7 +87,7 @@ class AdminsPresenter extends Presenter
     }
 
     // 製造 HTML
-    public function presentStatus($status=null)
+    public function presentStatus($status=null, $btn='')
     {
         switch ($status) {
             case 1: $btn = '<button class="btn btn-xs btn-success btn-open">'.trans('options.panel.status.open').'</button>'; break;

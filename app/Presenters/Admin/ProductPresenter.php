@@ -15,17 +15,9 @@ class ProductPresenter extends Presenter
     public function __construct()
     {
         $this->selectOptions = [
-            'product_cate' => [
-                /* 從資料庫得到 from database. */
-            ],
-            'product' => [
-                /* 從資料庫得到 from database. */
-            ],
-            'product_combination' => [
-                1 => '一般組合商品',
-                2 => '限時組合商品',
-                3 => '加購組合商品',
-            ],
+            'product_cate' => [ /* 從資料庫得到 from database. */ ],
+            'product' => [ /* 從資料庫得到 from database. */ ],
+            'product_combination' => config('parameter.product_combination'), //一般組合商品,限時組合商品...
         ];
     }
 

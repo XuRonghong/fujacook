@@ -48,15 +48,9 @@ class MenuPresenter extends Presenter
     }
 
     //
-    public function presentStatus($status=0)
+    public function presentStatus($status=null, $btn='')
     {
-        // current_data[row.id] = row;
-        $btn = '';
-//        $btn .= '<button class="btn btn-xs btn-show" title="'.trans('options.panel.show').'"><i class="fa fa-book" aria-hidden="true"></i></button>';
-//        $btn .= '<button class="btn btn-xs btn-edit" title="'.trans('options.panel.edit').'"><i class="fa fa-pencil-alt" aria-hidden="true"></i></button>';
-        $btn .= '<button class="btn btn-xs btn-del pull-right" title="'.trans('options.panel.del').'"><i class="fa fa-trash" aria-hidden="true"></i></button>';
-
-        return $btn;
+        return '<button class="btn btn-xs btn-del pull-right" title="'.trans('options.panel.del').'"><i class="fa fa-trash" aria-hidden="true"></i></button>';
     }
 
     //

@@ -15,11 +15,6 @@ abstract class Presenter
     protected $summary = '';
     protected $breadcrumb = [];
 
-    public function propSummary($text=0)
-    {
-        return $this->summary = $text ? $text : $this->summary;
-    }
-
     public function setTitle($title)
     {
         return $this->title = $title;
@@ -52,15 +47,30 @@ abstract class Presenter
         return $this->route_name;
     }
 
+    public function propSummary($text=0)
+    {
+        return $this->summary = $text ? $text : $this->summary;
+    }
+
+    //
+    public function addParameters(&$data, $key=null, $value=null)
+    {
+        $data = array_add($data, $key, $value);
+    }
+
+    //
+    public function editParameters(&$data, $key=null, $value=null)
+    {
+        $data[$key] = $value;
+    }
+
     /*
      * data object or array forEach to do.
      */
     public function eachOne_aaData($arr)
     {
         if ( $arr['aaData']) {
-            foreach ($arr['aaData'] as $key => $var) {
-                //
-            }
+            foreach ($arr['aaData'] as $key => $var) { }
         }
         return $arr;
     }
@@ -72,9 +82,7 @@ abstract class Presenter
     {
         //從資料串裡依據file_id找到image
         $data->image = $data->image ? array($data->image) : $this->transFileIdtoImage($data->file_id);
-        if ($other){
-
-        }
+        if ($other){ }
         return $data;
     }
 
@@ -86,32 +94,25 @@ abstract class Presenter
             case 'member': $model = new Member(); break;
             default: return null;
         }
-        if ( !$id) {
-            return null;
-        } else {
-            return $model->query()->where('id', $id)->first()->name;
-        }
+        if ( !$id) return null;
+        else return $model->query()->where('id', $id)->first()->name;
     }
 
     // 轉換 user type 為輸出顯示type
     public function transUserType($type=null)
     {
-        if ( !$type) {
-            return null;
-        } elseif ($type < 5) {
-            return trans('web.user_type.administrator');
-        } elseif ($type < 10) {
-            return trans('web.user_type.manager');
-        } else {
-            return trans('web_message.runaways'); //'超出可以判斷的範圍';
-        }
+        if ( !$type) return null;
+        elseif ($type < 5) return trans('web.user_type.administrator');
+        elseif ($type < 10) return trans('web.user_type.manager');
+        else return trans('web_message.runaways'); //'超出可以判斷的範圍';
     }
 
     // 轉換 type 為輸出顯示選項內容之一
     public function tranTypeInSelectOption($type=null, $arr=[], $key=null)
     {
-        if (is_null($type)) return null;
-        elseif ($key) {
+        if (is_null($type)) {
+            return null;
+        } elseif ($key) {
             foreach ($arr[$key] as $value => $option) {
                 if ($type == $value) return $option;
             }
@@ -158,18 +159,6 @@ abstract class Presenter
             'destroy' => strpos($except,'d')?:route($route_name.'.destroy', [-10]),
             'show' => strpos($except,'s')?:route($route_name.'.index'),
         ];
-    }
-
-    //
-    public function addParameters(&$data, $key=null, $value=null)
-    {
-        $data = array_add($data, $key, $value);
-    }
-
-    //
-    public function editParameters(&$data, $key=null, $value=null)
-    {
-        $data[$key] = $value;
     }
 
     // 例行公事，顯示板塊參數
@@ -233,7 +222,7 @@ abstract class Presenter
                         $this->title => data_get($data,'route_url')?$data['route_url']['index']:'',
                         'show' => request()->getUri(), // data_get($data,'route_url')?$data['route_url']['show']:'',
                     ]),
-                    'Disable'   => true
+                    'Disable' => true
                 ]);
                 break;
             default :
@@ -381,61 +370,41 @@ abstract class Presenter
     //click it can edit HTML
     public function presentIsEdit($index, $data)
     {
+        $cache = $data;
+        if ($data=='') $data = '-';
         switch ($index){
             case 'parent_id':
-                $cache = $data;
-                if ($data=='') $data = '-';
                 return '<input class="isEdit '.$index.'" data-id="'.$index.'" size="10" style="width: 100%; display: none;" type="text" value="'. $cache .'" />'.'<div class="aaa">'.$data.'</div>';
-                break;
             case 'rank':
-                $cache = $data;
-                if ($data=='') $data = '-';
                 return '<input class="isEdit '.$index.'" data-id="'.$index.'" style="width: 50%; display: none;" type="number" max="9999" min="-9999" value="'. $cache .'" />'.'<div class="aaa">'.$data.'</div>';
-                break;
             case 'name':
-                $cache = $data;
-                if ($data=='') $data = '-';
                 return '<input class="isEdit '.$index.'" data-id="'.$index.'" size="10" style="width: 100%; display: none;" type="text" value="'. $cache .'" />'.'<div class="aaa">'.$data.'</div>';
-                break;
             case 'value':
-                $cache = $data;
-                if ($data=='') $data = '-';
                 return '<input class="isEdit '.$index.'" data-id="'.$index.'" size="10" style="width: 100%; display: none;" type="text" value="'. $cache .'" />'.'<div class="aaa">'.$data.'</div>';
-                break;
             case 'link':
-                $cache = $data;
-                if ($data=='') $data = '-';
                 return '<input class="isEdit '.$index.'" data-id="'.$index.'" size="10" style="width: 100%; display: none;" type="text" value="'. $cache .'" />'.'<div class="aaa">'.$data.'</div>';
-                break;
             case 'sub_menu':
-                $cache = $data;
-                if ($data=='') $data = '-';
                 return '<input class="isEdit '.$index.'" data-id="'.$index.'" size="10" style="width: 100%; display: none;" type="text" value="'. $cache .'" />'.'<div class="aaa">'.$data.'</div>';
-                break;
             case 'open':
-                $cache = $data;
-                if ($data=='') $data = '-';
                 return '<input class="isEdit '.$index.'" data-id="'.$index.'" size="10" style="width: 100%; display: none;" type="text" value="'. $cache .'" />'.'<div class="aaa">'.$data.'</div>';
-                break;
             default:
-                return '<div class="'.$index.'">'.$data.'</div>';
+                return '<div class="'.$index.'">'.$cache.'</div>';
         }
     }
 
     // panel HTML
-    public function presentStatus($status=null)
+    public function presentStatus($status=null, $btn='')
     {
         switch ($status) {
-            case 1: $btn = '<button class="btn btn-xs btn-success btn-open">'.trans('options.panel.status.open').'</button>'; break;
-            case 0: $btn = '<button class="btn btn-xs btn-primary btn-open">'.trans('options.panel.status.close').'</button>'; break;
-            case '1': $btn = '<button class="btn btn-xs btn-success btn-open">'.trans('options.panel.status.open').'</button>'; break;
-            case '0': $btn = '<button class="btn btn-xs btn-primary btn-open">'.trans('options.panel.status.close').'</button>'; break;
-            default: $btn = trans('options.panel.status.not'); //"無功能";
+            case 1: $btn .= '<button class="btn btn-xs btn-success btn-open">'.trans('options.panel.status.open').'</button>'; break;
+            case 0: $btn .= '<button class="btn btn-xs btn-primary btn-open">'.trans('options.panel.status.close').'</button>'; break;
+            case '1': $btn .= '<button class="btn btn-xs btn-success btn-open">'.trans('options.panel.status.open').'</button>'; break;
+            case '0': $btn .= '<button class="btn btn-xs btn-primary btn-open">'.trans('options.panel.status.close').'</button>'; break;
+            default: $btn .= trans('options.panel.status.not'); //"無功能";
         }
         $btn .= '<button class="btn btn-xs btn-show" title="'.trans('options.panel.show').'"><i class="fa fa-book" aria-hidden="true"></i></button>';
         $btn .= '<button class="btn btn-xs btn-edit" title="'.trans('options.panel.edit').'"><i class="fa fa-pencil-alt" aria-hidden="true"></i></button>';
         $btn .= '<button class="btn btn-xs btn-del pull-right" title="'.trans('options.panel.del').'"><i class="fa fa-trash" aria-hidden="true"></i></button>';
-
         return $btn;
     }
 

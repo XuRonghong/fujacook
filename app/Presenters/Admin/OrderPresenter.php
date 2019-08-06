@@ -19,47 +19,14 @@ class OrderPresenter extends Presenter
         $this->model = $model;
         //
         $this->selectOptions = [
-            'type' => [
-                /* NULL */
-            ],
-            'payment_method_id' => [
-                /* 從資料庫得到 from database. */
-            ],
-            'shipping_type' => [
-                1 => '自取',
-                2 => '黑貓寄送',
-            ],
-            'shipping_status' => [
-                1 => '未出貨',
-                2 => '出貨中',
-                3 => '已出貨',
-            ],
-            'pay_status' => [
-                1 => '未付款',
-                2 => '已付款',
-                3 => '已取消授權',
-                4 => '已請款',
-                8 => '退貨',
-                9 => '付款失敗',
-                0 => '取消',
-            ],
-            'order_details' => [
-                0 => '正常訂購',
-                1 => '追加數量',
-                2 => '減少數量',
-                3 => '補繳',
-                4 => '退費',
-            ],
-            'status' => [
-                0 => '未處理',
-                1 => '已確認',
-                2 => '已取消',
-                3 => '已折讓',
-            ],
-            'order_contacts' => [
-                1 => '訂購人資料',
-                2 => '收件人資料',
-            ],
+            'type' => [ /* NULL */ ],
+            'payment_method_id' => [ /* 從資料庫得到 from database. */ ],
+            'shipping_type' => config('parameter.shipping_type'), //自取,黑貓寄送...
+            'shipping_status' => config('parameter.shipping_status'), //未出貨,出貨中...
+            'pay_status' => config('parameter.pay_status'), //未付款,已付款...
+            'order_details' => config('parameter.order_details'), //正常訂購,補繳...
+            'status' => config('parameter.order_status_2'), //未處理,已確認...
+            'order_contacts' => config('parameter.order_contacts'), //訂購人資料,收件人資料...
         ];
     }
 

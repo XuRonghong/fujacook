@@ -88,7 +88,7 @@ class CouponPresenter extends Presenter
     }
 
     // 製造 HTML 元素 select option
-    public function getSelectOption($type, $selected='', $opt = '')
+    public function getSelectOption($type, $selected='', $opt='')
     {
         if (strpos($selected, ',')) {   //int,int,int
             foreach ($this->selectOptions[$type] as $key => $val) {     // multiple selected

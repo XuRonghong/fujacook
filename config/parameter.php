@@ -1,30 +1,57 @@
 <?php
 return [
-    'mail' =>
-        [
-          'ttb' =>
-            [
-                'address' => 'ronghong@kahap.com'
-            ],
+    'mail' => [
+        'ttb' => [
+            'address' => 'ronghong@kahap.com',
         ],
+    ],
     'admin_access' => [ 1, 2 ],
     'activity' => [
         'coin' => [
             'register_time' => 86400 * 30 * 3,
-            'login_time' => 86400 * 30 * 3
-        ]
+            'login_time' => 86400 * 30 * 3,
+        ],
     ],
-    'coin_fee' => 0.1,
-    'agent_code' => "kahap",
-    'center_connection' => env( 'DB_CENTER_CONNECTION' ),
-    'fb_appid' => env( 'FB_APPID' ),
-    'fb_secret' => env( 'FB_SECRET' ),
-    'fb_ver' => env( 'FB_VER' ),
-    'g_plus_client_id' => env( 'G_PLUS_CLIENT_ID' ),
-    'g_plus_client_pw' => env( 'G_PLUS_CLIENT_PW' ),
-    'mall_connection' => env( 'DB_CONNECTION' ),
-    'order_limit_time' => env( 'ORDER_LIMIT_TIME' ),
-    'order_num_header' => env( 'ORDER_NUM_HEADER', 'TTW' ),
+    'product_combination' => [
+        1 => '一般組合商品',
+        2 => '限時組合商品',
+        3 => '加購組合商品',
+    ],
+    'shipping_type' => [
+        1 => '自取',
+        2 => '黑貓寄送',
+    ],
+    'shipping_status' => [
+        1 => '未出貨',
+        2 => '出貨中',
+        3 => '已出貨',
+    ],
+    'pay_status' => [
+        1 => '未付款',
+        2 => '已付款',
+        3 => '已取消授權',
+        4 => '已請款',
+        8 => '退貨',
+        9 => '付款失敗',
+        0 => '取消',
+    ],
+    'order_details' => [
+        0 => '正常訂購',
+        1 => '追加數量',
+        2 => '減少數量',
+        3 => '補繳',
+        4 => '退費',
+    ],
+    'order_status_2' => [
+        0 => '未處理',
+        1 => '已確認',
+        2 => '已取消',
+        3 => '已折讓',
+    ],
+    'order_contacts' => [
+        1 => '訂購人資料',
+        2 => '收件人資料',
+    ],
     'order_pay_status' =>
         [
             '0' => '未付款',
@@ -44,6 +71,17 @@ return [
             '5' => '已出貨',
             '6' => '待提貨',
         ],
+    'coin_fee' => 0.1,
+    'agent_code' => "kahap",
+    'center_connection' => env( 'DB_CENTER_CONNECTION' ),
+    'fb_appid' => env( 'FB_APPID' ),
+    'fb_secret' => env( 'FB_SECRET' ),
+    'fb_ver' => env( 'FB_VER' ),
+    'g_plus_client_id' => env( 'G_PLUS_CLIENT_ID' ),
+    'g_plus_client_pw' => env( 'G_PLUS_CLIENT_PW' ),
+    'mall_connection' => env( 'DB_CONNECTION' ),
+    'order_limit_time' => env( 'ORDER_LIMIT_TIME' ),
+    'order_num_header' => env( 'ORDER_NUM_HEADER', 'TTW' ),
     'productType' => [
         'museum_a01' => 201,
         'museum_a02' => 202,

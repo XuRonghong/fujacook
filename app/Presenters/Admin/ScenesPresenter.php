@@ -10,7 +10,6 @@ class ScenesPresenter extends Presenter
     protected $title = 'Scenes';          //output for view
     protected $view_group_name = 'scenes';       //document of view group
     protected $route_name;      //Route->name()
-
     protected $selectOptions;   //HTML元素
 
     public function __construct()
@@ -75,7 +74,7 @@ class ScenesPresenter extends Presenter
     }
 
     // 製造 HTML 元素 select option
-    public function getSelectOption($type, $selected='', $opt = '')
+    public function getSelectOption($type, $selected='', $opt='')
     {
         foreach ($this->selectOptions[$type] as $key => $val) {
             $opt .= '<option value="'.$key.'" '. ($selected==$key?'selected':'') .'>'.$val.'</option>';

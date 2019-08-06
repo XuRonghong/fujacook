@@ -61,7 +61,7 @@ class InformationPresenter extends Presenter
     }
 
     // 製造 HTML 元素 select option
-    public function getSelectOption($type, $selected='', $opt = '')
+    public function getSelectOption($type, $selected='', $opt='')
     {
         foreach ($this->selectOptions[$type] as $key => $val) {
             $opt .= '<option value="'.$key.'" '. ($selected==$key?'selected':'') .'>'.$val.'</option>';

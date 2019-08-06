@@ -62,7 +62,7 @@ class SettingPresenter extends Presenter
     }
 
     // 製造 HTML 元素 select option
-    public function getSelectOption($type, $selected='', $opt = '')
+    public function getSelectOption($type, $selected='', $opt='')
     {
         foreach ($this->selectOptions[$type] as $key => $val) {
             $opt .= '<option value="'.$key.'" '. ($selected==$key?'selected':'') .'>'.$val.'</option>';
@@ -76,7 +76,6 @@ class SettingPresenter extends Presenter
         switch ($selector) {
             case 'search_keyword':
                 return $this->presentStatus($status);
-                break;
             case 'global_keyword':
                 $btn .= '<button class="btn btn-xs btn-del pull-right" title="'.trans('options.panel.del').'"><i class="fa fa-trash" aria-hidden="true"></i></button>';
                 break;
