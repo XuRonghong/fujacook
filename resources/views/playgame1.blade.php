@@ -108,7 +108,7 @@
                 timer=setTimeout("timedCount()",10);
             }
 
-            $(document).ready(function () {
+            function document_ready() {
                 //
                 // if (!Date.now) {
                 //     Date.now = function() { return new Date().getTime(); }

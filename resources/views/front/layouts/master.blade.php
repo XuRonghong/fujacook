@@ -40,6 +40,8 @@
     <link rel="stylesheet" href="{{asset('css/sweetalert.css')}}">
     <link rel="stylesheet" href="{{asset('css/waitMe.css')}}" type="text/css">
 
+    <link href="{{asset('web0708/Fujacook/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" media="all">
+    <link href="{{asset('web0708/Fujacook/css/all.css')}}" rel="stylesheet" type="text/css" media="all">
 
     <!-- Master styles -->
     <style type="text/css">

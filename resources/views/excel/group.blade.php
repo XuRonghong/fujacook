@@ -73,7 +73,7 @@
 <script>
     var ajax_source = "{{url('group/preview-import-csv-excel')}}";
     var ajax_Table = "{{url('group/preview-import-csv-excel')}}";
-    $(document).ready(function () {
+    function document_ready() {
         {{--table = $('#dt_basic').dataTable({--}}
             {{--"processing": true,--}}
             {{--"serverSide": true,--}}
@@ -95,6 +95,6 @@
                 @endforeach
             ]
         });
-    });
-</script>
+    }
+    </script>
 </html>

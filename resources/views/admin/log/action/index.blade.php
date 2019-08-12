@@ -35,7 +35,7 @@
 
 @section('inline-js')
     <script>
-        $(document).ready(function () {
+        function document_ready() {
             // loading .....
             run_waitMe($('.waitme'));
             let data_table = $('#data_table');
@@ -164,6 +164,6 @@
                 // var id = $(this).closest('tr').find('td').first().text();
                 location.href = '{{$data['route_url']['show']}}'+'/'+id;
             });
-        });
+        }
     </script>
 @endsection

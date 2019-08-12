@@ -62,7 +62,7 @@
 <!-- ================== inline-js ================== -->
 @section('inline-js')
     <script>
-        $(document).ready(function () {
+        function document_ready() {
             $('.delete_form').on('submit', function () {
                 if (confirm("Are you sure you want to delete it ?")) {
                     return true
@@ -164,7 +164,7 @@
 
 
 
-        });
+        }
     </script>
 @endsection
 <!-- ================== /inline-js ================== -->

@@ -116,7 +116,7 @@
     @include('admin.js.crop_image_single')
     <!-- end -->
     <script type="text/javascript">
-        $(document).ready(function () {
+        function document_ready() {
 
             // 只顯示詳情不開啟編輯功能
             let disable = '{{data_get($data, 'Disable')}}'
@@ -163,6 +163,6 @@
 
                 ajax(url, data, 'POST')
             })
-        })
+        }
     </script>
 @endsection

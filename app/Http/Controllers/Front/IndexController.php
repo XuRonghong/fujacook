@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Presenters\Front\ScenesPresenter;
 use App\Repositories\Front\ScenesRepository;
 use App\Setting;
+use function Aws\filter;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
@@ -23,6 +24,11 @@ class IndexController extends Controller
     {
         $data = [];
         $data['parameters'] = $this->getParameters();
+        $collect = array_get($data['parameters'], 'external_link');
+        $data['parameters']['external_link'] = $collect->map(function ($item, $key){
+            $item->content = json_decode($item->content);
+            return $item;
+        });
         //
         $data['navbar'] = $this->repository->getOrmByType('navbar.home');
         //
@@ -50,6 +56,9 @@ class IndexController extends Controller
             'meta_title' => json_decode( Setting::query()->where('name', 'meta_title')->first()->content ),
             'meta_keyword' => json_decode( Setting::query()->where('name', 'meta_keyword')->first()->content ),
             'meta_description' => json_decode( Setting::query()->where('name', 'meta_description')->first()->content ),
+            'external_link' => Setting::query()->where('type', 'external_link')
+                ->orderBy('rank', 'asc')
+                ->get(['type','name','content','value']),
         ];
     }
 

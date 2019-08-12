@@ -245,8 +245,8 @@
                 error.insertAfter(element.parent());
             }
         });
-    });
-</script>
+    }
+    </script>
 
 </body>
 </html>

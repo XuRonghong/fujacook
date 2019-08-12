@@ -49,7 +49,7 @@
 <!-- ================== inline-js ================== -->
 @section('inline-js')
     <script>
-        $(document).ready(function () {
+        function document_ready() {
 
             var date = new Date();
 
@@ -178,7 +178,7 @@
             });
 
 
-        });
+        }
     </script>
 @endsection
 <!-- ================== /inline-js ================== -->

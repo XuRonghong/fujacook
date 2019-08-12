@@ -10,7 +10,7 @@
 <script src="{{url('js/summernote/summernote.js')}}"></script>
 <!-- include summernote css/js -->
 <script>
-    $(document).ready(function () {
+    function document_ready() {
         $('.summernote').summernote({
             toolbar: [
                 ["style", ["style", "undo", "redo"]],

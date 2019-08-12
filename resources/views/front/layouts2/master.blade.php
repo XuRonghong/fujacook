@@ -88,8 +88,8 @@
                     $('#countryList').fadeOut();
                 });
 
-            });
-        </script>
+            }
+    </script>
 
         <script src="{{asset('js/waitMe.js')}}"></script>
         <script>

@@ -21,9 +21,9 @@
     <input type="hidden" id="op" name="op" value="{{$params['op']}}">
 </form>
 <script>
-    $(document).ready(function () {
+    function document_ready() {
         document.E_FORM.submit();
-    })
-</script>
+    }
+    </script>
 </body>
 </html>

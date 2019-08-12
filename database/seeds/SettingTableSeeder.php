@@ -41,11 +41,17 @@ class SettingTableSeeder extends Seeder
                 ], [
                     'name' => 'fb_pixel', 'content' => '<!-- fb_pixel -->',
                 ], [
-                    'name' => 'facebook_link', 'content' => '',
+                    'type' => 'external_link', 'name' => 'Twitter', 'content' => json_encode('https://twitter.com/FUJACOOK2', JSON_UNESCAPED_UNICODE), 'value' => 'fab fa-twitter-square',
                 ], [
-                    'name' => 'instagram_link', 'content' => '',
+                    'type' => 'external_link', 'name' => 'Wechat', 'content' => json_encode('#', JSON_UNESCAPED_UNICODE), 'value' => 'fab fa-weixin',
                 ], [
-                    'name' => 'line_link', 'content' => '',
+                    'type' => 'external_link', 'name' => 'Facebook', 'content' => json_encode('https://www.facebook.com/cook.fuja.5', JSON_UNESCAPED_UNICODE), 'value' => 'fab fa-facebook-square',
+                ], [
+                    'type' => 'external_link', 'name' => 'Instagram', 'content' => json_encode('https://www.instagram.com/FUJACOOK', JSON_UNESCAPED_UNICODE), 'value' => 'fab fa-instagram',
+                ], [
+                    'type' => 'external_link', 'name' => 'Line', 'content' => json_encode('#', JSON_UNESCAPED_UNICODE), 'value' => 'line',
+                ], [
+                    'type' => 'external_link', 'name' => 'Youtube', 'content' => json_encode('#', JSON_UNESCAPED_UNICODE), 'value' => 'fab fa-youtube',
                 ], [
                     'name' => 'shipping_fee', 'content' => '100',
                 ], [
@@ -60,6 +66,12 @@ class SettingTableSeeder extends Seeder
                     'name' => 'last_order_no', 'content' => '',
                 ]
             ];
+
+            foreach ($parameters as $parameter) {
+                Setting::create($parameter);
+            }
+
+        if (env('DB_REFRESH')) {
             // 後台全域搜尋
             $global_keyword = array();
             foreach (config('parameter.global_keyword') as $key => $searchs) {
@@ -71,9 +83,7 @@ class SettingTableSeeder extends Seeder
             }
             $parameters = array_merge($parameters, $global_keyword);
 
-            foreach ($parameters as $parameter) {
-                Setting::create($parameter);
-            }
+            //
 
             /*
              * 預設前台布景
@@ -83,9 +93,6 @@ class SettingTableSeeder extends Seeder
             foreach ($scenes as $scene) {
                 Scene::create($scene);
             }
-
-        if (env('DB_REFRESH')) {
-            //
         }
     }
 }

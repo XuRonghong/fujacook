@@ -25,6 +25,7 @@ class SettingPresenter extends Presenter
                 'meta' => 'meta',
                 'search_keyword' => 'search_keyword',
                 'backend-global_keyword' => 'backend-global_keyword',
+                'external_link' => '對外聯結',
             ],
 //            'global_keyword' => [
 //                'app' => 'app',
@@ -46,6 +47,8 @@ class SettingPresenter extends Presenter
                 $var->value = $this->presentIsEdit('value', $var->value);
                 //
                 $var->status = $this->presentStatus_agent($var->open, $selector);
+                //
+                $var->content = json_decode($var->content);
             }
         }
         return $arr;

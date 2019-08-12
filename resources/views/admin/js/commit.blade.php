@@ -341,5 +341,5 @@
             timeout: 4000
         });
 
-    })
-</script>
+    }
+    </script>

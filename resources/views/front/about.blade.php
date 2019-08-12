@@ -70,21 +70,28 @@
                         @endforelse
                     </ul>
                     <ul class="social-media">
-                        <li><a href=""><i class="fab fa-twitter-square"></i>
-                                <p>Twitter</p>
-                            </a></li>
-                        <li><a href=""><i class="fab fa-weixin"></i>
-                                <p>Wechat</p>
-                            </a></li>
-                        <li><a href=""><i class="fab fa-facebook-square"></i>
-                                <p>Facebook</p>
-                            </a></li>
-                        <li><a href=""><i class="fab fa-line"></i>
-                                <p>Line</p>
-                            </a></li>
-                        <li><a href=""><i class="fab fa-youtube"></i>
-                                <p>Youtube</p>
-                            </a></li>
+                        @forelse(array_get($data, 'parameters.external_link') as $var)
+                            <li><a href="{{data_get($var,'content')}}"><i class="{{data_get($var,'value')}}"></i><p>{{data_get($var,'name')}}</p></a></li>
+                        @empty
+                            <li><a href="https://twitter.com/FUJACOOK2"><i class="fab fa-twitter-square"></i>
+                                    <p>Twitter</p>
+                                </a></li>
+                            <li><a href=""><i class="fab fa-weixin"></i>
+                                    <p>Wechat</p>
+                                </a></li>
+                            <li><a href="https://www.facebook.com/cook.fuja.5"><i class="fab fa-facebook-square"></i>
+                                    <p>Facebook</p>
+                                </a></li>
+                            <li><a href="https://www.instagram.com/FUJACOOK/"><i class="fab fa-instagram"></i>
+                                    <p>Instagram</p>
+                                </a></li>
+                            <li><a href=""><i class="fab fa-line"></i>
+                                    <p>Line</p>
+                                </a></li>
+                            <li><a href=""><i class="fab fa-youtube"></i>
+                                    <p>Youtube</p>
+                                </a></li>
+                        @endforelse
                     </ul>
                 </div>
             </nav>
@@ -648,9 +655,8 @@
                                 }
 
 
-                            });
-
-                        </script>
+                            }
+    </script>
                         <div>
                             <img src="{{asset('web0708/Fujacook/img/得獎紀錄.jpg')}}" alt="得獎紀錄">
                         </div>

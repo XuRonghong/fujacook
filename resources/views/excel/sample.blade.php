@@ -71,7 +71,7 @@
 <!--  -->
 <script>
     var ajax_Table = "{{url('excel/getList')}}";
-    $(document).ready(function () {
+    function document_ready() {
         $('#dt_basic').DataTable({
             processing: true,
             serverSide: true,
@@ -84,6 +84,6 @@
                 @endforeach
             ]
         });
-    });
-</script>
+    }
+    </script>
 </html>

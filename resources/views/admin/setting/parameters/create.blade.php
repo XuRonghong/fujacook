@@ -54,7 +54,7 @@
                             <hr>
                             <div class="card-body">
                                 <div class="form-group m-b-0 text-left">
-                                    <a type="button" href="{{data_get($data['route_url'], 'global_keyword')}}" class="btn btn-success waves-effect waves-light" style="text-align: left">Search record</a>
+                                    <a type="button" href="{{data_get($data['route_url'], 'global_keyword')}}" class="btn btn-secondary waves-effect waves-light" style="text-align: left">Search record</a>
                                 </div>
                                 <div class="form-group m-b-0 text-right">
                                     @if( !data_get($data, 'Disable'))
@@ -82,7 +82,7 @@
     @include('admin.js.summernote2019')
     <!-- end -->
     <script type="text/javascript">
-        $(document).ready(function () {
+        function document_ready() {
 
             // 只顯示詳情不開啟編輯功能
             let disable = '{{data_get($data, 'Disable')}}'
@@ -112,7 +112,7 @@
                 //寫入資料庫
                 let url = '{{data_get($data['route_url'], "store")}}'
                 let self = document.querySelector('#sample_form')
-                let data = prop_fromData_fun(self)
+                let data = prop_fromData_fun(self, {'content': $('#content').summernote('code')})
 
                 ajax(url, data, 'POST')
             })
@@ -125,10 +125,10 @@
                 let id = $(this).data('id')
                 let url = '{{data_get($data['route_url'], "update")}}'.replace('-10', id)  //-10代替字元為id
                 let self = document.querySelector('#sample_form')
-                let data = prop_fromData_fun(self)
+                let data = prop_fromData_fun(self, {'content': $('#content').summernote('code')})
 
                 ajax(url, data, 'POST')
             })
-        })
+        }
     </script>
 @endsection

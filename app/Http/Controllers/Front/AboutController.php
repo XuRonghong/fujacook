@@ -23,6 +23,11 @@ class AboutController extends Controller
     {
         $data = [];
         $data['parameters'] = $this->getParameters();
+        $collect = array_get($data['parameters'], 'external_link');
+        $data['parameters']['external_link'] = $collect->map(function ($item, $key){
+            $item->content = json_decode($item->content);
+            return $item;
+        });
         //
         $data['navbar'] = $this->repository->getOrmByType('navbar.home');
         $data['navbar2'] = $this->repository->getOrmByType('navbar.about');
@@ -55,6 +60,9 @@ class AboutController extends Controller
             'meta_title' => trans('front.about.title'),
             'meta_keyword' => json_decode( Setting::query()->where('name', 'meta_keyword')->first()->content ),
             'meta_description' => json_decode( Setting::query()->where('name', 'meta_description')->first()->content ),
+            'external_link' => Setting::query()->where('type', 'external_link')
+                ->orderBy('rank', 'asc')
+                ->get(['type','name','content','value']),
         ];
     }
 }

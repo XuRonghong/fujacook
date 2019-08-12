@@ -158,7 +158,7 @@
     {{--@include('_web._js.summernote')--}}
     <!-- end -->
 <script>
-    $(document).ready(function () {
+    function document_ready() {
 
         data_table = $('#data_table');
         let table = data_table.dataTable({
@@ -343,6 +343,6 @@
             })
         });
 
-    });
-</script>
+    }
+    </script>
 @endsection

@@ -35,7 +35,7 @@
 
 @section('inline-js')
     <script>
-        $(document).ready(function () {
+        function document_ready() {
 
             // loading .....
             run_waitMe($('.waitme'));
@@ -159,7 +159,7 @@
                 url = '{{data_get($data['route_url'], "update")}}'.replace('-10', id)
                 ajaxOpen(url, {open: 'change', doValidate: 0}, 'POST', table)
             })
-        });
+        }
     </script>
 @endsection
 <!-- ================== /inline-js ================== -->

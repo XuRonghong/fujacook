@@ -97,7 +97,7 @@
 
 @section('inline-js')
     <script type="text/javascript">
-        $(document).ready(function () {
+        function document_ready() {
 
             // 只顯示詳情不開啟編輯功能
             let disable = '{{data_get($data, 'Disable')}}'
@@ -110,6 +110,6 @@
                 e.preventDefault()
                 history.back()
             })
-        })
+        }
     </script>
 @endsection

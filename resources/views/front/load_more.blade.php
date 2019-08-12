@@ -49,7 +49,7 @@
                 load_data(id, _token);
             });
 
-        });
+        }
     </script>
 
 @endsection

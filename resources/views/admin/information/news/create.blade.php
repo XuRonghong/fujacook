@@ -92,7 +92,7 @@
     @include('admin.js.summernote2019')
     <!-- end -->
     <script type="text/javascript">
-        $(document).ready(function () {
+        function document_ready() {
 
             // 只顯示詳情不開啟編輯功能
             let disable = '{{data_get($data, 'Disable')}}'
@@ -145,6 +145,6 @@
 
                 ajax(url, data, 'POST')
             })
-        })
+        }
     </script>
 @endsection

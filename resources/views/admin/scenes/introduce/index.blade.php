@@ -35,7 +35,7 @@
 
 @section('inline-js')
     <script>
-        $(document).ready(function () {
+        function document_ready() {
             // loading .....
             run_waitMe($('.waitme'));
             let data_table = $('#data_table');
@@ -203,6 +203,6 @@
                 //
                 ajaxOpen(url, data, 'POST', table)
             });
-        })
+        }
     </script>
 @endsection

@@ -1,10 +1,4 @@
 <script>
-    //// windows load ready ////
-    (function () {
-        toastr_options()
-
-    })()
-
     // none, bounce, rotateplane, stretch, orbit,
     // roundBounce, win8, win8_linear or ios
     function run_waitMe(selector='body', effect='roundBounce')

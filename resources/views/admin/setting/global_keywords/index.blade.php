@@ -35,7 +35,7 @@
 
 @section('inline-js')
     <script>
-        $(document).ready(function () {
+        function document_ready() {
             // loading .....
             run_waitMe($('.waitme'));
             let data_table = $('#data_table');
@@ -161,6 +161,6 @@
                 };
                 doDelete(url, data, table)          // from layout.master
             });
-        });
+        }
     </script>
 @endsection
