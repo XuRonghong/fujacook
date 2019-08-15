@@ -60,6 +60,8 @@ class ProductRepository extends Repository
                     'rank' => 5,
                 ]);
                 $attributes['price'] = data_get($attributes, 'price') ?: '100';
+                $attributes['product_description'] = htmlspecialchars( data_get($attributes, 'product_description') ?: '' );
+                $attributes['service_description'] = htmlspecialchars( data_get($attributes, 'service_description') ?: '' );
             }
             if ($from=='product_combinations') {
                 $attributes = array_merge($attributes, [
@@ -86,6 +88,13 @@ class ProductRepository extends Repository
             if (isset($attributes['open']) && isset($attributes['doValidate'])) {
                 $scene = $this->model->find($id);
                 $attributes['open'] = ($attributes['open'] == "change") ? !$scene->open : $scene->open;
+            }
+            //
+            if (isset($attributes['product_description']) /*&& isset($attributes['doValidate'])*/) {
+                $attributes['product_description'] = htmlspecialchars( $attributes['product_description']);
+            }
+            if (isset($attributes['service_description']) /*&& isset($attributes['doValidate'])*/) {
+                $attributes['service_description'] = htmlspecialchars( $attributes['service_description']);
             }
 
             return parent::update($attributes, $id);

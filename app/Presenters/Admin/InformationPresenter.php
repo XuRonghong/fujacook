@@ -52,7 +52,7 @@ class InformationPresenter extends Presenter
     // trans each one data for output view from news.
     function tranOne($data, $other='')
     {
-        $data = parent::transOne($data);
+        $data = parent::transOne($data, 'strip_tags');
         //
         if ($other){
             $data['options'] = $this->getSelectOption($other, $data['type']);

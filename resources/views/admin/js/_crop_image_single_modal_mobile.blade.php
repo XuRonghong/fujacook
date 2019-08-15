@@ -31,7 +31,7 @@
 </div>
 <script src="/web_assets/v1/js/plugins/cropper/cropper.min.js"></script>
 <script>
-    function document_ready() {
+    $(document).ready(function() {
         $(".btn-image-mobile-modal").click(function () {
             $('#image-mobile-form').modal();
         })

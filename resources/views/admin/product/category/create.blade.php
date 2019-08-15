@@ -129,10 +129,6 @@
         var modal = $('#manage-modal')
         current_modal = modal.find('.messageInfo-modal')
 
-        //文字編輯器
-        // do_textarea_summernote_fun( $('#detail'))
-        // do_textarea_summernote_fun( $('#detail'))
-
         //返回上一頁
         $(".btn-cancel").click(function (e) {
             e.preventDefault()

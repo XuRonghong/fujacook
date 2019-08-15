@@ -73,6 +73,9 @@ class Kernel extends HttpKernel
         'CheckSuperLogin' => \App\Http\Middleware\CheckSuperLogin::class,
         'CheckAdmin' => \App\Http\Middleware\CheckAdmin::class,
         'LoginThrottle' => \App\Http\Middleware\LoginThrottle::class,
+
+        //
+        'force-json' => \App\Http\Middleware\ForceJson::class,
     ];
 
     /**

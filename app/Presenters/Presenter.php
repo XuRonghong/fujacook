@@ -82,7 +82,33 @@ abstract class Presenter
     {
         //從資料串裡依據file_id找到image
         $data->image = $data->image ? array($data->image) : $this->transFileIdtoImage($data->file_id);
-        if ($other){ }
+        if ($other=='strip_tags'){
+            //特別處理使文字方塊顯示出來
+            if (isset($data['product_description'])) {
+                $data['product_description'] = strip_tags( htmlspecialchars_decode($data['product_description']));
+            }
+            if (isset($data['service_description'])) {
+                $data['service_description'] = strip_tags( htmlspecialchars_decode($data['service_description']));
+            }
+            if (isset($data['customerservice_note'])) {
+                $data['customerservice_note'] = strip_tags( htmlspecialchars_decode($data['customerservice_note']));
+            }
+            if (isset($data['shipping_note'])) {
+                $data['shipping_note'] = strip_tags( htmlspecialchars_decode($data['shipping_note']));
+            }
+            if (isset($data['pay_note'])) {
+                $data['pay_note'] = strip_tags( htmlspecialchars_decode($data['pay_note']));
+            }
+            if (isset($data['remarks'])) {
+                $data['remarks'] = strip_tags( htmlspecialchars_decode($data['remarks']));
+            }
+            if (isset($data['content'])) {
+                $data['content'] = strip_tags( htmlspecialchars_decode($data['content']));
+            }
+            if (isset($data['detail'])) {
+                $data['detail'] = strip_tags( htmlspecialchars_decode($data['detail']));
+            }
+        }
         return $data;
     }
 
@@ -402,7 +428,7 @@ abstract class Presenter
             case '0': $btn .= '<button class="btn btn-xs btn-primary btn-open">'.trans('options.panel.status.close').'</button>'; break;
             default: $btn .= trans('options.panel.status.not'); //"無功能";
         }
-        $btn .= '<button class="btn btn-xs btn-show" title="'.trans('options.panel.show').'"><i class="fa fa-book" aria-hidden="true"></i></button>';
+        $btn .= '<button class="btn btn-xs btn-show btn-info" title="'.trans('options.panel.show').'" data-toggle="modal" data-target="#createmodel"><i class="fa fa-book" aria-hidden="true"></i></button>';
         $btn .= '<button class="btn btn-xs btn-edit" title="'.trans('options.panel.edit').'"><i class="fa fa-pencil-alt" aria-hidden="true"></i></button>';
         $btn .= '<button class="btn btn-xs btn-del pull-right" title="'.trans('options.panel.del').'"><i class="fa fa-trash" aria-hidden="true"></i></button>';
         return $btn;

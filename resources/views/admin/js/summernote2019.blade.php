@@ -38,13 +38,13 @@
             fontSizes: ['8', '9', '10', '11', '12', '14', '18', '24', '36', '48' , '64', '82', '150'],
             toolbar: [
                 // [groupName, [list of button]]
+                ['view', ['codeview', 'fullscreen', ]],
                 ['style', ['bold', 'italic', 'underline', 'clear']],
                 ['font', ['strikethrough', 'superscript', 'subscript']],
                 ['fontsize', ['fontsize']],
                 ['color', ['color']],
                 ['para', ['ul', 'ol', 'paragraph']],
                 ['height', ['height']],
-                ['view', ['fullscreen', 'codeview']],
             ],
         })
     }

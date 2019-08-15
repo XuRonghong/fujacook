@@ -35,7 +35,7 @@
             "closeButton": false,
             "debug": true,
             "newestOnTop": false,
-            "progressBar": false,
+            "progressBar": true,
             "positionClass": "toast-top-center",
             "preventDuplicates": false,
             "onclick": null,
@@ -105,7 +105,7 @@
 {{--                    Swal.fire("{{trans('web_alert.notice')}}", data.message, "success");--}}
 //                     setTimeout(function () {
                     DOM.api().ajax.reload(null, false);
-                    toastr.success(data.message, "{{trans('web_alert.notice')}}").css("width","360px")
+                    {{--toastr.success(data.message, "{{trans('web_alert.notice')}}").css("width","360px")--}}
                         // table.api().ajax.reload(null, false);
                     // }, 100);
                 } else {
@@ -119,6 +119,36 @@
                     JSON.stringify(err.responseJSON.message)+"<br>"+
                     JSON.stringify(err.responseJSON.errors),
                     "error");
+            }
+        })
+    }
+
+
+    function ajaxModal(url='', data={}, method='GET')
+    {
+        $.ajax({
+            headers: { 'X-CSRF-TOKEN': '{{csrf_token()}}' },
+            url: url,
+            method: method,
+            data: data,
+            success: function (data) {
+                $('#createModalLabel').html(data.Title)
+                for (var prop in data['arr']) {
+                    console.log(prop + ':' + data['arr'][prop]);
+                    $('.'+prop).val(data['arr'][prop])
+                    $('.'+prop).html(data['arr'][prop])
+                }
+                for(var val in data['arr']['image']) {
+                    let html = '<img id="img1" src="'+data['arr']['image'][val]+'" style="height:100px" alt="">'
+                    $('.images').html(html)
+                }
+            },
+            error: function (err) {
+                console.log(err.responseJSON)
+                Swal.fire("{{trans('web_alert.error')}}"+err.status,
+                    JSON.stringify(err.responseJSON.message)+"<br>"+
+                    JSON.stringify(err.responseJSON.errors)
+                    ,"error");
             }
         })
     }

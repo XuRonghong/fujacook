@@ -94,10 +94,10 @@
 
     <script>
         //// windows load ready ////
-        (function () {
+        $(document).ready(function () {
             toastr_options()
             document_ready()
-        })()
+        })
     </script>
 </body>
 </html>

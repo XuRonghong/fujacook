@@ -108,7 +108,8 @@ class ProductController extends Controller
         //轉換出顯示數據
         $data['arr'] = $this->presenter->transOne($data['arr'], 'product_cate');
 
-        return $this->presenter->responseJson($data, 'create');
+//        return $this->presenter->responseJson($data, 'create');
+        return $this->presenter->responseJson($data, 'ajax', 200);
     }
 
     /**

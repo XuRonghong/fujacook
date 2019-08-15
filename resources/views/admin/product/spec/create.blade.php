@@ -135,7 +135,6 @@
         if (disable){
             $('form#sample_form input[type=text]').attr('disabled','disabled')
             $('form select').attr('disabled','disabled')
-            //$('form #detail').summernote('disable');        //編輯器關閉
             $('form .image-del').css("visibility","hidden");    //刪除區塊隱藏
             $('form #Image').css("display","none");     //加載圖片關閉
             //唯讀

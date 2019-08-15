@@ -64,7 +64,7 @@ class ScenesPresenter extends Presenter
     // trans each one data for output view from scenes.
     public function transOne($data, $other=0)
     {
-        $data = parent::transOne($data);
+        $data = parent::transOne($data, 'strip_tags');
 
         //get option for select with scenes type
         if ($other){

@@ -103,6 +103,8 @@ class OrderPresenter extends Presenter
     // trans each one data for output view from create.
     public function transOne($data, $model=null)
     {
+        $data = parent::transOne($data, 'strip_tags');
+
         //get option for select with
         if ($model){
             if ($model->getTable() == 'order_details') {

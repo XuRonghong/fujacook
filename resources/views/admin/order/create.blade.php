@@ -190,17 +190,23 @@
     <script type="text/javascript">
     function document_ready() {
 
+        //文字編輯器
+        do_textarea_summernote_fun( $('#detail'))
+        do_textarea_summernote_fun( $('#service_description'))
+        do_textarea_summernote_fun( $('#customerservice_note'))
+
         // 只顯示詳情不開啟編輯功能
         let disable = '{{data_get($data, 'Disable')}}'
         if (disable){
             $('form#sample_form input[type=text]').attr('disabled','disabled')
             // $('form select').attr('disabled','disabled')
-            $('form #detail').summernote('disable')        //編輯器關閉
-            $('form #service_description').summernote('disable')        //編輯器關閉
-            $('form #customerservice_note').summernote('disable')        //編輯器關閉
             // $('form .image-del').css("visibility","hidden")    //刪除區塊隱藏
             // $('form #Image').css("display","none")     //加載圖片關閉
             $('form [type=date]').attr('disabled','disabled')    //加載圖片關閉
+            $('form #detail').summernote('disable')        //編輯器關閉
+            $('form #service_description').summernote('disable')        //編輯器關閉
+            $('form #customerservice_note').summernote('disable')        //編輯器關閉
+            $('.note-editable .note-toolbar').parent('div').hide();     //summernote toolbar hide
             //唯讀
             $('form .btn-image-modal ,form span').hide()
         } else { $('#img1').hide(); }
@@ -208,11 +214,6 @@
         //
         var modal = $('#manage-modal')
         current_modal = modal.find('.messageInfo-modal')
-
-        //文字編輯器
-        do_textarea_summernote_fun( $('#detail'))
-        do_textarea_summernote_fun( $('#service_description'))
-        do_textarea_summernote_fun( $('#customerservice_note'))
 
         //返回上一頁
         $(".btn-cancel").click(function (e) {

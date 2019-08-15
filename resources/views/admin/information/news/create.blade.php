@@ -94,6 +94,10 @@
     <script type="text/javascript">
         function document_ready() {
 
+            //文字編輯器
+            do_textarea_summernote_fun( $('#detail'))
+            // do_textarea_summernote_fun( $('#detail'))
+
             // 只顯示詳情不開啟編輯功能
             let disable = '{{data_get($data, 'Disable')}}'
             if (disable){
@@ -110,10 +114,6 @@
             // 為了做圖片編輯
             var modal = $('#manage-modal')
             current_modal = modal.find('.messageInfo-modal')
-
-            //文字編輯器
-            do_textarea_summernote_fun( $('#detail'))
-            // do_textarea_summernote_fun( $('#detail'))
 
             //返回上一頁
             $(".btn-cancel").click(function (e) {

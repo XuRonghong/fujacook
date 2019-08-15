@@ -31,7 +31,7 @@
 </div>
 <script src="{{url('js/cropper.min.js')}}"></script>
 <script>
-    function document_ready() {
+    $(document).ready(function() {
         $(".btn-image-modal").click(function () {
             $('#image-form').modal();
         })
