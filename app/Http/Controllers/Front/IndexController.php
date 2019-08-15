@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\FuncController;
 use App\Presenters\Front\ScenesPresenter;
 use App\Repositories\Front\ScenesRepository;
 use App\Setting;
@@ -22,6 +23,9 @@ class IndexController extends Controller
 
     function index ()
     {
+        //紀錄登入log
+        FuncController::addLog('Front for Visitor', 0);
+
         $data = [];
         $data['parameters'] = $this->getParameters();
         $collect = array_get($data['parameters'], 'external_link');
