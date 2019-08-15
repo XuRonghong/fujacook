@@ -24,7 +24,7 @@ class IndexController extends Controller
     function index ()
     {
         //紀錄登入log
-        FuncController::addLog('Front for Visitor', 0);
+        FuncController::addLog('Front for Browser or Visitor', 0);
 
         $data = [];
         $data['parameters'] = $this->getParameters();

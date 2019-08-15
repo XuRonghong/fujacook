@@ -216,7 +216,7 @@ class FuncController
     {
         $log_login = new LogLogin();
         $log_login->user_id = $user_id; //session( 'store.iId', 0 );
-        $log_login->user_type = Admin::query()->find($user_id)->type;
+        $log_login->user_type = isset(Admin::query()->find($user_id)->type) ?: null;
         $log_login->action = $action;
         $log_login->ip = Request::ip();
         $log_login->save();
