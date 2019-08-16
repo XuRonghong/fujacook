@@ -16,7 +16,9 @@
                     @forelse(data_get($data, 'slider', []) as $key => $var)
                         <div class="carousel-item <?php if ($i==1){ ?> active <?php } ?>">
                             <div class="w100-bg type{{$i}}">
-                                <img src="{{data_get($var, 'image', array_first($var->images))}}" alt="{{data_get($var, 'summary')}}">
+                                <a href="{{data_get($var, 'url')}}">
+                                    <img src="{{data_get($var, 'image', array_first($var->images))}}" alt="{{data_get($var, 'summary')}}">
+                                </a>
                             </div>
                         </div>
                         <?php $i++; ?>
@@ -54,11 +56,15 @@
                     @foreach(data_get($data, 'introduce.t01', []) as $key => $var)
                         @if($i%2)
                         <div class="fuja-introduce-left">
-                            <img src="{{data_get($var, 'image', array_first($var->images))}}" alt="{{data_get($var, 'summary')}}">
+                            <a href="{{data_get($var, 'url')}}">
+                                <img src="{{data_get($var, 'image', array_first($var->images))}}" alt="{{data_get($var, 'summary')}}">
+                            </a>
                         </div>
                         @else
                         <div class="fuja-introduce-right">
-                            <img src="{{data_get($var, 'image', array_first($var->images))}}" alt="{{data_get($var, 'summary')}}">
+                            <a href="{{data_get($var, 'url')}}">
+                                <img src="{{data_get($var, 'image', array_first($var->images))}}" alt="{{data_get($var, 'summary')}}">
+                            </a>
                         </div>
                         @endif
                             <?php $i++; ?>
@@ -71,20 +77,30 @@
         @forelse(data_get($data, 'image.section1', []) as $key => $var)
             <section class="fuja-introduce{{ $a[$i++] }}">
                 @if($i!=2+1)
-                <img src="{{data_get($var, 'image', array_first($var->images))}}" alt="{{data_get($var, 'summary')}}">
+                    <img src="{{data_get($var, 'image', array_first($var->images))}}" alt="{{data_get($var, 'summary')}}">
+{{--                    <a href="{{data_get($var, 'url')}}">即食鍋</a>--}}
+{{--                    <a href="{{data_get($var, 'url')}}">即時餐</a>--}}
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ explode(';',data_get($var, 'url'))[0] }}">即食鍋</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ explode(';',data_get($var, 'url'))[1] }}">即時餐</a>
+                        </li>
+                    </ul>
                 @endif
             </section>
         @empty
             <!--鍋子介紹B-->
-            <section class="fuja-introduceB">
-                <img src="{{asset('web0617/img/introduce03.jpg')}}" alt="">
-            </section>
-            <!--鍋子介紹C-->
-            <section class="fuja-introduceC"></section>
-            <!--鍋子介紹D-->
-            <section class="fuja-introduceD">
-                <img src="{{asset('web0617/img/introduce05.jpg')}}" alt="">
-            </section>
+{{--            <section class="fuja-introduceB">--}}
+{{--                <img src="{{asset('web0617/img/introduce03.jpg')}}" alt="">--}}
+{{--            </section>--}}
+{{--            <!--鍋子介紹C-->--}}
+{{--            <section class="fuja-introduceC"></section>--}}
+{{--            <!--鍋子介紹D-->--}}
+{{--            <section class="fuja-introduceD">--}}
+{{--                <img src="{{asset('web0617/img/introduce05.jpg')}}" alt="">--}}
+{{--            </section>--}}
         @endforelse
 
 
@@ -105,14 +121,14 @@
                         </a>
                     </div>
                 @empty
-                    <div class="E-block">
-                        <div class="E-img-l"></div>
-                        <a href="#" class="E-btn"><img src="{{asset('/web0617/img/E-btn-left.png')}}" alt="即食鍋"></a>
-                    </div>
-                    <div class="E-block">
-                        <div class="E-img-r"></div>
-                        <a href="#" class="E-btn"><img src="{{asset('/web0617/img/E-btn-right.png')}}" alt="即時餐"></a>
-                    </div>
+{{--                    <div class="E-block">--}}
+{{--                        <div class="E-img-l"></div>--}}
+{{--                        <a href="#" class="E-btn"><img src="{{asset('/web0617/img/E-btn-left.png')}}" alt="即食鍋"></a>--}}
+{{--                    </div>--}}
+{{--                    <div class="E-block">--}}
+{{--                        <div class="E-img-r"></div>--}}
+{{--                        <a href="#" class="E-btn"><img src="{{asset('/web0617/img/E-btn-right.png')}}" alt="即時餐"></a>--}}
+{{--                    </div>--}}
                 @endforelse
             </section>
 @endsection
