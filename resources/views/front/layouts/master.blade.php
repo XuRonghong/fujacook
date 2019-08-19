@@ -48,7 +48,7 @@
     <style type="text/css">
         .banner1 {
             width: 1280px;
-            height: 600px;
+            height: 400px;
         }
     </style>
 
