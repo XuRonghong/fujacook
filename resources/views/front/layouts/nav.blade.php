@@ -3,7 +3,7 @@
 <div class="fuja-nav">
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light">
-            <a class="navbar-brand" href="https://www.fujacook.com/">
+            <a class="navbar-brand" href="">
                 <img src="{{asset('/web0617/img/logo.png')}}" alt="FUJACOOK即食鍋">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -16,27 +16,27 @@
                             <a class="nav-link {{data_get($var, 'style')}}" href="{{env('APP_URL') . data_get($var, 'url')}}">{{data_get($var, 'summary')}}</a>
                         </li>
                     @empty
-                        <li class="nav-item active">
-                            <a class="nav-link" href="https://www.fujacook.com/">首頁</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">關於FUJACOOK</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">媒體報導</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">即食鍋</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">即時餐</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">最新消息</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">聯繫我們</a>
-                        </li>
+{{--                        <li class="nav-item active">--}}
+{{--                            <a class="nav-link" href="https://www.fujacook.com/">首頁</a>--}}
+{{--                        </li>--}}
+{{--                        <li class="nav-item">--}}
+{{--                            <a class="nav-link" href="#">關於FUJACOOK</a>--}}
+{{--                        </li>--}}
+{{--                        <li class="nav-item">--}}
+{{--                            <a class="nav-link" href="#">媒體報導</a>--}}
+{{--                        </li>--}}
+{{--                        <li class="nav-item">--}}
+{{--                            <a class="nav-link" href="#">即食鍋</a>--}}
+{{--                        </li>--}}
+{{--                        <li class="nav-item">--}}
+{{--                            <a class="nav-link" href="#">即時餐</a>--}}
+{{--                        </li>--}}
+{{--                        <li class="nav-item">--}}
+{{--                            <a class="nav-link" href="#">最新消息</a>--}}
+{{--                        </li>--}}
+{{--                        <li class="nav-item">--}}
+{{--                            <a class="nav-link" href="#">聯繫我們</a>--}}
+{{--                        </li>--}}
                     @endforelse
                 </ul>
 
@@ -47,12 +47,12 @@
                         @forelse(array_get($data, 'parameters.external_link') as $var)
                             <li><a href="{{data_get($var,'content','#')}}"><i class="{{data_get($var,'value')}}"></i><p>{{data_get($var,'name')}}</p></a></li>
                         @empty
-                            <li><a href="https://twitter.com/FUJACOOK2"><i class="fa fa-twitter-square"></i><p>Twitter</p></a></li>
-                            <li><a href=""><i class="fa fa-weixin"></i><p>Wechat</p></a></li>
-                            <li><a href="https://www.facebook.com/cook.fuja.5"><i class="fa fa-facebook-square"></i><p>Facebook</p></a></li>
-                            <li><a href="https://www.instagram.com/FUJACOOK/"><i class="fa fa-instagram"></i><p>Instagram</p></a></li>
-                            <li><a href=""><i class="line"></i><p>Line</p></a></li>
-                            <li><a href=""><i class="fa fa-youtube"></i><p>Youtube</p></a></li>
+{{--                            <li><a href="https://twitter.com/FUJACOOK2"><i class="fa fa-twitter-square"></i><p>Twitter</p></a></li>--}}
+{{--                            <li><a href=""><i class="fa fa-weixin"></i><p>Wechat</p></a></li>--}}
+{{--                            <li><a href="https://www.facebook.com/cook.fuja.5"><i class="fa fa-facebook-square"></i><p>Facebook</p></a></li>--}}
+{{--                            <li><a href="https://www.instagram.com/FUJACOOK/"><i class="fa fa-instagram"></i><p>Instagram</p></a></li>--}}
+{{--                            <li><a href=""><i class="line"></i><p>Line</p></a></li>--}}
+{{--                            <li><a href=""><i class="fa fa-youtube"></i><p>Youtube</p></a></li>--}}
                         @endforelse
                         @if (Route::has('login'))
                             @if(Auth::guard('web')->check())

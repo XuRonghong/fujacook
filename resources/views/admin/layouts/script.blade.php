@@ -90,7 +90,7 @@
 
     function ajaxOpen(url='', data={}, method='POST', DOM=null)
     {
-        toastr.info('Wait me ...').css("width","240px")
+        toastr.info("", "Please wait me ... Thank you.", { timeOut: 2200 }).css("width","360px")
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': '{{csrf_token()}}'
@@ -105,6 +105,7 @@
 {{--                    Swal.fire("{{trans('web_alert.notice')}}", data.message, "success");--}}
 //                     setTimeout(function () {
                     DOM.api().ajax.reload(null, false);
+                    toastr.success("{{trans('web_message.add.success')}}", "{{trans('web_alert.notice')}}", { timeOut: 1200 }).css("width","360px")
                     {{--toastr.success(data.message, "{{trans('web_alert.notice')}}").css("width","360px")--}}
                         // table.api().ajax.reload(null, false);
                     // }, 100);

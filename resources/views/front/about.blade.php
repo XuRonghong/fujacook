@@ -64,33 +64,33 @@
                                 <a class="nav-link {{data_get($var, 'style')}}" href="{{env('APP_URL') . data_get($var, 'url')}}">{{data_get($var, 'summary')}}</a>
                             </li>
                         @empty
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">首頁</a>
-                        </li>
+{{--                        <li class="nav-item active">--}}
+{{--                            <a class="nav-link" href="#">首頁</a>--}}
+{{--                        </li>--}}
                         @endforelse
                     </ul>
                     <ul class="social-media">
                         @forelse(array_get($data, 'parameters.external_link') as $var)
                             <li><a href="{{data_get($var,'content')}}"><i class="{{data_get($var,'value')}}"></i><p>{{data_get($var,'name')}}</p></a></li>
                         @empty
-                            <li><a href="https://twitter.com/FUJACOOK2"><i class="fab fa-twitter-square"></i>
-                                    <p>Twitter</p>
-                                </a></li>
-                            <li><a href=""><i class="fab fa-weixin"></i>
-                                    <p>Wechat</p>
-                                </a></li>
-                            <li><a href="https://www.facebook.com/cook.fuja.5"><i class="fab fa-facebook-square"></i>
-                                    <p>Facebook</p>
-                                </a></li>
-                            <li><a href="https://www.instagram.com/FUJACOOK/"><i class="fab fa-instagram"></i>
-                                    <p>Instagram</p>
-                                </a></li>
-                            <li><a href=""><i class="fab fa-line"></i>
-                                    <p>Line</p>
-                                </a></li>
-                            <li><a href=""><i class="fab fa-youtube"></i>
-                                    <p>Youtube</p>
-                                </a></li>
+{{--                            <li><a href="https://twitter.com/FUJACOOK2"><i class="fab fa-twitter-square"></i>--}}
+{{--                                    <p>Twitter</p>--}}
+{{--                                </a></li>--}}
+{{--                            <li><a href=""><i class="fab fa-weixin"></i>--}}
+{{--                                    <p>Wechat</p>--}}
+{{--                                </a></li>--}}
+{{--                            <li><a href="https://www.facebook.com/cook.fuja.5"><i class="fab fa-facebook-square"></i>--}}
+{{--                                    <p>Facebook</p>--}}
+{{--                                </a></li>--}}
+{{--                            <li><a href="https://www.instagram.com/FUJACOOK/"><i class="fab fa-instagram"></i>--}}
+{{--                                    <p>Instagram</p>--}}
+{{--                                </a></li>--}}
+{{--                            <li><a href=""><i class="fab fa-line"></i>--}}
+{{--                                    <p>Line</p>--}}
+{{--                                </a></li>--}}
+{{--                            <li><a href=""><i class="fab fa-youtube"></i>--}}
+{{--                                    <p>Youtube</p>--}}
+{{--                                </a></li>--}}
                         @endforelse
                     </ul>
                 </div>
@@ -120,31 +120,31 @@
                     </li>
                     <?php $i++; ?>
                 @empty
-                    <li data-tab-target="content">
-                        <span class="number oswald">.01</span>
-                        <span class="center">創辦人介紹</span>
-                        <i class="fas fa-lg fa-chevron-down"></i>
-                    </li>
-                    <li data-tab-target="content">
-                        <span class="number oswald">.02</span>
-                        <span class="center">專利獎項</span>
-                        <i class="fas fa-lg fa-chevron-down"></i>
-                    </li>
-                    <li data-tab-target="content" class="">
-                        <span class="number oswald">.03</span>
-                        <span class="center">研發理念</span>
-                        <i class="fas fa-lg fa-chevron-down"></i>
-                    </li>
-                    <li data-tab-target="content" class="">
-                        <span class="number oswald">.04</span>
-                        <span class="center">品牌沿革</span>
-                        <i class="fas fa-lg fa-chevron-down"></i>
-                    </li>
-                    <li data-tab-target="content" class="">
-                        <span class="number oswald">.05</span>
-                        <span class="center">核心價值</span>
-                        <i class="fas fa-lg fa-chevron-down"></i>
-                    </li>
+{{--                    <li data-tab-target="content">--}}
+{{--                        <span class="number oswald">.01</span>--}}
+{{--                        <span class="center">創辦人介紹</span>--}}
+{{--                        <i class="fas fa-lg fa-chevron-down"></i>--}}
+{{--                    </li>--}}
+{{--                    <li data-tab-target="content">--}}
+{{--                        <span class="number oswald">.02</span>--}}
+{{--                        <span class="center">專利獎項</span>--}}
+{{--                        <i class="fas fa-lg fa-chevron-down"></i>--}}
+{{--                    </li>--}}
+{{--                    <li data-tab-target="content" class="">--}}
+{{--                        <span class="number oswald">.03</span>--}}
+{{--                        <span class="center">研發理念</span>--}}
+{{--                        <i class="fas fa-lg fa-chevron-down"></i>--}}
+{{--                    </li>--}}
+{{--                    <li data-tab-target="content" class="">--}}
+{{--                        <span class="number oswald">.04</span>--}}
+{{--                        <span class="center">品牌沿革</span>--}}
+{{--                        <i class="fas fa-lg fa-chevron-down"></i>--}}
+{{--                    </li>--}}
+{{--                    <li data-tab-target="content" class="">--}}
+{{--                        <span class="number oswald">.05</span>--}}
+{{--                        <span class="center">核心價值</span>--}}
+{{--                        <i class="fas fa-lg fa-chevron-down"></i>--}}
+{{--                    </li>--}}
                 @endforelse
                 </ul>
             </div>
@@ -181,26 +181,26 @@
                                 @forelse(data_get($data, 'introduce.t01', []) as $key => $var)
                                     {!! data_get($var, 'detail') !!}
                                 @empty
-                                        <h2><span>即食餐鍋創辦人 陳献楨 先生</span></h2>
-                                        <div class="text-area-inner">
-                                            <li class="" data-tab-target="content">
-                                                <i class="fa fa-caret-right fa-3x"></i>
-                                                <p>富甲一方國際集團 創辦人</p>
-                                                <i class="fa fa-caret-right fa-3x"></i>
-                                                <p>何首烏皇帝雞餐飲集團創辦人</p>
-                                                <i class="fa fa-caret-right fa-3x"></i>
-                                                <p>台灣區南投同鄉會聯合總會第三屆總會長</p>
-                                                <p>（第一、二屆總會長為江丙坤先生）</p>
-                                                <i class="fa fa-caret-right fa-3x"></i>
-                                                <p>新北市後備憲兵荷松協會理事長</p>
-                                                <i class="fa fa-caret-right fa-3x"></i>
-                                                <p>2017世界跆拳道錦標賽 - 中華台北總領隊</p>
-                                                <i class="fa fa-caret-right fa-3x"></i>
-                                                <p>新北市道德慈善會創會顧問</p>
-                                                <i class="fa fa-caret-right fa-3x"></i>
-                                                <p>新北市政府市政顧問</p>
-                                            </li>
-                                        </div>
+{{--                                        <h2><span>即食餐鍋創辦人 陳献楨 先生</span></h2>--}}
+{{--                                        <div class="text-area-inner">--}}
+{{--                                            <li class="" data-tab-target="content">--}}
+{{--                                                <i class="fa fa-caret-right fa-3x"></i>--}}
+{{--                                                <p>富甲一方國際集團 創辦人</p>--}}
+{{--                                                <i class="fa fa-caret-right fa-3x"></i>--}}
+{{--                                                <p>何首烏皇帝雞餐飲集團創辦人</p>--}}
+{{--                                                <i class="fa fa-caret-right fa-3x"></i>--}}
+{{--                                                <p>台灣區南投同鄉會聯合總會第三屆總會長</p>--}}
+{{--                                                <p>（第一、二屆總會長為江丙坤先生）</p>--}}
+{{--                                                <i class="fa fa-caret-right fa-3x"></i>--}}
+{{--                                                <p>新北市後備憲兵荷松協會理事長</p>--}}
+{{--                                                <i class="fa fa-caret-right fa-3x"></i>--}}
+{{--                                                <p>2017世界跆拳道錦標賽 - 中華台北總領隊</p>--}}
+{{--                                                <i class="fa fa-caret-right fa-3x"></i>--}}
+{{--                                                <p>新北市道德慈善會創會顧問</p>--}}
+{{--                                                <i class="fa fa-caret-right fa-3x"></i>--}}
+{{--                                                <p>新北市政府市政顧問</p>--}}
+{{--                                            </li>--}}
+{{--                                        </div>--}}
                                 @endforelse
                             </div>
                         </div>
@@ -689,17 +689,17 @@
                                      style="width: 50%; margin-left:23.5%;margin-top: 5%">
                             </div>
                         @empty
-                            <div class="text-area-inner">
-                                <li class="" data-tab-target="content">
-                                    <p>過去很多的鍋子，便利性不是很高，很多的吃法不是那麼健康，於是有了<br>
-                                        改良的念頭，考量了健康與便利性，將原本圓形鍋子，改良成了方形利用<br>
-                                        鴛鴦鍋的概念，從鍋子中間分成一半，變成前後深淺鍋的形式，並改良成<br>
-                                        不沾鍋材質，讓淺鍋的能夠煎食，不用使用油就可以將食物煮熟面積也比<br>
-                                        較大，後鍋可以煮湯並蒸食，不只改變大眾飲食的習慣，也讓更多人能夠<br>
-                                        節省一般做菜所耗費的時間，徹底解決大眾飲食一條龍的解決方案。</p>
-                                </li>
-                                <img src="./Fujacook/img/研發理念.jpg" alt="研發理念" style="width: 50%; margin-left:23.5%;margin-top: 5%">
-                            </div>
+{{--                            <div class="text-area-inner">--}}
+{{--                                <li class="" data-tab-target="content">--}}
+{{--                                    <p>過去很多的鍋子，便利性不是很高，很多的吃法不是那麼健康，於是有了<br>--}}
+{{--                                        改良的念頭，考量了健康與便利性，將原本圓形鍋子，改良成了方形利用<br>--}}
+{{--                                        鴛鴦鍋的概念，從鍋子中間分成一半，變成前後深淺鍋的形式，並改良成<br>--}}
+{{--                                        不沾鍋材質，讓淺鍋的能夠煎食，不用使用油就可以將食物煮熟面積也比<br>--}}
+{{--                                        較大，後鍋可以煮湯並蒸食，不只改變大眾飲食的習慣，也讓更多人能夠<br>--}}
+{{--                                        節省一般做菜所耗費的時間，徹底解決大眾飲食一條龍的解決方案。</p>--}}
+{{--                                </li>--}}
+{{--                                <img src="./Fujacook/img/研發理念.jpg" alt="研發理念" style="width: 50%; margin-left:23.5%;margin-top: 5%">--}}
+{{--                            </div>--}}
                         @endforelse
                     </div>
                 </section>
@@ -852,7 +852,7 @@
                             @forelse(data_get($data, 'introduce.t05', []) as $key => $var)
                                 <img src="{{array_first( data_get($var, 'images', data_get($var, 'image', [])) )}}" alt="創辦人介紹" style="width: 100%;">
                             @empty
-                                <img src="{{asset('web0708/Fujacook/img/核心價值.jpg')}}" alt="核心價值" style="width: 100%;">
+{{--                                <img src="{{asset('web0708/Fujacook/img/核心價值.jpg')}}" alt="核心價值" style="width: 100%;">--}}
                             @endforelse
                         </div>
                     </div>
@@ -882,36 +882,36 @@
                     </a>
                 </li>
                 @empty
-                    <li class="lineup-brand">
-                        <img src="./Fujacook/img/即食鍋.jpg" alt="即食鍋">
-                        <div class="img-area">
-                            <i class="sp-only icon icon-btn_arrow_r"></i>
-                        </div>
-                        <a>
-                            <div class="text-area">
-                                <div class="heading_bold number">
-                                    <span class="oswald">即食鍋</span>
-                                </div>
-                                <p>即時 • 歡樂</p>
-                                <i class="pc-only icon icon-btn_arrow_r"></i>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="lineup-brand">
-                        <img src="./Fujacook/img/即食餐.jpg" alt="即食餐">
-                        <div class="img-area">
-                            <i class="sp-only icon icon-btn_arrow_r"></i>
-                        </div>
-                        <a>
-                        <div class="text-area">
-                            <div class="heading_bold number">
-                                <span class="oswald">即食餐</span>
-                            </div>
-                            <p>即時 • 幸福</p>
-                            <i class="pc-only icon icon-btn_arrow_r"></i>
-                        </div>
-                        </a>
-                    </li>
+{{--                    <li class="lineup-brand">--}}
+{{--                        <img src="./Fujacook/img/即食鍋.jpg" alt="即食鍋">--}}
+{{--                        <div class="img-area">--}}
+{{--                            <i class="sp-only icon icon-btn_arrow_r"></i>--}}
+{{--                        </div>--}}
+{{--                        <a>--}}
+{{--                            <div class="text-area">--}}
+{{--                                <div class="heading_bold number">--}}
+{{--                                    <span class="oswald">即食鍋</span>--}}
+{{--                                </div>--}}
+{{--                                <p>即時 • 歡樂</p>--}}
+{{--                                <i class="pc-only icon icon-btn_arrow_r"></i>--}}
+{{--                            </div>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
+{{--                    <li class="lineup-brand">--}}
+{{--                        <img src="./Fujacook/img/即食餐.jpg" alt="即食餐">--}}
+{{--                        <div class="img-area">--}}
+{{--                            <i class="sp-only icon icon-btn_arrow_r"></i>--}}
+{{--                        </div>--}}
+{{--                        <a>--}}
+{{--                        <div class="text-area">--}}
+{{--                            <div class="heading_bold number">--}}
+{{--                                <span class="oswald">即食餐</span>--}}
+{{--                            </div>--}}
+{{--                            <p>即時 • 幸福</p>--}}
+{{--                            <i class="pc-only icon icon-btn_arrow_r"></i>--}}
+{{--                        </div>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
                 @endforelse
             </ul>
         </div>

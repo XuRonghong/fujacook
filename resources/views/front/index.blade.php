@@ -2,7 +2,6 @@
 
 @section('style')
 	<style type="text/css">
-
 	</style>
 @endsection
 
@@ -17,22 +16,22 @@
                         <div class="carousel-item <?php if ($i==1){ ?> active <?php } ?>">
                             <div class="w100-bg type{{$i}}">
                                 <a href="{{data_get($var, 'url')}}">
-                                    <img src="{{data_get($var, 'image', array_first($var->images))}}" alt="{{data_get($var, 'summary')}}">
+                                    <img class="banner1" src="{{data_get($var, 'image', array_first($var->images))}}" alt="{{data_get($var, 'summary')}}">
                                 </a>
                             </div>
                         </div>
                         <?php $i++; ?>
                     @empty
-                        <div class="carousel-item">
-                            <div class="w100-bg type1">
-                                <img src="/web0617/img/slide01.jpg'" alt="...">
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="w100-bg type2">
-                                <img src="/web0617/img/slide02.jpg'" alt="...">
-                            </div>
-                        </div>
+{{--                        <div class="carousel-item">--}}
+{{--                            <div class="w100-bg type1">--}}
+{{--                                <img src="/web0617/img/slide01.jpg'" alt="...">--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="carousel-item">--}}
+{{--                            <div class="w100-bg type2">--}}
+{{--                                <img src="/web0617/img/slide02.jpg'" alt="...">--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
                     @endforelse
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
