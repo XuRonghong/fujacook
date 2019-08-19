@@ -120,9 +120,9 @@
 {{--    @include('admin.js.summernote2019')--}}
     <!-- Public ckeditor -->
     <script type="text/javascript">
-        var ckeditor_baseUrl = '{{url('/storage')}}'
+        var ckeditor_baseUrl = '{{asset('assets/ckeditor_full')}}'
     </script>
-    <script src="{{asset('storage/ckeditor/ckeditor.js')}}"></script>
+    <script src="{{asset('assets/ckeditor_full/ckeditor/ckeditor.js')}}"></script>
     {{--    <script src="//cdn.ckeditor.com/4.12.1/full/ckeditor.js"></script>--}}
     <!-- end -->
     <script type="text/javascript">
