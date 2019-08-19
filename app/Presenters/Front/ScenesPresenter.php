@@ -47,6 +47,8 @@ class ScenesPresenter extends Presenter
                 $var->type = $this->tranTypeInSelectOption($var->type, $this->selectOptions);
                 //找圖片檔案
                 $var->images = $var->image ? array($var->image) : $this->transFileIdtoImage($var->file_id); //有圖檔就不用去file找
+                //
+                $var->detail = htmlspecialchars_decode($var->detail);
             }
         }
         return $arr;
