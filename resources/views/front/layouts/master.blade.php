@@ -78,6 +78,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
     <script src="{{asset('js/waitMe.js')}}"></script>
 
+
     @include('front.layouts.script')
     @yield('inline-js')
 </body>

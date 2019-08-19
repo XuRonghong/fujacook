@@ -8,12 +8,12 @@
 
     .img-preview-sm {
         width: 256px;
-        height: 150px;
+        height: 80px;
     }
 </style>
 <script>
     var crop_width = 1280;
-    var crop_height = 750;
+    var crop_height = 400;
     var current_modal;
     var imagedata = {};
 </script>

@@ -96,6 +96,7 @@
                                     @if( !data_get($data, 'Disable'))
                                         @if(data_get($data['arr'], 'id'))
                                             <button type="button" class="btn btn-success waves-effect waves-light btn-dosave" data-id="{{data_get($data['arr'], 'id')}}">Save</button>
+{{--                                            <button type="button" class="btn btn-success waves-effect waves-light btn-dosave" data-id="{{data_get($data['arr'], 'id')}}">Save And </button>--}}
                                         @else
                                             <button type="button" class="btn btn-info waves-effect waves-light btn-doadd">Add</button>
                                         @endif
@@ -116,14 +117,24 @@
     <!-- Public Crop_Image -->
     @include('admin.js.crop_image_single_custom')
     <!-- Public SummerNote -->
-    @include('admin.js.summernote2019')
+{{--    @include('admin.js.summernote2019')--}}
+    <!-- Public ckeditor -->
+    <script type="text/javascript">
+        var ckeditor_baseUrl = '{{url('/storage')}}'
+    </script>
+    <script src="{{asset('storage/ckeditor/ckeditor.js')}}"></script>
+    {{--    <script src="//cdn.ckeditor.com/4.12.1/full/ckeditor.js"></script>--}}
     <!-- end -->
     <script type="text/javascript">
     function document_ready() {
 
         //文字編輯器
-        do_textarea_summernote_fun( $('#detail'))
         // do_textarea_summernote_fun( $('#detail'))
+        // do_textarea_summernote_fun( $('#detail'))
+        CKEDITOR.replace('detail', {
+            // width: 1000,
+            'height': '420px',
+        });
 
         // 只顯示詳情不開啟編輯功能
         let disable = '{{data_get($data, 'Disable')}}'
@@ -132,7 +143,8 @@
             $('form select').attr('disabled','disabled')
             $('form .image-del').css("visibility","hidden");    //刪除區塊隱藏
             $('form #Image').css("display","none");     //加載圖片關閉
-            $('form #detail').summernote('disable');        //編輯器關閉
+            // $('form #detail').summernote('disable');        //編輯器關閉
+            $('form #detail').attr('disabled','disabled');        //編輯器關閉
             $('.note-editable .note-toolbar').parent('div').hide();     //summernote toolbar hide
             //唯讀
             $('form .btn-image-modal ,form span').hide()
@@ -155,7 +167,9 @@
             //寫入資料庫
             let url = '{{data_get($data['route_url'], "store")}}'
             let self = document.querySelector('#sample_form')
-            let data = prop_fromData_fun(self)
+            let data = prop_fromData_fun(self, {
+                'detail': CKEDITOR.instances.detail.getData()
+            })
 
             ajax(url, data, 'POST')
         })
@@ -168,7 +182,9 @@
             let id = $(this).data('id')
             let url = '{{data_get($data['route_url'], "update")}}'.replace('-10', id)  //-10代替字元為id
             let self = document.querySelector('#sample_form')
-            let data = prop_fromData_fun(self)
+            let data = prop_fromData_fun(self, {
+                'detail': CKEDITOR.instances.detail.getData()
+            })
 
             ajax(url, data, 'POST')
         })

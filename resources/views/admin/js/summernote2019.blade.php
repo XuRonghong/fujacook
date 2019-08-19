@@ -46,7 +46,14 @@
                 ['para', ['ul', 'ol', 'paragraph']],
                 ['height', ['height']],
                 ['insert', ['link', 'picture', 'video']],
+                ['table', ['table']],
             ],
+            popover: {
+                air: [
+                    ['color', ['color']],
+                    ['font', ['bold', 'underline', 'clear']]
+                ]
+            }
         })
     }
 
