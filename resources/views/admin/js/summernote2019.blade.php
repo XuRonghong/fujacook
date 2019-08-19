@@ -45,6 +45,7 @@
                 ['color', ['color']],
                 ['para', ['ul', 'ol', 'paragraph']],
                 ['height', ['height']],
+                ['insert', ['link', 'picture', 'video']],
             ],
         })
     }
