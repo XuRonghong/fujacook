@@ -134,6 +134,7 @@
         CKEDITOR.replace('detail', {
             // width: 1000,
             'height': '420px',
+            'language' : 'fr',
         });
 
         // 只顯示詳情不開啟編輯功能
