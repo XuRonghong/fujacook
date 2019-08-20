@@ -38,10 +38,9 @@ class UploadController extends Controller
             //filename to store
             $filenametostore = $filename.'_'.time().'.'.$extension;
 
-
             //Upload File
-//            $request->file('upload')->storeAs('public/storage/upload/ckeditor/', $filenametostore);
-            $request->file('upload')->storeAs('public/upload/ckeditor/', $filenametostore);
+            $storage = Storage::disk( 'public' );
+            $storage->put('upload/ckeditor/'.$filenametostore, file_get_contents( $request->file('upload') ) );
 
             $CKEditorFuncNum = $request->input('CKEditorFuncNum');
 //            $url = asset('storage/upload/ckeditor/'.$filenametostore);
