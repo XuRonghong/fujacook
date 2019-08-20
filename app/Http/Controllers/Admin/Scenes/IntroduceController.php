@@ -99,7 +99,7 @@ class IntroduceController extends Controller
         //轉換出顯示數據
         $data['arr'] = $this->presenter->transOne($data['arr'], 'introduce');
 
-        return $this->presenter->responseJson($data, 'create');
+        return $this->presenter->responseJson($data, 'show');
     }
 
     /**

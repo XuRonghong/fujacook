@@ -343,7 +343,7 @@
         }
         //撈取html detail
         if (document.getElementById("detail")) {
-            form_data.append('detail', $('#detail').summernote('code'))
+            // form_data.append('detail', $('#detail').summernote('code'))
         }
 
         //撈取html 滑動開關切換按鈕

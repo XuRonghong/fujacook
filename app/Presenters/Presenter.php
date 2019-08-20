@@ -106,7 +106,8 @@ abstract class Presenter
                 $data['content'] = strip_tags( htmlspecialchars_decode($data['content']));
             }
             if (isset($data['detail'])) {
-                $data['detail'] = strip_tags( htmlspecialchars_decode($data['detail']));
+//                $data['detail'] = strip_tags( htmlspecialchars_decode($data['detail']));
+                $data['detail'] = htmlspecialchars_decode($data['detail']);
             }
         }
         return $data;

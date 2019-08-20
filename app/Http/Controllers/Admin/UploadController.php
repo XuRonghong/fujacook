@@ -40,9 +40,11 @@ class UploadController extends Controller
 
 
             //Upload File
-            $request->file('upload')->storeAs('public/storage/upload/ckeditor', $filenametostore);
+//            $request->file('upload')->storeAs('public/storage/upload/ckeditor/', $filenametostore);
+            $request->file('upload')->storeAs('public/upload/ckeditor/', $filenametostore);
 
             $CKEditorFuncNum = $request->input('CKEditorFuncNum');
+//            $url = asset('storage/upload/ckeditor/'.$filenametostore);
             $url = asset('storage/upload/ckeditor/'.$filenametostore);
             $msg = 'Image successfully uploaded';
             $re = "<script>window.parent.CKEDITOR.tools.callFunction($CKEditorFuncNum, '$url', '$msg')</script>";

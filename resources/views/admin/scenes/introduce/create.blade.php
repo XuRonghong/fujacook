@@ -96,7 +96,6 @@
                                     @if( !data_get($data, 'Disable'))
                                         @if(data_get($data['arr'], 'id'))
                                             <button type="button" class="btn btn-success waves-effect waves-light btn-dosave" data-id="{{data_get($data['arr'], 'id')}}">Save</button>
-{{--                                            <button type="button" class="btn btn-success waves-effect waves-light btn-dosave" data-id="{{data_get($data['arr'], 'id')}}">Save And </button>--}}
                                         @else
                                             <button type="button" class="btn btn-info waves-effect waves-light btn-doadd">Add</button>
                                         @endif
@@ -116,41 +115,18 @@
 @section('inline-js')
     <!-- Public Crop_Image -->
     @include('admin.js.crop_image_single_custom')
-    <!-- Public SummerNote -->
-{{--    @include('admin.js.summernote2019')--}}
     <!-- Public ckeditor -->
-    <script type="text/javascript">
-        var ckeditor_baseUrl = '{{asset('js')}}'
-    </script>
-    <script src="//cdn.ckeditor.com/4.10.0/full/ckeditor.js"></script>
-{{--    <script src="//cdn.ckeditor.com/4.10.0/full/ckeditor.js"></script>--}}
-{{--    <script src="{{ asset('vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>--}}
-{{--    @include('ckfinder::setup')--}}
-{{--    <script src="{{asset('ckeditor_full/ckeditor/ckeditor.js')}}"></script>--}}
-    {{--    <script src="//cdn.ckeditor.com/4.12.1/full/ckeditor.js"></script>--}}
+    <script src="{{ asset('vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
     <!-- end -->
     <script type="text/javascript">
     function document_ready() {
 
         //文字編輯器
-        // do_textarea_summernote_fun( $('#detail'))
-        // do_textarea_summernote_fun( $('#detail'))
         editor = CKEDITOR.replace('detail', {
-            {{--'filebrowserUploadUrl': "{{route('admin.ckupload', ['_token' => csrf_token() ])}}",--}}
-            {{--'filebrowserUploadMethod': 'form',--}}
-
-            filebrowserBrowseUrl: "{{ asset('ckfinder/ckfinder.html?Type=Files') }}",
-            filebrowserImageBrowseUrl: "{{ asset('ckfinder/ckfinder.html?Type=Images') }}",
-            filebrowserFlashBrowseUrl: "{{ asset('ckfinder/ckfinder.html?Type=Flash') }}",
-            filebrowserUploadUrl: "{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files') }}",
-            filebrowserImageUploadUrl: "{{ asset('ckfinder/core/connctor/php/connector.php?command=QuickUpload&type=Images') }}",
-            filebrowserFlashUploadUrl: "{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash') }}"
-
-            // width: 1000,
-            // 'height': '420px',
-            // 'language' : 'en',
+            'filebrowserUploadUrl': "{{route('admin.ckupload', ['_token' => csrf_token() ])}}",
+            'filebrowserUploadMethod': 'form',
+            'height': '420px',
         });
-        // CKFinder.setupCKEditor( editor );
 
         // 只顯示詳情不開啟編輯功能
         let disable = '{{data_get($data, 'Disable')}}'
@@ -159,7 +135,6 @@
             $('form select').attr('disabled','disabled')
             $('form .image-del').css("visibility","hidden");    //刪除區塊隱藏
             $('form #Image').css("display","none");     //加載圖片關閉
-            // $('form #detail').summernote('disable');        //編輯器關閉
             $('form #detail').attr('disabled','disabled');        //編輯器關閉
             $('.note-editable .note-toolbar').parent('div').hide();     //summernote toolbar hide
             //唯讀
