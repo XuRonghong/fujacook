@@ -152,7 +152,7 @@
 
 @section('inline-js')
     <!-- Public Crop_Image -->
-    @include('admin.js.crop_image_single_1280x400')
+    @include('admin.js.crop_image_single_custom')
     <!-- Public SummerNote -->
     @include('admin.js.summernote2019')
     <!-- end -->
