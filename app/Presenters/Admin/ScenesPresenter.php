@@ -68,7 +68,7 @@ class ScenesPresenter extends Presenter
 
         /* ckfinder & ckeditor test */
 //                $data['detail'] = strip_tags( htmlspecialchars_decode($data['detail']));
-        $data['detail'] = str_replace('/fujacook/public/storage', '/storage', $data['detail']);
+//        $data['detail'] = str_replace('/fujacook/public/storage', '/storage', $data['detail']);
 
         //get option for select with scenes type
         if ($other){

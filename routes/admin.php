@@ -54,6 +54,8 @@ Route::group(
     Route::get('/', 'IndexController@index');
     Route::get('/setlang', 'IndexController@setLang')->name('setlang');
 
+    //
+    Route::post('ckeditor/image_upload', 'UploadController@CKEditorUpload')->name('ckupload');
 
     /**********************************************************
      * Upload Images

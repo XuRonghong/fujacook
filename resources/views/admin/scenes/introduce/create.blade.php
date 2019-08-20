@@ -120,9 +120,13 @@
 {{--    @include('admin.js.summernote2019')--}}
     <!-- Public ckeditor -->
     <script type="text/javascript">
-        var ckeditor_baseUrl = '{{asset('ckeditor_full')}}'
+        var ckeditor_baseUrl = '{{asset('js')}}'
     </script>
-    <script src="{{asset('ckeditor_full/ckeditor/ckeditor.js')}}"></script>
+    <script src="//cdn.ckeditor.com/4.10.0/full/ckeditor.js"></script>
+{{--    <script src="//cdn.ckeditor.com/4.10.0/full/ckeditor.js"></script>--}}
+{{--    <script src="{{ asset('vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>--}}
+{{--    @include('ckfinder::setup')--}}
+{{--    <script src="{{asset('ckeditor_full/ckeditor/ckeditor.js')}}"></script>--}}
     {{--    <script src="//cdn.ckeditor.com/4.12.1/full/ckeditor.js"></script>--}}
     <!-- end -->
     <script type="text/javascript">
@@ -131,11 +135,22 @@
         //文字編輯器
         // do_textarea_summernote_fun( $('#detail'))
         // do_textarea_summernote_fun( $('#detail'))
-        CKEDITOR.replace('detail', {
+        editor = CKEDITOR.replace('detail', {
+            {{--'filebrowserUploadUrl': "{{route('admin.ckupload', ['_token' => csrf_token() ])}}",--}}
+            {{--'filebrowserUploadMethod': 'form',--}}
+
+            filebrowserBrowseUrl: "{{ asset('ckfinder/ckfinder.html?Type=Files') }}",
+            filebrowserImageBrowseUrl: "{{ asset('ckfinder/ckfinder.html?Type=Images') }}",
+            filebrowserFlashBrowseUrl: "{{ asset('ckfinder/ckfinder.html?Type=Flash') }}",
+            filebrowserUploadUrl: "{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files') }}",
+            filebrowserImageUploadUrl: "{{ asset('ckfinder/core/connctor/php/connector.php?command=QuickUpload&type=Images') }}",
+            filebrowserFlashUploadUrl: "{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash') }}"
+
             // width: 1000,
-            'height': '420px',
-            'language' : 'fr',
+            // 'height': '420px',
+            // 'language' : 'en',
         });
+        // CKFinder.setupCKEditor( editor );
 
         // 只顯示詳情不開啟編輯功能
         let disable = '{{data_get($data, 'Disable')}}'
