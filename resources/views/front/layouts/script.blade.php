@@ -55,7 +55,7 @@
         }
     }
 
-    function ajax(url='', data={}, method='POST')
+    function ajax(url='', data={}, method='POST', redirect=1)
     {
         $.ajax({
             headers: {
@@ -73,9 +73,11 @@
             success: function (data) {
                 if (data.status) {
                     toastr.success(data.message, "{{trans('web_alert.notice')}}").css("width","360px")
-                    setTimeout(function () {
-                        location.href = data.redirectUrl
-                    }, 500)
+                    if (redirect===1) {
+                        setTimeout(function () {
+                            location.href = data.redirectUrl
+                        }, 500)
+                    }
                 } else {
                     toastr.error(data.message, "{{trans('web_alert.notice')}}").css("width","360px")
                 }

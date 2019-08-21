@@ -51,7 +51,7 @@
     }
 
 
-    function ajax(url='', data={}, method='POST')
+    function ajax(url='', data={}, method='POST', redirect=1)
     {
         $.ajax({
             headers: {
@@ -68,10 +68,12 @@
             resetForm: true,
             success: function (data) {
                 if (data.status) {
-                    toastr.success(data.message, "{{trans('web_alert.notice')}}").css("width","360px")
-                    setTimeout(function () {
-                        location.href = data.redirectUrl
-                    }, 500)
+                    toastr.success(data.message, "{{trans('web_alert.notice')}}", { timeOut: 1300 }).css("width","360px")
+                    if (redirect) {
+                        setTimeout(function () {
+                            location.href = data.redirectUrl
+                        }, 500)
+                    }
                 } else {
                     toastr.error(data.message, "{{trans('web_alert.notice')}}").css("width","360px")
                     Swal.fire("{{trans('web_alert.error')}}", JSON.stringify(data.errors), "error");

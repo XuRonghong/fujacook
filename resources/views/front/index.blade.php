@@ -81,10 +81,10 @@
 {{--                    <a href="{{data_get($var, 'url')}}">即時餐</a>--}}
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ explode(';',data_get($var, 'url'))[0] }}">即食鍋</a>
+                            <a class="nav-link" href="{{ array_get(explode(';',data_get($var, 'url')),0) }}">即食鍋</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ explode(';',data_get($var, 'url'))[1] }}">即時餐</a>
+                            <a class="nav-link" href="{{ array_get(explode(';',data_get($var, 'url')),1) }}">即時餐</a>
                         </li>
                     </ul>
                 @endif

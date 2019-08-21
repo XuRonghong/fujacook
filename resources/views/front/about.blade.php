@@ -64,39 +64,16 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
-                        @forelse(data_get($data, 'navbar', []) as $key => $var)
+                        @foreach(data_get($data, 'navbar', []) as $key => $var)
                             <li class="nav-item @if($key==1) active @endif">
                                 <a class="nav-link {{data_get($var, 'style')}}" href="{{env('APP_URL') . data_get($var, 'url')}}">{{data_get($var, 'summary')}}</a>
                             </li>
-                        @empty
-{{--                        <li class="nav-item active">--}}
-{{--                            <a class="nav-link" href="#">首頁</a>--}}
-{{--                        </li>--}}
-                        @endforelse
+                        @endforeach
                     </ul>
                     <ul class="social-media">
-                        @forelse(array_get($data, 'parameters.external_link') as $var)
+                        @foreach(array_get($data, 'parameters.external_link') as $var)
                             <li><a href="{{data_get($var,'content')}}"><i class="{{data_get($var,'value')}}"></i><p>{{data_get($var,'name')}}</p></a></li>
-                        @empty
-{{--                            <li><a href="https://twitter.com/FUJACOOK2"><i class="fab fa-twitter-square"></i>--}}
-{{--                                    <p>Twitter</p>--}}
-{{--                                </a></li>--}}
-{{--                            <li><a href=""><i class="fab fa-weixin"></i>--}}
-{{--                                    <p>Wechat</p>--}}
-{{--                                </a></li>--}}
-{{--                            <li><a href="https://www.facebook.com/cook.fuja.5"><i class="fab fa-facebook-square"></i>--}}
-{{--                                    <p>Facebook</p>--}}
-{{--                                </a></li>--}}
-{{--                            <li><a href="https://www.instagram.com/FUJACOOK/"><i class="fab fa-instagram"></i>--}}
-{{--                                    <p>Instagram</p>--}}
-{{--                                </a></li>--}}
-{{--                            <li><a href=""><i class="fab fa-line"></i>--}}
-{{--                                    <p>Line</p>--}}
-{{--                                </a></li>--}}
-{{--                            <li><a href=""><i class="fab fa-youtube"></i>--}}
-{{--                                    <p>Youtube</p>--}}
-{{--                                </a></li>--}}
-                        @endforelse
+                        @endforeach
                     </ul>
                 </div>
             </nav>
@@ -120,60 +97,36 @@
             <div class="inner">
                 <ul class="tab-wrap-lister tab-wrap-top">
                 <?php $i=1; ?>
-                @forelse(data_get($data, 'navbar2', []) as $key => $var)
+                @foreach(data_get($data, 'navbar2', []) as $key => $var)
                     <li class="" data-tab-target="content" @if($i==1) class="tab-active" @endif>
                         <span class="number oswald">.0<?php echo $i;?></span>
                         <span class="center">{{data_get($var, 'summary')}}</span>
                         <i class="fas fa-lg fa-chevron-down"></i>
                     </li>
                     <?php $i++; ?>
-                @empty
-{{--                    <li data-tab-target="content">--}}
-{{--                        <span class="number oswald">.01</span>--}}
-{{--                        <span class="center">創辦人介紹</span>--}}
-{{--                        <i class="fas fa-lg fa-chevron-down"></i>--}}
-{{--                    </li>--}}
-{{--                    <li data-tab-target="content">--}}
-{{--                        <span class="number oswald">.02</span>--}}
-{{--                        <span class="center">專利獎項</span>--}}
-{{--                        <i class="fas fa-lg fa-chevron-down"></i>--}}
-{{--                    </li>--}}
-{{--                    <li data-tab-target="content" class="">--}}
-{{--                        <span class="number oswald">.03</span>--}}
-{{--                        <span class="center">研發理念</span>--}}
-{{--                        <i class="fas fa-lg fa-chevron-down"></i>--}}
-{{--                    </li>--}}
-{{--                    <li data-tab-target="content" class="">--}}
-{{--                        <span class="number oswald">.04</span>--}}
-{{--                        <span class="center">品牌沿革</span>--}}
-{{--                        <i class="fas fa-lg fa-chevron-down"></i>--}}
-{{--                    </li>--}}
-{{--                    <li data-tab-target="content" class="">--}}
-{{--                        <span class="number oswald">.05</span>--}}
-{{--                        <span class="center">核心價值</span>--}}
-{{--                        <i class="fas fa-lg fa-chevron-down"></i>--}}
-{{--                    </li>--}}
-                @endforelse
+                @endforeach
                 </ul>
             </div>
         </div>
 
         <!--tab-contents start-->
         <div class="tab-contents" data-tab-contents-name="content">
+
             <!--tab-contents-list start-->
+            <?php $ii=1; ?>
+            @if(data_get($data, 'introduce.t01.0'))
             <div class="tab-contents-list tab-content-active" style="display: block;">
                 <section class="message-sec">
-
                     <div class="inner message-ttl-head anime-slideIn anime-start" data-anime="on">
                         <div class="ttl-head clearfix">
                             <div class="ttl-head-inner clearfix">
-                                <span class="oswald number">.01</span>
+                                <span class="oswald number">.0<?php echo $ii++;?></span>
                                 <h2>
                                     <span class="heading_bold">FUJACOOK</span>
-                                    <small class="tsukushi-bold">{{data_get($data, 'navbar2.0.summary', [])}}</small>
+                                    <small class="tsukushi-bold">{{data_get($data, 'navbar2.'.($ii-2).'.summary', '')}}</small>
                                 </h2>
                             </div>
-                            <span class="authenia word-wrap">Founder</span>
+                            <span class="authenia word-wrap">{{data_get($data, 'navbar2.'.($ii-2).'.detail', '')}}</span>
                         </div>
                     </div>
                     <div class="inner">
@@ -186,30 +139,9 @@
                                 </figure>
                             </div>
                             <div class="text-area anime-slideIn anime-start" data-anime="on">
-                                @forelse(data_get($data, 'introduce.t01', []) as $key => $var)
+                                @foreach(data_get($data, 'introduce.t01', []) as $key => $var)
                                     {!! data_get($var, 'detail') !!}
-                                @empty
-{{--                                        <h2><span>即食餐鍋創辦人 陳献楨 先生</span></h2>--}}
-{{--                                        <div class="text-area-inner">--}}
-{{--                                            <li class="" data-tab-target="content">--}}
-{{--                                                <i class="fa fa-caret-right fa-3x"></i>--}}
-{{--                                                <p>富甲一方國際集團 創辦人</p>--}}
-{{--                                                <i class="fa fa-caret-right fa-3x"></i>--}}
-{{--                                                <p>何首烏皇帝雞餐飲集團創辦人</p>--}}
-{{--                                                <i class="fa fa-caret-right fa-3x"></i>--}}
-{{--                                                <p>台灣區南投同鄉會聯合總會第三屆總會長</p>--}}
-{{--                                                <p>（第一、二屆總會長為江丙坤先生）</p>--}}
-{{--                                                <i class="fa fa-caret-right fa-3x"></i>--}}
-{{--                                                <p>新北市後備憲兵荷松協會理事長</p>--}}
-{{--                                                <i class="fa fa-caret-right fa-3x"></i>--}}
-{{--                                                <p>2017世界跆拳道錦標賽 - 中華台北總領隊</p>--}}
-{{--                                                <i class="fa fa-caret-right fa-3x"></i>--}}
-{{--                                                <p>新北市道德慈善會創會顧問</p>--}}
-{{--                                                <i class="fa fa-caret-right fa-3x"></i>--}}
-{{--                                                <p>新北市政府市政顧問</p>--}}
-{{--                                            </li>--}}
-{{--                                        </div>--}}
-                                @endforelse
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -218,21 +150,23 @@
                     <!--myshopstick end-->
                 </section>
             </div>
+            @endif
             <!--tab-contents-list end-->
 
             <!--tab-contents-list start-->
+            @if(data_get($data, 'introduce.t02.0'))
             <div class="tab-contents-list" style="display: none;">
                 <section class="profile-sec">
                     <div class="inner">
                         <div class="ttl-head clearfix">
                             <div class="ttl-head-inner clearfix">
-                                <span class="oswald number">.02</span>
+                                <span class="oswald number">.0<?php echo $ii++;?></span>
                                 <h2>
                                     <span class="heading_bold">FUJACOOK</span>
-                                    <b class="heading_bold">{{data_get($data, 'navbar2.1.summary', [])}}</b>
+                                    <b class="heading_bold">{{data_get($data, 'navbar2.'.($ii-2).'.summary', '')}}</b>
                                 </h2>
                             </div>
-                            <span class="authenia word-wrap">patent</span>
+                            <span class="authenia word-wrap">{{data_get($data, 'navbar2.'.($ii-2).'.detail', '')}}</span>
                         </div>
                         <div>
                             <img src="{{asset('web0708/Fujacook/img/得獎紀錄.jpg')}}" alt="得獎紀錄">
@@ -681,23 +615,25 @@
                     </div>
                 </section>
             </div>
+            @endif
             <!--tab-contents end-->
 
             <!--tab-contents-list start-->
+            @if(data_get($data, 'introduce.t03.0'))
             <div class="tab-contents-list" style="display: none;">
                 <section class="profile-sec">
                     <div class="inner">
                         <div class="ttl-head clearfix">
                             <div class="ttl-head-inner clearfix">
-                                <span class="oswald number">.03</span>
+                                <span class="oswald number">.0<?php echo $ii++;?></span>
                                 <h2>
                                     <span class="heading_bold">FUJACOOK</span>
-                                    <b class="heading_bold">{{data_get($data, 'navbar2.2.summary', [])}}</b>
+                                    <b class="heading_bold">{{data_get($data, 'navbar2.'.($ii-2).'.summary', '')}}</b>
                                 </h2>
                             </div>
-                            <span class="authenia word-wrap">concept</span>
+                            <span class="authenia word-wrap">{{data_get($data, 'navbar2.'.($ii-2).'.detail', '')}}</span>
                         </div>
-                        @forelse(data_get($data, 'introduce.t03', []) as $key => $var)
+                        @foreach(data_get($data, 'introduce.t03', []) as $key => $var)
                             <div class="text-area-inner">
                                 <li class="" data-tab-target="content">
                                     {!! data_get($var, 'detail') !!}
@@ -706,184 +642,70 @@
                                      alt="{{data_get($var, 'summary', '研發理念')}}"
                                      style="width: 50%; margin-left:23.5%;margin-top: 5%">
                             </div>
-                        @empty
-{{--                            <div class="text-area-inner">--}}
-{{--                                <li class="" data-tab-target="content">--}}
-{{--                                    <p>過去很多的鍋子，便利性不是很高，很多的吃法不是那麼健康，於是有了<br>--}}
-{{--                                        改良的念頭，考量了健康與便利性，將原本圓形鍋子，改良成了方形利用<br>--}}
-{{--                                        鴛鴦鍋的概念，從鍋子中間分成一半，變成前後深淺鍋的形式，並改良成<br>--}}
-{{--                                        不沾鍋材質，讓淺鍋的能夠煎食，不用使用油就可以將食物煮熟面積也比<br>--}}
-{{--                                        較大，後鍋可以煮湯並蒸食，不只改變大眾飲食的習慣，也讓更多人能夠<br>--}}
-{{--                                        節省一般做菜所耗費的時間，徹底解決大眾飲食一條龍的解決方案。</p>--}}
-{{--                                </li>--}}
-{{--                                <img src="./Fujacook/img/研發理念.jpg" alt="研發理念" style="width: 50%; margin-left:23.5%;margin-top: 5%">--}}
-{{--                            </div>--}}
-                        @endforelse
+                        @endforeach
                     </div>
                 </section>
             </div>
+            @endif
             <!--tab-contents-list end-->
 
             <!--tab-contents-list start-->
+            @if(data_get($data, 'introduce.t04.0'))
             <div class="tab-contents-list" style="display: none;">
-
                 <section class="history-sec">
                     <div class="inner">
                         <div class="ttl-head clearfix">
                             <div class="ttl-head-inner clearfix">
-                                <span class="oswald number">.04</span>
+                                <span class="oswald number">.0<?php echo $ii++;?></span>
                                 <h2>
                                     <span class="heading_bold">FUJACOOK</span>
-                                    <b class="heading_bold">{{data_get($data, 'navbar2.3.summary', [])}}</b>
+                                    <b class="heading_bold">{{data_get($data, 'navbar2.'.($ii-2).'.summary', '')}}</b>
                                 </h2>
                             </div>
-                            <span class="authenia word-wrap">History</span>
+                            <span class="authenia word-wrap">{{data_get($data, 'navbar2.'.($ii-2).'.detail', '')}}</span>
                         </div>
                         <div class="history-sec-inner">
-                            <ul class="clearfix">
-                                <li>
-                                    <div class="history-sec-inner-list">
-                                        <div class="time-area">
-                                            <span class="anno-domini oswald">2014年 12月</span>
-                                        </div>
-                                        <div class="text-area">
-                                            <p>創辦人陳献楨先生發明一爐雙熱源可層疊雙槽方鍋。</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="history-sec-inner-list">
-                                        <div class="time-area">
-                                            <span class="anno-domini oswald">2015年 12月</span>
-                                        </div>
-                                        <div class="text-area">
-                                            <p>於台灣台北市復興北路成立富呷一方實驗餐廳，<br>全球第1家示範店。</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="history-sec-inner-list">
-                                        <div class="time-area">
-                                            <span class="anno-domini oswald">2015年 1月</span>
-                                        </div>
-                                        <div class="text-area">
-                                            <p>數十家媒體爭相報導富呷一方一鍋多種吃法。</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="history-sec-inner-list">
-                                        <div class="time-area">
-                                            <span class="anno-domini oswald">2015年 10月</span>
-                                        </div>
-                                        <div class="text-area">
-                                            <p>富甲一方鍋爐組榮獲第11屆台北國際發明展，<br>最高榮譽家電類唯一首獎 —— 鉑金獎 </p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="history-sec-inner-list">
-                                        <div class="time-area">
-                                            <span class="anno-domini oswald">2015年 11月</span>
-                                        </div>
-                                        <div class="text-area">
-                                            <p>富甲一方鍋爐組榮獲 IENA德國紐倫堡國際發明展第二名，<br>以及波蘭國家代表團主席頒發當年參賽作品唯一特別獎。</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="history-sec-inner-list">
-                                        <div class="time-area">
-                                            <span class="anno-domini oswald">2016年 6月</span>
-                                        </div>
-                                        <div class="text-area">
-                                            <p>富甲一方鍋爐組榮獲瑞士日內瓦國際發明展評審團第二名<br>以及日內瓦國際發明展伊朗代表團特別獎。</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="history-sec-inner-list">
-                                        <div class="time-area">
-                                            <span class="anno-domini oswald">2016年 7月</span>
-                                        </div>
-                                        <div class="text-area">
-                                            <p>富甲一方鍋爐組榮獲美國INPEX匹茲堡國際發明展第二名，<br>以及匹茲堡國際發明展中國大陸代表團金牌特別獎。</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="history-sec-inner-list">
-                                        <div class="time-area">
-                                            <span class="anno-domini oswald">2017年 9月</span>
-                                        </div>
-                                        <div class="text-area">
-                                            <p>積極研發家用多功能鍋爐組 ( 包含電磁爐、電熱板、電熱管、卡式爐等加熱方式 )。</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="history-sec-inner-list">
-                                        <div class="time-area">
-                                            <span class="anno-domini oswald">2018年 7月</span>
-                                        </div>
-                                        <div class="text-area">
-                                            <p>富甲一方鍋爐組已取得全球27國178項專利。</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="history-sec-inner-list">
-                                        <div class="time-area">
-                                            <span class="anno-domini oswald">2019年 9月</span>
-                                        </div>
-                                        <div class="text-area">
-                                            <p>計畫於日本搶先上市，並積極發展全球市場。</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="history-sec-inner-list">
-                                    </div>
-                                </li>
-                            </ul>
+                            @foreach(data_get($data, 'introduce.t04', []) as $key => $var)
+                                {!! $var->detail !!}
+                            @endforeach
                         </div>
                     </div>
                 </section>
             </div>
+            @endif
             <!--tab-contents-list end-->
 
             <!--tab-contents-list start-->
+            @if(data_get($data, 'introduce.t05.0'))
             <div class="tab-contents-list" style="display: none;">
                 <section class="profile-sec">
                     <div class="inner">
                         <div class="ttl-head clearfix">
                             <div class="ttl-head-inner clearfix">
-                                <span class="oswald number">.05</span>
+                                <span class="oswald number">.0<?php echo $ii++;?></span>
                                 <h2>
                                     <span class="heading_bold">FUJACOOK</span>
-                                    <b class="heading_bold">{{data_get($data, 'navbar2.4.summary', '')}}</b>
+                                    <b class="heading_bold">{{data_get($data, 'navbar2.'.($ii-2).'.summary', '')}}</b>
                                 </h2>
                             </div>
-                            <span class="authenia word-wrap">Core Values</span>
+                            <span class="authenia word-wrap">{{data_get($data, 'navbar2.'.($ii-2).'.detail', '')}}</span>
                         </div>
                         <div class="text-area-inner">
-                            @forelse(data_get($data, 'introduce.t05', []) as $key => $var)
+                            @foreach(data_get($data, 'introduce.t05', []) as $key => $var)
                                 <img src="{{array_first( data_get($var, 'images', data_get($var, 'image', [])) )}}" alt="創辦人介紹" style="width: 100%;">
-                            @empty
-{{--                                <img src="{{asset('web0708/Fujacook/img/核心價值.jpg')}}" alt="核心價值" style="width: 100%;">--}}
-                            @endforelse
+                            @endforeach
                         </div>
                     </div>
                 </section>
             </div>
+            @endif
             <!--tab-contents-list end-->
         </div>
         <!--tab-contents end-->
 
-
         <div class="l-lineup js__animation">
             <ul class="anime-slideIn" data-anime="on">
-                @forelse(data_get($data, 'image.section3', []) as $key => $var)
+                @foreach(data_get($data, 'image.section3', []) as $key => $var)
                 <li class="lineup-brand">
                     <img src="{{data_get($var, 'image', array_first(data_get($var, 'images', [])) )}}" alt="即食鍋">
                     <div class="img-area">
@@ -899,42 +721,9 @@
                         </div>
                     </a>
                 </li>
-                @empty
-{{--                    <li class="lineup-brand">--}}
-{{--                        <img src="./Fujacook/img/即食鍋.jpg" alt="即食鍋">--}}
-{{--                        <div class="img-area">--}}
-{{--                            <i class="sp-only icon icon-btn_arrow_r"></i>--}}
-{{--                        </div>--}}
-{{--                        <a>--}}
-{{--                            <div class="text-area">--}}
-{{--                                <div class="heading_bold number">--}}
-{{--                                    <span class="oswald">即食鍋</span>--}}
-{{--                                </div>--}}
-{{--                                <p>即時 • 歡樂</p>--}}
-{{--                                <i class="pc-only icon icon-btn_arrow_r"></i>--}}
-{{--                            </div>--}}
-{{--                        </a>--}}
-{{--                    </li>--}}
-{{--                    <li class="lineup-brand">--}}
-{{--                        <img src="./Fujacook/img/即食餐.jpg" alt="即食餐">--}}
-{{--                        <div class="img-area">--}}
-{{--                            <i class="sp-only icon icon-btn_arrow_r"></i>--}}
-{{--                        </div>--}}
-{{--                        <a>--}}
-{{--                        <div class="text-area">--}}
-{{--                            <div class="heading_bold number">--}}
-{{--                                <span class="oswald">即食餐</span>--}}
-{{--                            </div>--}}
-{{--                            <p>即時 • 幸福</p>--}}
-{{--                            <i class="pc-only icon icon-btn_arrow_r"></i>--}}
-{{--                        </div>--}}
-{{--                        </a>--}}
-{{--                    </li>--}}
-                @endforelse
+                @endforeach
             </ul>
         </div>
-
-
         <div class="anime-slideIn" data-anime="on">
             <div class="contact-area">
                 <div class="inner">
@@ -982,7 +771,6 @@
         </div>
     </main>
 
-
     <footer class="footer">
         <div class="footer-top">
             <div class="inner">
@@ -994,7 +782,6 @@
                         <li>
                             關於FUJACOOK
                         </li>
-
                     </ul>
                 </div>
                 <div class="footer-inner">
@@ -1019,7 +806,6 @@
         <div class="footer-copy">
             <div class="inner">
                 <div class="footer-copy-inner">
-
                 </div>
                 <div class="copy-inner">
                     <small class="heading_book">©FUJACOOK Co.,Ltd. all rights reserved. </small>

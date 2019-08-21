@@ -96,11 +96,12 @@
                                     @if( !data_get($data, 'Disable'))
                                         @if(data_get($data['arr'], 'id'))
                                             <button type="button" class="btn btn-success waves-effect waves-light btn-dosave" data-id="{{data_get($data['arr'], 'id')}}">Save</button>
+                                            <button type="button" class="btn btn-success waves-effect waves-light btn-dosave_and_exit" data-id="{{data_get($data['arr'], 'id')}}">Save & Exit</button>
                                         @else
                                             <button type="button" class="btn btn-info waves-effect waves-light btn-doadd">Add</button>
                                         @endif
                                     @endif
-                                    <button type="button" class="btn waves-effect waves-light btn-cancel">Cancel</button>
+                                    <button type="button" class="btn waves-effect waves-light btn-cancel">Exit</button>
                                 </div>
                             </div>
                         </form>
@@ -167,6 +168,21 @@
 
         //編輯模式
         $(".btn-dosave").click(function (e) {
+            e.preventDefault()
+
+            //寫入資料庫
+            let id = $(this).data('id')
+            let url = '{{data_get($data['route_url'], "update")}}'.replace('-10', id)  //-10代替字元為id
+            let self = document.querySelector('#sample_form')
+            let data = prop_fromData_fun(self, {
+                'detail': CKEDITOR.instances.detail.getData()
+            })
+
+            ajax(url, data, 'POST', 0)
+        })
+
+        //編輯模式
+        $(".btn-dosave_and_exit").click(function (e) {
             e.preventDefault()
 
             //寫入資料庫

@@ -18,15 +18,15 @@ return [
     ],
     //navbar.about
     [
-        'type' => 'navbar.about', 'summary' => '創辦人介紹', 'open' => 1, 'url' => '/',
+        'type' => 'navbar.about', 'title' => 'navbar11', 'summary' => '創辦人介紹', 'detail' => 'Founder', 'open' => 1, 'url' => '/',
     ], [
-        'type' => 'navbar.about', 'summary' => '專利獎項', 'open' => 1, 'url' => '/about',
+        'type' => 'navbar.about', 'title' => 'navbar12', 'summary' => '專利獎項', 'detail' => 'Patent', 'open' => 1, 'url' => '/about',
     ], [
-        'type' => 'navbar.about', 'summary' => '研發理念', 'open' => 1, 'url' => '/report',
+        'type' => 'navbar.about', 'title' => 'navbar13', 'summary' => '研發理念', 'detail' => 'Concept', 'open' => 1, 'url' => '/report',
     ], [
-        'type' => 'navbar.about', 'summary' => '品牌沿革', 'open' => 1, 'url' => '#',
+        'type' => 'navbar.about', 'title' => 'navbar14', 'summary' => '品牌沿革', 'detail' => 'History', 'open' => 1, 'url' => '#',
     ], [
-        'type' => 'navbar.about', 'summary' => '核心價值', 'open' => 1, 'url' => '#',
+        'type' => 'navbar.about', 'title' => 'navbar15', 'summary' => '核心價值', 'detail' => 'Core Values', 'open' => 1, 'url' => '#',
     ],
 
 
@@ -103,6 +103,15 @@ return [
         'open' => 1,
     ],
     [
+        'type' => 'introduce.about.t02',
+        'title' => '專利獎項',
+        'summary' => '',
+        'detail' => '',
+        'image' => '',
+        'url' => env('APP_URL') . '/#',
+        'open' => 1,
+    ],
+    [
         'type' => 'introduce.about.t03',
         'title' => '研發理念',
         'summary' => '',
@@ -117,8 +126,123 @@ return [
         'open' => 1,
     ],
     [
+        'type' => 'introduce.about.t04',
+        'title' => '品牌沿革',
+        'summary' => '',
+        'detail' => '<ul class="clearfix">
+                                <li>
+                                    <div class="history-sec-inner-list">
+                                        <div class="time-area">
+                                            <span class="anno-domini oswald">2014年 12月</span>
+                                        </div>
+                                        <div class="text-area">
+                                            <p>創辦人陳献楨先生發明一爐雙熱源可層疊雙槽方鍋。</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="history-sec-inner-list">
+                                        <div class="time-area">
+                                            <span class="anno-domini oswald">2015年 12月</span>
+                                        </div>
+                                        <div class="text-area">
+                                            <p>於台灣台北市復興北路成立富呷一方實驗餐廳，<br>全球第1家示範店。</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="history-sec-inner-list">
+                                        <div class="time-area">
+                                            <span class="anno-domini oswald">2015年 1月</span>
+                                        </div>
+                                        <div class="text-area">
+                                            <p>數十家媒體爭相報導富呷一方一鍋多種吃法。</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="history-sec-inner-list">
+                                        <div class="time-area">
+                                            <span class="anno-domini oswald">2015年 10月</span>
+                                        </div>
+                                        <div class="text-area">
+                                            <p>富甲一方鍋爐組榮獲第11屆台北國際發明展，<br>最高榮譽家電類唯一首獎 —— 鉑金獎 </p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="history-sec-inner-list">
+                                        <div class="time-area">
+                                            <span class="anno-domini oswald">2015年 11月</span>
+                                        </div>
+                                        <div class="text-area">
+                                            <p>富甲一方鍋爐組榮獲 IENA德國紐倫堡國際發明展第二名，<br>以及波蘭國家代表團主席頒發當年參賽作品唯一特別獎。</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="history-sec-inner-list">
+                                        <div class="time-area">
+                                            <span class="anno-domini oswald">2016年 6月</span>
+                                        </div>
+                                        <div class="text-area">
+                                            <p>富甲一方鍋爐組榮獲瑞士日內瓦國際發明展評審團第二名<br>以及日內瓦國際發明展伊朗代表團特別獎。</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="history-sec-inner-list">
+                                        <div class="time-area">
+                                            <span class="anno-domini oswald">2016年 7月</span>
+                                        </div>
+                                        <div class="text-area">
+                                            <p>富甲一方鍋爐組榮獲美國INPEX匹茲堡國際發明展第二名，<br>以及匹茲堡國際發明展中國大陸代表團金牌特別獎。</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="history-sec-inner-list">
+                                        <div class="time-area">
+                                            <span class="anno-domini oswald">2017年 9月</span>
+                                        </div>
+                                        <div class="text-area">
+                                            <p>積極研發家用多功能鍋爐組 ( 包含電磁爐、電熱板、電熱管、卡式爐等加熱方式 )。</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="history-sec-inner-list">
+                                        <div class="time-area">
+                                            <span class="anno-domini oswald">2018年 7月</span>
+                                        </div>
+                                        <div class="text-area">
+                                            <p>富甲一方鍋爐組已取得全球27國178項專利。</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="history-sec-inner-list">
+                                        <div class="time-area">
+                                            <span class="anno-domini oswald">2019年 9月</span>
+                                        </div>
+                                        <div class="text-area">
+                                            <p>計畫於日本搶先上市，並積極發展全球市場。</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="history-sec-inner-list">
+                                    </div>
+                                </li>
+                            </ul>',
+        'image' => '',
+        'url' => env('APP_URL') . '/#',
+        'open' => 1,
+    ],
+    [
         'type' => 'introduce.about.t05',
         'title' => '核心價值',
+        'summary' => '',
         'image' => env('APP_URL') . '/web0708/Fujacook/img/核心價值.jpg',
         'url' => env('APP_URL') . '/#',
         'open' => 1,

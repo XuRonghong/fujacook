@@ -51,6 +51,12 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
+                                    <label for="com41" class="col-sm-3 text-right control-label col-form-label">content</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" name="detail" value="{{data_get($data['arr'], 'detail')}}" id="com41" class="form-control detail" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
                                     <label for="com5" class="col-sm-3 text-right control-label col-form-label">url</label>
                                     <div class="col-sm-9">
                                         <input type="text" name="url" value="{{data_get($data['arr'], 'url')}}" class="form-control url" id="com5" placeholder="">

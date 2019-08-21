@@ -13,6 +13,7 @@ class SettingTableSeeder extends Seeder
      */
     public function run()
     {
+        if (env('DB_REFRESH')) {
             /*
              * 預設後台參數
              */
@@ -71,7 +72,6 @@ class SettingTableSeeder extends Seeder
                 Setting::create($parameter);
             }
 
-        if (env('DB_REFRESH')) {
             // 後台全域搜尋
             $global_keyword = array();
             foreach (config('parameter.global_keyword') as $key => $searchs) {
@@ -83,16 +83,16 @@ class SettingTableSeeder extends Seeder
             }
             $parameters = array_merge($parameters, $global_keyword);
 
-            //
 
-            /*
-             * 預設前台布景
-             */
-            Scene::truncate();
-            $scenes = config('scenes');
-            foreach ($scenes as $scene) {
-                Scene::create($scene);
-            }
+
+        }
+        /*
+         * 預設前台布景
+         */
+        Scene::truncate();
+        $scenes = config('scenes');
+        foreach ($scenes as $scene) {
+            Scene::create($scene);
         }
     }
 }
