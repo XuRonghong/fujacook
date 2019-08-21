@@ -118,7 +118,8 @@
     <!-- Public Crop_Image -->
     @include('admin.js.crop_image_single_custom')
     <!-- Public ckeditor -->
-    <script src="{{ asset('vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
+{{--    <script src="{{ asset('vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>--}}
+    <script src="{{ asset('assets/ckeditor_full/ckeditor.js') }}"></script>
     <!-- end -->
     <script type="text/javascript">
     function document_ready() {

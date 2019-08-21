@@ -8,21 +8,50 @@ CKEDITOR.editorConfig = function( config ) {
 	// config.language = 'fr';
 	// config.uiColor = '#AADC6E';
 
-    config.filebrowserBrowseUrl = ckeditor_baseUrl+'/ckfinder/ckfinder.html';
-    config.filebrowserImageBrowseUrl = ckeditor_baseUrl+'/ckfinder/ckfinder.html?Type=Images';
-    config.filebrowserFlashBrowseUrl = ckeditor_baseUrl+'/ckfinder/ckfinder.html?Type=Flash';
-    config.filebrowserUploadUrl = ckeditor_baseUrl+'/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files'; //可上傳一般檔案
-    config.filebrowserImageUploadUrl = ckeditor_baseUrl+'/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images';//可上傳圖檔
-    config.filebrowserFlashUploadUrl = ckeditor_baseUrl+'/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash';//可上傳Flash檔案
+    // config.filebrowserBrowseUrl = ckeditor_baseUrl+'/ckfinder/ckfinder.html';
+    // config.filebrowserImageBrowseUrl = ckeditor_baseUrl+'/ckfinder/ckfinder.html?Type=Images';
+    // config.filebrowserFlashBrowseUrl = ckeditor_baseUrl+'/ckfinder/ckfinder.html?Type=Flash';
+    // config.filebrowserUploadUrl = ckeditor_baseUrl+'/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files'; //可上傳一般檔案
+    // config.filebrowserImageUploadUrl = ckeditor_baseUrl+'/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images';//可上傳圖檔
+    // config.filebrowserFlashUploadUrl = ckeditor_baseUrl+'/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash';//可上傳Flash檔案
 
+
+    // Remove some buttons provided by the standard plugins, which are
+    // not needed in the Standard(s) toolbar.
+    // config.removeButtons = 'Underline,Subscript,Superscript';
+
+    // Toolbar configuration generated automatically by the editor based on config.toolbarGroups.
+    // config.toolbar = [
+    //     { name: 'document', groups: [ 'mode', 'document', 'doctools' ], items: [ /*'Source', '-',*/ 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates' ] },
+    //     { name: 'clipboard', groups: [ 'clipboard', 'undo' ], items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ] },
+    //     { name: 'editing', groups: [ 'find', 'selection', 'spellchecker' ], items: [ 'Find', 'Replace', '-', 'SelectAll', '-', 'Scayt' ] },
+    //     { name: 'forms', items: [ 'Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField' ] },
+    //     { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ], items: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat' ] },
+    //     { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ], items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl', 'Language' ] },
+    //     { name: 'links', items: [ 'Link', 'Unlink', 'Anchor' ] },
+    //     { name: 'insert', items: [ 'Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe' ] },
+    //     '/',
+    //     { name: 'styles', items: [ 'Styles', 'Format', 'Font', 'FontSize' ] },
+    //     { name: 'colors', items: [ 'TextColor', 'BGColor' ] },
+    //     { name: 'tools', items: [ 'Maximize', 'ShowBlocks' ] },
+    //     { name: 'others', items: [ '-' ] },
+    //     { name: 'about', items: [ 'About' ] },
+    // ];
+    config.toolbar = 'Full';
+
+    // Set the most common block elements.
+    config.format_tags = 'p;h1;h2;h3;pre';
+
+    // Simplify the dialog windows.
+    config.removeDialogTabs = 'image:advanced;link:advanced';
 
 // 介面語言，預設為 'en'
     config.language = 'zh-tw';
 // 設定寬高
-    config.width = 400;
-    config.height = 400;
+//     config.width = 400;
+//     config.height = 400;
 // 編輯器樣式，有三種：'kama'（預設）、'office2003'、'v2'
-    config.skin = 'v2';
+   /* config.skin = 'v2';
 // 背景顏色
     config.uiColor = '#FFF';
 // 工具欄（基礎'Basic'、全能'Full'、自定義）ckeditor/ckeditor.js
@@ -257,5 +286,5 @@ CKEDITOR.editorConfig = function( config ) {
 // 撤銷的記錄步數 plugins/undo/plugin.js
     config.undoStackSize =20;
 // 在 CKEditor 中整合 CKFinder，注意 ckfinder 的路徑選擇要正確。
-    CKFinder.SetupCKEditor(null, '/ckfinder/');
+    CKFinder.SetupCKEditor(null, '/ckfinder/');*/
 };
