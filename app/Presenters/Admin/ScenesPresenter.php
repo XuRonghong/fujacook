@@ -26,7 +26,9 @@ class ScenesPresenter extends Presenter
             'introduce' => [
                 'introduce.home.t01' => trans('options.scenes.introduce.home.t01'), //'首頁文字',
                 'introduce.about.t01' => trans('options.scenes.introduce.about.t01'), //'關於FUJACOOK t1',
+                'introduce.about.t02' => trans('options.scenes.introduce.about.t02'), //'關於FUJACOOK t2',
                 'introduce.about.t03' => trans('options.scenes.introduce.about.t03'), //'關於FUJACOOK t3',
+                'introduce.about.t04' => trans('options.scenes.introduce.about.t04'), //'關於FUJACOOK t4',
                 'introduce.about.t05' => trans('options.scenes.introduce.about.t05'), //'關於FUJACOOK t5',
             ],
             'image' => [

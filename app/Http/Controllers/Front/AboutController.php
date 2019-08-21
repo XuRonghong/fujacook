@@ -37,8 +37,12 @@ class AboutController extends Controller
         //
         $data['introduce']['t01'] = $this->repository->getOrmByType('introduce.about.t01');
         $data['introduce']['t01'] = $this->presenter->eachOne_aaData($data['introduce']['t01']);
+        $data['introduce']['t02'] = $this->repository->getOrmByType('introduce.about.t02');
+        $data['introduce']['t02'] = $this->presenter->eachOne_aaData($data['introduce']['t02']);
         $data['introduce']['t03'] = $this->repository->getOrmByType('introduce.about.t03');
         $data['introduce']['t03'] = $this->presenter->eachOne_aaData($data['introduce']['t03']);
+        $data['introduce']['t04'] = $this->repository->getOrmByType('introduce.about.t04');
+        $data['introduce']['t04'] = $this->presenter->eachOne_aaData($data['introduce']['t04']);
         $data['introduce']['t05'] = $this->repository->getOrmByType('introduce.about.t05');
         $data['introduce']['t05'] = $this->presenter->eachOne_aaData($data['introduce']['t05']);
         //

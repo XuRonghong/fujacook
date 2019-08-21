@@ -14,9 +14,9 @@
                     <?php $i=1; ?>
                     @forelse(data_get($data, 'slider', []) as $key => $var)
                         <div class="carousel-item <?php if ($i==1){ ?> active <?php } ?>">
-                            <div class="w100-bg type{{$i}}">
+                            <div class="w100-bg type{{$i}} banner1">
                                 <a href="{{data_get($var, 'url')}}">
-                                    <img class="banner1" src="{{data_get($var, 'image', array_first($var->images))}}" alt="{{data_get($var, 'summary')}}">
+                                    <img src="{{data_get($var, 'image', array_first($var->images))}}" alt="{{data_get($var, 'summary')}}">
                                 </a>
                             </div>
                         </div>

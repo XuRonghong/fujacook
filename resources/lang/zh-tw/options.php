@@ -60,7 +60,9 @@ return [
             ],
             'about' => [
                 't01' => '關於FUJACOOK t1',
+                't02' => '關於FUJACOOK t2',
                 't03' => '關於FUJACOOK t3',
+                't04' => '關於FUJACOOK t4',
                 't05' => '關於FUJACOOK t5',
             ],
         ],

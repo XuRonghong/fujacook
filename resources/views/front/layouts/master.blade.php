@@ -48,7 +48,8 @@
     <style type="text/css">
         .banner1 {
             /*width: 1280px;*/
-            /*height: 400px;*/
+            height: 400px;
+            overflow:hidden;
         }
     </style>
 
