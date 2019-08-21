@@ -9,7 +9,8 @@
 
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="shortcut icon" href="https://0848ishida.jp/wp/wp-content/themes/ishida/assets/images/common/favicon.ico">
+    <link rel="shortcut icon" href="">
+    <link href="{{asset('/images/favicon-2.png')}}" rel="icon" type="image/png" sizes="16x16">
     <title>{{data_get($data, 'parameters.meta_title')}}</title>
 
     <!-- web0708 about fujacook js-->

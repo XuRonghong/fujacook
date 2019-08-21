@@ -10,8 +10,9 @@
     <meta name="author" content="{{data_get($data, 'parameters.meta_author')}}">
     <meta name="keywords" content="{{data_get($data, 'parameters.meta_keyword')}}" />
     <meta name="description" content="{{data_get($data, 'parameters.meta_description')}}" />
-    <link rel="shortcut icon" href="https://0848ishida.jp/wp/wp-content/themes/ishida/assets/images/common/favicon.ico">
 
+    <link rel="shortcut icon" href="">
+    <link href="{{asset('/images/favicon-2.png')}}" rel="icon" type="image/png" sizes="16x16">
     <link rel="canonical" href="https://www.fujacook.com.tw/">
     <link rel="alternate" href="https://www.fujacook.com" hreflang="zh-TW" />
 

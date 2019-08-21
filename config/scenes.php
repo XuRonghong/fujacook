@@ -313,7 +313,7 @@ return [
                         </dl>
                     </li>',
         'image' => env('APP_URL') . '/images/empty.jpg',
-        'url' => 'https://0848ishida.jp/contact',
+        'url' => '', //'https://0848ishida.jp/contact',
         'open' => 1,
     ],
 ];
