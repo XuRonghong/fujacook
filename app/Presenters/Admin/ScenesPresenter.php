@@ -50,7 +50,8 @@ class ScenesPresenter extends Presenter
                 //
                 $var->rank = $this->presentIsEdit('rank', $var->rank);
                 //翻譯每個type
-                $var->type = $this->tranTypeInSelectOption($var->type, $this->selectOptions);
+                $var->type = '<i>'.$this->tranTypeInSelectOption($var->type, $this->selectOptions).'</i>';
+                $var->title = '<span style="font-family:Microsoft JhengHei;font-weight:bold;">'.$var->title.'</span>';
                 //找圖片檔案
                 $images = $var->image ? array($var->image) : $this->transFileIdtoImage($var->file_id); //有圖檔就不用去file找
                 $var->image = $this->presentImages($images);

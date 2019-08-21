@@ -429,9 +429,9 @@ abstract class Presenter
             case '0': $btn .= '<button class="btn btn-xs btn-primary btn-open">'.trans('options.panel.status.close').'</button>'; break;
             default: $btn .= trans('options.panel.status.not'); //"無功能";
         }
-        $btn .= '<button class="btn btn-xs btn-show btn-info" title="'.trans('options.panel.show').'" data-toggle="modal" data-target="#createmodel"><i class="fa fa-book" aria-hidden="true"></i></button>';
-        $btn .= '<button class="btn btn-xs btn-edit" title="'.trans('options.panel.edit').'"><i class="fa fa-pencil-alt" aria-hidden="true"></i></button>';
-        $btn .= '<button class="btn btn-xs btn-del pull-right" title="'.trans('options.panel.del').'"><i class="fa fa-trash" aria-hidden="true"></i></button>';
+        $btn .= '<button class="btn btn-xs btn-edit btn-default" title="'.trans('options.panel.edit').'"><i class="fa fa-pencil-alt" aria-hidden="true"></i></button>';
+        $btn .= '<button class="btn btn-xs btn-show " title="'.trans('options.panel.show').'" data-toggle="modal" data-target="#createmodel"><i class="fa fa-book" aria-hidden="true"></i></button>';
+        $btn .= '<button class="btn btn-xs btn-del btn-danger pull-right" title="'.trans('options.panel.del').'"><i class="fa fa-trash" aria-hidden="true"></i></button>';
         return $btn;
     }
 

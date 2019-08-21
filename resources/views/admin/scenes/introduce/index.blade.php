@@ -88,15 +88,15 @@
                     {
                         "sTitle": "title",
                         "mData": "title",
-                        "width": "20%",
+                        // "width": 'auto',//"20%",
                         "sName": "title"
                     },
-                    {
-                        "sTitle": "summary",
-                        "mData": "summary",
-                        // "width": "100px",
-                        "sName": "summary"
-                    },
+                    // {
+                    //     "sTitle": "summary",
+                    //     "mData": "summary",
+                    //     // "width": "100px",
+                    //     "sName": "summary"
+                    // },
                     {
                         "sTitle": "image",
                         "mData": "image",

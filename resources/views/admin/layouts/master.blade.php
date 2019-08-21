@@ -10,8 +10,6 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <!-- This page plugin CSS -->
-    <link href="{{asset('xtreme-admin/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css')}}" rel="stylesheet">
     <!-- Favicon icon -->
     <link href="{{asset('/images/favicon-2.png')}}" rel="icon" type="image/png" sizes="16x16">
     <!-- Custom CSS -->
@@ -25,9 +23,27 @@
 
     <link rel="stylesheet" href="{{asset('css/toastr.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/sweetalert.css')}}">
-    <link rel="stylesheet" href="{{asset('css/waitMe.css')}}" type="text/css">
-    <!-- 滑動開關切換按鈕﹍CSS 語法產生器 -->
-    <link rel="stylesheet" href="{{asset('css/switch_demo2.css')}}" type="text/css">
+
+    <!-- ============================================================== -->
+    <!-- 個別引入 -->
+    <!-- ============================================================== -->
+    <?php if( strrpos(Request::route()->getName(), '.index')) { ?>
+        <!-- This page plugin CSS -->
+        <link href="{{asset('xtreme-admin/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css')}}" rel="stylesheet">
+        <link rel="stylesheet" href="{{asset('css/waitMe.css')}}" type="text/css">
+    <?php } elseif( //查找字符串在另一字符串中最后一次出现的位置（区分大小写）
+            strrpos(Request::route()->getName(), '.create') ||
+            strrpos(Request::route()->getName(), '.edit') || 
+            strrpos(Request::route()->getName(), '.show') ) {  ?>
+        <!-- 滑動開關切換按鈕﹍CSS 語法產生器 -->
+        <link rel="stylesheet" href="{{asset('css/switch_demo2.css')}}" type="text/css">
+    <?php } else { ?>
+        <script src="{{asset('xtreme-admin/assets/libs/popper.js/dist/umd/popper.min.js')}}"></script>
+        <!-- Wave Effects -->
+        <script src="{{asset('xtreme-admin/dist/js/waves.js')}}"></script>
+        <!-- apps -->
+        <script src="{{asset('xtreme-admin/dist/js/app-style-switcher.js')}}"></script>
+    <?php } ?>
 
     <!-- Master styles -->
     @include('admin.layouts.style')
@@ -61,33 +77,42 @@
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
-    <script src="{{asset('xtreme-admin/assets/libs/jquery/dist/jquery.min.js')}}"></script>
-    <!-- Bootstrap tether Core JavaScript -->
-    <script src="{{asset('xtreme-admin/assets/libs/popper.js/dist/umd/popper.min.js')}}"></script>
-    <script src="{{asset('xtreme-admin/assets/libs/bootstrap/dist/js/bootstrap.min.js')}}"></script>
-    <!-- apps -->
-    <script src="{{asset('xtreme-admin/dist/js/app.min.js')}}"></script>
-    <script src="{{asset('xtreme-admin/dist/js/app.init.js')}}"></script>
-    <script src="{{asset('xtreme-admin/dist/js/app-style-switcher.js')}}"></script>
-    <!-- slimscrollbar scrollbar JavaScript -->
-    <script src="{{asset('xtreme-admin/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js')}}"></script>
-    <script src="{{asset('xtreme-admin/assets/extra-libs/sparkline/sparkline.js')}}"></script>
-    <!--Wave Effects -->
-    <script src="{{asset('xtreme-admin/dist/js/waves.js')}}"></script>
-    <!--Menu sidebar -->
-    <script src="{{asset('xtreme-admin/dist/js/sidebarmenu.js')}}"></script>
-    <!--Custom JavaScript -->
-    <script src="{{asset('xtreme-admin/dist/js/custom.min.js')}}"></script>
+        <script src="{{asset('xtreme-admin/assets/libs/jquery/dist/jquery.min.js')}}"></script>
+        <!-- Bootstrap tether Core JavaScript -->
+        <script src="{{asset('xtreme-admin/assets/libs/bootstrap/dist/js/bootstrap.min.js')}}"></script>
+        <!-- slimscrollbar scrollbar JavaScript -->
+        <script src="{{asset('xtreme-admin/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js')}}"></script>
+        <script src="{{asset('xtreme-admin/assets/extra-libs/sparkline/sparkline.js')}}"></script>
+        <!-- Custom JavaScript -->
+        <script src="{{asset('xtreme-admin/dist/js/custom.min.js')}}"></script>
+        <!-- Menu sidebar -->
+        <script src="{{asset('xtreme-admin/dist/js/sidebarmenu.js')}}"></script>
+        <!-- apps -->
+        <script src="{{asset('xtreme-admin/dist/js/app.min.js')}}"></script>
+        <script src="{{asset('xtreme-admin/dist/js/app.init.js')}}"></script>
+        <!-- This page plugins -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+        <script src="{{asset('js/toastr.min.js')}}"></script>
 
+    <!-- ============================================================== -->
+    <!-- 個別引入 -->
+    <!-- ============================================================== -->
+    <?php if( strrpos(Request::route()->getName(), '.index')) { ?>
+        <script src="{{asset('xtreme-admin/assets/extra-libs/DataTables/datatables.min.js')}}"></script>
+        <script src="{{asset('xtreme-admin/dist/js/pages/datatable/datatable-basic.init.js')}}"></script>
+        <script src="{{asset('js/waitMe.js')}}"></script>
+    <?php } elseif( //查找字符串在另一字符串中最后一次出现的位置（区分大小写）
+            strrpos(Request::route()->getName(), '.create') ||
+            strrpos(Request::route()->getName(), '.edit') || 
+            strrpos(Request::route()->getName(), '.show') ) {  ?>
+    <?php } else { ?>
+        <script src="{{asset('xtreme-admin/assets/libs/popper.js/dist/umd/popper.min.js')}}"></script>
+        <!-- Wave Effects -->
+        <script src="{{asset('xtreme-admin/dist/js/waves.js')}}"></script>
+        <!-- apps -->
+        <script src="{{asset('xtreme-admin/dist/js/app-style-switcher.js')}}"></script>
+    <?php } ?>
 
-    <!--This page plugins -->
-    <script src="{{asset('xtreme-admin/assets/extra-libs/DataTables/datatables.min.js')}}"></script>
-    <script src="{{asset('xtreme-admin/dist/js/pages/datatable/datatable-basic.init.js')}}"></script>
-
-    <script src="{{asset('js/toastr.min.js')}}"></script>
-{{--    <script src="{{asset('js/sweetalert.min.js')}}"></script>--}}
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
-    <script src="{{asset('js/waitMe.js')}}"></script>
 
     @include('admin.layouts.script')
     @yield('inline-js')
