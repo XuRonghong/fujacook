@@ -67,7 +67,7 @@
                     <ul class="navbar-nav mr-auto">
                         @foreach(data_get($data, 'navbar', []) as $key => $var)
                             <li class="nav-item @if($key==1) active @endif">
-                                <a class="nav-link {{data_get($var, 'style')}}" href="{{env('APP_URL') . data_get($var, 'url')}}">{{data_get($var, 'summary')}}</a>
+                                <a class="nav-link {{data_get($var, 'style')}}" href="{{data_get($var, 'url')}}">{{data_get($var, 'summary')}}</a>
                             </li>
                         @endforeach
                     </ul>
