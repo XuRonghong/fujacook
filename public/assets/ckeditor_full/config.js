@@ -15,6 +15,23 @@ CKEDITOR.editorConfig = function( config ) {
     // config.filebrowserImageUploadUrl = ckeditor_baseUrl+'/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images';//可上傳圖檔
     // config.filebrowserFlashUploadUrl = ckeditor_baseUrl+'/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash';//可上傳Flash檔案
 
+    config.toolbarGroups = [
+        // { name: 'document', groups: [ 'mode', 'document', 'doctools' ] },
+        { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
+        { name: 'clipboard', groups: [ 'clipboard', 'undo' ] },
+        // { name: 'forms' },
+        { name: 'insert' },
+        { name: 'links' },
+        { name: 'editing', groups: [ 'find', 'selection', 'spellchecker' ] },
+        { name: 'tools' },
+        { name: 'others' },
+        { name: 'about' },
+        '/',
+        { name: 'styles' },
+        { name: 'colors' },
+        { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ] },
+        '/',
+    ];
 
     // Remove some buttons provided by the standard plugins, which are
     // not needed in the Standard(s) toolbar.
@@ -37,7 +54,7 @@ CKEDITOR.editorConfig = function( config ) {
     //     { name: 'others', items: [ '-' ] },
     //     { name: 'about', items: [ 'About' ] },
     // ];
-    config.toolbar = 'Full';
+    // config.toolbar = 'Full';
 
     // Set the most common block elements.
     config.format_tags = 'p;h1;h2;h3;pre';
@@ -45,13 +62,14 @@ CKEDITOR.editorConfig = function( config ) {
     // Simplify the dialog windows.
     config.removeDialogTabs = 'image:advanced;link:advanced';
 
+    /*
 // 介面語言，預設為 'en'
     config.language = 'zh-tw';
 // 設定寬高
-//     config.width = 400;
-//     config.height = 400;
+    config.width = 400;
+    config.height = 400;
 // 編輯器樣式，有三種：'kama'（預設）、'office2003'、'v2'
-   /* config.skin = 'v2';
+    config.skin = 'v2';
 // 背景顏色
     config.uiColor = '#FFF';
 // 工具欄（基礎'Basic'、全能'Full'、自定義）ckeditor/ckeditor.js
