@@ -21,7 +21,7 @@
         "sass": "^1.15.2",
         "sass-loader": "^7.1.0",
         "vue": "^2.5.17",
-        "webpack-cli": "^3.3.6"
+        "webpack-cli": "^3.3.12"
     },
     "dependencies": {
         "browser-sync": "^2.26.7",
